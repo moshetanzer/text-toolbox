@@ -1,6 +1,6 @@
-import type {DistanceResult} from '../types/index'
+import type {damerauLevenshteinDistance} from '../types/index'
 
-function damerauLevenshteinDistance(a: string, b: string, limit?: number): DistanceResult {
+function damerauLevenshteinDistance(a: string, b: string, limit?: number): damerauLevenshteinDistance {
 const thisLength = a.length,
 thatLength = b.length,
 matrix = [];
