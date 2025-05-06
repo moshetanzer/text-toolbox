@@ -1,4 +1,4 @@
-import { bigram } from '../tokenizers/n-gram'
+import { bigram } from './n-gram.js'
 
 export interface DiceCoefficientOptions {
   caseSensitive?: boolean
