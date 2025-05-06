@@ -1,34 +1,36 @@
-# String Similarity Metrics
+# Text Toolbox
 
-A TypeScript library that provides a consistent API for string similarity algorithms, including both similarity scores and distance calculations.
+A TypeScript library providing a consistent API for string similarity algorithms, including both similarity scores and distance calculations. Also includes performent utilities for cleaning and normalizing strings.
 
 ## Features
 
-- **Consistent API** across all similarity algorithms
-- Both **similarity scores** (0-1) and **distance metrics**
-- **High Performance** implementations, especially for Levenshtein distance
-- TypeScript support with full type definitions
-- Multiple string comparison algorithms:
-  - Levenshtein distance
-  - Damerau-Levenshtein distance
-  - Cosine similarity
-  - Dice coefficient
-  - Jaro-Winkler
+* **Consistent API** across all algorithms
+* Support for both **similarity scores** (0–1) and **distance metrics**
+* **High-performance** implementations
+* TypeScript support with **full type definitions**
+* Multiple string comparison algorithms:
+
+  * Levenshtein distance
+  * Damerau-Levenshtein distance
+  * Cosine similarity
+  * Dice coefficient
+  * Jaro-Winkler
+* Built-in **string normalization utilities** for whitespace and special characters
 
 ## Installation
 
 ```bash
-pnpm add cuddle-cluster
+pnpm add text-toolbox
 ```
 
 ## Usage
 
-### Basic Usage
+### Basic Example
 
-```typescript
-import { cosine, levenshtein } from 'cuddle-cluster'
+```ts
+import { levenshtein } from 'text-toolbox'
 
-// Calculate similarity (0-1, higher means more similar)
+// Calculate similarity (0–1, higher means more similar)
 const similarity = levenshtein.similarity('hello', 'hallo')
 console.log(`Similarity: ${similarity}`) // Output: Similarity: 0.8
 
@@ -41,56 +43,69 @@ const result = levenshtein.compare('hello', 'hallo')
 console.log(`Distance: ${result.distance}, Similarity: ${result.similarity}`)
 ```
 
-### Available Algorithms
+### Using Options
 
-```typescript
-import similarityMetrics from 'cuddle-cluster'
+```ts
+import { levenshtein } from 'text-toolbox'
 
-// Available algorithms:
-const { levenshtein, damerauLevenshtein, cosine, diceCoefficient, jaroWinkler } = similarityMetrics
-
-// Compare strings with different algorithms
-const leven = levenshtein.compare('book', 'back')
-const cosine = cosine.compare('book', 'back')
-
-console.log(`Levenshtein: ${leven.similarity}`)
-console.log(`Cosine: ${cosine.similarity}`)
-```
-
-### Options
-
-```typescript
-import { levenshtein } from 'cuddle-cluster'
-
-// With options
 const result = levenshtein.compare('Hello', 'hello', {
-  caseSensitive: true, // Default: false
-  normalize: true // Default: true
+  caseSensitive: true,
+  normalize: true
 })
 ```
+
+## String Cleaning Utilities
+
+A set of helper functions to normalize and sanitize strings before comparison.
+
+### Whitespace Normalizers
+
+Clean up inconsistent or unwanted whitespace:
+
+* `removeAllSpaces` – Removes **all spaces** from the string.
+* `removeDoubleSpaces` – Replaces multiple consecutive spaces with a **single space**.
+* `removeLeadingSpaces` – Removes **spaces at the beginning** of the string.
+* `removeTrailingSpaces` – Removes **spaces at the end** of the string.
+* `removeWhitespaceAroundPunctuation` – Removes extra spaces **around punctuation** (e.g., ` , . : ; ! ?`).
+
+### Special Character Cleaners
+
+Remove or replace problematic characters and formatting:
+
+* `removeHtmlTags` – Strips **HTML tags** (e.g., `<p>`, `<div>`) from the string.
+* `removeIllegalChars` – Removes **non-printable or disallowed characters** (e.g., control codes).
+* `removeNewLineCharacters` – Removes **newline (`\n`) and carriage return (`\r`) characters**.
+* `removeNonASCII` – Removes all characters **outside the standard ASCII range**.
+* `removePunctuation` – Removes **common punctuation marks** from the string.
+* `replaceSmartChars` – Replaces **smart quotes, long dashes, and other typographic symbols** with plain equivalents.
+* `stripEmoji` – Removes all **emoji characters** and symbols.
 
 ## Algorithm Descriptions
 
 ### Levenshtein Distance
 
-The Levenshtein distance is the minimum number of single-character edits (insertions, deletions, or substitutions) required to change one string into another. Our implementation uses a highly-optimized bit-vector algorithm based on [fastest-levenshtein](https://github.com/ka-weihe/fastest-levenshtein) for maximum performance.
+The Levenshtein distance is the minimum number of single-character edits (insertions, deletions, or substitutions) required to transform one string into another. This implementation uses a highly-optimized bit-vector algorithm based on [fastest-levenshtein](https://github.com/ka-weihe/fastest-levenshtein) for maximum performance.
 
 ### Damerau-Levenshtein Distance
 
-An extension of Levenshtein that also considers transpositions of adjacent characters as a single edit operation.
+An extension of the Levenshtein algorithm that also considers transpositions (swapping of adjacent characters) as a single edit operation.
 
 ### Cosine Similarity
 
-Measures the cosine of the angle between two vectors representing the strings. The vectors are typically created by counting character n-grams.
+Measures the cosine of the angle between two n-gram vectors of the strings. Often used for full-text similarity.
 
 ### Dice Coefficient
 
-Also known as Sørensen–Dice coefficient, it's defined as twice the number of common terms divided by the sum of the number of terms in each string.
+Also known as the Sørensen–Dice coefficient. It is calculated as twice the number of shared bigrams divided by the total number of bigrams in both strings.
 
 ### Jaro-Winkler
 
-A string metric designed for short strings such as person names. It gives more favorable ratings to strings that match from the beginning.
+A string similarity metric designed for short strings such as names. It favors strings that match from the beginning and penalizes transpositions.
 
 ## License
 
 MIT
+
+---
+
+Let me know if you want a table of contents or example projects added!
