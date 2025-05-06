@@ -26,47 +26,47 @@ pnpm add cuddle-cluster
 ### Basic Usage
 
 ```typescript
-import { levenshtein, cosine } from 'cuddle-cluster';
+import { cosine, levenshtein } from 'cuddle-cluster'
 
 // Calculate similarity (0-1, higher means more similar)
-const similarity = levenshtein.similarity('hello', 'hallo');
-console.log(`Similarity: ${similarity}`); // Output: Similarity: 0.8
+const similarity = levenshtein.similarity('hello', 'hallo')
+console.log(`Similarity: ${similarity}`) // Output: Similarity: 0.8
 
 // Calculate distance (higher means more different)
-const distance = levenshtein.distance('hello', 'hallo');
-console.log(`Distance: ${distance}`); // Output: Distance: 1
+const distance = levenshtein.distance('hello', 'hallo')
+console.log(`Distance: ${distance}`) // Output: Distance: 1
 
 // Get both metrics at once
-const result = levenshtein.compare('hello', 'hallo');
-console.log(`Distance: ${result.distance}, Similarity: ${result.similarity}`);
+const result = levenshtein.compare('hello', 'hallo')
+console.log(`Distance: ${result.distance}, Similarity: ${result.similarity}`)
 ```
 
 ### Available Algorithms
 
 ```typescript
-import similarityMetrics from 'cuddle-cluster';
+import similarityMetrics from 'cuddle-cluster'
 
 // Available algorithms:
-const { levenshtein, damerauLevenshtein, cosine, diceCoefficient, jaroWinkler } = similarityMetrics;
+const { levenshtein, damerauLevenshtein, cosine, diceCoefficient, jaroWinkler } = similarityMetrics
 
 // Compare strings with different algorithms
-const leven = levenshtein.compare('book', 'back');
-const cosine = cosine.compare('book', 'back');
+const leven = levenshtein.compare('book', 'back')
+const cosine = cosine.compare('book', 'back')
 
-console.log(`Levenshtein: ${leven.similarity}`);
-console.log(`Cosine: ${cosine.similarity}`);
+console.log(`Levenshtein: ${leven.similarity}`)
+console.log(`Cosine: ${cosine.similarity}`)
 ```
 
 ### Options
 
 ```typescript
-import { levenshtein } from 'cuddle-cluster';
+import { levenshtein } from 'cuddle-cluster'
 
 // With options
 const result = levenshtein.compare('Hello', 'hello', {
   caseSensitive: true, // Default: false
-  normalize: true      // Default: true
-});
+  normalize: true // Default: true
+})
 ```
 
 ## Algorithm Descriptions

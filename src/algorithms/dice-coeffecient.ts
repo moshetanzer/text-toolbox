@@ -11,13 +11,13 @@ export interface DiceCoefficientOptions {
 function diceCoefficientDistance(
   a: string,
   b: string,
-  options: DiceCoefficientOptions = {}
+  options: DiceCoefficientOptions = {},
 ): number {
   // Special case for empty strings - they are considered identical
   if (a === '' && b === '') {
     return 0
   }
-  
+
   // If either string is empty, there is no similarity
   if (a === '' || b === '') {
     return 1
@@ -34,7 +34,7 @@ function diceCoefficientDistance(
 
   // Calculate the similarity coefficient first
   const similarity = diceCoefficientSimilarity(a, b, options)
-  
+
   // Distance is the inverse of similarity
   return 1 - similarity
 }
@@ -44,15 +44,15 @@ function diceCoefficientDistance(
  * Returns a value between 0 (completely different) and 1 (identical)
  */
 function diceCoefficientSimilarity(
-  a: string, 
-  b: string, 
-  options: DiceCoefficientOptions = {}
+  a: string,
+  b: string,
+  options: DiceCoefficientOptions = {},
 ): number {
   const caseSensitive = options.caseSensitive ?? false
-  
+
   const left = toPairs(a, caseSensitive)
   const right = toPairs(b, caseSensitive)
-  
+
   // Handle edge cases to avoid division by zero
   if (left.length === 0 && right.length === 0) {
     return 1 // Both strings have no bigrams (identical)
@@ -60,7 +60,7 @@ function diceCoefficientSimilarity(
   if (left.length === 0 || right.length === 0) {
     return 0 // One string has no bigrams (completely different)
   }
-  
+
   let index = -1
   let intersections = 0
   const rightCopy = [...right] // Create a copy to mark matched pairs
@@ -73,7 +73,7 @@ function diceCoefficientSimilarity(
       const rightPair = rightCopy[offset]
 
       if (leftPair === rightPair) {
-        intersections++;
+        intersections++
 
         // Make sure this pair never matches again
         rightCopy[offset] = ''
@@ -87,7 +87,7 @@ function diceCoefficientSimilarity(
 
 function toPairs(value: string | string[], caseSensitive: boolean = false): string[] {
   if (Array.isArray(value)) {
-    return value.map((item) => normalize(item, caseSensitive))
+    return value.map(item => normalize(item, caseSensitive))
   }
 
   const normal = normalize(value, caseSensitive)

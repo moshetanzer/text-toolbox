@@ -1,6 +1,11 @@
 {
   "name": "cuddle-cluster",
+  "type": "module",
   "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -14,20 +19,11 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
-  "description": "",
-  "dependencies": {
-    "@types/node": "^22.15.6",
-    "typescript": "^5.8.3"
-  },
   "devDependencies": {
-    "@eslint/js": "^9.26.0",
+    "@antfu/eslint-config": "^4.13.0",
+    "@types/node": "^22.15.6",
     "eslint": "^9.26.0",
-    "globals": "^16.0.0",
-    "typescript-eslint": "^8.32.0",
+    "typescript": "^5.8.3",
     "vitest": "^3.1.3"
   }
 }

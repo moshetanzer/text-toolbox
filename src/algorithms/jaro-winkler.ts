@@ -1,91 +1,91 @@
 function jaroWinkler(a: string, b: string, options?: { caseSensitive?: boolean }): number {
-  const defaults = { caseSensitive: true };
-  const settings = { ...defaults, ...options };
+  const defaults = { caseSensitive: true }
+  const settings = { ...defaults, ...options }
 
-
-  const s1 = settings.caseSensitive ? a : a.toUpperCase();
-  const s2 = settings.caseSensitive ? b : b.toUpperCase();
+  const s1 = settings.caseSensitive ? a : a.toUpperCase()
+  const s2 = settings.caseSensitive ? b : b.toUpperCase()
 
   if (s1.length === 0 && s2.length === 0) {
-    return 1;
+    return 1
   }
   if (s1.length === 0 || s2.length === 0) {
-    return 0;
+    return 0
   }
   if (s1 === s2) {
-    return 1;
+    return 1
   }
 
-  const matchDistance = Math.floor(Math.max(s1.length, s2.length) / 2) - 1;
+  const matchDistance = Math.floor(Math.max(s1.length, s2.length) / 2) - 1
 
-  const s1Matches = new Array(s1.length).fill(false);
-  const s2Matches = new Array(s2.length).fill(false);
+  const s1Matches = Array.from({ length: s1.length }).fill(false)
+  const s2Matches = Array.from({ length: s2.length }).fill(false)
 
-  let matchingCharacters = 0;
+  let matchingCharacters = 0
   for (let i = 0; i < s1.length; i++) {
-    const low = Math.max(0, i - matchDistance);
-    const high = Math.min(i + matchDistance + 1, s2.length);
+    const low = Math.max(0, i - matchDistance)
+    const high = Math.min(i + matchDistance + 1, s2.length)
 
     for (let j = low; j < high; j++) {
       if (!s1Matches[i] && !s2Matches[j] && s1[i] === s2[j]) {
-        s1Matches[i] = true;
-        s2Matches[j] = true;
-        matchingCharacters++;
-        break;
+        s1Matches[i] = true
+        s2Matches[j] = true
+        matchingCharacters++
+        break
       }
     }
   }
 
   if (matchingCharacters === 0) {
-    return 0;
+    return 0
   }
 
-  let transpositions = 0;
-  let j = 0;
+  let transpositions = 0
+  let j = 0
 
   for (let i = 0; i < s1.length; i++) {
     if (s1Matches[i]) {
       while (!s2Matches[j]) {
-        j++;
+        j++
       }
 
       if (s1[i] !== s2[j]) {
-        transpositions++;
+        transpositions++
       }
 
-      j++;
+      j++
     }
   }
 
-  transpositions = Math.floor(transpositions / 2);
+  transpositions = Math.floor(transpositions / 2)
 
   const jaroSimilarity = (
-    matchingCharacters / s1.length +
-    matchingCharacters / s2.length +
-    (matchingCharacters - transpositions) / matchingCharacters
-  ) / 3;
+    matchingCharacters / s1.length
+    + matchingCharacters / s2.length
+    + (matchingCharacters - transpositions) / matchingCharacters
+  ) / 3
 
-  let commonPrefixLength = 0;
-  const maxPrefixLength = Math.min(4, Math.min(s1.length, s2.length));
+  let commonPrefixLength = 0
+  const maxPrefixLength = Math.min(4, Math.min(s1.length, s2.length))
 
   for (let i = 0; i < maxPrefixLength; i++) {
     if (s1[i] === s2[i]) {
-      commonPrefixLength++;
-    } else {
-      break;
+      commonPrefixLength++
+    }
+    else {
+      break
     }
   }
 
-  const winklerThreshold = 0.7;
-  const winklerScalingFactor = 0.1;
+  const winklerThreshold = 0.7
+  const winklerScalingFactor = 0.1
 
-  let jaroWinklerSimilarity = jaroSimilarity;
+  let jaroWinklerSimilarity = jaroSimilarity
   if (jaroSimilarity > winklerThreshold) {
-    jaroWinklerSimilarity +=
-      commonPrefixLength * winklerScalingFactor * (1 - jaroSimilarity);
+    jaroWinklerSimilarity
+      += commonPrefixLength * winklerScalingFactor * (1 - jaroSimilarity)
   }
 
-  return jaroWinklerSimilarity;
+  return jaroWinklerSimilarity
 }
 
-export { jaroWinkler };
+export { jaroWinkler }

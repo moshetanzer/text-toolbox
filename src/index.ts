@@ -1,5 +1,5 @@
 export * from './algorithms/cosine.js'
+export * from './algorithms/damerau-levenshtein.js'
 export * from './algorithms/dice-coeffecient.js'
 export * from './algorithms/jaro-winkler.js'
 export * from './algorithms/levenshtein.js'
-export * from './algorithms/damerau-levenshtein.js'
