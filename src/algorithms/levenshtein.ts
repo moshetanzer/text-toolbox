@@ -132,7 +132,7 @@ function levenshteinInternal(a: string, b: string): number {
 
 export class Levenshtein implements SimilarityAlgorithm {
   private defaultOptions: SimilarityOptions = {
-    caseSensitive: false,
+    caseSensitive: true,
   }
 
   public compare(str1: string, str2: string, options?: SimilarityOptions): SimilarityResult {

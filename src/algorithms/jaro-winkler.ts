@@ -1,4 +1,7 @@
-function jaroWinkler(a: string, b: string, options?: { caseSensitive?: boolean }): number {
+import type { SimilarityAlgorithm, SimilarityOptions, SimilarityResult } from '../types.js'
+import { distanceToSimilarity, preprocessStrings } from '../utils.js'
+
+function jaroWinklerInternal(a: string, b: string, options?: { caseSensitive?: boolean }): number {
   const defaults = { caseSensitive: true }
   const settings = { ...defaults, ...options }
 
@@ -88,4 +91,27 @@ function jaroWinkler(a: string, b: string, options?: { caseSensitive?: boolean }
   return jaroWinklerSimilarity
 }
 
-export { jaroWinkler }
+export class JaroWinkler implements SimilarityAlgorithm {
+  private defaultOptions: SimilarityOptions = {
+    caseSensitive: true,
+  }
+
+  public compare(str1: string, str2: string, options?: SimilarityOptions): SimilarityResult {
+    const mergedOptions: SimilarityOptions = { ...this.defaultOptions, ...options }
+    const [processedStr1, processedStr2] = preprocessStrings(str1, str2, mergedOptions)
+    const distance = jaroWinklerInternal(processedStr1, processedStr2)
+    const maxDistance = Math.max(processedStr1.length, processedStr2.length)
+    const similarity = distanceToSimilarity(distance, maxDistance)
+    return { distance, similarity }
+  }
+
+  public similarity(str1: string, str2: string, options?: SimilarityOptions): number {
+    return this.compare(str1, str2, options).similarity
+  }
+
+  public distance(str1: string, str2: string, options?: SimilarityOptions): number {
+    return this.compare(str1, str2, options).distance
+  }
+}
+
+export const jaroWinkler = new JaroWinkler()

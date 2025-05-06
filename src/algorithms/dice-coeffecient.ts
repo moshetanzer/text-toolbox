@@ -1,104 +1,54 @@
-import { bigram } from './n-gram.js'
+// based on https://github.com/ka-weihe/fast-dice-coefficient
 
-export interface DiceCoefficientOptions {
-  caseSensitive?: boolean
-}
+import type { SimilarityAlgorithm, SimilarityOptions, SimilarityResult } from '../types.js'
+import { preprocessStrings } from '../utils.js'
 
-/**
- * Calculate Dice coefficient distance between two strings
- * Returns a value between 0 (identical) and 1 (completely different)
- */
-function diceCoefficientDistance(
-  a: string,
-  b: string,
-  options: DiceCoefficientOptions = {},
-): number {
-  // Special case for empty strings - they are considered identical
-  if (a === '' && b === '') {
+function diceCoefficientInternal(a: string, b: string): number {
+  let i, j, k, match, ref, ref1, sub
+  if (a.length < 2 || b.length < 2) {
     return 0
   }
-
-  // If either string is empty, there is no similarity
-  if (a === '' || b === '') {
-    return 1
-  }
-
-  // For single character strings, compare them directly
-  if (a.length === 1 && b.length === 1) {
-    const caseSensitive = options.caseSensitive ?? false
-    if (!caseSensitive && a.toLowerCase() === b.toLowerCase()) {
-      return 0
+  const map = new Map()
+  for (i = j = 0, ref = a.length - 2; (ref >= 0 ? j <= ref : j >= ref); i = ref >= 0 ? ++j : --j) {
+    sub = a.slice(i, i + 2)
+    if (map.has(sub)) {
+      map.set(sub, map.get(sub) + 1)
     }
-    return a === b ? 0 : 1
-  }
-
-  // Calculate the similarity coefficient first
-  const similarity = diceCoefficientSimilarity(a, b, options)
-
-  // Distance is the inverse of similarity
-  return 1 - similarity
-}
-
-/**
- * Calculate Dice coefficient similarity between two strings
- * Returns a value between 0 (completely different) and 1 (identical)
- */
-function diceCoefficientSimilarity(
-  a: string,
-  b: string,
-  options: DiceCoefficientOptions = {},
-): number {
-  const caseSensitive = options.caseSensitive ?? false
-
-  const left = toPairs(a, caseSensitive)
-  const right = toPairs(b, caseSensitive)
-
-  // Handle edge cases to avoid division by zero
-  if (left.length === 0 && right.length === 0) {
-    return 1 // Both strings have no bigrams (identical)
-  }
-  if (left.length === 0 || right.length === 0) {
-    return 0 // One string has no bigrams (completely different)
-  }
-
-  let index = -1
-  let intersections = 0
-  const rightCopy = [...right] // Create a copy to mark matched pairs
-
-  while (++index < left.length) {
-    const leftPair = left[index]
-    let offset = -1
-
-    while (++offset < rightCopy.length) {
-      const rightPair = rightCopy[offset]
-
-      if (leftPair === rightPair) {
-        intersections++
-
-        // Make sure this pair never matches again
-        rightCopy[offset] = ''
-        break
-      }
+    else {
+      map.set(sub, 1)
     }
   }
+  match = 0
+  for (i = k = 0, ref1 = b.length - 2; (ref1 >= 0 ? k <= ref1 : k >= ref1); i = ref1 >= 0 ? ++k : --k) {
+    sub = b.slice(i, i + 2)
+    if (map.get(sub) > 0) {
+      match++
+      map.set(sub, map.get(sub) - 1)
+    }
+  }
+  return 2.0 * match / (a.length + b.length - 2)
+};
 
-  return (2 * intersections) / (left.length + right.length)
-}
-
-function toPairs(value: string | string[], caseSensitive: boolean = false): string[] {
-  if (Array.isArray(value)) {
-    return value.map(item => normalize(item, caseSensitive))
+export class DiceCoefficient implements SimilarityAlgorithm {
+  private defaultOptions: SimilarityOptions = {
+    caseSensitive: false,
   }
 
-  const normal = normalize(value, caseSensitive)
-  return normal.length === 1 ? [normal] : bigram(normal)
-}
-
-function normalize(value: string, caseSensitive: boolean = false): string {
-  if (caseSensitive) {
-    return String(value)
+  public compare(str1: string, str2: string, options?: SimilarityOptions): SimilarityResult {
+    const mergedOptions: SimilarityOptions = { ...this.defaultOptions, ...options }
+    const [processedStr1, processedStr2] = preprocessStrings(str1, str2, mergedOptions)
+    const similarity = diceCoefficientInternal(processedStr1, processedStr2)
+    const distance = 1 - similarity
+    return { distance, similarity }
   }
-  return String(value).toLowerCase()
+
+  public similarity(str1: string, str2: string, options?: SimilarityOptions): number {
+    return this.compare(str1, str2, options).similarity
+  }
+
+  public distance(str1: string, str2: string, options?: SimilarityOptions): number {
+    return this.compare(str1, str2, options).distance
+  }
 }
 
-export { diceCoefficientDistance, diceCoefficientSimilarity }
+export const diceCoefficient = new DiceCoefficient()
