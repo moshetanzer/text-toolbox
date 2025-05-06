@@ -1,6 +1,6 @@
 // https://github.com/ka-weihe/fastest-levenshtein
-import type { SimilarityAlgorithm, SimilarityOptions, SimilarityResult } from '../types.js'
-import { distanceToSimilarity, preprocessStrings } from '../utils.js'
+import type { SimilarityAlgorithm, SimilarityOptions, SimilarityResult } from '../types'
+import { distanceToSimilarity, preprocessStrings } from '../utils'
 
 const peq = new Uint32Array(0x10000)
 function myers_32(a: string, b: string): number {

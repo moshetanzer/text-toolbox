@@ -1,7 +1,7 @@
 // based on https://github.com/ka-weihe/fast-dice-coefficient
 
-import type { SimilarityAlgorithm, SimilarityOptions, SimilarityResult } from '../types.js'
-import { preprocessStrings } from '../utils.js'
+import type { SimilarityAlgorithm, SimilarityOptions, SimilarityResult } from '../types'
+import { preprocessStrings } from '../utils'
 
 function diceCoefficientInternal(a: string, b: string): number {
   let i, j, k, match, ref, ref1, sub

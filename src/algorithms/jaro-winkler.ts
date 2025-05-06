@@ -1,5 +1,5 @@
-import type { SimilarityAlgorithm, SimilarityOptions, SimilarityResult } from '../types.js'
-import { distanceToSimilarity, preprocessStrings } from '../utils.js'
+import type { SimilarityAlgorithm, SimilarityOptions, SimilarityResult } from '../types'
+import { distanceToSimilarity, preprocessStrings } from '../utils'
 
 function jaroWinklerInternal(a: string, b: string, options?: { caseSensitive?: boolean }): number {
   const defaults = { caseSensitive: true }

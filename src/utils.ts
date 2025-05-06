@@ -1,4 +1,4 @@
-import type { SimilarityOptions } from './types.js'
+import type { SimilarityOptions } from './types'
 
 /**
  * Process strings according to specified options

@@ -1,13 +1,15 @@
 {
   "name": "text-toolbox",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "",
   "author": "",
   "license": "MIT",
   "keywords": [],
+  "exports": { ".": "./dist/index.mjs" },
   "main": "./dist/index.js",
-  "types": "./dist/types/index.d.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
