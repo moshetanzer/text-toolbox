@@ -4,6 +4,7 @@ import {
   removeDoubleSpaces,
   removeLeadingSpaces,
   removeTrailingSpaces,
+  removeWhitespaceAroundPunctuation,
 } from './whitespace'
 
 describe('text normalizer functions', () => {
@@ -73,6 +74,31 @@ describe('text normalizer functions', () => {
       const expected = '  abc\n\nxyz\n'
       console.warn(JSON.stringify(removeTrailingSpaces(input)))
       expect(removeTrailingSpaces(input)).toBe(expected)
+    })
+  })
+
+  describe('removeWhitespaceAroundPunctuation', () => {
+    it('removes spaces before punctuation and normalizes after', () => {
+      const input = 'Hello ,  world ! This is a test .'
+      const expected = 'Hello, world! This is a test.'
+      expect(removeWhitespaceAroundPunctuation(input)).toBe(expected)
+    })
+
+    it('preserves correct spacing after punctuation', () => {
+      const input = 'Wait!  Are you sure ?Yes , absolutely.'
+      const expected = 'Wait! Are you sure? Yes, absolutely.'
+      expect(removeWhitespaceAroundPunctuation(input)).toBe(expected)
+    })
+
+    it('works with multiple punctuation marks in sequence', () => {
+      const input = 'Wow! ! ! That was awesome, wasn\'t it?'
+      const expected = 'Wow!!! That was awesome, wasn\'t it?'
+      expect(removeWhitespaceAroundPunctuation(input)).toBe(expected)
+    })
+
+    it('does not affect punctuation with no extra spacing', () => {
+      const input = 'Hello, world! This is fine.'
+      expect(removeWhitespaceAroundPunctuation(input)).toBe(input)
     })
   })
 })
