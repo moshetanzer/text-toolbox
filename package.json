@@ -5,6 +5,7 @@
   "scripts": {
     "build": "tsc",
     "test": "vitest",
+    "prepublish": "vitest tsc",
     "test:watch": "vitest --watch",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
