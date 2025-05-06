@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { 
-  cosine, 
-  distance, 
-  stringToVector, 
-  cosineStringSimilarity, 
-  stringDistance 
+import {
+  cosine,
+  distance,
+  stringToVector,
+  cosineStringSimilarity,
+  stringDistance
 } from './cosine';
 describe('Vector Cosine Similarity', () => {
   it('calculates cosine similarity between vectors correctly', () => {
@@ -37,7 +37,7 @@ describe('Vector Distance', () => {
 describe('String to Vector Conversion', () => {
   it('converts strings to term frequency vectors', () => {
     const vocabulary = new Set(['hello', 'world']);
-    
+
     // Test with default options (word tokenization, case insensitive)
     expect(stringToVector('hello world', vocabulary)).toEqual([1, 1]);
     expect(stringToVector('Hello World', vocabulary)).toEqual([1, 1]);
@@ -47,18 +47,18 @@ describe('String to Vector Conversion', () => {
 
   it('respects case sensitivity option', () => {
     const vocabulary = new Set(['hello', 'Hello', 'world']);
-    
+
     // Case sensitive
     expect(stringToVector('hello world', vocabulary, { caseSensitive: true }))
       .toEqual([1, 0, 1]);
-    
+
     expect(stringToVector('Hello world', vocabulary, { caseSensitive: true }))
       .toEqual([0, 1, 1]);
   });
 
   it('supports character tokenization', () => {
     const vocabulary = new Set(['h', 'e', 'l', 'o', 'w', 'r', 'd']);
-    
+
     expect(stringToVector('hello world', vocabulary, { tokenizeBy: 'character' }))
       .toEqual([1, 1, 3, 2, 1, 1, 1]);
   });
@@ -89,7 +89,7 @@ describe('String Similarity', () => {
   it('respects case sensitivity option', () => {
     // Case insensitive (default)
     expect(cosineStringSimilarity('Hello World', 'hello world')).toBe(1);
-    
+
     // Case sensitive
     expect(cosineStringSimilarity('Hello World', 'hello world', { caseSensitive: true }))
       .toBeLessThan(1);
@@ -98,7 +98,7 @@ describe('String Similarity', () => {
   it('supports character tokenization', () => {
     // By default (word tokenization), these are completely different
     expect(cosineStringSimilarity('abc', 'abd')).toBe(0);
-    
+
     // With character tokenization, they're very similar
     expect(cosineStringSimilarity('abc', 'abd', { tokenizeBy: 'character' }))
       .toBeCloseTo(0.67, 2);
@@ -115,7 +115,7 @@ describe('String Distance', () => {
   it('supports all options from cosine similarity', () => {
     expect(stringDistance('Abc', 'abc', { caseSensitive: true })).toBe(1);
     expect(stringDistance('Abc', 'abc', { caseSensitive: false })).toBe(0);
-    
+
     expect(stringDistance('abc', 'abd', { tokenizeBy: 'character' }))
       .toBeCloseTo(0.33, 2);
   });
@@ -126,21 +126,21 @@ describe('Real-world String Similarity Examples', () => {
   it('detects similar sentences', () => {
     const sentence1 = "The quick brown fox jumps over the lazy dog";
     const sentence2 = "The fast brown fox leaps over the lazy canine";
-    
+
     expect(cosineStringSimilarity(sentence1, sentence2)).toBeGreaterThan(0.7);
   });
 
   it('differentiates unrelated content', () => {
     const sentence1 = "The quick brown fox jumps over the lazy dog";
     const sentence2 = "Python is a programming language with clean syntax";
-    
+
     expect(cosineStringSimilarity(sentence1, sentence2)).toBeLessThan(0.3);
   });
 
   it('works with repeated terms', () => {
     const sentence1 = "apple apple apple banana";
     const sentence2 = "apple banana banana banana";
-    
+
     // These should be somewhat similar but not identical
     const similarity = cosineStringSimilarity(sentence1, sentence2);
     expect(similarity).toBeGreaterThan(0.5);
@@ -150,12 +150,12 @@ describe('Real-world String Similarity Examples', () => {
   it('handles punctuation appropriately', () => {
     const sentence1 = "Hello, world! How are you today?";
     const sentence2 = "Hello world. How are you today";
-    
+
     // With default tokenization, punctuation affects similarity
     const similarity = cosineStringSimilarity(sentence1, sentence2);
     expect(similarity).toBeGreaterThan(0.4);
     expect(similarity).toBeLessThan(0.9);
-    
+
     // To ignore punctuation, we should preprocess the strings
     const processed1 = sentence1.replace(/[^\w\s]/g, '');
     const processed2 = sentence2.replace(/[^\w\s]/g, '');

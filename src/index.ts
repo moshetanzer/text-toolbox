@@ -1,5 +1,3 @@
-import {levenshteinDistance} from './similarity/levenshtein'
-import {damerauLevenshteinDistance} from './similarity/damerau-levenshtein'
-import { jaroWinklerDistance } from './similarity/jaro-winkler'
-
-export {levenshteinDistance, damerauLevenshteinDistance, jaroWinklerDistance}
+export * from './similarity/dice-coeffecient'
+export * from './similarity/levenshtein'
+export * from './similarity/damerau-levenshtein'

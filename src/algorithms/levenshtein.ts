@@ -112,7 +112,7 @@ const myers_x = (b: string, a: string): number => {
   return score;
 };
 
-function levenshteinDistance(a: string, b: string): number {
+function levenshtein(a: string, b: string): number {
   if (a.length < b.length) {
     const tmp = b;
     b = a;
@@ -128,4 +128,4 @@ function levenshteinDistance(a: string, b: string): number {
 };
 
 
-export { levenshteinDistance };
+export { levenshtein };
