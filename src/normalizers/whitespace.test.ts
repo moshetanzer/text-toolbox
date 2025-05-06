@@ -72,7 +72,6 @@ describe('text normalizer functions', () => {
     it('handles multiple lines and blank lines', () => {
       const input = '  abc  \n   \nxyz \n'
       const expected = '  abc\n\nxyz\n'
-      console.warn(JSON.stringify(removeTrailingSpaces(input)))
       expect(removeTrailingSpaces(input)).toBe(expected)
     })
   })
