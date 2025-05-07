@@ -1,31 +1,56 @@
 {
   "name": "text-toolbox",
   "type": "module",
-  "version": "1.0.4",
+  "version": "1.0.5",
+  "packageManager": "pnpm@10.10.0",
   "description": "",
   "author": "",
   "license": "MIT",
+  "repository": "moshetanzer/text-toolbox",
   "keywords": [],
-  "exports": { ".": "./dist/index.mjs" },
-  "main": "./dist/index.js",
+  "sideEffects": false,
+  "exports": {
+    ".": "./dist/index.mjs"
+  },
+  "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/index.d.mts"
+      ]
+    }
+  },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
-    "test": "vitest",
-    "prepublish": "vitest tsc",
-    "test:watch": "vitest --watch",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "build": "unbuild",
+    "dev": "vitest dev",
+    "lint": "eslint . --fix",
+    "prepare": "simple-git-hooks",
+    "prepack": "pnpm build",
+    "prepublishOnly": "pnpm lint && pnpm test",
+    "release": "bumpp && pnpm publish",
+    "test": "pnpm test:unit && pnpm test:types",
+    "test:unit": "vitest",
+    "test:knip": "knip",
+    "test:versions": "installed-check -d --no-workspaces",
+    "test:types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.13.0",
+    "@antfu/eslint-config": "latest",
     "@types/node": "^22.15.6",
-    "eslint": "^9.26.0",
-    "typescript": "^5.8.3",
-    "vitest": "^3.1.3"
+    "@vitest/coverage-v8": "latest",
+    "bumpp": "latest",
+    "changelogithub": "latest",
+    "eslint": "latest",
+    "installed-check": "latest",
+    "knip": "latest",
+    "lint-staged": "latest",
+    "simple-git-hooks": "latest",
+    "typescript": "latest",
+    "unbuild": "latest",
+    "vitest": "latest"
   }
 }
