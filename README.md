@@ -105,7 +105,3 @@ A string similarity metric designed for short strings such as names. It favors s
 ## License
 
 MIT
-
----
-
-Let me know if you want a table of contents or example projects added!

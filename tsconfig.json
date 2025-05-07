@@ -1,19 +1,21 @@
 {
   "compilerOptions": {
     "target": "es2022",
-    "lib": ["es2022"],
+    "lib": [
+      "es2022"
+    ],
     "moduleDetection": "force",
-    "rootDir": "./src",
-    "module": "Preserve",
+    "module": "preserve",
     "resolveJsonModule": true,
     "allowJs": true,
     "strict": true,
-    "declaration": true,
-    "declarationMap": true,
-    "outDir": "./dist/",
-    "sourceMap": true,
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     "skipLibCheck": true
   },
   "include": ["src/**/*"],
