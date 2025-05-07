@@ -9,7 +9,6 @@ function damerauLevenshtein(a: string, b: string, limit?: number): DamerauLevens
   const lenB = b.length
   const matrix = []
 
-  // If the limit is not defined it will be calculate from this and that args.
   limit = (limit || ((lenB > lenA ? lenB : lenA))) + 1
 
   for (let i = 0; i < limit; i++) {
@@ -45,12 +44,15 @@ function damerauLevenshtein(a: string, b: string, limit?: number): DamerauLevens
       cost = (this_i === that_j) ? 0 : 1 // Step 5
       // Calculate the minimum (much faster than Math.min(...)).
       min = matrix[i - 1][j] + 1 // Deletion.
+      // eslint-disable-next-line no-cond-assign
       if ((t = matrix[i][j - 1] + 1) < min)
         min = t // Insertion.
+      // eslint-disable-next-line no-cond-assign
       if ((t = matrix[i - 1][j - 1] + cost) < min)
         min = t // Substitution.
 
       // Update matrix.
+      // eslint-disable-next-line no-cond-assign
       matrix[i][j] = (i > 1 && j > 1 && this_i === b[j - 2] && a[i - 2] === that_j && (t = matrix[i - 2][j - 2] + cost) < min) ? t : min // Transposition.
     }
   }

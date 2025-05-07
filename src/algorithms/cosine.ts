@@ -51,6 +51,7 @@ export function stringToVector(
   const { tokenizeBy = 'word', caseSensitive = false } = options
 
   if (!str)
+    // eslint-disable-next-line unicorn/no-new-array
     return new Array(vocabulary.size).fill(0)
 
   const processedStr = caseSensitive ? str : str.toLowerCase()
