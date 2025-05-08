@@ -1,12 +1,12 @@
 /**
  * Default size of key storage allocation
  */
-const MAX_KEY_ALLOCATION = 32;
+const MAX_KEY_ALLOCATION = 32
 
 /**
  * Default maximum length of encoded key.
  */
-const DEFAULT_MAX_KEY_LENGTH = 8;
+const DEFAULT_MAX_KEY_LENGTH = 8
 
 /* Generated from Java with JSweet 3.1.0 - http://www.jsweet.org */
 /**
@@ -20,7 +20,7 @@ const DEFAULT_MAX_KEY_LENGTH = 8;
  * approximate phonetic key when appropriate) that should be the same for
  * English
  * words, and most names familiar in the United States, that are pronounced
- * *similarly*.
+ * similarly*.
  * The key value is *not* intended to be an *exact* phonetic, or even phonemic,
  * representation of the word. This is because a certain degree of 'fuzziness'
  * has
@@ -238,68 +238,68 @@ export class Metaphone3 {
    * Length of word sent in to be encoded, as
    * measured at beginning of encoding.
    */
-  m_length: number = 0;
+  m_length: number = 0
 
   /**
    * Length of encoded key string.
    */
-  m_metaphLength: number = DEFAULT_MAX_KEY_LENGTH;
+  m_metaphLength: number = DEFAULT_MAX_KEY_LENGTH
 
   /**
    * Flag whether or not to encode non-initial vowels.
    */
-  m_encodeVowels: boolean = false;
+  m_encodeVowels: boolean = false
 
   /**
    * Flag whether or not to encode consonants as exactly
    * as possible.
    */
-  m_encodeExact: boolean = false;
+  m_encodeExact: boolean = false
 
   /**
    * Internal copy of word to be encoded, allocated separately
    * from string pointed to in incoming parameter.
    */
-  m_inWord!: string;
+  m_inWord!: string
 
   /**
    * Running copy of primary key.
    */
   m_primary = {
     str: '',
-    toString: function () {
-      return this.str;
+    toString() {
+      return this.str
     },
-  };
+  }
 
   /**
    * Running copy of secondary key.
    */
   m_secondary = {
     str: '',
-    toString: function () {
-      return this.str;
+    toString() {
+      return this.str
     },
-  };
+  }
 
   /**
    * Index of character in m_inWord currently being
    * encoded.
    */
-  m_current: number = 0;
+  m_current: number = 0
 
   /**
    * Index of last character in m_inWord.
    */
-  m_last: number = 0;
+  m_last: number = 0
 
   /**
    * Flag that an AL inversion has already been done.
    */
-  flag_AL_inversion: boolean = false;
+  flag_AL_inversion: boolean = false
 
   public constructor(incomingCharString: string = '') {
-    this.SetWord(incomingCharString);
+    this.SetWord(incomingCharString)
   }
 
   /**
@@ -309,8 +309,8 @@ export class Metaphone3 {
    * the word to be encoded.
    */
   SetWord(incomingCharString: string) {
-    this.m_inWord = incomingCharString.toUpperCase();
-    this.m_length = this.m_inWord.length;
+    this.m_inWord = incomingCharString.toUpperCase()
+    this.m_length = this.m_inWord.length
   }
 
   /**
@@ -325,22 +325,22 @@ export class Metaphone3 {
    */
   SetKeyLength(inKeyLength: number): boolean {
     if (inKeyLength < 1) {
-      inKeyLength = 1;
+      inKeyLength = 1
     }
     if (inKeyLength > MAX_KEY_ALLOCATION) {
-      this.m_metaphLength = MAX_KEY_ALLOCATION;
-      return false;
+      this.m_metaphLength = MAX_KEY_ALLOCATION
+      return false
     }
-    this.m_metaphLength = inKeyLength;
-    return true;
+    this.m_metaphLength = inKeyLength
+    return true
   }
 
   MetaphAdd$java_lang_String(incomingChar: string) {
     if (
       !(
-        incomingChar === 'A' &&
-        /* length */ this.m_primary.str.length > 0 &&
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        incomingChar === 'A'
+        /* length */ && this.m_primary.str.length > 0
+        && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           /* charAt */ this.m_primary.str.charAt(
             /* length */ this.m_primary.str.length - 1,
           ),
@@ -348,15 +348,15 @@ export class Metaphone3 {
       )
     ) {
       /* append */ ((sb) => {
-        sb.str += incomingChar;
-        return sb;
-      })(this.m_primary);
+        sb.str += incomingChar
+        return sb
+      })(this.m_primary)
     }
     if (
       !(
-        incomingChar === 'A' &&
-        /* length */ this.m_secondary.str.length > 0 &&
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        incomingChar === 'A'
+        /* length */ && this.m_secondary.str.length > 0
+        && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           /* charAt */ this.m_secondary.str.charAt(
             /* length */ this.m_secondary.str.length - 1,
           ),
@@ -364,9 +364,9 @@ export class Metaphone3 {
       )
     ) {
       /* append */ ((sb) => {
-        sb.str += incomingChar;
-        return sb;
-      })(this.m_secondary);
+        sb.str += incomingChar
+        return sb
+      })(this.m_secondary)
     }
   }
 
@@ -376,9 +376,9 @@ export class Metaphone3 {
   ) {
     if (
       !(
-        main === 'A' &&
-        /* length */ this.m_primary.str.length > 0 &&
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        main === 'A'
+        /* length */ && this.m_primary.str.length > 0
+        && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           /* charAt */ this.m_primary.str.charAt(
             /* length */ this.m_primary.str.length - 1,
           ),
@@ -386,15 +386,15 @@ export class Metaphone3 {
       )
     ) {
       /* append */ ((sb) => {
-        sb.str += main;
-        return sb;
-      })(this.m_primary);
+        sb.str += main
+        return sb
+      })(this.m_primary)
     }
     if (
       !(
-        alt === 'A' &&
-        /* length */ this.m_secondary.str.length > 0 &&
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        alt === 'A'
+        /* length */ && this.m_secondary.str.length > 0
+        && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           /* charAt */ this.m_secondary.str.charAt(
             /* length */ this.m_secondary.str.length - 1,
           ),
@@ -403,9 +403,9 @@ export class Metaphone3 {
     ) {
       if (!(/* isEmpty */ (alt.length === 0))) {
         /* append */ ((sb) => {
-          sb.str += alt;
-          return sb;
-        })(this.m_secondary);
+          sb.str += alt
+          return sb
+        })(this.m_secondary)
       }
     }
   }
@@ -420,16 +420,20 @@ export class Metaphone3 {
    */
   public MetaphAdd(main?: any, alt?: any) {
     if (
-      (typeof main === 'string' || main === null) &&
-      (typeof alt === 'string' || alt === null)
+      (typeof main === 'string' || main === null)
+      && (typeof alt === 'string' || alt === null)
     ) {
-      return this.MetaphAdd$java_lang_String$java_lang_String(main, alt);
-    } else if (
-      (typeof main === 'string' || main === null) &&
-      alt === undefined
+      return this.MetaphAdd$java_lang_String$java_lang_String(main, alt)
+    }
+    else if (
+      (typeof main === 'string' || main === null)
+      && alt === undefined
     ) {
-      return this.MetaphAdd$java_lang_String(main);
-    } else throw new Error('invalid overload');
+      return this.MetaphAdd$java_lang_String(main)
+    }
+    else {
+      throw new Error('invalid overload')
+    }
   }
 
   public MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
@@ -439,9 +443,10 @@ export class Metaphone3 {
     alt: string,
   ) {
     if (this.m_encodeExact) {
-      this.MetaphAdd$java_lang_String$java_lang_String(mainExact, altExact);
-    } else {
-      this.MetaphAdd$java_lang_String$java_lang_String(main, alt);
+      this.MetaphAdd$java_lang_String$java_lang_String(mainExact, altExact)
+    }
+    else {
+      this.MetaphAdd$java_lang_String$java_lang_String(main, alt)
     }
   }
 
@@ -469,28 +474,32 @@ export class Metaphone3 {
     alt?: any,
   ) {
     if (
-      (typeof mainExact === 'string' || mainExact === null) &&
-      (typeof altExact === 'string' || altExact === null) &&
-      (typeof main === 'string' || main === null) &&
-      (typeof alt === 'string' || alt === null)
+      (typeof mainExact === 'string' || mainExact === null)
+      && (typeof altExact === 'string' || altExact === null)
+      && (typeof main === 'string' || main === null)
+      && (typeof alt === 'string' || alt === null)
     ) {
       return this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
         mainExact,
         altExact,
         main,
         alt,
-      );
-    } else if (
-      (typeof mainExact === 'string' || mainExact === null) &&
-      (typeof altExact === 'string' || altExact === null) &&
-      main === undefined &&
-      alt === undefined
+      )
+    }
+    else if (
+      (typeof mainExact === 'string' || mainExact === null)
+      && (typeof altExact === 'string' || altExact === null)
+      && main === undefined
+      && alt === undefined
     ) {
       return this.MetaphAddExactApprox$java_lang_String$java_lang_String(
         mainExact,
         altExact,
-      );
-    } else throw new Error('invalid overload');
+      )
+    }
+    else {
+      throw new Error('invalid overload')
+    }
   }
 
   MetaphAddExactApprox$java_lang_String$java_lang_String(
@@ -498,9 +507,10 @@ export class Metaphone3 {
     main: string,
   ) {
     if (this.m_encodeExact) {
-      this.MetaphAdd$java_lang_String(mainExact);
-    } else {
-      this.MetaphAdd$java_lang_String(main);
+      this.MetaphAdd$java_lang_String(mainExact)
+    }
+    else {
+      this.MetaphAdd$java_lang_String(main)
     }
   }
 
@@ -510,7 +520,7 @@ export class Metaphone3 {
    * @return {number} short integer representing the length allowed for the key.
    */
   GetKeyLength(): number {
-    return this.m_metaphLength;
+    return this.m_metaphLength
   }
 
   /**
@@ -520,7 +530,7 @@ export class Metaphone3 {
    * key.
    */
   GetMaximumKeyLength(): number {
-    return MAX_KEY_ALLOCATION | 0;
+    return MAX_KEY_ALLOCATION | 0
   }
 
   /**
@@ -533,7 +543,7 @@ export class Metaphone3 {
    * @param {boolean} inEncodeVowels Non-initial vowels encoded if true, not if false.
    */
   SetEncodeVowels(inEncodeVowels: boolean) {
-    this.m_encodeVowels = inEncodeVowels;
+    this.m_encodeVowels = inEncodeVowels
   }
 
   /**
@@ -544,7 +554,7 @@ export class Metaphone3 {
    * vowels, false if not.
    */
   GetEncodeVowels(): boolean {
-    return this.m_encodeVowels;
+    return this.m_encodeVowels
   }
 
   /**
@@ -560,7 +570,7 @@ export class Metaphone3 {
    * false.
    */
   SetEncodeExact(inEncodeExact: boolean) {
-    this.m_encodeExact = inEncodeExact;
+    this.m_encodeExact = inEncodeExact
   }
 
   /**
@@ -571,7 +581,7 @@ export class Metaphone3 {
    * if not.
    */
   GetEncodeExact(): boolean {
-    return this.m_encodeExact;
+    return this.m_encodeExact
   }
 
   /**
@@ -580,8 +590,8 @@ export class Metaphone3 {
    * @return {string} a character pointer to the primary encoded key
    */
   GetMetaph(): string {
-    const primary: string = this.m_primary.str;
-    return primary;
+    const primary: string = this.m_primary.str
+    return primary
   }
 
   /**
@@ -590,8 +600,8 @@ export class Metaphone3 {
    * @return {string} a character pointer to the alternate encoded key
    */
   GetAlternateMetaph(): string {
-    const secondary: string = this.m_secondary.str;
-    return secondary;
+    const secondary: string = this.m_secondary.str
+    return secondary
   }
 
   /**
@@ -602,16 +612,16 @@ export class Metaphone3 {
    */
   Front_Vowel(at: number): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(this.CharAt(at)) ==
-        'E'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(this.CharAt(at)) ==
-        'I'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(this.CharAt(at)) ==
-        'Y'.charCodeAt(0)
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(this.CharAt(at))
+      == 'E'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(this.CharAt(at))
+      == 'I'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(this.CharAt(at))
+      == 'Y'.charCodeAt(0)
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -622,92 +632,92 @@ export class Metaphone3 {
    */
   SlavoGermanic(): boolean {
     if (
-      this.StringAt(0, 3, 'SCH', '') ||
-      this.StringAt(0, 2, 'SW', '') ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(this.CharAt(0)) ==
-        'J'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(this.CharAt(0)) ==
-        'W'.charCodeAt(0)
+      this.StringAt(0, 3, 'SCH', '')
+      || this.StringAt(0, 2, 'SW', '')
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(this.CharAt(0))
+      == 'J'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(this.CharAt(0))
+      == 'W'.charCodeAt(0)
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   public IsVowel$char(inChar: string): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        'A'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        'E'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        'I'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        'O'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        'U'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        'Y'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00c0'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00c1'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00c2'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00c3'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00c4'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00c5'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00c6'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00c8'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00c9'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00ca'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00cb'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00cc'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00cd'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00ce'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00cf'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00d2'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00d3'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00d4'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00d5'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00d6'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u008c'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00d8'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00d9'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00da'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00db'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00dc'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u00dd'.charCodeAt(0) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar) ==
-        '\u009f'.charCodeAt(0)
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == 'A'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == 'E'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == 'I'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == 'O'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == 'U'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == 'Y'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00C0'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00C1'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00C2'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00C3'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00C4'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00C5'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00C6'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00C8'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00C9'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00CA'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00CB'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00CC'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00CD'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u00CE'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u00CF'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u00D2'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u00D3'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u00D4'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u00D5'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u00D6'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u008C'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u00D8'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u00D9'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u00DA'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u00DB'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u00DC'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u00DD'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+        == '\u009F'.charCodeAt(0)
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -718,21 +728,25 @@ export class Metaphone3 {
    */
   public IsVowel(inChar?: any): boolean {
     if (typeof inChar === 'string' || inChar === null) {
-      return this.IsVowel$char(inChar);
-    } else if (typeof inChar === 'number' || inChar === null) {
-      return this.IsVowel$int(inChar);
-    } else throw new Error('invalid overload');
+      return this.IsVowel$char(inChar)
+    }
+    else if (typeof inChar === 'number' || inChar === null) {
+      return this.IsVowel$int(inChar)
+    }
+    else {
+      throw new Error('invalid overload')
+    }
   }
 
   IsVowel$int(at: number): boolean {
     if (at < 0 || at >= this.m_length) {
-      return false;
+      return false
     }
-    const it: string = this.CharAt(at);
+    const it: string = this.CharAt(at)
     if (this.IsVowel$char(it)) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -746,36 +760,36 @@ export class Metaphone3 {
    */
   SkipVowels(at: number): number {
     if (at < 0) {
-      return 0;
+      return 0
     }
     if (at >= this.m_length) {
-      return this.m_length;
+      return this.m_length
     }
-    let it: string = this.CharAt(at);
+    let it: string = this.CharAt(at)
     while (
-      this.IsVowel$char(it) ||
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(it) ==
-        'W'.charCodeAt(0)
+      this.IsVowel$char(it)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(it)
+      == 'W'.charCodeAt(0)
     ) {
       {
         if (
-          this.StringAt(at, 4, 'WICZ', 'WITZ', 'WIAK', '') ||
-          this.StringAt(at - 1, 5, 'EWSKI', 'EWSKY', 'OWSKI', 'OWSKY', '') ||
-          (this.StringAt(at, 5, 'WICKI', 'WACKI', '') && at + 4 === this.m_last)
+          this.StringAt(at, 4, 'WICZ', 'WITZ', 'WIAK', '')
+          || this.StringAt(at - 1, 5, 'EWSKI', 'EWSKY', 'OWSKI', 'OWSKY', '')
+          || (this.StringAt(at, 5, 'WICKI', 'WACKI', '') && at + 4 === this.m_last)
         ) {
-          break;
+          break
         }
-        at++;
+        at++
         if (
-          ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+          (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
             this.CharAt(at - 1),
-          ) == 'W'.charCodeAt(0) &&
-          ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+          ) == 'W'.charCodeAt(0)
+          && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
             this.CharAt(at),
-          ) == 'H'.charCodeAt(0) &&
-          !(
-            this.StringAt(at, 3, 'HOP', '') ||
-            this.StringAt(
+          ) == 'H'.charCodeAt(0)
+          && !(
+            this.StringAt(at, 3, 'HOP', '')
+            || this.StringAt(
               at,
               4,
               'HIDE',
@@ -787,20 +801,20 @@ export class Metaphone3 {
               'HAND',
               'HOLE',
               '',
-            ) ||
-            this.StringAt(at, 5, 'HEART', 'HOUSE', 'HOUND', '') ||
-            this.StringAt(at, 6, 'HAMMER', '')
+            )
+            || this.StringAt(at, 5, 'HEART', 'HOUSE', 'HOUND', '')
+            || this.StringAt(at, 6, 'HAMMER', '')
           )
         ) {
-          at++;
+          at++
         }
         if (at > this.m_length - 1) {
-          break;
+          break
         }
-        it = this.CharAt(at);
+        it = this.CharAt(at)
       }
     }
-    return at;
+    return at
   }
 
   /**
@@ -814,9 +828,10 @@ export class Metaphone3 {
    */
   AdvanceCounter(ifNotEncodeVowels: number, ifEncodeVowels: number) {
     if (!this.m_encodeVowels) {
-      this.m_current += ifNotEncodeVowels;
-    } else {
-      this.m_current += ifEncodeVowels;
+      this.m_current += ifNotEncodeVowels
+    }
+    else {
+      this.m_current += ifEncodeVowels
     }
   }
 
@@ -828,9 +843,9 @@ export class Metaphone3 {
    */
   CharAt(at: number): string {
     if (at < 0 || at > this.m_length - 1) {
-      return '\u0000';
+      return '\u0000'
     }
-    return this.m_inWord.charAt(at);
+    return this.m_inWord.charAt(at)
   }
 
   /**
@@ -844,54 +859,55 @@ export class Metaphone3 {
    * @return {boolean}
    */
   RootOrInflections(inWord: string, root: string): boolean {
-    const len: number = root.length;
-    let test: string;
-    test = root + 'S';
+    const len: number = root.length
+    let test: string
+    test = `${root}S`
     if (inWord === root || inWord === test) {
-      return true;
+      return true
     }
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         root.charAt(len - 1),
       ) != 'E'.charCodeAt(0)
     ) {
-      test = root + 'ES';
+      test = `${root}ES`
     }
     if (inWord === test) {
-      return true;
+      return true
     }
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         root.charAt(len - 1),
       ) != 'E'.charCodeAt(0)
     ) {
-      test = root + 'ED';
-    } else {
-      test = root + 'D';
+      test = `${root}ED`
+    }
+    else {
+      test = `${root}D`
     }
     if (inWord === test) {
-      return true;
+      return true
     }
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         root.charAt(len - 1),
       ) == 'E'.charCodeAt(0)
     ) {
-      root = root.substring(0, len - 1);
+      root = root.substring(0, len - 1)
     }
-    test = root + 'ING';
+    test = `${root}ING`
     if (inWord === test) {
-      return true;
+      return true
     }
-    test = root + 'INGLY';
+    test = `${root}INGLY`
     if (inWord === test) {
-      return true;
+      return true
     }
-    test = root + 'Y';
+    test = `${root}Y`
     if (inWord === test) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -910,29 +926,29 @@ export class Metaphone3 {
     ...compareStrings: string[]
   ): boolean {
     if (
-      start < 0 ||
-      start > this.m_length - 1 ||
-      start + length - 1 > this.m_length - 1
+      start < 0
+      || start > this.m_length - 1
+      || start + length - 1 > this.m_length - 1
     ) {
-      return false;
+      return false
     }
-    const target: string = this.m_inWord.substring(start, start + length);
+    const target: string = this.m_inWord.substring(start, start + length)
     for (let index = 0; index < compareStrings.length; index++) {
-      let strFragment = compareStrings[index];
+      const strFragment = compareStrings[index]
       {
         if (target === strFragment) {
-          return true;
+          return true
         }
       }
     }
-    return false;
+    return false
   }
 
   /**
    * Encodes input string to one or two key values according to Metaphone 3 rules.
    */
   Encode() {
-    this.flag_AL_inversion = false;
+    this.flag_AL_inversion = false
     this.m_current = 0;
     /* setLength */ ((sb, length) => (sb.str = sb.str.substring(0, length)))(
       this.m_primary,
@@ -941,108 +957,108 @@ export class Metaphone3 {
     /* setLength */ ((sb, length) => (sb.str = sb.str.substring(0, length)))(
       this.m_secondary,
       0,
-    );
+    )
     if (this.m_length < 1) {
-      return;
+      return
     }
-    this.m_last = this.m_length - 1;
+    this.m_last = this.m_length - 1
     while (
-      !(/* length */ (this.m_primary.str.length > this.m_metaphLength)) &&
-      !(/* length */ (this.m_secondary.str.length > this.m_metaphLength))
+      !(/* length */ (this.m_primary.str.length > this.m_metaphLength))
+      && !(/* length */ (this.m_secondary.str.length > this.m_metaphLength))
     ) {
       {
         if (this.m_current >= this.m_length) {
-          break;
+          break
         }
         switch (this.CharAt(this.m_current).charCodeAt(0)) {
           case 66 /* 'B' */:
-            this.Encode_B();
-            break;
+            this.Encode_B()
+            break
           case 223 /* '\u00df' */:
           case 199 /* '\u00c7' */:
-            this.MetaphAdd$java_lang_String('S');
-            this.m_current++;
-            break;
+            this.MetaphAdd$java_lang_String('S')
+            this.m_current++
+            break
           case 67 /* 'C' */:
-            this.Encode_C();
-            break;
+            this.Encode_C()
+            break
           case 68 /* 'D' */:
-            this.Encode_D();
-            break;
+            this.Encode_D()
+            break
           case 70 /* 'F' */:
-            this.Encode_F();
-            break;
+            this.Encode_F()
+            break
           case 71 /* 'G' */:
-            this.Encode_G();
-            break;
+            this.Encode_G()
+            break
           case 72 /* 'H' */:
-            this.Encode_H();
-            break;
+            this.Encode_H()
+            break
           case 74 /* 'J' */:
-            this.Encode_J();
-            break;
+            this.Encode_J()
+            break
           case 75 /* 'K' */:
-            this.Encode_K();
-            break;
+            this.Encode_K()
+            break
           case 76 /* 'L' */:
-            this.Encode_L();
-            break;
+            this.Encode_L()
+            break
           case 77 /* 'M' */:
-            this.Encode_M();
-            break;
+            this.Encode_M()
+            break
           case 78 /* 'N' */:
-            this.Encode_N();
-            break;
+            this.Encode_N()
+            break
           case 209 /* '\u00d1' */:
-            this.MetaphAdd$java_lang_String('N');
-            this.m_current++;
-            break;
+            this.MetaphAdd$java_lang_String('N')
+            this.m_current++
+            break
           case 80 /* 'P' */:
-            this.Encode_P();
-            break;
+            this.Encode_P()
+            break
           case 81 /* 'Q' */:
-            this.Encode_Q();
-            break;
+            this.Encode_Q()
+            break
           case 82 /* 'R' */:
-            this.Encode_R();
-            break;
+            this.Encode_R()
+            break
           case 83 /* 'S' */:
-            this.Encode_S();
-            break;
+            this.Encode_S()
+            break
           case 84 /* 'T' */:
-            this.Encode_T();
-            break;
+            this.Encode_T()
+            break
           case 208 /* '\u00d0' */:
           case 222 /* '\u00de' */:
-            this.MetaphAdd$java_lang_String('0');
-            this.m_current++;
-            break;
+            this.MetaphAdd$java_lang_String('0')
+            this.m_current++
+            break
           case 86 /* 'V' */:
-            this.Encode_V();
-            break;
+            this.Encode_V()
+            break
           case 87 /* 'W' */:
-            this.Encode_W();
-            break;
+            this.Encode_W()
+            break
           case 88 /* 'X' */:
-            this.Encode_X();
-            break;
+            this.Encode_X()
+            break
           case 138 /* '\u008a' */:
-            this.MetaphAdd$java_lang_String('X');
-            this.m_current++;
-            break;
+            this.MetaphAdd$java_lang_String('X')
+            this.m_current++
+            break
           case 142 /* '\u008e' */:
-            this.MetaphAdd$java_lang_String('S');
-            this.m_current++;
-            break;
+            this.MetaphAdd$java_lang_String('S')
+            this.m_current++
+            break
           case 90 /* 'Z' */:
-            this.Encode_Z();
-            break;
+            this.Encode_Z()
+            break
           default:
             if (this.IsVowel$char(this.CharAt(this.m_current))) {
-              this.Encode_Vowels();
-              break;
+              this.Encode_Vowels()
+              break
             }
-            this.m_current++;
+            this.m_current++
         }
       }
     }
@@ -1050,13 +1066,13 @@ export class Metaphone3 {
       /* setLength */ ((sb, length) => (sb.str = sb.str.substring(0, length)))(
         this.m_primary,
         this.m_metaphLength,
-      );
+      )
     }
     if (/* length */ this.m_secondary.str.length > this.m_metaphLength) {
       /* setLength */ ((sb, length) => (sb.str = sb.str.substring(0, length)))(
         this.m_secondary,
         this.m_metaphLength,
-      );
+      )
     }
     if (
       /* toString */ this.m_primary.str === /* toString */ this.m_secondary.str
@@ -1064,7 +1080,7 @@ export class Metaphone3 {
       /* setLength */ ((sb, length) => (sb.str = sb.str.substring(0, length)))(
         this.m_secondary,
         0,
-      );
+      )
     }
   }
 
@@ -1077,34 +1093,37 @@ export class Metaphone3 {
    */
   Encode_Vowels() {
     if (this.m_current === 0) {
-      this.MetaphAdd$java_lang_String('A');
-    } else if (this.m_encodeVowels) {
+      this.MetaphAdd$java_lang_String('A')
+    }
+    else if (this.m_encodeVowels) {
       if (
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current),
         ) != 'E'.charCodeAt(0)
       ) {
         if (this.Skip_Silent_UE()) {
-          return;
+          return
         }
         if (this.O_Silent()) {
-          this.m_current++;
-          return;
+          this.m_current++
+          return
         }
-        this.MetaphAdd$java_lang_String('A');
-      } else {
-        this.Encode_E_Pronounced();
+        this.MetaphAdd$java_lang_String('A')
+      }
+      else {
+        this.Encode_E_Pronounced()
       }
     }
     if (
       !(
-        !this.IsVowel$int(this.m_current - 2) &&
-        this.StringAt(this.m_current - 1, 4, 'LEWA', 'LEWO', 'LEWI', '')
+        !this.IsVowel$int(this.m_current - 2)
+        && this.StringAt(this.m_current - 1, 4, 'LEWA', 'LEWO', 'LEWI', '')
       )
     ) {
-      this.m_current = this.SkipVowels(this.m_current);
-    } else {
-      this.m_current++;
+      this.m_current = this.SkipVowels(this.m_current)
+    }
+    else {
+      this.m_current++
     }
   }
 
@@ -1118,17 +1137,17 @@ export class Metaphone3 {
    */
   Encode_E_Pronounced() {
     if (
-      (this.StringAt(0, 4, 'LAME', 'SAKE', 'PATE', '') &&
-        this.m_length === 4) ||
-      (this.StringAt(0, 5, 'AGAPE', '') && this.m_length === 5) ||
-      (this.m_current === 5 && this.StringAt(0, 6, 'RESUME', ''))
+      (this.StringAt(0, 4, 'LAME', 'SAKE', 'PATE', '')
+        && this.m_length === 4)
+      || (this.StringAt(0, 5, 'AGAPE', '') && this.m_length === 5)
+      || (this.m_current === 5 && this.StringAt(0, 6, 'RESUME', ''))
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('', 'A');
-      return;
+      this.MetaphAdd$java_lang_String$java_lang_String('', 'A')
+      return
     }
     if (this.StringAt(0, 4, 'INGE', '') && this.m_length === 4) {
-      this.MetaphAdd$java_lang_String$java_lang_String('A', '');
-      return;
+      this.MetaphAdd$java_lang_String$java_lang_String('A', '')
+      return
     }
     if (this.m_current === 5 && this.StringAt(0, 7, 'BLESSED', 'LEARNED', '')) {
       this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
@@ -1136,19 +1155,19 @@ export class Metaphone3 {
         'AD',
         'T',
         'AT',
-      );
-      this.m_current += 2;
-      return;
+      )
+      this.m_current += 2
+      return
     }
     if (
-      (!this.E_Silent() &&
-        !this.flag_AL_inversion &&
-        !this.Silent_Internal_E()) ||
-      this.E_Pronounced_Exceptions()
+      (!this.E_Silent()
+        && !this.flag_AL_inversion
+        && !this.Silent_Internal_E())
+      || this.E_Pronounced_Exceptions()
     ) {
-      this.MetaphAdd$java_lang_String('A');
+      this.MetaphAdd$java_lang_String('A')
     }
-    this.flag_AL_inversion = false;
+    this.flag_AL_inversion = false
   }
 
   /**
@@ -1159,21 +1178,21 @@ export class Metaphone3 {
    */
   O_Silent(): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current),
-      ) == 'O'.charCodeAt(0) &&
-      this.StringAt(this.m_current - 2, 4, 'IRON', '')
+      ) == 'O'.charCodeAt(0)
+      && this.StringAt(this.m_current - 2, 4, 'IRON', '')
     ) {
       if (
-        (this.StringAt(0, 4, 'IRON', '') ||
-          (this.StringAt(this.m_current - 2, 4, 'IRON', '') &&
-            this.m_last === this.m_current + 1)) &&
-        !this.StringAt(this.m_current - 2, 6, 'IRONIC', '')
+        (this.StringAt(0, 4, 'IRON', '')
+          || (this.StringAt(this.m_current - 2, 4, 'IRON', '')
+            && this.m_last === this.m_current + 1))
+          && !this.StringAt(this.m_current - 2, 6, 'IRONIC', '')
       ) {
-        return true;
+        return true
       }
     }
-    return false;
+    return false
   }
 
   /**
@@ -1184,19 +1203,19 @@ export class Metaphone3 {
    */
   E_Silent(): boolean {
     if (this.E_Pronounced_At_End()) {
-      return false;
+      return false
     }
     if (
-      this.m_current === this.m_last ||
-      (this.StringAt(this.m_last, 1, 'S', 'D', '') &&
-        this.m_current > 1 &&
-        this.m_current + 1 === this.m_last &&
-        !(
-          this.StringAt(this.m_current - 1, 3, 'TED', 'SES', 'CES', '') ||
-          this.StringAt(0, 9, 'ANTIPODES', 'ANOPHELES', '') ||
-          this.StringAt(0, 8, 'MOHAMMED', 'MUHAMMED', 'MOUHAMED', '') ||
-          this.StringAt(0, 7, 'MOHAMED', '') ||
-          this.StringAt(
+      this.m_current === this.m_last
+      || (this.StringAt(this.m_last, 1, 'S', 'D', '')
+        && this.m_current > 1
+        && this.m_current + 1 === this.m_last
+        && !(
+          this.StringAt(this.m_current - 1, 3, 'TED', 'SES', 'CES', '')
+          || this.StringAt(0, 9, 'ANTIPODES', 'ANOPHELES', '')
+          || this.StringAt(0, 8, 'MOHAMMED', 'MUHAMMED', 'MOUHAMED', '')
+          || this.StringAt(0, 7, 'MOHAMED', '')
+          || this.StringAt(
             0,
             6,
             'NORRED',
@@ -1207,19 +1226,19 @@ export class Metaphone3 {
             'RASHED',
             'MASJED',
             '',
-          ) ||
-          this.StringAt(0, 5, 'JARED', 'AHMED', 'HAMED', 'JAVED', '') ||
-          this.StringAt(0, 4, 'ABED', 'IMED', '')
-        )) ||
-      (this.StringAt(this.m_current + 1, 4, 'NESS', 'LESS', '') &&
-        this.m_current + 4 === this.m_last) ||
-      (this.StringAt(this.m_current + 1, 2, 'LY', '') &&
-        this.m_current + 2 === this.m_last &&
-        !this.StringAt(0, 6, 'CICELY', ''))
+          )
+          || this.StringAt(0, 5, 'JARED', 'AHMED', 'HAMED', 'JAVED', '')
+          || this.StringAt(0, 4, 'ABED', 'IMED', '')
+        ))
+        || (this.StringAt(this.m_current + 1, 4, 'NESS', 'LESS', '')
+          && this.m_current + 4 === this.m_last)
+        || (this.StringAt(this.m_current + 1, 2, 'LY', '')
+          && this.m_current + 2 === this.m_last
+          && !this.StringAt(0, 6, 'CICELY', ''))
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1239,11 +1258,11 @@ export class Metaphone3 {
    */
   E_Pronounced_At_End(): boolean {
     if (
-      this.m_current === this.m_last &&
-      (this.StringAt(this.m_current - 6, 7, 'STROPHE', '') ||
-        this.m_length === 2 ||
-        (this.m_length === 3 && !this.IsVowel$int(0)) ||
-        (this.StringAt(
+      this.m_current === this.m_last
+      && (this.StringAt(this.m_current - 6, 7, 'STROPHE', '')
+        || this.m_length === 2
+        || (this.m_length === 3 && !this.IsVowel$int(0))
+        || (this.StringAt(
           this.m_last - 2,
           3,
           'BKE',
@@ -1258,121 +1277,121 @@ export class Metaphone3 {
           'VKE',
           'ZKE',
           '',
-        ) &&
-          !this.StringAt(0, 5, 'FINKE', 'FUNKE', '') &&
-          !this.StringAt(0, 6, 'FRANKE', '')) ||
-        this.StringAt(this.m_last - 4, 5, 'SCHKE', '') ||
-        (this.StringAt(
-          0,
-          4,
-          'ACME',
-          'NIKE',
-          'CAFE',
-          'RENE',
-          'LUPE',
-          'JOSE',
-          'ESME',
-          '',
-        ) &&
-          this.m_length === 4) ||
-        (this.StringAt(
-          0,
-          5,
-          'LETHE',
-          'CADRE',
-          'TILDE',
-          'SIGNE',
-          'POSSE',
-          'LATTE',
-          'ANIME',
-          'DOLCE',
-          'CROCE',
-          'ADOBE',
-          'OUTRE',
-          'JESSE',
-          'JAIME',
-          'JAFFE',
-          'BENGE',
-          'RUNGE',
-          'CHILE',
-          'DESME',
-          'CONDE',
-          'URIBE',
-          'LIBRE',
-          'ANDRE',
-          '',
-        ) &&
-          this.m_length === 5) ||
-        (this.StringAt(
-          0,
-          6,
-          'HECATE',
-          'PSYCHE',
-          'DAPHNE',
-          'PENSKE',
-          'CLICHE',
-          'RECIPE',
-          'TAMALE',
-          'SESAME',
-          'SIMILE',
-          'FINALE',
-          'KARATE',
-          'RENATE',
-          'SHANTE',
-          'OBERLE',
-          'COYOTE',
-          'KRESGE',
-          'STONGE',
-          'STANGE',
-          'SWAYZE',
-          'FUENTE',
-          'SALOME',
-          'URRIBE',
-          '',
-        ) &&
-          this.m_length === 6) ||
-        (this.StringAt(
-          0,
-          7,
-          'ECHIDNE',
-          'ARIADNE',
-          'MEINEKE',
-          'PORSCHE',
-          'ANEMONE',
-          'EPITOME',
-          'SYNCOPE',
-          'SOUFFLE',
-          'ATTACHE',
-          'MACHETE',
-          'KARAOKE',
-          'BUKKAKE',
-          'VICENTE',
-          'ELLERBE',
-          'VERSACE',
-          '',
-        ) &&
-          this.m_length === 7) ||
-        (this.StringAt(
-          0,
-          8,
-          'PENELOPE',
-          'CALLIOPE',
-          'CHIPOTLE',
-          'ANTIGONE',
-          'KAMIKAZE',
-          'EURIDICE',
-          'YOSEMITE',
-          'FERRANTE',
-          '',
-        ) &&
-          this.m_length === 8) ||
-        (this.StringAt(0, 9, 'HYPERBOLE', 'GUACAMOLE', 'XANTHIPPE', '') &&
-          this.m_length === 9) ||
-        (this.StringAt(0, 10, 'SYNECDOCHE', '') && this.m_length === 10))
+        )
+        && !this.StringAt(0, 5, 'FINKE', 'FUNKE', '')
+        && !this.StringAt(0, 6, 'FRANKE', ''))
+      || this.StringAt(this.m_last - 4, 5, 'SCHKE', '')
+      || (this.StringAt(
+        0,
+        4,
+        'ACME',
+        'NIKE',
+        'CAFE',
+        'RENE',
+        'LUPE',
+        'JOSE',
+        'ESME',
+        '',
+      )
+      && this.m_length === 4)
+    || (this.StringAt(
+      0,
+      5,
+      'LETHE',
+      'CADRE',
+      'TILDE',
+      'SIGNE',
+      'POSSE',
+      'LATTE',
+      'ANIME',
+      'DOLCE',
+      'CROCE',
+      'ADOBE',
+      'OUTRE',
+      'JESSE',
+      'JAIME',
+      'JAFFE',
+      'BENGE',
+      'RUNGE',
+      'CHILE',
+      'DESME',
+      'CONDE',
+      'URIBE',
+      'LIBRE',
+      'ANDRE',
+      '',
+    )
+    && this.m_length === 5)
+  || (this.StringAt(
+    0,
+    6,
+    'HECATE',
+    'PSYCHE',
+    'DAPHNE',
+    'PENSKE',
+    'CLICHE',
+    'RECIPE',
+    'TAMALE',
+    'SESAME',
+    'SIMILE',
+    'FINALE',
+    'KARATE',
+    'RENATE',
+    'SHANTE',
+    'OBERLE',
+    'COYOTE',
+    'KRESGE',
+    'STONGE',
+    'STANGE',
+    'SWAYZE',
+    'FUENTE',
+    'SALOME',
+    'URRIBE',
+    '',
+  )
+  && this.m_length === 6)
+|| (this.StringAt(
+  0,
+  7,
+  'ECHIDNE',
+  'ARIADNE',
+  'MEINEKE',
+  'PORSCHE',
+  'ANEMONE',
+  'EPITOME',
+  'SYNCOPE',
+  'SOUFFLE',
+  'ATTACHE',
+  'MACHETE',
+  'KARAOKE',
+  'BUKKAKE',
+  'VICENTE',
+  'ELLERBE',
+  'VERSACE',
+  '',
+)
+&& this.m_length === 7)
+|| (this.StringAt(
+  0,
+  8,
+  'PENELOPE',
+  'CALLIOPE',
+  'CHIPOTLE',
+  'ANTIGONE',
+  'KAMIKAZE',
+  'EURIDICE',
+  'YOSEMITE',
+  'FERRANTE',
+  '',
+)
+&& this.m_length === 8)
+|| (this.StringAt(0, 9, 'HYPERBOLE', 'GUACAMOLE', 'XANTHIPPE', '')
+  && this.m_length === 9)
+|| (this.StringAt(0, 10, 'SYNECDOCHE', '') && this.m_length === 10))
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1383,10 +1402,10 @@ export class Metaphone3 {
    */
   Silent_Internal_E(): boolean {
     if (
-      (this.StringAt(0, 3, 'OLE', '') &&
-        this.E_Silent_Suffix(3) &&
-        !this.E_Pronouncing_Suffix(3)) ||
-      (this.StringAt(
+      (this.StringAt(0, 3, 'OLE', '')
+        && this.E_Silent_Suffix(3)
+        && !this.E_Pronouncing_Suffix(3))
+      || (this.StringAt(
         0,
         4,
         'BARE',
@@ -1417,39 +1436,39 @@ export class Metaphone3 {
         'WISE',
         'WINE',
         '',
-      ) &&
-        this.E_Silent_Suffix(4) &&
-        !this.E_Pronouncing_Suffix(4)) ||
-      (this.StringAt(
-        0,
-        5,
-        'BLAKE',
-        'BRAKE',
-        'BRINE',
-        'CARLE',
-        'CLEVE',
-        'DUNNE',
-        'HEDGE',
-        'HOUSE',
-        'JEFFE',
-        'LUNCE',
-        'STOKE',
-        'STONE',
-        'THORE',
-        'WEDGE',
-        'WHITE',
-        '',
-      ) &&
-        this.E_Silent_Suffix(5) &&
-        !this.E_Pronouncing_Suffix(5)) ||
-      (this.StringAt(0, 6, 'BRIDGE', 'CHEESE', '') &&
-        this.E_Silent_Suffix(6) &&
-        !this.E_Pronouncing_Suffix(6)) ||
-      this.StringAt(this.m_current - 5, 7, 'CHARLES', '')
+      )
+      && this.E_Silent_Suffix(4)
+      && !this.E_Pronouncing_Suffix(4))
+    || (this.StringAt(
+      0,
+      5,
+      'BLAKE',
+      'BRAKE',
+      'BRINE',
+      'CARLE',
+      'CLEVE',
+      'DUNNE',
+      'HEDGE',
+      'HOUSE',
+      'JEFFE',
+      'LUNCE',
+      'STOKE',
+      'STONE',
+      'THORE',
+      'WEDGE',
+      'WHITE',
+      '',
+    )
+    && this.E_Silent_Suffix(5)
+    && !this.E_Pronouncing_Suffix(5))
+  || (this.StringAt(0, 6, 'BRIDGE', 'CHEESE', '')
+    && this.E_Silent_Suffix(6)
+    && !this.E_Pronouncing_Suffix(6))
+  || this.StringAt(this.m_current - 5, 7, 'CHARLES', '')
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1461,14 +1480,14 @@ export class Metaphone3 {
    */
   E_Silent_Suffix(at: number): boolean {
     if (
-      this.m_current === at - 1 &&
-      this.m_length > at + 1 &&
-      (this.IsVowel$int(at + 1) ||
-        (this.StringAt(at, 2, 'ST', 'SL', '') && this.m_length > at + 2))
+      this.m_current === at - 1
+      && this.m_length > at + 1
+      && (this.IsVowel$int(at + 1)
+        || (this.StringAt(at, 2, 'ST', 'SL', '') && this.m_length > at + 2))
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1480,23 +1499,23 @@ export class Metaphone3 {
    */
   E_Pronouncing_Suffix(at: number): boolean {
     if (this.m_length === at + 4 && this.StringAt(at, 4, 'WOOD', '')) {
-      return true;
+      return true
     }
     if (
-      this.m_length === at + 5 &&
-      this.StringAt(at, 5, 'WATER', 'WORTH', '')
+      this.m_length === at + 5
+      && this.StringAt(at, 5, 'WATER', 'WORTH', '')
     ) {
-      return true;
+      return true
     }
     if (
-      this.m_length === at + 3 &&
-      this.StringAt(at, 3, 'TTE', 'LIA', 'NOW', 'ROS', 'RAS', '')
+      this.m_length === at + 3
+      && this.StringAt(at, 3, 'TTE', 'LIA', 'NOW', 'ROS', 'RAS', '')
     ) {
-      return true;
+      return true
     }
     if (
-      this.m_length === at + 2 &&
-      this.StringAt(
+      this.m_length === at + 2
+      && this.StringAt(
         at,
         2,
         'TA',
@@ -1513,12 +1532,12 @@ export class Metaphone3 {
         '',
       )
     ) {
-      return true;
+      return true
     }
     if (this.m_length === at + 1 && this.StringAt(at, 1, 'T', 'R', '')) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1532,10 +1551,10 @@ export class Metaphone3 {
    */
   E_Pronounced_Exceptions(): boolean {
     if (
-      (this.m_current + 1 === this.m_last &&
-        (this.StringAt(this.m_current - 3, 5, 'OCLES', 'ACLES', 'AKLES', '') ||
-          this.StringAt(0, 4, 'INES', '') ||
-          this.StringAt(
+      (this.m_current + 1 === this.m_last
+        && (this.StringAt(this.m_current - 3, 5, 'OCLES', 'ACLES', 'AKLES', '')
+          || this.StringAt(0, 4, 'INES', '')
+          || this.StringAt(
             0,
             5,
             'LOPES',
@@ -1551,8 +1570,8 @@ export class Metaphone3 {
             'BENES',
             'DONES',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             0,
             6,
             'CORTES',
@@ -1576,8 +1595,8 @@ export class Metaphone3 {
             'BATRES',
             'MATHES',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             0,
             7,
             'DELORES',
@@ -1609,8 +1628,8 @@ export class Metaphone3 {
             'HENTGES',
             'VALORES',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             0,
             8,
             'GONZALES',
@@ -1628,8 +1647,8 @@ export class Metaphone3 {
             'MARTINES',
             'GRAJALES',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             0,
             9,
             'CERVANTES',
@@ -1642,31 +1661,31 @@ export class Metaphone3 {
             'HERNANDES',
             'BENAVIDES',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             0,
             10,
             'ARCHIMEDES',
             'CARRIZALES',
             'MAGALLANES',
             '',
-          ))) ||
-      this.StringAt(
-        this.m_current - 2,
-        4,
-        'FRED',
-        'DGES',
-        'DRED',
-        'GNES',
-        '',
-      ) ||
-      this.StringAt(this.m_current - 5, 7, 'PROBLEM', 'RESPLEN', '') ||
-      this.StringAt(this.m_current - 4, 6, 'REPLEN', '') ||
-      this.StringAt(this.m_current - 3, 4, 'SPLE', '')
+          )))
+          || this.StringAt(
+            this.m_current - 2,
+            4,
+            'FRED',
+            'DGES',
+            'DRED',
+            'GNES',
+            '',
+          )
+          || this.StringAt(this.m_current - 5, 7, 'PROBLEM', 'RESPLEN', '')
+          || this.StringAt(this.m_current - 4, 6, 'REPLEN', '')
+          || this.StringAt(this.m_current - 3, 4, 'SPLE', '')
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1676,19 +1695,19 @@ export class Metaphone3 {
    */
   Skip_Silent_UE(): boolean {
     if (
-      this.StringAt(this.m_current - 1, 3, 'QUE', 'GUE', '') &&
-      !this.StringAt(0, 8, 'BARBEQUE', 'PALENQUE', 'APPLIQUE', '') &&
-      !this.StringAt(0, 6, 'RISQUE', '') &&
-      !this.StringAt(this.m_current - 3, 5, 'ARGUE', 'SEGUE', '') &&
-      !this.StringAt(0, 7, 'PIROGUE', 'ENRIQUE', '') &&
-      !this.StringAt(0, 10, 'COMMUNIQUE', '') &&
-      this.m_current > 1 &&
-      (this.m_current + 1 === this.m_last || this.StringAt(0, 7, 'JACQUES', ''))
+      this.StringAt(this.m_current - 1, 3, 'QUE', 'GUE', '')
+      && !this.StringAt(0, 8, 'BARBEQUE', 'PALENQUE', 'APPLIQUE', '')
+      && !this.StringAt(0, 6, 'RISQUE', '')
+      && !this.StringAt(this.m_current - 3, 5, 'ARGUE', 'SEGUE', '')
+      && !this.StringAt(0, 7, 'PIROGUE', 'ENRIQUE', '')
+      && !this.StringAt(0, 10, 'COMMUNIQUE', '')
+      && this.m_current > 1
+      && (this.m_current + 1 === this.m_last || this.StringAt(0, 7, 'JACQUES', ''))
     ) {
-      this.m_current = this.SkipVowels(this.m_current);
-      return true;
+      this.m_current = this.SkipVowels(this.m_current)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1697,24 +1716,25 @@ export class Metaphone3 {
    */
   Encode_B() {
     if (this.Encode_Silent_B()) {
-      return;
+      return
     }
-    this.MetaphAddExactApprox$java_lang_String$java_lang_String('B', 'P');
+    this.MetaphAddExactApprox$java_lang_String$java_lang_String('B', 'P')
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
-      ) == 'B'.charCodeAt(0) ||
-      (((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      ) == 'B'.charCodeAt(0)
+      || ((c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
-      ) == 'P'.charCodeAt(0) &&
-        this.m_current + 1 < this.m_last &&
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
-          this.CharAt(this.m_current + 2),
-        ) != 'H'.charCodeAt(0))
+      ) == 'P'.charCodeAt(0)
+      && this.m_current + 1 < this.m_last
+      && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        this.CharAt(this.m_current + 2),
+      ) != 'H'.charCodeAt(0))
     ) {
-      this.m_current += 2;
-    } else {
-      this.m_current++;
+      this.m_current += 2
+    }
+    else {
+      this.m_current++
     }
   }
 
@@ -1726,16 +1746,16 @@ export class Metaphone3 {
    */
   Encode_Silent_B(): boolean {
     if (
-      this.StringAt(this.m_current - 2, 4, 'DEBT', '') ||
-      this.StringAt(this.m_current - 2, 5, 'SUBTL', '') ||
-      this.StringAt(this.m_current - 2, 6, 'SUBTIL', '') ||
-      this.StringAt(this.m_current - 3, 5, 'DOUBT', '')
+      this.StringAt(this.m_current - 2, 4, 'DEBT', '')
+      || this.StringAt(this.m_current - 2, 5, 'SUBTL', '')
+      || this.StringAt(this.m_current - 2, 6, 'SUBTIL', '')
+      || this.StringAt(this.m_current - 3, 5, 'DOUBT', '')
     ) {
-      this.MetaphAdd$java_lang_String('T');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('T')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1744,39 +1764,41 @@ export class Metaphone3 {
    */
   Encode_C() {
     if (
-      this.Encode_Silent_C_At_Beginning() ||
-      this.Encode_CA_To_S() ||
-      this.Encode_CO_To_S() ||
-      this.Encode_CH() ||
-      this.Encode_CCIA() ||
-      this.Encode_CC() ||
-      this.Encode_CK_CG_CQ() ||
-      this.Encode_C_Front_Vowel() ||
-      this.Encode_Silent_C() ||
-      this.Encode_CZ() ||
-      this.Encode_CS()
+      this.Encode_Silent_C_At_Beginning()
+      || this.Encode_CA_To_S()
+      || this.Encode_CO_To_S()
+      || this.Encode_CH()
+      || this.Encode_CCIA()
+      || this.Encode_CC()
+      || this.Encode_CK_CG_CQ()
+      || this.Encode_C_Front_Vowel()
+      || this.Encode_Silent_C()
+      || this.Encode_CZ()
+      || this.Encode_CS()
     ) {
-      return;
+      return
     }
     if (!this.StringAt(this.m_current - 1, 1, 'C', 'K', 'G', 'Q', '')) {
-      this.MetaphAdd$java_lang_String('K');
+      this.MetaphAdd$java_lang_String('K')
     }
     if (this.StringAt(this.m_current + 1, 2, ' C', ' Q', ' G', '')) {
-      this.m_current += 2;
-    } else {
+      this.m_current += 2
+    }
+    else {
       if (
-        this.StringAt(this.m_current + 1, 1, 'C', 'K', 'Q', '') &&
-        !this.StringAt(this.m_current + 1, 2, 'CE', 'CI', '')
+        this.StringAt(this.m_current + 1, 1, 'C', 'K', 'Q', '')
+        && !this.StringAt(this.m_current + 1, 2, 'CE', 'CI', '')
       ) {
-        this.m_current += 2;
+        this.m_current += 2
         if (
-          this.StringAt(this.m_current, 1, 'C', 'K', 'Q', '') &&
-          !this.StringAt(this.m_current + 1, 2, 'CE', 'CI', '')
+          this.StringAt(this.m_current, 1, 'C', 'K', 'Q', '')
+          && !this.StringAt(this.m_current + 1, 2, 'CE', 'CI', '')
         ) {
-          this.m_current++;
+          this.m_current++
         }
-      } else {
-        this.m_current++;
+      }
+      else {
+        this.m_current++
       }
     }
   }
@@ -1789,13 +1811,13 @@ export class Metaphone3 {
    */
   Encode_Silent_C_At_Beginning(): boolean {
     if (
-      this.m_current === 0 &&
-      this.StringAt(this.m_current, 2, 'CT', 'CN', '')
+      this.m_current === 0
+      && this.StringAt(this.m_current, 2, 'CT', 'CN', '')
     ) {
-      this.m_current += 1;
-      return true;
+      this.m_current += 1
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1807,17 +1829,17 @@ export class Metaphone3 {
    */
   Encode_CA_To_S(): boolean {
     if (
-      (this.m_current === 0 &&
-        this.StringAt(this.m_current, 4, 'CAES', 'CAEC', 'CAEM', '')) ||
-      this.StringAt(0, 8, 'FRANCAIS', 'FRANCAIX', 'LINGUICA', '') ||
-      this.StringAt(0, 6, 'FACADE', '') ||
-      this.StringAt(0, 9, 'GONCALVES', 'PROVENCAL', '')
+      (this.m_current === 0
+        && this.StringAt(this.m_current, 4, 'CAES', 'CAEC', 'CAEM', ''))
+      || this.StringAt(0, 8, 'FRANCAIS', 'FRANCAIX', 'LINGUICA', '')
+      || this.StringAt(0, 6, 'FACADE', '')
+      || this.StringAt(0, 9, 'GONCALVES', 'PROVENCAL', '')
     ) {
-      this.MetaphAdd$java_lang_String('S');
-      this.AdvanceCounter(2, 1);
-      return true;
+      this.MetaphAdd$java_lang_String('S')
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1829,18 +1851,18 @@ export class Metaphone3 {
    */
   Encode_CO_To_S(): boolean {
     if (
-      (this.StringAt(this.m_current, 4, 'COEL', '') &&
-        (this.IsVowel$int(this.m_current + 4) ||
-          this.m_current + 3 === this.m_last)) ||
-      this.StringAt(this.m_current, 5, 'COENA', 'COENO', '') ||
-      this.StringAt(0, 8, 'FRANCOIS', 'MELANCON', '') ||
-      this.StringAt(0, 6, 'GARCON', '')
+      (this.StringAt(this.m_current, 4, 'COEL', '')
+        && (this.IsVowel$int(this.m_current + 4)
+          || this.m_current + 3 === this.m_last))
+        || this.StringAt(this.m_current, 5, 'COENA', 'COENO', '')
+        || this.StringAt(0, 8, 'FRANCOIS', 'MELANCON', '')
+        || this.StringAt(0, 6, 'GARCON', '')
     ) {
-      this.MetaphAdd$java_lang_String('S');
-      this.AdvanceCounter(3, 1);
-      return true;
+      this.MetaphAdd$java_lang_String('S')
+      this.AdvanceCounter(3, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1852,31 +1874,33 @@ export class Metaphone3 {
   Encode_CH(): boolean {
     if (this.StringAt(this.m_current, 2, 'CH', '')) {
       if (
-        this.Encode_CHAE() ||
-        this.Encode_CH_To_H() ||
-        this.Encode_Silent_CH() ||
-        this.Encode_ARCH() ||
-        this.Encode_CH_To_X() ||
-        this.Encode_English_CH_To_K() ||
-        this.Encode_Germanic_CH_To_K() ||
-        this.Encode_Greek_CH_Initial() ||
-        this.Encode_Greek_CH_Non_Initial()
+        this.Encode_CHAE()
+        || this.Encode_CH_To_H()
+        || this.Encode_Silent_CH()
+        || this.Encode_ARCH()
+        || this.Encode_CH_To_X()
+        || this.Encode_English_CH_To_K()
+        || this.Encode_Germanic_CH_To_K()
+        || this.Encode_Greek_CH_Initial()
+        || this.Encode_Greek_CH_Non_Initial()
       ) {
-        return true;
+        return true
       }
       if (this.m_current > 0) {
         if (this.StringAt(0, 2, 'MC', '') && this.m_current === 1) {
-          this.MetaphAdd$java_lang_String('K');
-        } else {
-          this.MetaphAdd$java_lang_String$java_lang_String('X', 'K');
+          this.MetaphAdd$java_lang_String('K')
         }
-      } else {
-        this.MetaphAdd$java_lang_String('X');
+        else {
+          this.MetaphAdd$java_lang_String$java_lang_String('X', 'K')
+        }
       }
-      this.m_current += 2;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('X')
+      }
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1888,16 +1912,17 @@ export class Metaphone3 {
   Encode_CHAE(): boolean {
     if (this.m_current > 0 && this.StringAt(this.m_current + 2, 2, 'AE', '')) {
       if (this.StringAt(0, 7, 'RACHAEL', '')) {
-        this.MetaphAdd$java_lang_String('X');
-      } else if (
+        this.MetaphAdd$java_lang_String('X')
+      }
+      else if (
         !this.StringAt(this.m_current - 1, 1, 'C', 'K', 'G', 'Q', '')
       ) {
-        this.MetaphAdd$java_lang_String('K');
+        this.MetaphAdd$java_lang_String('K')
       }
-      this.AdvanceCounter(4, 2);
-      return true;
+      this.AdvanceCounter(4, 2)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1911,10 +1936,10 @@ export class Metaphone3 {
    */
   Encode_CH_To_H(): boolean {
     if (
-      (this.m_current === 0 &&
-        (this.StringAt(this.m_current + 2, 3, 'AIM', 'ETH', 'ELM', '') ||
-          this.StringAt(this.m_current + 2, 4, 'ASID', 'AZAN', '') ||
-          this.StringAt(
+      (this.m_current === 0
+        && (this.StringAt(this.m_current + 2, 3, 'AIM', 'ETH', 'ELM', '')
+          || this.StringAt(this.m_current + 2, 4, 'ASID', 'AZAN', '')
+          || this.StringAt(
             this.m_current + 2,
             5,
             'UPPAH',
@@ -1923,30 +1948,30 @@ export class Metaphone3 {
             'ALUTZ',
             'AMETZ',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             this.m_current + 2,
             6,
             'ESHVAN',
             'ADARIM',
             'ANUKAH',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             this.m_current + 2,
             7,
             'ALLLOTH',
             'ANNUKAH',
             'AROSETH',
             '',
-          ))) ||
-      this.StringAt(this.m_current - 3, 7, 'CLACHAN', '')
+          )))
+          || this.StringAt(this.m_current - 3, 7, 'CLACHAN', '')
     ) {
-      this.MetaphAdd$java_lang_String('H');
-      this.AdvanceCounter(3, 2);
-      return true;
+      this.MetaphAdd$java_lang_String('H')
+      this.AdvanceCounter(3, 2)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1957,17 +1982,17 @@ export class Metaphone3 {
    */
   Encode_Silent_CH(): boolean {
     if (
-      this.StringAt(this.m_current - 2, 7, 'FUCHSIA', '') ||
-      this.StringAt(this.m_current - 2, 5, 'YACHT', '') ||
-      this.StringAt(0, 8, 'STRACHAN', '') ||
-      this.StringAt(0, 8, 'CRICHTON', '') ||
-      (this.StringAt(this.m_current - 3, 6, 'DRACHM', '') &&
-        !this.StringAt(this.m_current - 3, 7, 'DRACHMA', ''))
+      this.StringAt(this.m_current - 2, 7, 'FUCHSIA', '')
+      || this.StringAt(this.m_current - 2, 5, 'YACHT', '')
+      || this.StringAt(0, 8, 'STRACHAN', '')
+      || this.StringAt(0, 8, 'CRICHTON', '')
+      || (this.StringAt(this.m_current - 3, 6, 'DRACHM', '')
+        && !this.StringAt(this.m_current - 3, 7, 'DRACHMA', ''))
     ) {
-      this.m_current += 2;
-      return true;
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -1990,29 +2015,29 @@ export class Metaphone3 {
         'MUCH',
         'SUCH',
         '',
-      ) &&
-        !this.StringAt(this.m_current - 3, 5, 'JOACH', '')) ||
-      (this.m_current + 2 === this.m_last &&
-        this.StringAt(this.m_current - 1, 4, 'ACHA', 'ACHO', '')) ||
-      (this.StringAt(this.m_current, 4, 'CHOT', 'CHOD', 'CHAT', '') &&
-        this.m_current + 3 === this.m_last) ||
-      (this.StringAt(this.m_current - 1, 4, 'OCHE', '') &&
-        this.m_current + 2 === this.m_last &&
-        !this.StringAt(this.m_current - 2, 5, 'DOCHE', '')) ||
-      this.StringAt(this.m_current - 4, 6, 'ATTACH', 'DETACH', 'KOVACH', '') ||
-      this.StringAt(this.m_current - 5, 7, 'SPINACH', '') ||
-      this.StringAt(0, 6, 'MACHAU', '') ||
-      this.StringAt(this.m_current - 4, 8, 'PARACHUT', '') ||
-      this.StringAt(this.m_current - 5, 8, 'MASSACHU', '') ||
-      (this.StringAt(this.m_current - 3, 5, 'THACH', '') &&
-        !this.StringAt(this.m_current - 1, 4, 'ACHE', '')) ||
-      this.StringAt(this.m_current - 2, 6, 'VACHON', '')
+      )
+      && !this.StringAt(this.m_current - 3, 5, 'JOACH', ''))
+    || (this.m_current + 2 === this.m_last
+      && this.StringAt(this.m_current - 1, 4, 'ACHA', 'ACHO', ''))
+    || (this.StringAt(this.m_current, 4, 'CHOT', 'CHOD', 'CHAT', '')
+      && this.m_current + 3 === this.m_last)
+    || (this.StringAt(this.m_current - 1, 4, 'OCHE', '')
+      && this.m_current + 2 === this.m_last
+      && !this.StringAt(this.m_current - 2, 5, 'DOCHE', ''))
+    || this.StringAt(this.m_current - 4, 6, 'ATTACH', 'DETACH', 'KOVACH', '')
+    || this.StringAt(this.m_current - 5, 7, 'SPINACH', '')
+    || this.StringAt(0, 6, 'MACHAU', '')
+    || this.StringAt(this.m_current - 4, 8, 'PARACHUT', '')
+    || this.StringAt(this.m_current - 5, 8, 'MASSACHU', '')
+    || (this.StringAt(this.m_current - 3, 5, 'THACH', '')
+      && !this.StringAt(this.m_current - 1, 4, 'ACHE', ''))
+    || this.StringAt(this.m_current - 2, 6, 'VACHON', '')
     ) {
-      this.MetaphAdd$java_lang_String('X');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2024,25 +2049,25 @@ export class Metaphone3 {
    */
   Encode_English_CH_To_K(): boolean {
     if (
-      (this.m_current === 1 && this.RootOrInflections(this.m_inWord, 'ACHE')) ||
-      (this.m_current > 3 &&
-        this.RootOrInflections(
+      (this.m_current === 1 && this.RootOrInflections(this.m_inWord, 'ACHE'))
+      || (this.m_current > 3
+        && this.RootOrInflections(
           this.m_inWord.substring(this.m_current - 1),
           'ACHE',
-        ) &&
-        (this.StringAt(0, 3, 'EAR', '') ||
-          this.StringAt(0, 4, 'HEAD', 'BACK', '') ||
-          this.StringAt(0, 5, 'HEART', 'BELLY', 'TOOTH', ''))) ||
-      this.StringAt(this.m_current - 1, 4, 'ECHO', '') ||
-      this.StringAt(this.m_current - 2, 7, 'MICHEAL', '') ||
-      this.StringAt(this.m_current - 4, 7, 'JERICHO', '') ||
-      this.StringAt(this.m_current - 5, 7, 'LEPRECH', '')
+        )
+        && (this.StringAt(0, 3, 'EAR', '')
+          || this.StringAt(0, 4, 'HEAD', 'BACK', '')
+          || this.StringAt(0, 5, 'HEART', 'BELLY', 'TOOTH', '')))
+        || this.StringAt(this.m_current - 1, 4, 'ECHO', '')
+        || this.StringAt(this.m_current - 2, 7, 'MICHEAL', '')
+        || this.StringAt(this.m_current - 4, 7, 'JERICHO', '')
+        || this.StringAt(this.m_current - 5, 7, 'LEPRECH', '')
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('K', 'X');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('K', 'X')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2054,10 +2079,10 @@ export class Metaphone3 {
    */
   Encode_Germanic_CH_To_K(): boolean {
     if (
-      (this.m_current > 1 &&
-        !this.IsVowel$int(this.m_current - 2) &&
-        this.StringAt(this.m_current - 1, 3, 'ACH', '') &&
-        !this.StringAt(
+      (this.m_current > 1
+        && !this.IsVowel$int(this.m_current - 2)
+        && this.StringAt(this.m_current - 1, 3, 'ACH', '')
+        && !this.StringAt(
           this.m_current - 2,
           7,
           'MACHADO',
@@ -2066,80 +2091,80 @@ export class Metaphone3 {
           'LACHAPE',
           'KACHATU',
           '',
-        ) &&
-        !this.StringAt(this.m_current - 3, 7, 'KHACHAT', '') &&
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        )
+        && !this.StringAt(this.m_current - 3, 7, 'KHACHAT', '')
+        && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current + 2),
-        ) != 'I'.charCodeAt(0) &&
-        (((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        ) != 'I'.charCodeAt(0)
+        && ((c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current + 2),
-        ) != 'E'.charCodeAt(0) ||
-          this.StringAt(
-            this.m_current - 2,
-            6,
-            'BACHER',
-            'MACHER',
-            'MACHEN',
-            'LACHER',
-            '',
-          ))) ||
-      (this.StringAt(this.m_current + 2, 1, 'T', 'S', '') &&
-        !(
-          this.StringAt(0, 11, 'WHICHSOEVER', '') ||
-          this.StringAt(0, 9, 'LUNCHTIME', '')
-        )) ||
-      this.StringAt(0, 4, 'SCHR', '') ||
-      (this.m_current > 2 &&
-        this.StringAt(this.m_current - 2, 5, 'MACHE', '')) ||
-      (this.m_current === 2 &&
-        this.StringAt(this.m_current - 2, 4, 'ZACH', '')) ||
-      this.StringAt(this.m_current - 4, 6, 'SCHACH', '') ||
-      this.StringAt(this.m_current - 1, 5, 'ACHEN', '') ||
-      this.StringAt(this.m_current - 3, 5, 'SPICH', 'ZURCH', 'BUECH', '') ||
-      (this.StringAt(
-        this.m_current - 3,
-        5,
-        'KIRCH',
-        'JOACH',
-        'BLECH',
-        'MALCH',
-        '',
-      ) &&
-        !(
-          this.StringAt(this.m_current - 3, 8, 'KIRCHNER', '') ||
-          this.m_current + 1 === this.m_last
-        )) ||
-      (this.m_current + 1 === this.m_last &&
-        this.StringAt(this.m_current - 2, 4, 'NICH', 'LICH', 'BACH', '')) ||
-      (this.m_current + 1 === this.m_last &&
-        this.StringAt(
-          this.m_current - 3,
-          5,
-          'URICH',
-          'BRICH',
-          'ERICH',
-          'DRICH',
-          'NRICH',
-          '',
-        ) &&
-        !this.StringAt(this.m_current - 5, 7, 'ALDRICH', '') &&
-        !this.StringAt(this.m_current - 6, 8, 'GOODRICH', '') &&
-        !this.StringAt(this.m_current - 7, 9, 'GINGERICH', '')) ||
-      (this.m_current + 1 === this.m_last &&
-        this.StringAt(
-          this.m_current - 4,
+        ) != 'E'.charCodeAt(0)
+        || this.StringAt(
+          this.m_current - 2,
           6,
-          'ULRICH',
-          'LFRICH',
-          'LLRICH',
-          'EMRICH',
-          'ZURICH',
-          'EYRICH',
+          'BACHER',
+          'MACHER',
+          'MACHEN',
+          'LACHER',
           '',
-        )) ||
-      ((this.StringAt(this.m_current - 1, 1, 'A', 'O', 'U', 'E', '') ||
-        this.m_current === 0) &&
-        this.StringAt(
+        )))
+        || (this.StringAt(this.m_current + 2, 1, 'T', 'S', '')
+          && !(
+            this.StringAt(0, 11, 'WHICHSOEVER', '')
+            || this.StringAt(0, 9, 'LUNCHTIME', '')
+          ))
+          || this.StringAt(0, 4, 'SCHR', '')
+          || (this.m_current > 2
+            && this.StringAt(this.m_current - 2, 5, 'MACHE', ''))
+          || (this.m_current === 2
+            && this.StringAt(this.m_current - 2, 4, 'ZACH', ''))
+          || this.StringAt(this.m_current - 4, 6, 'SCHACH', '')
+          || this.StringAt(this.m_current - 1, 5, 'ACHEN', '')
+          || this.StringAt(this.m_current - 3, 5, 'SPICH', 'ZURCH', 'BUECH', '')
+          || (this.StringAt(
+            this.m_current - 3,
+            5,
+            'KIRCH',
+            'JOACH',
+            'BLECH',
+            'MALCH',
+            '',
+          )
+          && !(
+            this.StringAt(this.m_current - 3, 8, 'KIRCHNER', '')
+            || this.m_current + 1 === this.m_last
+          ))
+          || (this.m_current + 1 === this.m_last
+            && this.StringAt(this.m_current - 2, 4, 'NICH', 'LICH', 'BACH', ''))
+          || (this.m_current + 1 === this.m_last
+            && this.StringAt(
+              this.m_current - 3,
+              5,
+              'URICH',
+              'BRICH',
+              'ERICH',
+              'DRICH',
+              'NRICH',
+              '',
+            )
+            && !this.StringAt(this.m_current - 5, 7, 'ALDRICH', '')
+            && !this.StringAt(this.m_current - 6, 8, 'GOODRICH', '')
+              && !this.StringAt(this.m_current - 7, 9, 'GINGERICH', ''))
+            || (this.m_current + 1 === this.m_last
+              && this.StringAt(
+            this.m_current - 4,
+            6,
+            'ULRICH',
+            'LFRICH',
+            'LLRICH',
+            'EMRICH',
+            'ZURICH',
+            'EYRICH',
+            '',
+          ))
+          || ((this.StringAt(this.m_current - 1, 1, 'A', 'O', 'U', 'E', '')
+            || this.m_current === 0)
+        && this.StringAt(
           this.m_current + 2,
           1,
           'L',
@@ -2156,17 +2181,18 @@ export class Metaphone3 {
         ))
     ) {
       if (
-        this.StringAt(this.m_current + 2, 1, 'R', 'L', '') ||
-        this.SlavoGermanic()
+        this.StringAt(this.m_current + 2, 1, 'R', 'L', '')
+        || this.SlavoGermanic()
       ) {
-        this.MetaphAdd$java_lang_String('K');
-      } else {
-        this.MetaphAdd$java_lang_String$java_lang_String('K', 'X');
+        this.MetaphAdd$java_lang_String('K')
       }
-      this.m_current += 2;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String$java_lang_String('K', 'X')
+      }
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2179,8 +2205,8 @@ export class Metaphone3 {
   Encode_ARCH(): boolean {
     if (this.StringAt(this.m_current - 2, 4, 'ARCH', '')) {
       if (
-        ((this.IsVowel$int(this.m_current + 2) &&
-          this.StringAt(
+        ((this.IsVowel$int(this.m_current + 2)
+          && this.StringAt(
             this.m_current - 2,
             5,
             'ARCHA',
@@ -2189,8 +2215,8 @@ export class Metaphone3 {
             'ARCHU',
             'ARCHY',
             '',
-          )) ||
-          this.StringAt(
+          ))
+          || this.StringAt(
             this.m_current - 2,
             6,
             'ARCHEA',
@@ -2203,13 +2229,13 @@ export class Metaphone3 {
             'ARCHEM',
             'ARCHEN',
             '',
-          ) ||
-          (this.StringAt(this.m_current - 2, 4, 'ARCH', '') &&
-            this.m_current + 1 === this.m_last) ||
-          this.StringAt(0, 7, 'MENARCH', '')) &&
-        !this.RootOrInflections(this.m_inWord, 'ARCH') &&
-        !this.StringAt(this.m_current - 4, 6, 'SEARCH', 'POARCH', '') &&
-        !this.StringAt(
+          )
+          || (this.StringAt(this.m_current - 2, 4, 'ARCH', '')
+            && this.m_current + 1 === this.m_last)
+          || this.StringAt(0, 7, 'MENARCH', ''))
+        && !this.RootOrInflections(this.m_inWord, 'ARCH')
+        && !this.StringAt(this.m_current - 4, 6, 'SEARCH', 'POARCH', '')
+        && !this.StringAt(
           0,
           9,
           'ARCHENEMY',
@@ -2217,9 +2243,9 @@ export class Metaphone3 {
           'ARCHULETA',
           'ARCHAMBAU',
           '',
-        ) &&
-        !this.StringAt(0, 6, 'ARCHER', 'ARCHIE', '') &&
-        !(
+        )
+        && !this.StringAt(0, 6, 'ARCHER', 'ARCHIE', '')
+        && !(
           (((this.StringAt(
             this.m_current - 3,
             5,
@@ -2227,28 +2253,29 @@ export class Metaphone3 {
             'MARCH',
             'PARCH',
             '',
-          ) ||
-            this.StringAt(this.m_current - 4, 6, 'STARCH', '')) &&
-            !(
-              this.StringAt(0, 6, 'EPARCH', '') ||
-              this.StringAt(0, 7, 'NOMARCH', '') ||
-              this.StringAt(0, 8, 'EXILARCH', 'HIPPARCH', 'MARCHESE', '') ||
-              this.StringAt(0, 9, 'ARISTARCH', '') ||
-              this.StringAt(0, 9, 'MARCHETTI', '')
-            )) ||
-            this.RootOrInflections(this.m_inWord, 'STARCH')) &&
-          (!this.StringAt(this.m_current - 2, 5, 'ARCHU', 'ARCHY', '') ||
-            this.StringAt(0, 7, 'STARCHY', ''))
+          )
+          || this.StringAt(this.m_current - 4, 6, 'STARCH', ''))
+        && !(
+          this.StringAt(0, 6, 'EPARCH', '')
+          || this.StringAt(0, 7, 'NOMARCH', '')
+          || this.StringAt(0, 8, 'EXILARCH', 'HIPPARCH', 'MARCHESE', '')
+          || this.StringAt(0, 9, 'ARISTARCH', '')
+          || this.StringAt(0, 9, 'MARCHETTI', '')
+        ))
+        || this.RootOrInflections(this.m_inWord, 'STARCH'))
+      && (!this.StringAt(this.m_current - 2, 5, 'ARCHU', 'ARCHY', '')
+        || this.StringAt(0, 7, 'STARCHY', ''))
         )
       ) {
-        this.MetaphAdd$java_lang_String$java_lang_String('K', 'X');
-      } else {
-        this.MetaphAdd$java_lang_String('X');
+        this.MetaphAdd$java_lang_String$java_lang_String('K', 'X')
       }
-      this.m_current += 2;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('X')
+      }
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2272,50 +2299,50 @@ export class Metaphone3 {
         'CHEMIC',
         'CHILIA',
         '',
-      ) ||
-        (this.StringAt(
-          this.m_current,
-          5,
-          'CHEMI',
-          'CHEMO',
-          'CHEMU',
-          'CHEMY',
-          'CHOND',
-          'CHONA',
-          'CHONI',
-          'CHOIR',
-          'CHASM',
-          'CHARO',
-          'CHROM',
-          'CHROI',
-          'CHAMA',
-          'CHALC',
-          'CHALD',
-          'CHAET',
-          'CHIRO',
-          'CHILO',
-          'CHELA',
-          'CHOUS',
-          'CHEIL',
-          'CHEIR',
-          'CHEIM',
-          'CHITI',
-          'CHEOP',
-          '',
-        ) &&
-          !(
-            this.StringAt(this.m_current, 6, 'CHEMIN', '') ||
-            this.StringAt(this.m_current - 2, 8, 'ANCHONDO', '')
-          )) ||
-        (this.StringAt(this.m_current, 5, 'CHISM', 'CHELI', '') &&
-          !(
-            this.StringAt(0, 8, 'MACHISMO', '') ||
-            this.StringAt(0, 10, 'REVANCHISM', '') ||
-            this.StringAt(0, 9, 'RICHELIEU', '') ||
-            (this.StringAt(0, 5, 'CHISM', '') && this.m_length === 5) ||
-            this.StringAt(0, 6, 'MICHEL', '')
-          )) ||
-        (this.StringAt(
+      )
+      || (this.StringAt(
+        this.m_current,
+        5,
+        'CHEMI',
+        'CHEMO',
+        'CHEMU',
+        'CHEMY',
+        'CHOND',
+        'CHONA',
+        'CHONI',
+        'CHOIR',
+        'CHASM',
+        'CHARO',
+        'CHROM',
+        'CHROI',
+        'CHAMA',
+        'CHALC',
+        'CHALD',
+        'CHAET',
+        'CHIRO',
+        'CHILO',
+        'CHELA',
+        'CHOUS',
+        'CHEIL',
+        'CHEIR',
+        'CHEIM',
+        'CHITI',
+        'CHEOP',
+        '',
+      )
+      && !(
+        this.StringAt(this.m_current, 6, 'CHEMIN', '')
+        || this.StringAt(this.m_current - 2, 8, 'ANCHONDO', '')
+      ))
+      || (this.StringAt(this.m_current, 5, 'CHISM', 'CHELI', '')
+        && !(
+          this.StringAt(0, 8, 'MACHISMO', '')
+          || this.StringAt(0, 10, 'REVANCHISM', '')
+          || this.StringAt(0, 9, 'RICHELIEU', '')
+          || (this.StringAt(0, 5, 'CHISM', '') && this.m_length === 5)
+          || this.StringAt(0, 6, 'MICHEL', '')
+        ))
+        || (this.StringAt(
           this.m_current,
           4,
           'CHOR',
@@ -2327,38 +2354,39 @@ export class Metaphone3 {
           'CHUS',
           'CHOE',
           '',
-        ) &&
-          !this.StringAt(0, 6, 'CHOLLO', 'CHOLLA', 'CHORIZ', '')) ||
-        (this.StringAt(this.m_current, 4, 'CHAO', '') &&
-          this.m_current + 3 !== this.m_last) ||
-        (this.StringAt(this.m_current, 4, 'CHIA', '') &&
-          !(
-            this.StringAt(0, 10, 'APPALACHIA', '') ||
-            this.StringAt(0, 7, 'CHIAPAS', '')
-          )) ||
-        this.StringAt(this.m_current, 7, 'CHIMERA', 'CHIMAER', 'CHIMERI', '') ||
-        (this.m_current === 0 &&
-          this.StringAt(this.m_current, 5, 'CHAME', 'CHELO', 'CHITO', '')) ||
-        ((this.m_current + 4 === this.m_last ||
-          this.m_current + 5 === this.m_last) &&
-          this.StringAt(this.m_current - 1, 6, 'OCHETE', ''))) &&
-      !(
-        (this.StringAt(0, 5, 'CHORE', 'CHOLO', 'CHOLA', '') &&
-          this.m_length === 5) ||
-        this.StringAt(this.m_current, 5, 'CHORT', 'CHOSE', '') ||
-        this.StringAt(this.m_current - 3, 7, 'CROCHET', '') ||
-        this.StringAt(0, 7, 'CHEMISE', 'CHARISE', 'CHARISS', 'CHAROLE', '')
+        )
+        && !this.StringAt(0, 6, 'CHOLLO', 'CHOLLA', 'CHORIZ', ''))
+      || (this.StringAt(this.m_current, 4, 'CHAO', '')
+        && this.m_current + 3 !== this.m_last)
+      || (this.StringAt(this.m_current, 4, 'CHIA', '')
+        && !(
+          this.StringAt(0, 10, 'APPALACHIA', '')
+          || this.StringAt(0, 7, 'CHIAPAS', '')
+        ))
+        || this.StringAt(this.m_current, 7, 'CHIMERA', 'CHIMAER', 'CHIMERI', '')
+        || (this.m_current === 0
+          && this.StringAt(this.m_current, 5, 'CHAME', 'CHELO', 'CHITO', ''))
+        || ((this.m_current + 4 === this.m_last
+          || this.m_current + 5 === this.m_last)
+        && this.StringAt(this.m_current - 1, 6, 'OCHETE', '')))
+      && !(
+        (this.StringAt(0, 5, 'CHORE', 'CHOLO', 'CHOLA', '')
+          && this.m_length === 5)
+          || this.StringAt(this.m_current, 5, 'CHORT', 'CHOSE', '')
+          || this.StringAt(this.m_current - 3, 7, 'CROCHET', '')
+            || this.StringAt(0, 7, 'CHEMISE', 'CHARISE', 'CHARISS', 'CHAROLE', '')
       )
     ) {
       if (this.StringAt(this.m_current + 2, 1, 'R', 'L', '')) {
-        this.MetaphAdd$java_lang_String('K');
-      } else {
-        this.MetaphAdd$java_lang_String$java_lang_String('K', 'X');
+        this.MetaphAdd$java_lang_String('K')
       }
-      this.m_current += 2;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String$java_lang_String('K', 'X')
+      }
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2384,8 +2412,8 @@ export class Metaphone3 {
         'RACHIC',
         'MICHAL',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         this.m_current - 3,
         5,
         'MELCH',
@@ -2399,10 +2427,10 @@ export class Metaphone3 {
         'PULCH',
         'EPOCH',
         '',
-      ) ||
-      (this.StringAt(this.m_current - 3, 5, 'TRICH', '') &&
-        !this.StringAt(this.m_current - 5, 7, 'OSTRICH', '')) ||
-      (this.StringAt(
+      )
+      || (this.StringAt(this.m_current - 3, 5, 'TRICH', '')
+        && !this.StringAt(this.m_current - 5, 7, 'OSTRICH', ''))
+      || (this.StringAt(
         this.m_current - 2,
         4,
         'TYCH',
@@ -2418,12 +2446,12 @@ export class Metaphone3 {
         'ZECH',
         'WYCH',
         '',
-      ) &&
-        !(
-          this.StringAt(this.m_current - 4, 9, 'INDOCHINA', '') ||
-          this.StringAt(this.m_current - 2, 6, 'BUCHON', '')
-        )) ||
-      this.StringAt(
+      )
+      && !(
+        this.StringAt(this.m_current - 4, 9, 'INDOCHINA', '')
+        || this.StringAt(this.m_current - 2, 6, 'BUCHON', '')
+      ))
+      || this.StringAt(
         this.m_current - 2,
         5,
         'LYCHN',
@@ -2432,10 +2460,10 @@ export class Metaphone3 {
         'ORCHI',
         'LICHO',
         '',
-      ) ||
-      (this.StringAt(this.m_current - 1, 5, 'OCHER', 'ECHIN', 'ECHID', '') &&
-        (this.m_current === 1 || this.m_current === 2)) ||
-      this.StringAt(
+      )
+      || (this.StringAt(this.m_current - 1, 5, 'OCHER', 'ECHIN', 'ECHID', '')
+        && (this.m_current === 1 || this.m_current === 2))
+      || this.StringAt(
         this.m_current - 4,
         6,
         'BRONCH',
@@ -2449,12 +2477,12 @@ export class Metaphone3 {
         'BIANCH',
         'DIDACH',
         '',
-      ) ||
-      (this.StringAt(this.m_current - 1, 4, 'ICHA', 'ICHN', '') &&
-        this.m_current === 1) ||
-      this.StringAt(this.m_current - 2, 8, 'ORCHESTR', '') ||
-      this.StringAt(this.m_current - 4, 8, 'BRANCHIO', 'BRANCHIF', '') ||
-      (this.StringAt(
+      )
+      || (this.StringAt(this.m_current - 1, 4, 'ICHA', 'ICHN', '')
+        && this.m_current === 1)
+      || this.StringAt(this.m_current - 2, 8, 'ORCHESTR', '')
+      || this.StringAt(this.m_current - 4, 8, 'BRANCHIO', 'BRANCHIF', '')
+      || (this.StringAt(
         this.m_current - 1,
         5,
         'ACHAB',
@@ -2462,62 +2490,62 @@ export class Metaphone3 {
         'ACHAN',
         'ACHAZ',
         '',
-      ) &&
-        !this.StringAt(this.m_current - 2, 7, 'MACHADO', 'LACHANC', '')) ||
-      this.StringAt(
-        this.m_current - 1,
-        6,
-        'ACHISH',
-        'ACHILL',
-        'ACHAIA',
-        'ACHENE',
-        '',
-      ) ||
-      this.StringAt(
-        this.m_current - 1,
-        7,
-        'ACHAIAN',
-        'ACHATES',
-        'ACHIRAL',
-        'ACHERON',
-        '',
-      ) ||
-      this.StringAt(
-        this.m_current - 1,
-        8,
-        'ACHILLEA',
-        'ACHIMAAS',
-        'ACHILARY',
-        'ACHELOUS',
-        'ACHENIAL',
-        'ACHERNAR',
-        '',
-      ) ||
-      this.StringAt(
+      )
+      && !this.StringAt(this.m_current - 2, 7, 'MACHADO', 'LACHANC', ''))
+    || this.StringAt(
+      this.m_current - 1,
+      6,
+      'ACHISH',
+      'ACHILL',
+      'ACHAIA',
+      'ACHENE',
+      '',
+    )
+    || this.StringAt(
+      this.m_current - 1,
+      7,
+      'ACHAIAN',
+      'ACHATES',
+      'ACHIRAL',
+      'ACHERON',
+      '',
+    )
+    || this.StringAt(
+      this.m_current - 1,
+      8,
+      'ACHILLEA',
+      'ACHIMAAS',
+      'ACHILARY',
+      'ACHELOUS',
+      'ACHENIAL',
+      'ACHERNAR',
+      '',
+    )
+      || this.StringAt(
         this.m_current - 1,
         9,
         'ACHALASIA',
         'ACHILLEAN',
         'ACHIMENES',
         '',
-      ) ||
-      this.StringAt(this.m_current - 1, 10, 'ACHIMELECH', 'ACHITOPHEL', '') ||
-      (this.m_current - 2 === 0 &&
-        (this.StringAt(this.m_current - 2, 6, 'INCHOA', '') ||
-          this.StringAt(0, 4, 'ISCH', ''))) ||
-      (this.m_current + 1 === this.m_last &&
-        this.StringAt(this.m_current - 1, 1, 'A', 'O', 'U', 'E', '') &&
-        !(
-          this.StringAt(0, 7, 'DEBAUCH', '') ||
-          this.StringAt(this.m_current - 2, 4, 'MUCH', 'SUCH', 'KOCH', '') ||
-          this.StringAt(this.m_current - 5, 7, 'OODRICH', 'ALDRICH', '')
+      )
+    || this.StringAt(this.m_current - 1, 10, 'ACHIMELECH', 'ACHITOPHEL', '')
+    || (this.m_current - 2 === 0
+      && (this.StringAt(this.m_current - 2, 6, 'INCHOA', '')
+        || this.StringAt(0, 4, 'ISCH', '')))
+      || (this.m_current + 1 === this.m_last
+        && this.StringAt(this.m_current - 1, 1, 'A', 'O', 'U', 'E', '')
+        && !(
+          this.StringAt(0, 7, 'DEBAUCH', '')
+          || this.StringAt(this.m_current - 2, 4, 'MUCH', 'SUCH', 'KOCH', '')
+          || this.StringAt(this.m_current - 5, 7, 'OODRICH', 'ALDRICH', '')
         ))
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('K', 'X');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('K', 'X')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2528,11 +2556,11 @@ export class Metaphone3 {
    */
   Encode_CCIA(): boolean {
     if (this.StringAt(this.m_current + 1, 3, 'CIA', '')) {
-      this.MetaphAdd$java_lang_String$java_lang_String('X', 'S');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('X', 'S')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2543,48 +2571,49 @@ export class Metaphone3 {
    */
   Encode_CC(): boolean {
     if (
-      this.StringAt(this.m_current, 2, 'CC', '') &&
-      !(
-        this.m_current === 1 &&
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(this.CharAt(0)) ==
-          'M'.charCodeAt(0)
+      this.StringAt(this.m_current, 2, 'CC', '')
+      && !(
+        this.m_current === 1
+        && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(this.CharAt(0))
+        == 'M'.charCodeAt(0)
       )
     ) {
       if (this.StringAt(this.m_current - 3, 7, 'FLACCID', '')) {
-        this.MetaphAdd$java_lang_String('S');
-        this.AdvanceCounter(3, 2);
-        return true;
+        this.MetaphAdd$java_lang_String('S')
+        this.AdvanceCounter(3, 2)
+        return true
       }
       if (
-        (this.m_current + 2 === this.m_last &&
-          this.StringAt(this.m_current + 2, 1, 'I', '')) ||
-        this.StringAt(this.m_current + 2, 2, 'IO', '') ||
-        (this.m_current + 4 === this.m_last &&
-          this.StringAt(this.m_current + 2, 3, 'INO', 'INI', ''))
+        (this.m_current + 2 === this.m_last
+          && this.StringAt(this.m_current + 2, 1, 'I', ''))
+        || this.StringAt(this.m_current + 2, 2, 'IO', '')
+        || (this.m_current + 4 === this.m_last
+          && this.StringAt(this.m_current + 2, 3, 'INO', 'INI', ''))
       ) {
-        this.MetaphAdd$java_lang_String('X');
-        this.AdvanceCounter(3, 2);
-        return true;
+        this.MetaphAdd$java_lang_String('X')
+        this.AdvanceCounter(3, 2)
+        return true
       }
       if (
-        this.StringAt(this.m_current + 2, 1, 'I', 'E', 'Y', '') &&
-        !(
-          ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        this.StringAt(this.m_current + 2, 1, 'I', 'E', 'Y', '')
+        && !(
+          (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
             this.CharAt(this.m_current + 2),
-          ) == 'H'.charCodeAt(0) ||
-          this.StringAt(this.m_current - 2, 6, 'SOCCER', '')
+          ) == 'H'.charCodeAt(0)
+          || this.StringAt(this.m_current - 2, 6, 'SOCCER', '')
         )
       ) {
-        this.MetaphAdd$java_lang_String('KS');
-        this.AdvanceCounter(3, 2);
-        return true;
-      } else {
-        this.MetaphAdd$java_lang_String('K');
-        this.m_current += 2;
-        return true;
+        this.MetaphAdd$java_lang_String('KS')
+        this.AdvanceCounter(3, 2)
+        return true
+      }
+      else {
+        this.MetaphAdd$java_lang_String('K')
+        this.m_current += 2
+        return true
       }
     }
-    return false;
+    return false
   }
 
   /**
@@ -2596,21 +2625,22 @@ export class Metaphone3 {
   Encode_CK_CG_CQ(): boolean {
     if (this.StringAt(this.m_current, 2, 'CK', 'CG', 'CQ', '')) {
       if (
-        this.StringAt(this.m_current, 3, 'CKI', 'CKY', '') &&
-        this.m_current + 2 === this.m_last &&
-        this.m_length > 6
+        this.StringAt(this.m_current, 3, 'CKI', 'CKY', '')
+        && this.m_current + 2 === this.m_last
+        && this.m_length > 6
       ) {
-        this.MetaphAdd$java_lang_String$java_lang_String('K', 'SK');
-      } else {
-        this.MetaphAdd$java_lang_String('K');
+        this.MetaphAdd$java_lang_String$java_lang_String('K', 'SK')
       }
-      this.m_current += 2;
+      else {
+        this.MetaphAdd$java_lang_String('K')
+      }
+      this.m_current += 2
       if (this.StringAt(this.m_current, 1, 'K', 'G', 'Q', '')) {
-        this.m_current++;
+        this.m_current++
       }
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2623,19 +2653,19 @@ export class Metaphone3 {
   Encode_C_Front_Vowel(): boolean {
     if (this.StringAt(this.m_current, 2, 'CI', 'CE', 'CY', '')) {
       if (
-        this.Encode_British_Silent_CE() ||
-        this.Encode_CE() ||
-        this.Encode_CI() ||
-        this.Encode_Latinate_Suffixes()
+        this.Encode_British_Silent_CE()
+        || this.Encode_CE()
+        || this.Encode_CI()
+        || this.Encode_Latinate_Suffixes()
       ) {
-        this.AdvanceCounter(2, 1);
-        return true;
+        this.AdvanceCounter(2, 1)
+        return true
       }
-      this.MetaphAdd$java_lang_String('S');
-      this.AdvanceCounter(2, 1);
-      return true;
+      this.MetaphAdd$java_lang_String('S')
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2645,13 +2675,13 @@ export class Metaphone3 {
    */
   Encode_British_Silent_CE(): boolean {
     if (
-      (this.StringAt(this.m_current + 1, 5, 'ESTER', '') &&
-        this.m_current + 5 === this.m_last) ||
-      this.StringAt(this.m_current + 1, 10, 'ESTERSHIRE', '')
+      (this.StringAt(this.m_current + 1, 5, 'ESTER', '')
+        && this.m_current + 5 === this.m_last)
+      || this.StringAt(this.m_current + 1, 10, 'ESTERSHIRE', '')
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2661,22 +2691,22 @@ export class Metaphone3 {
    */
   Encode_CE(): boolean {
     if (
-      (this.StringAt(this.m_current + 1, 3, 'EAN', '') &&
-        this.IsVowel$int(this.m_current - 1)) ||
-      (this.StringAt(this.m_current - 1, 4, 'ACEA', '') &&
-        this.m_current + 2 === this.m_last &&
-        !this.StringAt(0, 7, 'PANACEA', '')) ||
-      this.StringAt(this.m_current + 1, 4, 'ELLI', 'ERTO', 'EORL', '') ||
-      (this.StringAt(this.m_current - 3, 5, 'CROCE', '') &&
-        this.m_current + 1 === this.m_last) ||
-      this.StringAt(this.m_current - 3, 5, 'DOLCE', '') ||
-      (this.StringAt(this.m_current + 1, 4, 'ELLO', '') &&
-        this.m_current + 4 === this.m_last)
+      (this.StringAt(this.m_current + 1, 3, 'EAN', '')
+        && this.IsVowel$int(this.m_current - 1))
+      || (this.StringAt(this.m_current - 1, 4, 'ACEA', '')
+        && this.m_current + 2 === this.m_last
+        && !this.StringAt(0, 7, 'PANACEA', ''))
+      || this.StringAt(this.m_current + 1, 4, 'ELLI', 'ERTO', 'EORL', '')
+      || (this.StringAt(this.m_current - 3, 5, 'CROCE', '')
+        && this.m_current + 1 === this.m_last)
+      || this.StringAt(this.m_current - 3, 5, 'DOLCE', '')
+      || (this.StringAt(this.m_current + 1, 4, 'ELLO', '')
+        && this.m_current + 4 === this.m_last)
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('X', 'S');
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('X', 'S')
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2686,12 +2716,12 @@ export class Metaphone3 {
    */
   Encode_CI(): boolean {
     if (
-      (this.StringAt(this.m_current + 1, 3, 'INI', '') &&
-        !this.StringAt(0, 7, 'MANCINI', '') &&
-        this.m_current + 3 === this.m_last) ||
-      (this.StringAt(this.m_current - 1, 3, 'ICI', '') &&
-        this.m_current + 1 === this.m_last) ||
-      this.StringAt(
+      (this.StringAt(this.m_current + 1, 3, 'INI', '')
+        && !this.StringAt(0, 7, 'MANCINI', '')
+        && this.m_current + 3 === this.m_last)
+      || (this.StringAt(this.m_current - 1, 3, 'ICI', '')
+        && this.m_current + 1 === this.m_last)
+      || this.StringAt(
         this.m_current - 1,
         5,
         'RCIAL',
@@ -2699,18 +2729,18 @@ export class Metaphone3 {
         'RCIAN',
         'UCIUS',
         '',
-      ) ||
-      this.StringAt(this.m_current - 3, 6, 'MARCIA', '') ||
-      this.StringAt(this.m_current - 2, 7, 'ANCIENT', '')
+      )
+      || this.StringAt(this.m_current - 3, 6, 'MARCIA', '')
+      || this.StringAt(this.m_current - 2, 7, 'ANCIENT', '')
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('X', 'S');
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('X', 'S')
+      return true
     }
     if (
-      ((this.StringAt(this.m_current, 3, 'CIO', 'CIE', 'CIA', '') &&
-        this.IsVowel$int(this.m_current - 1)) ||
-        this.StringAt(this.m_current + 1, 3, 'IAO', '')) &&
-      !this.StringAt(this.m_current - 4, 8, 'COERCION', '')
+      ((this.StringAt(this.m_current, 3, 'CIO', 'CIE', 'CIA', '')
+        && this.IsVowel$int(this.m_current - 1))
+      || this.StringAt(this.m_current + 1, 3, 'IAO', ''))
+    && !this.StringAt(this.m_current - 4, 8, 'COERCION', '')
     ) {
       if (
         (this.StringAt(
@@ -2723,54 +2753,55 @@ export class Metaphone3 {
           'CIOL',
           'CION',
           '',
-        ) ||
-          this.StringAt(this.m_current - 3, 7, 'GLACIER', '') ||
-          this.StringAt(
-            this.m_current,
-            5,
-            'CIENT',
-            'CIENC',
-            'CIOUS',
-            'CIATE',
-            'CIATI',
-            'CIATO',
-            'CIABL',
-            'CIARY',
-            '',
-          ) ||
-          (this.m_current + 2 === this.m_last &&
-            this.StringAt(this.m_current, 3, 'CIA', 'CIO', '')) ||
-          (this.m_current + 3 === this.m_last &&
-            this.StringAt(this.m_current, 3, 'CIAS', 'CIOS', ''))) &&
-        !(
-          this.StringAt(this.m_current - 4, 11, 'ASSOCIATION', '') ||
-          this.StringAt(0, 4, 'OCIE', '') ||
-          this.StringAt(this.m_current - 2, 5, 'LUCIO', '') ||
-          this.StringAt(this.m_current - 2, 6, 'MACIAS', '') ||
-          this.StringAt(this.m_current - 3, 6, 'GRACIE', 'GRACIA', '') ||
-          this.StringAt(this.m_current - 2, 7, 'LUCIANO', '') ||
-          this.StringAt(this.m_current - 3, 8, 'MARCIANO', '') ||
-          this.StringAt(this.m_current - 4, 7, 'PALACIO', '') ||
-          this.StringAt(this.m_current - 4, 9, 'FELICIANO', '') ||
-          this.StringAt(this.m_current - 5, 8, 'MAURICIO', '') ||
-          this.StringAt(this.m_current - 7, 11, 'ENCARNACION', '') ||
-          this.StringAt(this.m_current - 4, 8, 'POLICIES', '') ||
-          this.StringAt(this.m_current - 2, 8, 'HACIENDA', '') ||
-          this.StringAt(this.m_current - 6, 9, 'ANDALUCIA', '') ||
-          this.StringAt(this.m_current - 2, 5, 'SOCIO', 'SOCIE', '')
+        )
+        || this.StringAt(this.m_current - 3, 7, 'GLACIER', '')
+        || this.StringAt(
+          this.m_current,
+          5,
+          'CIENT',
+          'CIENC',
+          'CIOUS',
+          'CIATE',
+          'CIATI',
+          'CIATO',
+          'CIABL',
+          'CIARY',
+          '',
+        )
+        || (this.m_current + 2 === this.m_last
+          && this.StringAt(this.m_current, 3, 'CIA', 'CIO', ''))
+        || (this.m_current + 3 === this.m_last
+          && this.StringAt(this.m_current, 3, 'CIAS', 'CIOS', '')))
+        && !(
+          this.StringAt(this.m_current - 4, 11, 'ASSOCIATION', '')
+          || this.StringAt(0, 4, 'OCIE', '')
+          || this.StringAt(this.m_current - 2, 5, 'LUCIO', '')
+          || this.StringAt(this.m_current - 2, 6, 'MACIAS', '')
+          || this.StringAt(this.m_current - 3, 6, 'GRACIE', 'GRACIA', '')
+          || this.StringAt(this.m_current - 2, 7, 'LUCIANO', '')
+          || this.StringAt(this.m_current - 3, 8, 'MARCIANO', '')
+          || this.StringAt(this.m_current - 4, 7, 'PALACIO', '')
+          || this.StringAt(this.m_current - 4, 9, 'FELICIANO', '')
+          || this.StringAt(this.m_current - 5, 8, 'MAURICIO', '')
+          || this.StringAt(this.m_current - 7, 11, 'ENCARNACION', '')
+          || this.StringAt(this.m_current - 4, 8, 'POLICIES', '')
+          || this.StringAt(this.m_current - 2, 8, 'HACIENDA', '')
+            || this.StringAt(this.m_current - 6, 9, 'ANDALUCIA', '')
+            || this.StringAt(this.m_current - 2, 5, 'SOCIO', 'SOCIE', '')
         )
       ) {
-        this.MetaphAdd$java_lang_String$java_lang_String('X', 'S');
-      } else {
-        this.MetaphAdd$java_lang_String$java_lang_String('S', 'X');
+        this.MetaphAdd$java_lang_String$java_lang_String('X', 'S')
       }
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String$java_lang_String('S', 'X')
+      }
+      return true
     }
     if (this.StringAt(this.m_current - 4, 8, 'COERCION', '')) {
-      this.MetaphAdd$java_lang_String('J');
-      return true;
+      this.MetaphAdd$java_lang_String('J')
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2780,10 +2811,10 @@ export class Metaphone3 {
    */
   Encode_Latinate_Suffixes(): boolean {
     if (this.StringAt(this.m_current + 1, 4, 'EOUS', 'IOUS', '')) {
-      this.MetaphAdd$java_lang_String$java_lang_String('X', 'S');
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('X', 'S')
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2795,14 +2826,14 @@ export class Metaphone3 {
   Encode_Silent_C(): boolean {
     if (this.StringAt(this.m_current + 1, 1, 'T', 'S', '')) {
       if (
-        this.StringAt(0, 11, 'CONNECTICUT', '') ||
-        this.StringAt(0, 6, 'INDICT', 'TUCSON', '')
+        this.StringAt(0, 11, 'CONNECTICUT', '')
+        || this.StringAt(0, 6, 'INDICT', 'TUCSON', '')
       ) {
-        this.m_current++;
-        return true;
+        this.m_current++
+        return true
       }
     }
-    return false;
+    return false
   }
 
   /**
@@ -2814,18 +2845,19 @@ export class Metaphone3 {
    */
   Encode_CZ(): boolean {
     if (
-      this.StringAt(this.m_current + 1, 1, 'Z', '') &&
-      !this.StringAt(this.m_current - 1, 6, 'ECZEMA', '')
+      this.StringAt(this.m_current + 1, 1, 'Z', '')
+      && !this.StringAt(this.m_current - 1, 6, 'ECZEMA', '')
     ) {
       if (this.StringAt(this.m_current, 4, 'CZAR', '')) {
-        this.MetaphAdd$java_lang_String('S');
-      } else {
-        this.MetaphAdd$java_lang_String('X');
+        this.MetaphAdd$java_lang_String('S')
       }
-      this.m_current += 2;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('X')
+      }
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2836,20 +2868,20 @@ export class Metaphone3 {
    */
   Encode_CS(): boolean {
     if (this.StringAt(0, 6, 'KOVACS', '')) {
-      this.MetaphAdd$java_lang_String$java_lang_String('KS', 'X');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('KS', 'X')
+      this.m_current += 2
+      return true
     }
     if (
-      this.StringAt(this.m_current - 1, 3, 'ACS', '') &&
-      this.m_current + 1 === this.m_last &&
-      !this.StringAt(this.m_current - 4, 6, 'ISAACS', '')
+      this.StringAt(this.m_current - 1, 3, 'ACS', '')
+      && this.m_current + 1 === this.m_last
+      && !this.StringAt(this.m_current - 4, 6, 'ISAACS', '')
     ) {
-      this.MetaphAdd$java_lang_String('X');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2858,28 +2890,30 @@ export class Metaphone3 {
    */
   Encode_D() {
     if (
-      this.Encode_DG() ||
-      this.Encode_DJ() ||
-      this.Encode_DT_DD() ||
-      this.Encode_D_To_J() ||
-      this.Encode_DOUS() ||
-      this.Encode_Silent_D()
+      this.Encode_DG()
+      || this.Encode_DJ()
+      || this.Encode_DT_DD()
+      || this.Encode_D_To_J()
+      || this.Encode_DOUS()
+      || this.Encode_Silent_D()
     ) {
-      return;
+      return
     }
     if (this.m_encodeExact) {
       if (
-        this.m_current === this.m_last &&
-        this.StringAt(this.m_current - 3, 4, 'SSED', '')
+        this.m_current === this.m_last
+        && this.StringAt(this.m_current - 3, 4, 'SSED', '')
       ) {
-        this.MetaphAdd$java_lang_String('T');
-      } else {
-        this.MetaphAdd$java_lang_String('D');
+        this.MetaphAdd$java_lang_String('T')
       }
-    } else {
-      this.MetaphAdd$java_lang_String('T');
+      else {
+        this.MetaphAdd$java_lang_String('D')
+      }
     }
-    this.m_current++;
+    else {
+      this.MetaphAdd$java_lang_String('T')
+    }
+    this.m_current++
   }
 
   /**
@@ -2891,9 +2925,9 @@ export class Metaphone3 {
   Encode_DG(): boolean {
     if (this.StringAt(this.m_current, 2, 'DG', '')) {
       if (
-        this.StringAt(this.m_current + 2, 1, 'A', 'O', '') ||
-        this.StringAt(this.m_current + 1, 3, 'GUN', 'GUT', '') ||
-        this.StringAt(
+        this.StringAt(this.m_current + 2, 1, 'A', 'O', '')
+        || this.StringAt(this.m_current + 1, 3, 'GUN', 'GUT', '')
+        || this.StringAt(
           this.m_current + 1,
           4,
           'GEAR',
@@ -2903,8 +2937,8 @@ export class Metaphone3 {
           'GILL',
           'GRAF',
           '',
-        ) ||
-        this.StringAt(
+        )
+        || this.StringAt(
           this.m_current + 1,
           5,
           'GUARD',
@@ -2912,17 +2946,18 @@ export class Metaphone3 {
           'GRAVE',
           'GRASS',
           '',
-        ) ||
-        this.StringAt(this.m_current + 1, 6, 'GROUSE', '')
+        )
+        || this.StringAt(this.m_current + 1, 6, 'GROUSE', '')
       ) {
-        this.MetaphAddExactApprox$java_lang_String$java_lang_String('DG', 'TK');
-      } else {
-        this.MetaphAdd$java_lang_String('J');
+        this.MetaphAddExactApprox$java_lang_String$java_lang_String('DG', 'TK')
       }
-      this.m_current += 2;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('J')
+      }
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2933,11 +2968,11 @@ export class Metaphone3 {
    */
   Encode_DJ(): boolean {
     if (this.StringAt(this.m_current, 2, 'DJ', '')) {
-      this.MetaphAdd$java_lang_String('J');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('J')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2949,23 +2984,26 @@ export class Metaphone3 {
   Encode_DT_DD(): boolean {
     if (this.StringAt(this.m_current, 2, 'DT', 'DD', '')) {
       if (this.StringAt(this.m_current, 3, 'DTH', '')) {
-        this.MetaphAddExactApprox$java_lang_String$java_lang_String('D0', 'T0');
-        this.m_current += 3;
-      } else {
+        this.MetaphAddExactApprox$java_lang_String$java_lang_String('D0', 'T0')
+        this.m_current += 3
+      }
+      else {
         if (this.m_encodeExact) {
           if (this.StringAt(this.m_current, 2, 'DT', '')) {
-            this.MetaphAdd$java_lang_String('T');
-          } else {
-            this.MetaphAdd$java_lang_String('D');
+            this.MetaphAdd$java_lang_String('T')
           }
-        } else {
-          this.MetaphAdd$java_lang_String('T');
+          else {
+            this.MetaphAdd$java_lang_String('D')
+          }
         }
-        this.m_current += 2;
+        else {
+          this.MetaphAdd$java_lang_String('T')
+        }
+        this.m_current += 2
       }
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2976,11 +3014,11 @@ export class Metaphone3 {
    */
   Encode_D_To_J(): boolean {
     if (
-      (this.StringAt(this.m_current, 3, 'DUL', '') &&
-        this.IsVowel$int(this.m_current - 1) &&
-        this.IsVowel$int(this.m_current + 3)) ||
-      (this.m_current + 3 === this.m_last &&
-        this.StringAt(
+      (this.StringAt(this.m_current, 3, 'DUL', '')
+        && this.IsVowel$int(this.m_current - 1)
+        && this.IsVowel$int(this.m_current + 3))
+      || (this.m_current + 3 === this.m_last
+        && this.StringAt(
           this.m_current - 1,
           5,
           'LDIER',
@@ -2988,21 +3026,21 @@ export class Metaphone3 {
           'EDURE',
           'RDURE',
           '',
-        )) ||
-      this.StringAt(this.m_current - 3, 7, 'CORDIAL', '') ||
-      this.StringAt(this.m_current - 1, 5, 'NDULA', 'NDULU', 'EDUCA', '') ||
-      this.StringAt(this.m_current - 1, 4, 'ADUA', 'IDUA', 'IDUU', '')
+        ))
+        || this.StringAt(this.m_current - 3, 7, 'CORDIAL', '')
+        || this.StringAt(this.m_current - 1, 5, 'NDULA', 'NDULU', 'EDUCA', '')
+        || this.StringAt(this.m_current - 1, 4, 'ADUA', 'IDUA', 'IDUU', '')
     ) {
       this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
         'J',
         'D',
         'J',
         'T',
-      );
-      this.AdvanceCounter(2, 1);
-      return true;
+      )
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3018,11 +3056,11 @@ export class Metaphone3 {
         'D',
         'J',
         'T',
-      );
-      this.AdvanceCounter(4, 1);
-      return true;
+      )
+      this.AdvanceCounter(4, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3033,22 +3071,22 @@ export class Metaphone3 {
    */
   Encode_Silent_D(): boolean {
     if (
-      this.StringAt(this.m_current - 2, 9, 'WEDNESDAY', '') ||
-      this.StringAt(
+      this.StringAt(this.m_current - 2, 9, 'WEDNESDAY', '')
+      || this.StringAt(
         this.m_current - 3,
         7,
         'HANDKER',
         'HANDSOM',
         'WINDSOR',
         '',
-      ) ||
-      this.StringAt(this.m_current - 5, 6, 'PERNOD', 'ARTAUD', 'RENAUD', '') ||
-      this.StringAt(this.m_current - 6, 7, 'RIMBAUD', 'MICHAUD', 'BICHAUD', '')
+      )
+      || this.StringAt(this.m_current - 5, 6, 'PERNOD', 'ARTAUD', 'RENAUD', '')
+      || this.StringAt(this.m_current - 6, 7, 'RIMBAUD', 'MICHAUD', 'BICHAUD', '')
     ) {
-      this.m_current++;
-      return true;
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3057,20 +3095,21 @@ export class Metaphone3 {
    */
   Encode_F() {
     if (this.StringAt(this.m_current - 1, 5, 'OFTEN', '')) {
-      this.MetaphAdd$java_lang_String$java_lang_String('F', 'FT');
-      this.m_current += 2;
-      return;
+      this.MetaphAdd$java_lang_String$java_lang_String('F', 'FT')
+      this.m_current += 2
+      return
     }
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
       ) == 'F'.charCodeAt(0)
     ) {
-      this.m_current += 2;
-    } else {
-      this.m_current++;
+      this.m_current += 2
     }
-    this.MetaphAdd$java_lang_String('F');
+    else {
+      this.m_current++
+    }
+    this.MetaphAdd$java_lang_String('F')
   }
 
   /**
@@ -3079,26 +3118,26 @@ export class Metaphone3 {
    */
   Encode_G() {
     if (
-      this.Encode_Silent_G_At_Beginning() ||
-      this.Encode_GG() ||
-      this.Encode_GK() ||
-      this.Encode_GH() ||
-      this.Encode_Silent_G() ||
-      this.Encode_GN() ||
-      this.Encode_GL() ||
-      this.Encode_Initial_G_Front_Vowel() ||
-      this.Encode_NGER() ||
-      this.Encode_GER() ||
-      this.Encode_GEL() ||
-      this.Encode_Non_Initial_G_Front_Vowel() ||
-      this.Encode_GA_To_J()
+      this.Encode_Silent_G_At_Beginning()
+      || this.Encode_GG()
+      || this.Encode_GK()
+      || this.Encode_GH()
+      || this.Encode_Silent_G()
+      || this.Encode_GN()
+      || this.Encode_GL()
+      || this.Encode_Initial_G_Front_Vowel()
+      || this.Encode_NGER()
+      || this.Encode_GER()
+      || this.Encode_GEL()
+      || this.Encode_Non_Initial_G_Front_Vowel()
+      || this.Encode_GA_To_J()
     ) {
-      return;
+      return
     }
     if (!this.StringAt(this.m_current - 1, 1, 'C', 'K', 'G', 'Q', '')) {
-      this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K');
+      this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K')
     }
-    this.m_current++;
+    this.m_current++
   }
 
   /**
@@ -3109,10 +3148,10 @@ export class Metaphone3 {
    */
   Encode_Silent_G_At_Beginning(): boolean {
     if (this.m_current === 0 && this.StringAt(this.m_current, 2, 'GN', '')) {
-      this.m_current += 1;
-      return true;
+      this.m_current += 1
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3123,7 +3162,7 @@ export class Metaphone3 {
    */
   Encode_GG(): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
       ) == 'G'.charCodeAt(0)
     ) {
@@ -3138,28 +3177,29 @@ export class Metaphone3 {
           'EGGIA',
           'IGGIO',
           '',
-        ) ||
-        (this.StringAt(this.m_current - 1, 5, 'UGGIE', '') &&
-          !(
-            this.m_current + 3 === this.m_last ||
-            this.m_current + 4 === this.m_last
-          )) ||
-        (this.m_current + 2 === this.m_last &&
-          this.StringAt(this.m_current - 1, 4, 'AGGI', 'OGGI', '')) ||
-        this.StringAt(this.m_current - 2, 6, 'SUGGES', 'XAGGER', 'REGGIE', '')
+        )
+        || (this.StringAt(this.m_current - 1, 5, 'UGGIE', '')
+          && !(
+            this.m_current + 3 === this.m_last
+            || this.m_current + 4 === this.m_last
+          ))
+          || (this.m_current + 2 === this.m_last
+            && this.StringAt(this.m_current - 1, 4, 'AGGI', 'OGGI', ''))
+          || this.StringAt(this.m_current - 2, 6, 'SUGGES', 'XAGGER', 'REGGIE', '')
       ) {
         if (this.StringAt(this.m_current - 2, 7, 'SUGGEST', '')) {
-          this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K');
+          this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K')
         }
-        this.MetaphAdd$java_lang_String('J');
-        this.AdvanceCounter(3, 2);
-      } else {
-        this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K');
-        this.m_current += 2;
+        this.MetaphAdd$java_lang_String('J')
+        this.AdvanceCounter(3, 2)
       }
-      return true;
+      else {
+        this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K')
+        this.m_current += 2
+      }
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3170,15 +3210,15 @@ export class Metaphone3 {
    */
   Encode_GK(): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
       ) == 'K'.charCodeAt(0)
     ) {
-      this.MetaphAdd$java_lang_String('K');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('K')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3189,27 +3229,27 @@ export class Metaphone3 {
    */
   Encode_GH(): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
       ) == 'H'.charCodeAt(0)
     ) {
       if (
-        this.Encode_GH_After_Consonant() ||
-        this.Encode_Initial_GH() ||
-        this.Encode_GH_To_J() ||
-        this.Encode_GH_To_H() ||
-        this.Encode_UGHT() ||
-        this.Encode_GH_H_Part_Of_Other_Word() ||
-        this.Encode_Silent_GH() ||
-        this.Encode_GH_To_F()
+        this.Encode_GH_After_Consonant()
+        || this.Encode_Initial_GH()
+        || this.Encode_GH_To_J()
+        || this.Encode_GH_To_H()
+        || this.Encode_UGHT()
+        || this.Encode_GH_H_Part_Of_Other_Word()
+        || this.Encode_Silent_GH()
+        || this.Encode_GH_To_F()
       ) {
-        return true;
+        return true
       }
-      this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K');
-      this.m_current += 2;
-      return true;
+      this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3219,18 +3259,18 @@ export class Metaphone3 {
    */
   Encode_GH_After_Consonant(): boolean {
     if (
-      this.m_current > 0 &&
-      !this.IsVowel$int(this.m_current - 1) &&
-      !(
-        this.StringAt(this.m_current - 3, 5, 'HALGH', '') &&
-        this.m_current + 1 === this.m_last
+      this.m_current > 0
+      && !this.IsVowel$int(this.m_current - 1)
+      && !(
+        this.StringAt(this.m_current - 3, 5, 'HALGH', '')
+        && this.m_current + 1 === this.m_last
       )
     ) {
-      this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K');
-      this.m_current += 2;
-      return true;
+      this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3242,19 +3282,20 @@ export class Metaphone3 {
     if (this.m_current < 3) {
       if (this.m_current === 0) {
         if (
-          ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+          (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
             this.CharAt(this.m_current + 2),
           ) == 'I'.charCodeAt(0)
         ) {
-          this.MetaphAdd$java_lang_String('J');
-        } else {
-          this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K');
+          this.MetaphAdd$java_lang_String('J')
         }
-        this.m_current += 2;
-        return true;
+        else {
+          this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K')
+        }
+        this.m_current += 2
+        return true
       }
     }
-    return false;
+    return false
   }
 
   /**
@@ -3264,14 +3305,14 @@ export class Metaphone3 {
    */
   Encode_GH_To_J(): boolean {
     if (
-      this.StringAt(this.m_current - 2, 4, 'ALGH', '') &&
-      this.m_current + 1 === this.m_last
+      this.StringAt(this.m_current - 2, 4, 'ALGH', '')
+      && this.m_current + 1 === this.m_last
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('J', '');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('J', '')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3281,15 +3322,15 @@ export class Metaphone3 {
    */
   Encode_GH_To_H(): boolean {
     if (
-      (this.StringAt(this.m_current - 4, 4, 'DONO', 'DONA', '') &&
-        this.IsVowel$int(this.m_current + 2)) ||
-      this.StringAt(this.m_current - 5, 9, 'CALLAGHAN', '')
+      (this.StringAt(this.m_current - 4, 4, 'DONO', 'DONA', '')
+        && this.IsVowel$int(this.m_current + 2))
+      || this.StringAt(this.m_current - 5, 9, 'CALLAGHAN', '')
     ) {
-      this.MetaphAdd$java_lang_String('H');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('H')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3300,21 +3341,22 @@ export class Metaphone3 {
   Encode_UGHT(): boolean {
     if (this.StringAt(this.m_current - 1, 4, 'UGHT', '')) {
       if (
-        (this.StringAt(this.m_current - 3, 5, 'LAUGH', '') &&
-          !(
-            this.StringAt(this.m_current - 4, 7, 'SLAUGHT', '') ||
-            this.StringAt(this.m_current - 3, 7, 'LAUGHTO', '')
-          )) ||
-        this.StringAt(this.m_current - 4, 6, 'DRAUGH', '')
+        (this.StringAt(this.m_current - 3, 5, 'LAUGH', '')
+          && !(
+            this.StringAt(this.m_current - 4, 7, 'SLAUGHT', '')
+            || this.StringAt(this.m_current - 3, 7, 'LAUGHTO', '')
+          ))
+          || this.StringAt(this.m_current - 4, 6, 'DRAUGH', '')
       ) {
-        this.MetaphAdd$java_lang_String('FT');
-      } else {
-        this.MetaphAdd$java_lang_String('T');
+        this.MetaphAdd$java_lang_String('FT')
       }
-      this.m_current += 3;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('T')
+      }
+      this.m_current += 3
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3335,11 +3377,11 @@ export class Metaphone3 {
         '',
       )
     ) {
-      this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K');
-      this.m_current += 2;
-      return true;
+      this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3349,91 +3391,91 @@ export class Metaphone3 {
    */
   Encode_Silent_GH(): boolean {
     if (
-      ((this.m_current > 1 &&
-        this.StringAt(this.m_current - 2, 1, 'B', 'H', 'D', 'G', 'L', '')) ||
-        (this.m_current > 2 &&
-          this.StringAt(
-            this.m_current - 3,
-            1,
-            'B',
-            'H',
-            'D',
-            'K',
-            'W',
-            'N',
-            'P',
-            'V',
-            '',
-          ) &&
-          !this.StringAt(0, 6, 'ENOUGH', '')) ||
-        (this.m_current > 3 &&
-          this.StringAt(this.m_current - 4, 1, 'B', 'H', '')) ||
-        (this.m_current > 3 &&
-          this.StringAt(this.m_current - 4, 2, 'PL', 'SL', '')) ||
-        (this.m_current > 0 &&
-          (((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
-            this.CharAt(this.m_current - 1),
-          ) == 'I'.charCodeAt(0) ||
-            this.StringAt(0, 4, 'PUGH', '') ||
-            (this.StringAt(this.m_current - 1, 3, 'AGH', '') &&
-              this.m_current + 1 === this.m_last) ||
-            this.StringAt(this.m_current - 4, 6, 'GERAGH', 'DRAUGH', '') ||
-            (this.StringAt(
-              this.m_current - 3,
-              5,
-              'GAUGH',
-              'GEOGH',
-              'MAUGH',
-              '',
-            ) &&
-              !this.StringAt(0, 9, 'MCGAUGHEY', '')) ||
-            (this.StringAt(this.m_current - 2, 4, 'OUGH', '') &&
-              this.m_current > 3 &&
-              !this.StringAt(
-                this.m_current - 4,
-                6,
-                'CCOUGH',
-                'ENOUGH',
-                'TROUGH',
-                'CLOUGH',
-                '',
-              ))))) &&
-      (this.StringAt(this.m_current - 3, 5, 'VAUGH', 'FEIGH', 'LEIGH', '') ||
-        this.StringAt(this.m_current - 2, 4, 'HIGH', 'TIGH', '') ||
-        this.m_current + 1 === this.m_last ||
-        (this.StringAt(
-          this.m_current + 2,
-          2,
-          'IE',
-          'EY',
-          'ES',
-          'ER',
-          'ED',
-          'TY',
+      ((this.m_current > 1
+        && this.StringAt(this.m_current - 2, 1, 'B', 'H', 'D', 'G', 'L', ''))
+      || (this.m_current > 2
+        && this.StringAt(
+          this.m_current - 3,
+          1,
+          'B',
+          'H',
+          'D',
+          'K',
+          'W',
+          'N',
+          'P',
+          'V',
           '',
-        ) &&
-          this.m_current + 3 === this.m_last &&
-          !this.StringAt(this.m_current - 5, 9, 'GALLAGHER', '')) ||
-        (this.StringAt(this.m_current + 2, 1, 'Y', '') &&
-          this.m_current + 2 === this.m_last) ||
-        (this.StringAt(this.m_current + 2, 3, 'ING', 'OUT', '') &&
-          this.m_current + 4 === this.m_last) ||
-        (this.StringAt(this.m_current + 2, 4, 'ERTY', '') &&
-          this.m_current + 5 === this.m_last) ||
-        !this.IsVowel$int(this.m_current + 2) ||
-        this.StringAt(this.m_current - 3, 5, 'GAUGH', 'GEOGH', 'MAUGH', '') ||
-        this.StringAt(this.m_current - 4, 8, 'BROUGHAM', '')) &&
-      !(
-        this.StringAt(0, 6, 'BALOGH', 'SABAGH', '') ||
-        this.StringAt(this.m_current - 2, 7, 'BAGHDAD', '') ||
-        this.StringAt(this.m_current - 3, 5, 'WHIGH', '') ||
-        this.StringAt(this.m_current - 5, 7, 'SABBAGH', 'AKHLAGH', '')
-      )
+        )
+        && !this.StringAt(0, 6, 'ENOUGH', ''))
+      || (this.m_current > 3
+        && this.StringAt(this.m_current - 4, 1, 'B', 'H', ''))
+      || (this.m_current > 3
+        && this.StringAt(this.m_current - 4, 2, 'PL', 'SL', ''))
+      || (this.m_current > 0
+        && ((c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+          this.CharAt(this.m_current - 1),
+        ) == 'I'.charCodeAt(0)
+        || this.StringAt(0, 4, 'PUGH', '')
+        || (this.StringAt(this.m_current - 1, 3, 'AGH', '')
+          && this.m_current + 1 === this.m_last)
+        || this.StringAt(this.m_current - 4, 6, 'GERAGH', 'DRAUGH', '')
+        || (this.StringAt(
+          this.m_current - 3,
+          5,
+          'GAUGH',
+          'GEOGH',
+          'MAUGH',
+          '',
+        )
+        && !this.StringAt(0, 9, 'MCGAUGHEY', ''))
+      || (this.StringAt(this.m_current - 2, 4, 'OUGH', '')
+        && this.m_current > 3
+        && !this.StringAt(
+          this.m_current - 4,
+          6,
+          'CCOUGH',
+          'ENOUGH',
+          'TROUGH',
+          'CLOUGH',
+          '',
+        )))))
+        && (this.StringAt(this.m_current - 3, 5, 'VAUGH', 'FEIGH', 'LEIGH', '')
+          || this.StringAt(this.m_current - 2, 4, 'HIGH', 'TIGH', '')
+          || this.m_current + 1 === this.m_last
+          || (this.StringAt(
+              this.m_current + 2,
+              2,
+              'IE',
+              'EY',
+              'ES',
+              'ER',
+              'ED',
+              'TY',
+              '',
+            )
+            && this.m_current + 3 === this.m_last
+            && !this.StringAt(this.m_current - 5, 9, 'GALLAGHER', ''))
+          || (this.StringAt(this.m_current + 2, 1, 'Y', '')
+            && this.m_current + 2 === this.m_last)
+          || (this.StringAt(this.m_current + 2, 3, 'ING', 'OUT', '')
+            && this.m_current + 4 === this.m_last)
+          || (this.StringAt(this.m_current + 2, 4, 'ERTY', '')
+            && this.m_current + 5 === this.m_last)
+          || !this.IsVowel$int(this.m_current + 2)
+            || this.StringAt(this.m_current - 3, 5, 'GAUGH', 'GEOGH', 'MAUGH', '')
+            || this.StringAt(this.m_current - 4, 8, 'BROUGHAM', ''))
+          && !(
+            this.StringAt(0, 6, 'BALOGH', 'SABAGH', '')
+            || this.StringAt(this.m_current - 2, 7, 'BAGHDAD', '')
+              || this.StringAt(this.m_current - 3, 5, 'WHIGH', '')
+              || this.StringAt(this.m_current - 5, 7, 'SABBAGH', 'AKHLAGH', '')
+          )
     ) {
-      this.m_current += 2;
-      return true;
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3442,22 +3484,25 @@ export class Metaphone3 {
    *
    */
   Encode_GH_Special_Cases(): boolean {
-    let handled: boolean = false;
+    let handled: boolean = false
     if (this.StringAt(this.m_current - 6, 8, 'HICCOUGH', '')) {
-      this.MetaphAdd$java_lang_String('P');
-      handled = true;
-    } else if (this.StringAt(0, 5, 'LOUGH', '')) {
-      this.MetaphAdd$java_lang_String('K');
-      handled = true;
-    } else if (this.StringAt(0, 6, 'BALOGH', '')) {
+      this.MetaphAdd$java_lang_String('P')
+      handled = true
+    }
+    else if (this.StringAt(0, 5, 'LOUGH', '')) {
+      this.MetaphAdd$java_lang_String('K')
+      handled = true
+    }
+    else if (this.StringAt(0, 6, 'BALOGH', '')) {
       this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
         'G',
         '',
         'K',
         '',
-      );
-      handled = true;
-    } else if (
+      )
+      handled = true
+    }
+    else if (
       this.StringAt(
         this.m_current - 3,
         8,
@@ -3467,20 +3512,21 @@ export class Metaphone3 {
         '',
       )
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('K', 'F');
-      handled = true;
-    } else if (
-      this.StringAt(this.m_current - 3, 5, 'GOUGH', '') ||
-      this.StringAt(this.m_current - 7, 9, 'COLCLOUGH', '')
+      this.MetaphAdd$java_lang_String$java_lang_String('K', 'F')
+      handled = true
+    }
+    else if (
+      this.StringAt(this.m_current - 3, 5, 'GOUGH', '')
+      || this.StringAt(this.m_current - 7, 9, 'COLCLOUGH', '')
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('', 'F');
-      handled = true;
+      this.MetaphAdd$java_lang_String$java_lang_String('', 'F')
+      handled = true
     }
     if (handled) {
-      this.m_current += 2;
-      return true;
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3490,15 +3536,16 @@ export class Metaphone3 {
    */
   Encode_GH_To_F(): boolean {
     if (this.Encode_GH_Special_Cases()) {
-      return true;
-    } else {
+      return true
+    }
+    else {
       if (
-        this.m_current > 2 &&
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        this.m_current > 2
+        && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current - 1),
-        ) == 'U'.charCodeAt(0) &&
-        this.IsVowel$int(this.m_current - 2) &&
-        this.StringAt(
+        ) == 'U'.charCodeAt(0)
+        && this.IsVowel$int(this.m_current - 2)
+        && this.StringAt(
           this.m_current - 3,
           1,
           'C',
@@ -3509,15 +3556,15 @@ export class Metaphone3 {
           'N',
           'S',
           '',
-        ) &&
-        !this.StringAt(this.m_current - 4, 8, 'BREUGHEL', 'FLAUGHER', '')
+        )
+        && !this.StringAt(this.m_current - 4, 8, 'BREUGHEL', 'FLAUGHER', '')
       ) {
-        this.MetaphAdd$java_lang_String('F');
-        this.m_current += 2;
-        return true;
+        this.MetaphAdd$java_lang_String('F')
+        this.m_current += 2
+        return true
       }
     }
-    return false;
+    return false
   }
 
   /**
@@ -3528,19 +3575,19 @@ export class Metaphone3 {
    */
   Encode_Silent_G(): boolean {
     if (
-      (this.m_current + 1 === this.m_last &&
-        (this.StringAt(this.m_current - 1, 3, 'EGM', 'IGM', 'AGM', '') ||
-          this.StringAt(this.m_current, 2, 'GT', ''))) ||
-      (this.StringAt(0, 5, 'HUGES', '') && this.m_length === 5)
+      (this.m_current + 1 === this.m_last
+        && (this.StringAt(this.m_current - 1, 3, 'EGM', 'IGM', 'AGM', '')
+          || this.StringAt(this.m_current, 2, 'GT', '')))
+        || (this.StringAt(0, 5, 'HUGES', '') && this.m_length === 5)
     ) {
-      this.m_current++;
-      return true;
+      this.m_current++
+      return true
     }
     if (this.StringAt(0, 2, 'NG', '') && this.m_current !== this.m_last) {
-      this.m_current++;
-      return true;
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3551,72 +3598,73 @@ export class Metaphone3 {
    */
   Encode_GN(): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
       ) == 'N'.charCodeAt(0)
     ) {
       if (
-        (this.m_current > 1 &&
-          (this.StringAt(this.m_current - 1, 1, 'I', 'U', 'E', '') ||
-            this.StringAt(this.m_current - 3, 9, 'LORGNETTE', '') ||
-            this.StringAt(this.m_current - 2, 9, 'LAGNIAPPE', '') ||
-            this.StringAt(this.m_current - 2, 6, 'COGNAC', '') ||
-            this.StringAt(this.m_current - 3, 7, 'CHAGNON', '') ||
-            this.StringAt(this.m_current - 5, 9, 'COMPAGNIE', '') ||
-            this.StringAt(this.m_current - 4, 6, 'BOLOGN', '')) &&
-          !(
-            this.StringAt(this.m_current + 2, 5, 'ATION', '') ||
-            this.StringAt(this.m_current + 2, 4, 'ATOR', '') ||
-            this.StringAt(this.m_current + 2, 3, 'ATE', 'ITY', '') ||
-            (this.StringAt(this.m_current + 2, 2, 'AN', 'AC', 'IA', 'UM', '') &&
-              !(
-                this.StringAt(this.m_current - 3, 8, 'POIGNANT', '') ||
-                this.StringAt(this.m_current - 2, 6, 'COGNAC', '')
-              )) ||
-            this.StringAt(0, 7, 'SPIGNER', 'STEGNER', '') ||
-            (this.StringAt(0, 5, 'SIGNE', '') && this.m_length === 5) ||
-            this.StringAt(
-              this.m_current - 2,
-              5,
-              'LIGNI',
-              'LIGNO',
-              'REGNA',
-              'DIGNI',
-              'WEGNE',
-              'TIGNE',
-              'RIGNE',
-              'REGNE',
-              'TIGNO',
-              '',
-            ) ||
-            this.StringAt(
-              this.m_current - 2,
-              6,
-              'SIGNAL',
-              'SIGNIF',
-              'SIGNAT',
-              '',
-            ) ||
-            this.StringAt(this.m_current - 1, 5, 'IGNIT', '')
-          ) &&
-          !this.StringAt(this.m_current - 2, 6, 'SIGNET', 'LIGNEO', '')) ||
-        (this.m_current + 2 === this.m_last &&
-          this.StringAt(this.m_current, 3, 'GNE', 'GNA', '') &&
-          !this.StringAt(this.m_current - 2, 5, 'SIGNA', 'MAGNA', 'SIGNE', ''))
+        (this.m_current > 1
+          && (this.StringAt(this.m_current - 1, 1, 'I', 'U', 'E', '')
+            || this.StringAt(this.m_current - 3, 9, 'LORGNETTE', '')
+            || this.StringAt(this.m_current - 2, 9, 'LAGNIAPPE', '')
+            || this.StringAt(this.m_current - 2, 6, 'COGNAC', '')
+            || this.StringAt(this.m_current - 3, 7, 'CHAGNON', '')
+            || this.StringAt(this.m_current - 5, 9, 'COMPAGNIE', '')
+            || this.StringAt(this.m_current - 4, 6, 'BOLOGN', ''))
+          && !(
+            this.StringAt(this.m_current + 2, 5, 'ATION', '')
+            || this.StringAt(this.m_current + 2, 4, 'ATOR', '')
+            || this.StringAt(this.m_current + 2, 3, 'ATE', 'ITY', '')
+            || (this.StringAt(this.m_current + 2, 2, 'AN', 'AC', 'IA', 'UM', '')
+              && !(
+                this.StringAt(this.m_current - 3, 8, 'POIGNANT', '')
+                || this.StringAt(this.m_current - 2, 6, 'COGNAC', '')
+              ))
+              || this.StringAt(0, 7, 'SPIGNER', 'STEGNER', '')
+              || (this.StringAt(0, 5, 'SIGNE', '') && this.m_length === 5)
+              || this.StringAt(
+                this.m_current - 2,
+                5,
+                'LIGNI',
+                'LIGNO',
+                'REGNA',
+                'DIGNI',
+                'WEGNE',
+                'TIGNE',
+                'RIGNE',
+                'REGNE',
+                'TIGNO',
+                '',
+              )
+              || this.StringAt(
+                this.m_current - 2,
+                6,
+                'SIGNAL',
+                'SIGNIF',
+                'SIGNAT',
+                '',
+              )
+              || this.StringAt(this.m_current - 1, 5, 'IGNIT', '')
+          )
+          && !this.StringAt(this.m_current - 2, 6, 'SIGNET', 'LIGNEO', ''))
+        || (this.m_current + 2 === this.m_last
+          && this.StringAt(this.m_current, 3, 'GNE', 'GNA', '')
+          && !this.StringAt(this.m_current - 2, 5, 'SIGNA', 'MAGNA', 'SIGNE', ''))
       ) {
         this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
           'N',
           'GN',
           'N',
           'KN',
-        );
-      } else {
-        this.MetaphAddExactApprox$java_lang_String$java_lang_String('GN', 'KN');
+        )
       }
-      this.m_current += 2;
-      return true;
+      else {
+        this.MetaphAddExactApprox$java_lang_String$java_lang_String('GN', 'KN')
+      }
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3627,19 +3675,19 @@ export class Metaphone3 {
    */
   Encode_GL(): boolean {
     if (
-      this.StringAt(this.m_current + 1, 3, 'LIA', 'LIO', 'LIE', '') &&
-      this.IsVowel$int(this.m_current - 1)
+      this.StringAt(this.m_current + 1, 3, 'LIA', 'LIO', 'LIE', '')
+      && this.IsVowel$int(this.m_current - 1)
     ) {
       this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
         'L',
         'GL',
         'L',
         'KL',
-      );
-      this.m_current += 2;
-      return true;
+      )
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3669,116 +3717,116 @@ export class Metaphone3 {
         'YR',
         'EE',
         '',
-      ) ||
-        this.StringAt(this.m_current + 1, 3, 'IRA', 'IRO', '')) &&
-        !(
-          this.StringAt(
-            this.m_current + 1,
-            3,
-            'ELD',
-            'ELT',
-            'ERT',
-            'INZ',
-            'ERH',
-            'ITE',
-            'ERD',
-            'ERL',
-            'ERN',
-            'INT',
-            'EES',
-            'EEK',
-            'ELB',
-            'EER',
-            '',
-          ) ||
-          this.StringAt(
-            this.m_current + 1,
-            4,
-            'ERSH',
-            'ERST',
-            'INSB',
-            'INGR',
-            'EROW',
-            'ERKE',
-            'EREN',
-            '',
-          ) ||
-          this.StringAt(
-            this.m_current + 1,
-            5,
-            'ELLER',
-            'ERDIE',
-            'ERBER',
-            'ESUND',
-            'ESNER',
-            'INGKO',
-            'INKGO',
-            'IPPER',
-            'ESELL',
-            'IPSON',
-            'EEZER',
-            'ERSON',
-            'ELMAN',
-            '',
-          ) ||
-          this.StringAt(
-            this.m_current + 1,
-            6,
-            'ESTALT',
-            'ESTAPO',
-            'INGHAM',
-            'ERRITY',
-            'ERRISH',
-            'ESSNER',
-            'ENGLER',
-            '',
-          ) ||
-          this.StringAt(
-            this.m_current + 1,
-            7,
-            'YNAECOL',
-            'YNECOLO',
-            'ENTHNER',
-            'ERAGHTY',
-            '',
-          ) ||
-          this.StringAt(this.m_current + 1, 8, 'INGERICH', 'EOGHEGAN', '')
-        )) ||
-      (this.IsVowel$int(this.m_current + 1) &&
-        (this.StringAt(this.m_current + 1, 3, 'EE ', 'EEW', '') ||
-          (this.StringAt(
-            this.m_current + 1,
-            3,
-            'IGI',
-            'IRA',
-            'IBE',
-            'AOL',
-            'IDE',
-            'IGL',
-            '',
-          ) &&
-            !this.StringAt(this.m_current + 1, 5, 'IDEON', '')) ||
-          this.StringAt(this.m_current + 1, 4, 'ILES', 'INGI', 'ISEL', '') ||
-          (this.StringAt(this.m_current + 1, 5, 'INGER', '') &&
-            !this.StringAt(this.m_current + 1, 8, 'INGERICH', '')) ||
-          this.StringAt(
-            this.m_current + 1,
-            5,
-            'IBBER',
-            'IBBET',
-            'IBLET',
-            'IBRAN',
-            'IGOLO',
-            'IRARD',
-            'IGANT',
-            '',
-          ) ||
-          this.StringAt(this.m_current + 1, 6, 'IRAFFE', 'EEWHIZ', '') ||
-          this.StringAt(this.m_current + 1, 7, 'ILLETTE', 'IBRALTA', '')))
+      )
+      || this.StringAt(this.m_current + 1, 3, 'IRA', 'IRO', ''))
+    && !(
+      this.StringAt(
+        this.m_current + 1,
+        3,
+        'ELD',
+        'ELT',
+        'ERT',
+        'INZ',
+        'ERH',
+        'ITE',
+        'ERD',
+        'ERL',
+        'ERN',
+        'INT',
+        'EES',
+        'EEK',
+        'ELB',
+        'EER',
+        '',
+      )
+      || this.StringAt(
+        this.m_current + 1,
+        4,
+        'ERSH',
+        'ERST',
+        'INSB',
+        'INGR',
+        'EROW',
+        'ERKE',
+        'EREN',
+        '',
+      )
+      || this.StringAt(
+        this.m_current + 1,
+        5,
+        'ELLER',
+        'ERDIE',
+        'ERBER',
+        'ESUND',
+        'ESNER',
+        'INGKO',
+        'INKGO',
+        'IPPER',
+        'ESELL',
+        'IPSON',
+        'EEZER',
+        'ERSON',
+        'ELMAN',
+        '',
+      )
+      || this.StringAt(
+        this.m_current + 1,
+        6,
+        'ESTALT',
+        'ESTAPO',
+        'INGHAM',
+        'ERRITY',
+        'ERRISH',
+        'ESSNER',
+        'ENGLER',
+        '',
+      )
+      || this.StringAt(
+        this.m_current + 1,
+        7,
+        'YNAECOL',
+        'YNECOLO',
+        'ENTHNER',
+        'ERAGHTY',
+        '',
+      )
+      || this.StringAt(this.m_current + 1, 8, 'INGERICH', 'EOGHEGAN', '')
+    ))
+    || (this.IsVowel$int(this.m_current + 1)
+      && (this.StringAt(this.m_current + 1, 3, 'EE ', 'EEW', '')
+        || (this.StringAt(
+          this.m_current + 1,
+          3,
+          'IGI',
+          'IRA',
+          'IBE',
+          'AOL',
+          'IDE',
+          'IGL',
+          '',
+        )
+        && !this.StringAt(this.m_current + 1, 5, 'IDEON', ''))
+      || this.StringAt(this.m_current + 1, 4, 'ILES', 'INGI', 'ISEL', '')
+      || (this.StringAt(this.m_current + 1, 5, 'INGER', '')
+        && !this.StringAt(this.m_current + 1, 8, 'INGERICH', ''))
+      || this.StringAt(
+        this.m_current + 1,
+        5,
+        'IBBER',
+        'IBBET',
+        'IBLET',
+        'IBRAN',
+        'IGOLO',
+        'IRARD',
+        'IGANT',
+        '',
+      )
+      || this.StringAt(this.m_current + 1, 6, 'IRAFFE', 'EEWHIZ', '')
+      || this.StringAt(this.m_current + 1, 7, 'ILLETTE', 'IBRALTA', '')))
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3791,23 +3839,25 @@ export class Metaphone3 {
   Encode_Initial_G_Front_Vowel(): boolean {
     if (this.m_current === 0 && this.Front_Vowel(this.m_current + 1)) {
       if (
-        this.StringAt(this.m_current + 1, 3, 'ILA', '') &&
-        this.m_length === 4
+        this.StringAt(this.m_current + 1, 3, 'ILA', '')
+        && this.m_length === 4
       ) {
-        this.MetaphAdd$java_lang_String('H');
-      } else if (this.Initial_G_Soft()) {
+        this.MetaphAdd$java_lang_String('H')
+      }
+      else if (this.Initial_G_Soft()) {
         this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
           'J',
           'G',
           'J',
           'K',
-        );
-      } else {
+        )
+      }
+      else {
         if (
-          ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+          (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
             this.m_inWord.charAt(this.m_current + 1),
-          ) == 'E'.charCodeAt(0) ||
-          ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+          ) == 'E'.charCodeAt(0)
+          || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
             this.m_inWord.charAt(this.m_current + 1),
           ) == 'I'.charCodeAt(0)
         ) {
@@ -3816,15 +3866,16 @@ export class Metaphone3 {
             'J',
             'K',
             'J',
-          );
-        } else {
-          this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K');
+          )
+        }
+        else {
+          this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K')
         }
       }
-      this.AdvanceCounter(2, 1);
-      return true;
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3835,16 +3886,16 @@ export class Metaphone3 {
    */
   Encode_NGER(): boolean {
     if (
-      this.m_current > 1 &&
-      this.StringAt(this.m_current - 1, 4, 'NGER', '')
+      this.m_current > 1
+      && this.StringAt(this.m_current - 1, 4, 'NGER', '')
     ) {
       if (
         !(
-          this.RootOrInflections(this.m_inWord, 'ANGER') ||
-          this.RootOrInflections(this.m_inWord, 'LINGER') ||
-          this.RootOrInflections(this.m_inWord, 'MALINGER') ||
-          this.RootOrInflections(this.m_inWord, 'FINGER') ||
-          (this.StringAt(
+          this.RootOrInflections(this.m_inWord, 'ANGER')
+          || this.RootOrInflections(this.m_inWord, 'LINGER')
+          || this.RootOrInflections(this.m_inWord, 'MALINGER')
+          || this.RootOrInflections(this.m_inWord, 'FINGER')
+          || (this.StringAt(
             this.m_current - 3,
             4,
             'HUNG',
@@ -3869,29 +3920,29 @@ export class Metaphone3 {
             'WANG',
             'ZANG',
             '',
-          ) &&
-            !(
-              this.StringAt(
-                this.m_current - 6,
-                7,
-                'BOULANG',
-                'SLESING',
-                'KISSING',
-                'DERRING',
-                '',
-              ) ||
-              this.StringAt(this.m_current - 8, 9, 'SCHLESING', '') ||
-              this.StringAt(this.m_current - 5, 6, 'SALING', 'BELANG', '') ||
-              this.StringAt(this.m_current - 6, 7, 'BARRING', '') ||
-              this.StringAt(this.m_current - 6, 9, 'PHALANGER', '') ||
-              this.StringAt(this.m_current - 4, 5, 'CHANG', '')
-            )) ||
-          this.StringAt(this.m_current - 4, 5, 'STING', 'YOUNG', '') ||
-          this.StringAt(this.m_current - 5, 6, 'STRONG', '') ||
-          this.StringAt(0, 3, 'UNG', 'ENG', 'ING', '') ||
-          this.StringAt(this.m_current, 6, 'GERICH', '') ||
-          this.StringAt(0, 6, 'SENGER', '') ||
-          this.StringAt(
+          )
+          && !(
+            this.StringAt(
+              this.m_current - 6,
+              7,
+              'BOULANG',
+              'SLESING',
+              'KISSING',
+              'DERRING',
+              '',
+            )
+            || this.StringAt(this.m_current - 8, 9, 'SCHLESING', '')
+            || this.StringAt(this.m_current - 5, 6, 'SALING', 'BELANG', '')
+            || this.StringAt(this.m_current - 6, 7, 'BARRING', '')
+            || this.StringAt(this.m_current - 6, 9, 'PHALANGER', '')
+            || this.StringAt(this.m_current - 4, 5, 'CHANG', '')
+          ))
+          || this.StringAt(this.m_current - 4, 5, 'STING', 'YOUNG', '')
+          || this.StringAt(this.m_current - 5, 6, 'STRONG', '')
+          || this.StringAt(0, 3, 'UNG', 'ENG', 'ING', '')
+          || this.StringAt(this.m_current, 6, 'GERICH', '')
+          || this.StringAt(0, 6, 'SENGER', '')
+          || this.StringAt(
             this.m_current - 3,
             6,
             'WENGER',
@@ -3899,8 +3950,8 @@ export class Metaphone3 {
             'SONGER',
             'KINGER',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             this.m_current - 4,
             7,
             'FLINGER',
@@ -3910,10 +3961,10 @@ export class Metaphone3 {
             'KLINGER',
             'CLINGER',
             '',
-          ) ||
-          this.StringAt(this.m_current - 5, 8, 'SPRINGER', 'SPRENGER', '') ||
-          this.StringAt(this.m_current - 3, 7, 'LINGERF', '') ||
-          this.StringAt(
+          )
+          || this.StringAt(this.m_current - 5, 8, 'SPRINGER', 'SPRENGER', '')
+          || this.StringAt(this.m_current - 3, 7, 'LINGERF', '')
+          || this.StringAt(
             this.m_current - 2,
             7,
             'ANGERLY',
@@ -3928,19 +3979,20 @@ export class Metaphone3 {
           'G',
           'J',
           'K',
-        );
-      } else {
+        )
+      }
+      else {
         this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
           'G',
           'J',
           'K',
           'J',
-        );
+        )
       }
-      this.AdvanceCounter(2, 1);
-      return true;
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -3952,10 +4004,10 @@ export class Metaphone3 {
   Encode_GER(): boolean {
     if (this.m_current > 0 && this.StringAt(this.m_current + 1, 2, 'ER', '')) {
       if (
-        ((this.m_current === 2 &&
-          this.IsVowel$int(this.m_current - 1) &&
-          !this.IsVowel$int(this.m_current - 2) &&
-          !this.StringAt(
+        ((this.m_current === 2
+          && this.IsVowel$int(this.m_current - 1)
+          && !this.IsVowel$int(this.m_current - 2)
+          && !this.StringAt(
             this.m_current - 2,
             5,
             'PAGER',
@@ -3965,8 +4017,8 @@ export class Metaphone3 {
             'LEGER',
             'CAGER',
             '',
-          )) ||
-          this.StringAt(
+          ))
+          || this.StringAt(
             this.m_current - 2,
             5,
             'AUGER',
@@ -3974,8 +4026,8 @@ export class Metaphone3 {
             'INGER',
             'YAGER',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             this.m_current - 3,
             6,
             'SEEGER',
@@ -4005,10 +4057,10 @@ export class Metaphone3 {
             'STIGER',
             'BERGER',
             '',
-          ) ||
-          (this.StringAt(this.m_current - 3, 6, 'BERGER', '') &&
-            this.m_current + 2 === this.m_last) ||
-          this.StringAt(
+          )
+          || (this.StringAt(this.m_current - 3, 6, 'BERGER', '')
+            && this.m_current + 2 === this.m_last)
+          || this.StringAt(
             this.m_current - 4,
             7,
             'KREIGER',
@@ -4022,12 +4074,12 @@ export class Metaphone3 {
             'BOERGER',
             'FIBIGER',
             '',
-          ) ||
-          (this.StringAt(this.m_current - 3, 6, 'BARGER', '') &&
-            this.m_current > 4) ||
-          (this.StringAt(this.m_current, 6, 'GERBER', '') &&
-            this.m_current > 0) ||
-          this.StringAt(
+          )
+          || (this.StringAt(this.m_current - 3, 6, 'BARGER', '')
+            && this.m_current > 4)
+          || (this.StringAt(this.m_current, 6, 'GERBER', '')
+            && this.m_current > 0)
+          || this.StringAt(
             this.m_current - 5,
             8,
             'SCHWAGER',
@@ -4036,39 +4088,41 @@ export class Metaphone3 {
             'GALLAGER',
             'WILLIGER',
             '',
-          ) ||
-          this.StringAt(0, 4, 'HARGER', '') ||
-          (this.StringAt(0, 4, 'AGER', 'EGER', '') && this.m_length === 4) ||
-          this.StringAt(this.m_current - 1, 6, 'YGERNE', '') ||
-          this.StringAt(this.m_current - 6, 9, 'SCHWEIGER', '')) &&
-        !(
-          this.StringAt(this.m_current - 5, 10, 'BELLIGEREN', '') ||
-          this.StringAt(0, 7, 'MARGERY', '') ||
-          this.StringAt(this.m_current - 3, 8, 'BERGERAC', '')
+          )
+          || this.StringAt(0, 4, 'HARGER', '')
+          || (this.StringAt(0, 4, 'AGER', 'EGER', '') && this.m_length === 4)
+          || this.StringAt(this.m_current - 1, 6, 'YGERNE', '')
+          || this.StringAt(this.m_current - 6, 9, 'SCHWEIGER', ''))
+        && !(
+          this.StringAt(this.m_current - 5, 10, 'BELLIGEREN', '')
+          || this.StringAt(0, 7, 'MARGERY', '')
+          || this.StringAt(this.m_current - 3, 8, 'BERGERAC', '')
         )
       ) {
         if (this.SlavoGermanic()) {
-          this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K');
-        } else {
+          this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K')
+        }
+        else {
           this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
             'G',
             'J',
             'K',
             'J',
-          );
+          )
         }
-      } else {
+      }
+      else {
         this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
           'J',
           'G',
           'J',
           'K',
-        );
+        )
       }
-      this.AdvanceCounter(2, 1);
-      return true;
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4080,11 +4134,11 @@ export class Metaphone3 {
   Encode_GEL(): boolean {
     if (this.StringAt(this.m_current + 1, 2, 'EL', '') && this.m_current > 0) {
       if (
-        (this.m_length === 5 &&
-          this.IsVowel$int(this.m_current - 1) &&
-          !this.IsVowel$int(this.m_current - 2) &&
-          !this.StringAt(this.m_current - 2, 5, 'NIGEL', 'RIGEL', '')) ||
-        this.StringAt(
+        (this.m_length === 5
+          && this.IsVowel$int(this.m_current - 1)
+          && !this.IsVowel$int(this.m_current - 2)
+          && !this.StringAt(this.m_current - 2, 5, 'NIGEL', 'RIGEL', ''))
+        || this.StringAt(
           this.m_current - 2,
           5,
           'ENGEL',
@@ -4092,8 +4146,8 @@ export class Metaphone3 {
           'NAGEL',
           'VOGEL',
           '',
-        ) ||
-        this.StringAt(
+        )
+        || this.StringAt(
           this.m_current - 3,
           6,
           'MANGEL',
@@ -4104,8 +4158,8 @@ export class Metaphone3 {
           'RIEGEL',
           'VOEGEL',
           '',
-        ) ||
-        this.StringAt(
+        )
+        || this.StringAt(
           this.m_current - 4,
           7,
           'SPEIGEL',
@@ -4113,31 +4167,33 @@ export class Metaphone3 {
           'WRANGEL',
           'SPIEGEL',
           '',
-        ) ||
-        this.StringAt(this.m_current - 4, 8, 'DANEGELD', '')
+        )
+        || this.StringAt(this.m_current - 4, 8, 'DANEGELD', '')
       ) {
         if (this.SlavoGermanic()) {
-          this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K');
-        } else {
+          this.MetaphAddExactApprox$java_lang_String$java_lang_String('G', 'K')
+        }
+        else {
           this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
             'G',
             'J',
             'K',
             'J',
-          );
+          )
         }
-      } else {
+      }
+      else {
         this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
           'J',
           'G',
           'J',
           'K',
-        );
+        )
       }
-      this.AdvanceCounter(2, 1);
-      return true;
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4151,59 +4207,64 @@ export class Metaphone3 {
   Encode_Non_Initial_G_Front_Vowel(): boolean {
     if (this.StringAt(this.m_current + 1, 1, 'E', 'I', 'Y', '')) {
       if (
-        this.StringAt(this.m_current, 2, 'GE', '') &&
-        this.m_current === this.m_last - 1
+        this.StringAt(this.m_current, 2, 'GE', '')
+        && this.m_current === this.m_last - 1
       ) {
         if (this.Hard_GE_At_End()) {
           if (this.SlavoGermanic()) {
             this.MetaphAddExactApprox$java_lang_String$java_lang_String(
               'G',
               'K',
-            );
-          } else {
+            )
+          }
+          else {
             this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
               'G',
               'J',
               'K',
               'J',
-            );
+            )
           }
-        } else {
-          this.MetaphAdd$java_lang_String('J');
         }
-      } else {
+        else {
+          this.MetaphAdd$java_lang_String('J')
+        }
+      }
+      else {
         if (this.Internal_Hard_G()) {
           if (
-            (this.m_current === 2 && this.StringAt(0, 2, 'MC', '')) ||
-            (this.m_current === 3 && this.StringAt(0, 3, 'MAC', ''))
+            (this.m_current === 2 && this.StringAt(0, 2, 'MC', ''))
+            || (this.m_current === 3 && this.StringAt(0, 3, 'MAC', ''))
           ) {
             if (this.SlavoGermanic()) {
               this.MetaphAddExactApprox$java_lang_String$java_lang_String(
                 'G',
                 'K',
-              );
-            } else {
+              )
+            }
+            else {
               this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
                 'G',
                 'J',
                 'K',
                 'J',
-              );
+              )
             }
           }
-        } else {
+        }
+        else {
           this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
             'J',
             'G',
             'J',
             'K',
-          );
+          )
         }
       }
-      this.AdvanceCounter(2, 1);
-      return true;
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   Hard_GE_At_End(): boolean {
@@ -4217,15 +4278,15 @@ export class Metaphone3 {
         'PRANGE',
         'KRESGE',
         '',
-      ) ||
-      this.StringAt(0, 5, 'BYRGE', 'BIRGE', 'BERGE', 'HAUGE', '') ||
-      this.StringAt(0, 4, 'HAGE', '') ||
-      this.StringAt(0, 5, 'LANGE', 'SYNGE', 'BENGE', 'RUNGE', 'HELGE', '') ||
-      this.StringAt(0, 4, 'INGE', 'LAGE', '')
+      )
+      || this.StringAt(0, 5, 'BYRGE', 'BIRGE', 'BERGE', 'HAUGE', '')
+      || this.StringAt(0, 4, 'HAGE', '')
+      || this.StringAt(0, 5, 'LANGE', 'SYNGE', 'BENGE', 'RUNGE', 'HELGE', '')
+      || this.StringAt(0, 4, 'INGE', 'LAGE', '')
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4239,19 +4300,19 @@ export class Metaphone3 {
   Internal_Hard_G(): boolean {
     if (
       !(
-        this.m_current + 1 === this.m_last &&
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        this.m_current + 1 === this.m_last
+        && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current + 1),
         ) == 'E'.charCodeAt(0)
-      ) &&
-      (this.Internal_Hard_NG() ||
-        this.Internal_Hard_GEN_GIN_GET_GIT() ||
-        this.Internal_Hard_G_Open_Syllable() ||
-        this.Internal_Hard_G_Other())
+      )
+      && (this.Internal_Hard_NG()
+        || this.Internal_Hard_GEN_GIN_GET_GIT()
+        || this.Internal_Hard_G_Open_Syllable()
+        || this.Internal_Hard_G_Other())
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4279,31 +4340,31 @@ export class Metaphone3 {
         'GILD',
         'GELD',
         '',
-      ) &&
-        !this.StringAt(this.m_current - 3, 6, 'GINGIV', '')) ||
-      (this.StringAt(this.m_current + 1, 3, 'ISH', '') &&
-        this.m_current > 0 &&
-        !this.StringAt(0, 4, 'LARG', '')) ||
-      (this.StringAt(this.m_current - 2, 5, 'MAGED', 'MEGID', '') &&
-        !(this.m_current + 2 === this.m_last)) ||
-      this.StringAt(this.m_current, 3, 'GEZ', '') ||
-      this.StringAt(0, 4, 'WEGE', 'HAGE', '') ||
-      (this.StringAt(this.m_current - 2, 6, 'ONGEST', 'UNGEST', '') &&
-        this.m_current + 3 === this.m_last &&
-        !this.StringAt(this.m_current - 3, 7, 'CONGEST', '')) ||
-      this.StringAt(0, 5, 'VOEGE', 'BERGE', 'HELGE', '') ||
-      (this.StringAt(0, 4, 'ENGE', 'BOGY', '') && this.m_length === 4) ||
-      this.StringAt(this.m_current, 6, 'GIBBON', '') ||
-      this.StringAt(0, 10, 'CORREGIDOR', '') ||
-      this.StringAt(0, 8, 'INGEBORG', '') ||
-      (this.StringAt(this.m_current, 4, 'GILL', '') &&
-        (this.m_current + 3 === this.m_last ||
-          this.m_current + 4 === this.m_last) &&
-        !this.StringAt(0, 8, 'STURGILL', ''))
+      )
+      && !this.StringAt(this.m_current - 3, 6, 'GINGIV', ''))
+    || (this.StringAt(this.m_current + 1, 3, 'ISH', '')
+      && this.m_current > 0
+      && !this.StringAt(0, 4, 'LARG', ''))
+    || (this.StringAt(this.m_current - 2, 5, 'MAGED', 'MEGID', '')
+      && !(this.m_current + 2 === this.m_last))
+    || this.StringAt(this.m_current, 3, 'GEZ', '')
+    || this.StringAt(0, 4, 'WEGE', 'HAGE', '')
+    || (this.StringAt(this.m_current - 2, 6, 'ONGEST', 'UNGEST', '')
+      && this.m_current + 3 === this.m_last
+      && !this.StringAt(this.m_current - 3, 7, 'CONGEST', ''))
+    || this.StringAt(0, 5, 'VOEGE', 'BERGE', 'HELGE', '')
+    || (this.StringAt(0, 4, 'ENGE', 'BOGY', '') && this.m_length === 4)
+    || this.StringAt(this.m_current, 6, 'GIBBON', '')
+    || this.StringAt(0, 10, 'CORREGIDOR', '')
+    || this.StringAt(0, 8, 'INGEBORG', '')
+    || (this.StringAt(this.m_current, 4, 'GILL', '')
+      && (this.m_current + 3 === this.m_last
+        || this.m_current + 4 === this.m_last)
+      && !this.StringAt(0, 8, 'STURGILL', ''))
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4316,18 +4377,18 @@ export class Metaphone3 {
    */
   Internal_Hard_G_Open_Syllable(): boolean {
     if (
-      this.StringAt(this.m_current + 1, 3, 'EYE', '') ||
-      this.StringAt(this.m_current - 2, 4, 'FOGY', 'POGY', 'YOGI', '') ||
-      this.StringAt(this.m_current - 2, 5, 'MAGEE', 'MCGEE', 'HAGIO', '') ||
-      this.StringAt(this.m_current - 1, 4, 'RGEY', 'OGEY', '') ||
-      this.StringAt(this.m_current - 3, 5, 'HOAGY', 'STOGY', 'PORGY', '') ||
-      this.StringAt(this.m_current - 5, 8, 'CARNEGIE', '') ||
-      (this.StringAt(this.m_current - 1, 4, 'OGEY', 'OGIE', '') &&
-        this.m_current + 2 === this.m_last)
+      this.StringAt(this.m_current + 1, 3, 'EYE', '')
+      || this.StringAt(this.m_current - 2, 4, 'FOGY', 'POGY', 'YOGI', '')
+      || this.StringAt(this.m_current - 2, 5, 'MAGEE', 'MCGEE', 'HAGIO', '')
+      || this.StringAt(this.m_current - 1, 4, 'RGEY', 'OGEY', '')
+      || this.StringAt(this.m_current - 3, 5, 'HOAGY', 'STOGY', 'PORGY', '')
+      || this.StringAt(this.m_current - 5, 8, 'CARNEGIE', '')
+      || (this.StringAt(this.m_current - 1, 4, 'OGEY', 'OGIE', '')
+        && this.m_current + 2 === this.m_last)
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4360,37 +4421,37 @@ export class Metaphone3 {
         'STIGER',
         'BERGER',
         '',
-      ) &&
-        !this.StringAt(this.m_current, 7, 'GENETIC', 'GENESIS', '') &&
-        !this.StringAt(this.m_current - 4, 8, 'PLANGENT', '')) ||
-      (this.StringAt(this.m_current - 3, 6, 'BERGIN', 'FEAGIN', 'DURGIN', '') &&
-        this.m_current + 2 === this.m_last) ||
-      (this.StringAt(this.m_current - 2, 5, 'ENGEN', '') &&
-        !this.StringAt(this.m_current + 3, 3, 'DER', 'ETI', 'ESI', '')) ||
-      this.StringAt(this.m_current - 4, 7, 'JUERGEN', '') ||
-      this.StringAt(0, 5, 'NAGIN', 'MAGIN', 'HAGIN', '') ||
-      (this.StringAt(0, 5, 'ENGIN', 'DEGEN', 'LAGEN', 'MAGEN', 'NAGIN', '') &&
-        this.m_length === 5) ||
-      (this.StringAt(
-        this.m_current - 2,
-        5,
-        'BEGET',
-        'BEGIN',
-        'HAGEN',
-        'FAGIN',
-        'BOGEN',
-        'WIGIN',
-        'NTGEN',
-        'EIGEN',
-        'WEGEN',
-        'WAGEN',
-        '',
-      ) &&
-        !this.StringAt(this.m_current - 5, 8, 'OSPHAGEN', ''))
+      )
+      && !this.StringAt(this.m_current, 7, 'GENETIC', 'GENESIS', '')
+      && !this.StringAt(this.m_current - 4, 8, 'PLANGENT', ''))
+    || (this.StringAt(this.m_current - 3, 6, 'BERGIN', 'FEAGIN', 'DURGIN', '')
+      && this.m_current + 2 === this.m_last)
+    || (this.StringAt(this.m_current - 2, 5, 'ENGEN', '')
+      && !this.StringAt(this.m_current + 3, 3, 'DER', 'ETI', 'ESI', ''))
+    || this.StringAt(this.m_current - 4, 7, 'JUERGEN', '')
+    || this.StringAt(0, 5, 'NAGIN', 'MAGIN', 'HAGIN', '')
+    || (this.StringAt(0, 5, 'ENGIN', 'DEGEN', 'LAGEN', 'MAGEN', 'NAGIN', '')
+      && this.m_length === 5)
+    || (this.StringAt(
+      this.m_current - 2,
+      5,
+      'BEGET',
+      'BEGIN',
+      'HAGEN',
+      'FAGIN',
+      'BOGEN',
+      'WIGIN',
+      'NTGEN',
+      'EIGEN',
+      'WEGEN',
+      'WAGEN',
+      '',
+    )
+    && !this.StringAt(this.m_current - 5, 8, 'OSPHAGEN', ''))
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4403,10 +4464,10 @@ export class Metaphone3 {
    */
   Internal_Hard_NG(): boolean {
     if (
-      (this.StringAt(this.m_current - 3, 4, 'DANG', 'FANG', 'SING', '') &&
-        !this.StringAt(this.m_current - 5, 8, 'DISINGEN', '')) ||
-      this.StringAt(0, 5, 'INGEB', 'ENGEB', '') ||
-      (this.StringAt(
+      (this.StringAt(this.m_current - 3, 4, 'DANG', 'FANG', 'SING', '')
+        && !this.StringAt(this.m_current - 5, 8, 'DISINGEN', ''))
+      || this.StringAt(0, 5, 'INGEB', 'ENGEB', '')
+      || (this.StringAt(
         this.m_current - 3,
         4,
         'RING',
@@ -4414,41 +4475,41 @@ export class Metaphone3 {
         'HANG',
         'LONG',
         '',
-      ) &&
-        !(
-          this.StringAt(
-            this.m_current - 4,
-            5,
-            'CRING',
-            'FRING',
-            'ORANG',
-            'TWING',
-            'CHANG',
-            'PHANG',
-            '',
-          ) ||
-          this.StringAt(this.m_current - 5, 6, 'SYRING', '') ||
-          this.StringAt(
-            this.m_current - 3,
-            7,
-            'RINGENC',
-            'RINGENT',
-            'LONGITU',
-            'LONGEVI',
-            '',
-          ) ||
-          (this.StringAt(this.m_current, 4, 'GELO', 'GINO', '') &&
-            this.m_current + 3 === this.m_last)
-        )) ||
-      (this.StringAt(this.m_current - 1, 3, 'NGY', '') &&
-        !(
-          this.StringAt(this.m_current - 3, 5, 'RANGY', 'MANGY', 'MINGY', '') ||
-          this.StringAt(this.m_current - 4, 6, 'SPONGY', 'STINGY', '')
+      )
+      && !(
+        this.StringAt(
+          this.m_current - 4,
+          5,
+          'CRING',
+          'FRING',
+          'ORANG',
+          'TWING',
+          'CHANG',
+          'PHANG',
+          '',
+        )
+        || this.StringAt(this.m_current - 5, 6, 'SYRING', '')
+        || this.StringAt(
+          this.m_current - 3,
+          7,
+          'RINGENC',
+          'RINGENT',
+          'LONGITU',
+          'LONGEVI',
+          '',
+        )
+        || (this.StringAt(this.m_current, 4, 'GELO', 'GINO', '')
+          && this.m_current + 3 === this.m_last)
+      ))
+      || (this.StringAt(this.m_current - 1, 3, 'NGY', '')
+        && !(
+          this.StringAt(this.m_current - 3, 5, 'RANGY', 'MANGY', 'MINGY', '')
+          || this.StringAt(this.m_current - 4, 6, 'SPONGY', 'STINGY', '')
         ))
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4459,21 +4520,21 @@ export class Metaphone3 {
    */
   Encode_GA_To_J(): boolean {
     if (
-      (this.StringAt(this.m_current - 3, 7, 'MARGARY', 'MARGARI', '') &&
-        !this.StringAt(this.m_current - 3, 8, 'MARGARIT', '')) ||
-      this.StringAt(0, 4, 'GAOL', '') ||
-      this.StringAt(this.m_current - 2, 5, 'ALGAE', '')
+      (this.StringAt(this.m_current - 3, 7, 'MARGARY', 'MARGARI', '')
+        && !this.StringAt(this.m_current - 3, 8, 'MARGARIT', ''))
+      || this.StringAt(0, 4, 'GAOL', '')
+      || this.StringAt(this.m_current - 2, 5, 'ALGAE', '')
     ) {
       this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
         'J',
         'G',
         'J',
         'K',
-      );
-      this.AdvanceCounter(2, 1);
-      return true;
+      )
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4483,15 +4544,15 @@ export class Metaphone3 {
    */
   Encode_H() {
     if (
-      this.Encode_Initial_Silent_H() ||
-      this.Encode_Initial_HS() ||
-      this.Encode_Initial_HU_HW() ||
-      this.Encode_Non_Initial_Silent_H()
+      this.Encode_Initial_Silent_H()
+      || this.Encode_Initial_HS()
+      || this.Encode_Initial_HU_HW()
+      || this.Encode_Non_Initial_Silent_H()
     ) {
-      return;
+      return
     }
     if (!this.Encode_H_Pronounced()) {
-      this.m_current++;
+      this.m_current++
     }
   }
 
@@ -4503,27 +4564,29 @@ export class Metaphone3 {
    */
   Encode_Initial_Silent_H(): boolean {
     if (
-      this.StringAt(this.m_current + 1, 3, 'OUR', 'ERB', 'EIR', '') ||
-      this.StringAt(this.m_current + 1, 4, 'ONOR', '') ||
-      this.StringAt(this.m_current + 1, 5, 'ONOUR', 'ONEST', '')
+      this.StringAt(this.m_current + 1, 3, 'OUR', 'ERB', 'EIR', '')
+      || this.StringAt(this.m_current + 1, 4, 'ONOR', '')
+      || this.StringAt(this.m_current + 1, 5, 'ONOUR', 'ONEST', '')
     ) {
       if (
-        this.m_current === 0 &&
-        this.StringAt(this.m_current, 4, 'HERB', '')
+        this.m_current === 0
+        && this.StringAt(this.m_current, 4, 'HERB', '')
       ) {
         if (this.m_encodeVowels) {
-          this.MetaphAdd$java_lang_String$java_lang_String('HA', 'A');
-        } else {
-          this.MetaphAdd$java_lang_String$java_lang_String('H', 'A');
+          this.MetaphAdd$java_lang_String$java_lang_String('HA', 'A')
         }
-      } else if (this.m_current === 0 || this.m_encodeVowels) {
-        this.MetaphAdd$java_lang_String('A');
+        else {
+          this.MetaphAdd$java_lang_String$java_lang_String('H', 'A')
+        }
       }
-      this.m_current++;
-      this.m_current = this.SkipVowels(this.m_current);
-      return true;
+      else if (this.m_current === 0 || this.m_encodeVowels) {
+        this.MetaphAdd$java_lang_String('A')
+      }
+      this.m_current++
+      this.m_current = this.SkipVowels(this.m_current)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4534,11 +4597,11 @@ export class Metaphone3 {
    */
   Encode_Initial_HS(): boolean {
     if (this.m_current === 0 && this.StringAt(0, 2, 'HS', '')) {
-      this.MetaphAdd$java_lang_String('X');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4550,26 +4613,27 @@ export class Metaphone3 {
   Encode_Initial_HU_HW(): boolean {
     if (this.StringAt(0, 3, 'HUA', 'HUE', 'HWA', '')) {
       if (!this.StringAt(this.m_current, 4, 'HUEY', '')) {
-        this.MetaphAdd$java_lang_String('A');
+        this.MetaphAdd$java_lang_String('A')
         if (!this.m_encodeVowels) {
-          this.m_current += 3;
-        } else {
-          this.m_current++;
+          this.m_current += 3
+        }
+        else {
+          this.m_current++
           while (
-            this.IsVowel$int(this.m_current) ||
-            ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+            this.IsVowel$int(this.m_current)
+            || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
               this.CharAt(this.m_current),
             ) == 'W'.charCodeAt(0)
           ) {
             {
-              this.m_current++;
+              this.m_current++
             }
           }
         }
-        return true;
+        return true
       }
     }
-    return false;
+    return false
   }
 
   /**
@@ -4592,8 +4656,8 @@ export class Metaphone3 {
         'COHEN',
         'GAHAN',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         this.m_current - 3,
         6,
         'GRAHAM',
@@ -4602,19 +4666,20 @@ export class Metaphone3 {
         'TOOHEY',
         'TOUHEY',
         '',
-      ) ||
-      this.StringAt(this.m_current - 3, 5, 'TOUHY', '') ||
-      this.StringAt(0, 9, 'CHIHUAHUA', '')
+      )
+      || this.StringAt(this.m_current - 3, 5, 'TOUHY', '')
+      || this.StringAt(0, 9, 'CHIHUAHUA', '')
     ) {
       if (!this.m_encodeVowels) {
-        this.m_current += 2;
-      } else {
-        this.m_current++;
-        this.m_current = this.SkipVowels(this.m_current);
+        this.m_current += 2
       }
-      return true;
+      else {
+        this.m_current++
+        this.m_current = this.SkipVowels(this.m_current)
+      }
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4625,23 +4690,23 @@ export class Metaphone3 {
    */
   Encode_H_Pronounced(): boolean {
     if (
-      ((this.m_current === 0 ||
-        this.IsVowel$int(this.m_current - 1) ||
-        (this.m_current > 0 &&
-          ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      ((this.m_current === 0
+        || this.IsVowel$int(this.m_current - 1)
+        || (this.m_current > 0
+          && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
             this.CharAt(this.m_current - 1),
-          ) == 'W'.charCodeAt(0))) &&
-        this.IsVowel$int(this.m_current + 1)) ||
-      (((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
-        this.CharAt(this.m_current + 1),
-      ) == 'H'.charCodeAt(0) &&
-        this.IsVowel$int(this.m_current + 2))
+          ) == 'W'.charCodeAt(0)))
+          && this.IsVowel$int(this.m_current + 1))
+        || ((c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+          this.CharAt(this.m_current + 1),
+        ) == 'H'.charCodeAt(0)
+        && this.IsVowel$int(this.m_current + 2))
     ) {
-      this.MetaphAdd$java_lang_String('H');
-      this.AdvanceCounter(2, 1);
-      return true;
+      this.MetaphAdd$java_lang_String('H')
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4650,9 +4715,9 @@ export class Metaphone3 {
    */
   Encode_J() {
     if (this.Encode_Spanish_J() || this.Encode_Spanish_OJ_UJ()) {
-      return;
+      return
     }
-    this.Encode_Other_J();
+    this.Encode_Other_J()
   }
 
   /**
@@ -4675,111 +4740,113 @@ export class Metaphone3 {
         'OAQ',
         'UAR',
         '',
-      ) &&
-        !this.StringAt(this.m_current, 8, 'JIMERSON', 'JIMERSEN', '')) ||
-      (this.StringAt(this.m_current + 1, 3, 'OSE', '') &&
-        this.m_current + 3 === this.m_last) ||
-      this.StringAt(
-        this.m_current + 1,
-        4,
-        'EREZ',
-        'UNTA',
-        'AIME',
-        'AVIE',
-        'AVIA',
-        '',
-      ) ||
-      this.StringAt(this.m_current + 1, 6, 'IMINEZ', 'ARAMIL', '') ||
-      (this.m_current + 2 === this.m_last &&
-        this.StringAt(this.m_current - 2, 5, 'MEJIA', '')) ||
-      this.StringAt(
-        this.m_current - 2,
-        5,
-        'TEJED',
-        'TEJAD',
-        'LUJAN',
-        'FAJAR',
-        'BEJAR',
-        'BOJOR',
-        'CAJIG',
-        'DEJAS',
-        'DUJAR',
-        'DUJAN',
-        'MIJAR',
-        'MEJOR',
-        'NAJAR',
-        'NOJOS',
-        'RAJED',
-        'RIJAL',
-        'REJON',
-        'TEJAN',
-        'UIJAN',
-        '',
-      ) ||
-      this.StringAt(
-        this.m_current - 3,
-        8,
-        'ALEJANDR',
-        'GUAJARDO',
-        'TRUJILLO',
-        '',
-      ) ||
-      (this.StringAt(this.m_current - 2, 5, 'RAJAS', '') &&
-        this.m_current > 2) ||
-      (this.StringAt(this.m_current - 2, 5, 'MEJIA', '') &&
-        !this.StringAt(this.m_current - 2, 6, 'MEJIAN', '')) ||
-      this.StringAt(this.m_current - 1, 5, 'OJEDA', '') ||
-      this.StringAt(this.m_current - 3, 5, 'LEIJA', 'MINJA', '') ||
-      this.StringAt(this.m_current - 3, 6, 'VIAJES', 'GRAJAL', '') ||
-      this.StringAt(this.m_current, 8, 'JAUREGUI', '') ||
-      this.StringAt(this.m_current - 4, 8, 'HINOJOSA', '') ||
-      this.StringAt(0, 4, 'SAN ', '') ||
-      (this.m_current + 1 === this.m_last &&
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      )
+      && !this.StringAt(this.m_current, 8, 'JIMERSON', 'JIMERSEN', ''))
+    || (this.StringAt(this.m_current + 1, 3, 'OSE', '')
+      && this.m_current + 3 === this.m_last)
+    || this.StringAt(
+      this.m_current + 1,
+      4,
+      'EREZ',
+      'UNTA',
+      'AIME',
+      'AVIE',
+      'AVIA',
+      '',
+    )
+    || this.StringAt(this.m_current + 1, 6, 'IMINEZ', 'ARAMIL', '')
+    || (this.m_current + 2 === this.m_last
+      && this.StringAt(this.m_current - 2, 5, 'MEJIA', ''))
+    || this.StringAt(
+      this.m_current - 2,
+      5,
+      'TEJED',
+      'TEJAD',
+      'LUJAN',
+      'FAJAR',
+      'BEJAR',
+      'BOJOR',
+      'CAJIG',
+      'DEJAS',
+      'DUJAR',
+      'DUJAN',
+      'MIJAR',
+      'MEJOR',
+      'NAJAR',
+      'NOJOS',
+      'RAJED',
+      'RIJAL',
+      'REJON',
+      'TEJAN',
+      'UIJAN',
+      '',
+    )
+    || this.StringAt(
+      this.m_current - 3,
+      8,
+      'ALEJANDR',
+      'GUAJARDO',
+      'TRUJILLO',
+      '',
+    )
+    || (this.StringAt(this.m_current - 2, 5, 'RAJAS', '')
+      && this.m_current > 2)
+    || (this.StringAt(this.m_current - 2, 5, 'MEJIA', '')
+      && !this.StringAt(this.m_current - 2, 6, 'MEJIAN', ''))
+    || this.StringAt(this.m_current - 1, 5, 'OJEDA', '')
+    || this.StringAt(this.m_current - 3, 5, 'LEIJA', 'MINJA', '')
+    || this.StringAt(this.m_current - 3, 6, 'VIAJES', 'GRAJAL', '')
+    || this.StringAt(this.m_current, 8, 'JAUREGUI', '')
+    || this.StringAt(this.m_current - 4, 8, 'HINOJOSA', '')
+    || this.StringAt(0, 4, 'SAN ', '')
+    || (this.m_current + 1 === this.m_last
+      && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current + 1),
-        ) == 'O'.charCodeAt(0) &&
-        !(
-          this.StringAt(0, 4, 'TOJO', '') ||
-          this.StringAt(0, 5, 'BANJO', '') ||
-          this.StringAt(0, 6, 'MARYJO', '')
+        ) == 'O'.charCodeAt(0)
+        && !(
+          this.StringAt(0, 4, 'TOJO', '')
+          || this.StringAt(0, 5, 'BANJO', '')
+          || this.StringAt(0, 6, 'MARYJO', '')
         ))
     ) {
       if (
         !(
-          this.StringAt(this.m_current, 4, 'JUAN', '') ||
-          this.StringAt(this.m_current, 4, 'JOAQ', '')
+          this.StringAt(this.m_current, 4, 'JUAN', '')
+          || this.StringAt(this.m_current, 4, 'JOAQ', '')
         )
       ) {
-        this.MetaphAdd$java_lang_String('H');
-      } else {
+        this.MetaphAdd$java_lang_String('H')
+      }
+      else {
         if (this.m_current === 0) {
-          this.MetaphAdd$java_lang_String('A');
+          this.MetaphAdd$java_lang_String('A')
         }
       }
-      this.AdvanceCounter(2, 1);
-      return true;
+      this.AdvanceCounter(2, 1)
+      return true
     }
     if (
-      this.StringAt(this.m_current + 1, 4, 'ORGE', 'ULIO', 'ESUS', '') &&
-      !this.StringAt(0, 6, 'JORGEN', '')
+      this.StringAt(this.m_current + 1, 4, 'ORGE', 'ULIO', 'ESUS', '')
+      && !this.StringAt(0, 6, 'JORGEN', '')
     ) {
       if (
-        this.m_current + 4 === this.m_last &&
-        this.StringAt(this.m_current + 1, 4, 'ORGE', '')
+        this.m_current + 4 === this.m_last
+        && this.StringAt(this.m_current + 1, 4, 'ORGE', '')
       ) {
         if (this.m_encodeVowels) {
-          this.MetaphAdd$java_lang_String$java_lang_String('JARJ', 'HARHA');
-        } else {
-          this.MetaphAdd$java_lang_String$java_lang_String('JRJ', 'HRH');
+          this.MetaphAdd$java_lang_String$java_lang_String('JARJ', 'HARHA')
         }
-        this.AdvanceCounter(5, 5);
-        return true;
+        else {
+          this.MetaphAdd$java_lang_String$java_lang_String('JRJ', 'HRH')
+        }
+        this.AdvanceCounter(5, 5)
+        return true
       }
-      this.MetaphAdd$java_lang_String$java_lang_String('J', 'H');
-      this.AdvanceCounter(2, 1);
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('J', 'H')
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4791,18 +4858,18 @@ export class Metaphone3 {
    */
   Encode_German_J(): boolean {
     if (
-      this.StringAt(this.m_current + 1, 2, 'AH', '') ||
-      (this.StringAt(this.m_current + 1, 5, 'OHANN', '') &&
-        this.m_current + 5 === this.m_last) ||
-      (this.StringAt(this.m_current + 1, 3, 'UNG', '') &&
-        !this.StringAt(this.m_current + 1, 4, 'UNGL', '')) ||
-      this.StringAt(this.m_current + 1, 3, 'UGO', '')
+      this.StringAt(this.m_current + 1, 2, 'AH', '')
+      || (this.StringAt(this.m_current + 1, 5, 'OHANN', '')
+        && this.m_current + 5 === this.m_last)
+      || (this.StringAt(this.m_current + 1, 3, 'UNG', '')
+        && !this.StringAt(this.m_current + 1, 4, 'UNGL', ''))
+      || this.StringAt(this.m_current + 1, 3, 'UGO', '')
     ) {
-      this.MetaphAdd$java_lang_String('A');
-      this.AdvanceCounter(2, 1);
-      return true;
+      this.MetaphAdd$java_lang_String('A')
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4814,14 +4881,15 @@ export class Metaphone3 {
   Encode_Spanish_OJ_UJ(): boolean {
     if (this.StringAt(this.m_current + 1, 5, 'OJOBA', 'UJUY ', '')) {
       if (this.m_encodeVowels) {
-        this.MetaphAdd$java_lang_String('HAH');
-      } else {
-        this.MetaphAdd$java_lang_String('HH');
+        this.MetaphAdd$java_lang_String('HAH')
       }
-      this.AdvanceCounter(4, 3);
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('HH')
+      }
+      this.AdvanceCounter(4, 3)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4833,28 +4901,32 @@ export class Metaphone3 {
   Encode_J_To_J(): boolean {
     if (this.IsVowel$int(this.m_current + 1)) {
       if (
-        this.m_current === 0 &&
-        this.Names_Beginning_With_J_That_Get_Alt_Y()
+        this.m_current === 0
+        && this.Names_Beginning_With_J_That_Get_Alt_Y()
       ) {
         if (this.m_encodeVowels) {
-          this.MetaphAdd$java_lang_String$java_lang_String('JA', 'A');
-        } else {
-          this.MetaphAdd$java_lang_String$java_lang_String('J', 'A');
+          this.MetaphAdd$java_lang_String$java_lang_String('JA', 'A')
         }
-      } else {
-        if (this.m_encodeVowels) {
-          this.MetaphAdd$java_lang_String('JA');
-        } else {
-          this.MetaphAdd$java_lang_String('J');
+        else {
+          this.MetaphAdd$java_lang_String$java_lang_String('J', 'A')
         }
       }
-      this.m_current++;
-      this.m_current = this.SkipVowels(this.m_current);
-      return false;
-    } else {
-      this.MetaphAdd$java_lang_String('J');
-      this.m_current++;
-      return true;
+      else {
+        if (this.m_encodeVowels) {
+          this.MetaphAdd$java_lang_String('JA')
+        }
+        else {
+          this.MetaphAdd$java_lang_String('J')
+        }
+      }
+      this.m_current++
+      this.m_current = this.SkipVowels(this.m_current)
+      return false
+    }
+    else {
+      this.MetaphAdd$java_lang_String('J')
+      this.m_current++
+      return true
     }
   }
 
@@ -4866,8 +4938,8 @@ export class Metaphone3 {
    */
   Encode_Spanish_J_2(): boolean {
     if (
-      (this.m_current - 2 === 0 &&
-        this.StringAt(
+      (this.m_current - 2 === 0
+        && this.StringAt(
           this.m_current - 2,
           4,
           'BOJA',
@@ -4878,47 +4950,47 @@ export class Metaphone3 {
           'MOJI',
           'MEJI',
           '',
-        )) ||
-      (this.m_current - 3 === 0 &&
-        this.StringAt(
-          this.m_current - 3,
-          5,
-          'FRIJO',
-          'BRUJO',
-          'BRUJA',
-          'GRAJE',
-          'GRIJA',
-          'LEIJA',
-          'QUIJA',
-          '',
-        )) ||
-      (this.m_current + 3 === this.m_last &&
-        this.StringAt(this.m_current - 1, 5, 'AJARA', '')) ||
-      (this.m_current + 2 === this.m_last &&
-        this.StringAt(
-          this.m_current - 1,
-          4,
-          'AJOS',
-          'EJOS',
-          'OJAS',
-          'OJOS',
-          'UJON',
-          'AJOZ',
-          'AJAL',
-          'UJAR',
-          'EJON',
-          'EJAN',
-          '',
-        )) ||
-      (this.m_current + 1 === this.m_last &&
-        this.StringAt(this.m_current - 1, 3, 'OJA', 'EJA', '') &&
-        !this.StringAt(0, 4, 'DEJA', ''))
+        ))
+        || (this.m_current - 3 === 0
+          && this.StringAt(
+            this.m_current - 3,
+            5,
+            'FRIJO',
+            'BRUJO',
+            'BRUJA',
+            'GRAJE',
+            'GRIJA',
+            'LEIJA',
+            'QUIJA',
+            '',
+          ))
+          || (this.m_current + 3 === this.m_last
+            && this.StringAt(this.m_current - 1, 5, 'AJARA', ''))
+          || (this.m_current + 2 === this.m_last
+            && this.StringAt(
+              this.m_current - 1,
+              4,
+              'AJOS',
+              'EJOS',
+              'OJAS',
+              'OJOS',
+              'UJON',
+              'AJOZ',
+              'AJAL',
+              'UJAR',
+              'EJON',
+              'EJAN',
+              '',
+            ))
+            || (this.m_current + 1 === this.m_last
+              && this.StringAt(this.m_current - 1, 3, 'OJA', 'EJA', '')
+              && !this.StringAt(0, 4, 'DEJA', ''))
     ) {
-      this.MetaphAdd$java_lang_String('H');
-      this.AdvanceCounter(2, 1);
-      return true;
+      this.MetaphAdd$java_lang_String('H')
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4929,24 +5001,24 @@ export class Metaphone3 {
    */
   Encode_J_As_Vowel(): boolean {
     if (this.StringAt(this.m_current, 5, 'JEWSK', '')) {
-      this.MetaphAdd$java_lang_String$java_lang_String('J', '');
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('J', '')
+      return true
     }
     if (
-      (this.StringAt(this.m_current + 1, 1, 'L', 'T', 'K', 'S', 'N', 'M', '') &&
-        !this.StringAt(this.m_current + 2, 1, 'A', '')) ||
-      this.StringAt(0, 9, 'HALLELUJA', 'LJUBLJANA', '') ||
-      this.StringAt(0, 4, 'LJUB', 'BJOR', '') ||
-      this.StringAt(0, 5, 'HAJEK', '') ||
-      this.StringAt(0, 3, 'WOJ', '') ||
-      this.StringAt(0, 2, 'FJ', '') ||
-      this.StringAt(this.m_current, 5, 'JAVIK', 'JEVIC', '') ||
-      (this.m_current + 1 === this.m_last &&
-        this.StringAt(0, 5, 'SONJA', 'TANJA', 'TONJA', ''))
+      (this.StringAt(this.m_current + 1, 1, 'L', 'T', 'K', 'S', 'N', 'M', '')
+        && !this.StringAt(this.m_current + 2, 1, 'A', ''))
+      || this.StringAt(0, 9, 'HALLELUJA', 'LJUBLJANA', '')
+      || this.StringAt(0, 4, 'LJUB', 'BJOR', '')
+      || this.StringAt(0, 5, 'HAJEK', '')
+      || this.StringAt(0, 3, 'WOJ', '')
+      || this.StringAt(0, 2, 'FJ', '')
+      || this.StringAt(this.m_current, 5, 'JAVIK', 'JEVIC', '')
+      || (this.m_current + 1 === this.m_last
+        && this.StringAt(0, 5, 'SONJA', 'TANJA', 'TONJA', ''))
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -4956,26 +5028,30 @@ export class Metaphone3 {
   Encode_Other_J() {
     if (this.m_current === 0) {
       if (this.Encode_German_J()) {
-        return;
-      } else {
+
+      }
+      else {
         if (this.Encode_J_To_J()) {
-          return;
+
         }
       }
-    } else {
+    }
+    else {
       if (this.Encode_Spanish_J_2()) {
-        return;
-      } else if (!this.Encode_J_As_Vowel()) {
-        this.MetaphAdd$java_lang_String('J');
+        return
+      }
+      else if (!this.Encode_J_As_Vowel()) {
+        this.MetaphAdd$java_lang_String('J')
       }
       if (
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current + 1),
         ) == 'J'.charCodeAt(0)
       ) {
-        this.m_current += 2;
-      } else {
-        this.m_current++;
+        this.m_current += 2
+      }
+      else {
+        this.m_current++
       }
     }
   }
@@ -4987,18 +5063,19 @@ export class Metaphone3 {
    */
   Encode_K() {
     if (!this.Encode_Silent_K()) {
-      this.MetaphAdd$java_lang_String('K');
+      this.MetaphAdd$java_lang_String('K')
       if (
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current + 1),
-        ) == 'K'.charCodeAt(0) ||
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        ) == 'K'.charCodeAt(0)
+        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current + 1),
         ) == 'Q'.charCodeAt(0)
       ) {
-        this.m_current += 2;
-      } else {
-        this.m_current++;
+        this.m_current += 2
+      }
+      else {
+        this.m_current++
       }
     }
   }
@@ -5013,18 +5090,18 @@ export class Metaphone3 {
     if (this.m_current === 0 && this.StringAt(this.m_current, 2, 'KN', '')) {
       if (
         !(
-          this.StringAt(this.m_current + 2, 5, 'ESSET', 'IEVEL', '') ||
-          this.StringAt(this.m_current + 2, 3, 'ISH', '')
+          this.StringAt(this.m_current + 2, 5, 'ESSET', 'IEVEL', '')
+          || this.StringAt(this.m_current + 2, 3, 'ISH', '')
         )
       ) {
-        this.m_current += 1;
-        return true;
+        this.m_current += 1
+        return true
       }
     }
     if (
-      (this.StringAt(this.m_current + 1, 3, 'NOW', 'NIT', 'NOT', 'NOB', '') &&
-        !this.StringAt(0, 8, 'BANKNOTE', '')) ||
-      this.StringAt(
+      (this.StringAt(this.m_current + 1, 3, 'NOW', 'NIT', 'NOT', 'NOB', '')
+        && !this.StringAt(0, 8, 'BANKNOTE', ''))
+      || this.StringAt(
         this.m_current + 1,
         4,
         'NOCK',
@@ -5032,22 +5109,23 @@ export class Metaphone3 {
         'NIFE',
         'NACK',
         '',
-      ) ||
-      this.StringAt(this.m_current + 1, 5, 'NIGHT', '')
+      )
+      || this.StringAt(this.m_current + 1, 5, 'NIGHT', '')
     ) {
       if (
-        this.m_current > 0 &&
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        this.m_current > 0
+        && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current - 1),
         ) == 'N'.charCodeAt(0)
       ) {
-        this.m_current += 2;
-      } else {
-        this.m_current++;
+        this.m_current += 2
       }
-      return true;
+      else {
+        this.m_current++
+      }
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5058,24 +5136,24 @@ export class Metaphone3 {
    *
    */
   Encode_L() {
-    const save_current: number = this.m_current;
-    this.Interpolate_Vowel_When_Cons_L_At_End();
+    const save_current: number = this.m_current
+    this.Interpolate_Vowel_When_Cons_L_At_End()
     if (
-      this.Encode_LELY_To_L() ||
-      this.Encode_COLONEL() ||
-      this.Encode_French_AULT() ||
-      this.Encode_French_EUIL() ||
-      this.Encode_French_OULX() ||
-      this.Encode_Silent_L_In_LM() ||
-      this.Encode_Silent_L_In_LK_LV() ||
-      this.Encode_Silent_L_In_OULD()
+      this.Encode_LELY_To_L()
+      || this.Encode_COLONEL()
+      || this.Encode_French_AULT()
+      || this.Encode_French_EUIL()
+      || this.Encode_French_OULX()
+      || this.Encode_Silent_L_In_LM()
+      || this.Encode_Silent_L_In_LK_LV()
+      || this.Encode_Silent_L_In_OULD()
     ) {
-      return;
+      return
     }
     if (this.Encode_LL_As_Vowel_Cases()) {
-      return;
+      return
     }
-    this.Encode_LE_Cases(save_current);
+    this.Encode_LE_Cases(save_current)
   }
 
   /**
@@ -5086,10 +5164,10 @@ export class Metaphone3 {
   Interpolate_Vowel_When_Cons_L_At_End() {
     if (this.m_encodeVowels === true) {
       if (
-        this.m_current === this.m_last &&
-        this.StringAt(this.m_current - 1, 1, 'D', 'G', 'T', '')
+        this.m_current === this.m_last
+        && this.StringAt(this.m_current - 1, 1, 'D', 'G', 'T', '')
       ) {
-        this.MetaphAdd$java_lang_String('A');
+        this.MetaphAdd$java_lang_String('A')
       }
     }
   }
@@ -5103,14 +5181,14 @@ export class Metaphone3 {
    */
   Encode_LELY_To_L(): boolean {
     if (
-      this.StringAt(this.m_current - 1, 5, 'ILELY', '') &&
-      this.m_current + 3 === this.m_last
+      this.StringAt(this.m_current - 1, 5, 'ILELY', '')
+      && this.m_current + 3 === this.m_last
     ) {
-      this.MetaphAdd$java_lang_String('L');
-      this.m_current += 3;
-      return true;
+      this.MetaphAdd$java_lang_String('L')
+      this.m_current += 3
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5122,11 +5200,11 @@ export class Metaphone3 {
    */
   Encode_COLONEL(): boolean {
     if (this.StringAt(this.m_current - 2, 7, 'COLONEL', '')) {
-      this.MetaphAdd$java_lang_String('R');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('R')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5137,8 +5215,8 @@ export class Metaphone3 {
    */
   Encode_French_AULT(): boolean {
     if (
-      this.m_current > 3 &&
-      (this.StringAt(
+      this.m_current > 3
+      && (this.StringAt(
         this.m_current - 3,
         5,
         'RAULT',
@@ -5148,26 +5226,26 @@ export class Metaphone3 {
         'GAULT',
         'CAULT',
         '',
-      ) ||
-        this.StringAt(
-          this.m_current - 4,
-          6,
-          'REAULT',
-          'RIAULT',
-          'NEAULT',
-          'BEAULT',
-          '',
-        )) &&
-      !(
-        this.RootOrInflections(this.m_inWord, 'ASSAULT') ||
-        this.StringAt(this.m_current - 8, 10, 'SOMERSAULT', '') ||
-        this.StringAt(this.m_current - 9, 11, 'SUMMERSAULT', '')
+      )
+      || this.StringAt(
+        this.m_current - 4,
+        6,
+        'REAULT',
+        'RIAULT',
+        'NEAULT',
+        'BEAULT',
+        '',
+      ))
+      && !(
+        this.RootOrInflections(this.m_inWord, 'ASSAULT')
+        || this.StringAt(this.m_current - 8, 10, 'SOMERSAULT', '')
+        || this.StringAt(this.m_current - 9, 11, 'SUMMERSAULT', '')
       )
     ) {
-      this.m_current += 2;
-      return true;
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5178,13 +5256,13 @@ export class Metaphone3 {
    */
   Encode_French_EUIL(): boolean {
     if (
-      this.StringAt(this.m_current - 3, 4, 'EUIL', '') &&
-      this.m_current === this.m_last
+      this.StringAt(this.m_current - 3, 4, 'EUIL', '')
+      && this.m_current === this.m_last
     ) {
-      this.m_current++;
-      return true;
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5195,13 +5273,13 @@ export class Metaphone3 {
    */
   Encode_French_OULX(): boolean {
     if (
-      this.StringAt(this.m_current - 2, 4, 'OULX', '') &&
-      this.m_current + 1 === this.m_last
+      this.StringAt(this.m_current - 2, 4, 'OULX', '')
+      && this.m_current + 1 === this.m_last
     ) {
-      this.m_current += 2;
-      return true;
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5222,35 +5300,36 @@ export class Metaphone3 {
           'MALM',
           'PALM',
           '',
-        ) ||
-          (this.StringAt(this.m_current - 1, 3, 'OLM', '') &&
-            this.m_current + 1 === this.m_last) ||
-          this.StringAt(this.m_current - 3, 5, 'PSALM', 'QUALM', '') ||
-          this.StringAt(this.m_current - 2, 6, 'SALMON', 'HOLMES', '') ||
-          this.StringAt(this.m_current - 1, 6, 'ALMOND', '') ||
-          (this.m_current === 1 &&
-            this.StringAt(this.m_current - 1, 4, 'ALMS', ''))) &&
-        !this.StringAt(this.m_current + 2, 1, 'A', '') &&
-        !this.StringAt(this.m_current - 2, 5, 'BALMO', '') &&
-        !this.StringAt(
+        )
+        || (this.StringAt(this.m_current - 1, 3, 'OLM', '')
+          && this.m_current + 1 === this.m_last)
+        || this.StringAt(this.m_current - 3, 5, 'PSALM', 'QUALM', '')
+        || this.StringAt(this.m_current - 2, 6, 'SALMON', 'HOLMES', '')
+        || this.StringAt(this.m_current - 1, 6, 'ALMOND', '')
+        || (this.m_current === 1
+          && this.StringAt(this.m_current - 1, 4, 'ALMS', '')))
+        && !this.StringAt(this.m_current + 2, 1, 'A', '')
+        && !this.StringAt(this.m_current - 2, 5, 'BALMO', '')
+        && !this.StringAt(
           this.m_current - 2,
           6,
           'PALMER',
           'PALMOR',
           'BALMER',
           '',
-        ) &&
-        !this.StringAt(this.m_current - 3, 5, 'THALM', '')
+        )
+        && !this.StringAt(this.m_current - 3, 5, 'THALM', '')
       ) {
-        this.m_current++;
-        return true;
-      } else {
-        this.MetaphAdd$java_lang_String('L');
-        this.m_current++;
-        return true;
+        this.m_current++
+        return true
+      }
+      else {
+        this.MetaphAdd$java_lang_String('L')
+        this.m_current++
+        return true
       }
     }
-    return false;
+    return false
   }
 
   /**
@@ -5273,32 +5352,32 @@ export class Metaphone3 {
         'BALK',
         'CALK',
         '',
-      ) ||
-        (this.StringAt(this.m_current - 2, 4, 'POLK', '') &&
-          !this.StringAt(this.m_current - 2, 5, 'POLKA', 'WALKO', '')) ||
-        (this.StringAt(this.m_current - 2, 4, 'HALV', '') &&
-          !this.StringAt(this.m_current - 2, 5, 'HALVA', 'HALVO', '')) ||
-        (this.StringAt(
-          this.m_current - 3,
-          5,
-          'CAULK',
-          'CHALK',
-          'BAULK',
-          'FAULK',
-          '',
-        ) &&
-          !this.StringAt(this.m_current - 4, 6, 'SCHALK', '')) ||
-        ((this.StringAt(this.m_current - 2, 5, 'SALVE', 'CALVE', '') ||
-          this.StringAt(this.m_current - 2, 6, 'SOLDER', '')) &&
-          !this.StringAt(this.m_current - 2, 6, 'SALVER', 'CALVER', ''))) &&
-      !this.StringAt(this.m_current - 5, 9, 'GONSALVES', 'GONCALVES', '') &&
-      !this.StringAt(this.m_current - 2, 6, 'BALKAN', 'TALKAL', '') &&
-      !this.StringAt(this.m_current - 3, 5, 'PAULK', 'CHALF', '')
+      )
+      || (this.StringAt(this.m_current - 2, 4, 'POLK', '')
+        && !this.StringAt(this.m_current - 2, 5, 'POLKA', 'WALKO', ''))
+      || (this.StringAt(this.m_current - 2, 4, 'HALV', '')
+        && !this.StringAt(this.m_current - 2, 5, 'HALVA', 'HALVO', ''))
+      || (this.StringAt(
+        this.m_current - 3,
+        5,
+        'CAULK',
+        'CHALK',
+        'BAULK',
+        'FAULK',
+        '',
+      )
+      && !this.StringAt(this.m_current - 4, 6, 'SCHALK', ''))
+    || ((this.StringAt(this.m_current - 2, 5, 'SALVE', 'CALVE', '')
+      || this.StringAt(this.m_current - 2, 6, 'SOLDER', ''))
+    && !this.StringAt(this.m_current - 2, 6, 'SALVER', 'CALVER', '')))
+  && !this.StringAt(this.m_current - 5, 9, 'GONSALVES', 'GONCALVES', '')
+  && !this.StringAt(this.m_current - 2, 6, 'BALKAN', 'TALKAL', '')
+  && !this.StringAt(this.m_current - 3, 5, 'PAULK', 'CHALF', '')
     ) {
-      this.m_current++;
-      return true;
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5309,15 +5388,15 @@ export class Metaphone3 {
    */
   Encode_Silent_L_In_OULD(): boolean {
     if (
-      this.StringAt(this.m_current - 3, 5, 'WOULD', 'COULD', '') ||
-      (this.StringAt(this.m_current - 4, 6, 'SHOULD', '') &&
-        !this.StringAt(this.m_current - 4, 8, 'SHOULDER', ''))
+      this.StringAt(this.m_current - 3, 5, 'WOULD', 'COULD', '')
+      || (this.StringAt(this.m_current - 4, 6, 'SHOULD', '')
+        && !this.StringAt(this.m_current - 4, 8, 'SHOULDER', ''))
     ) {
-      this.MetaphAddExactApprox$java_lang_String$java_lang_String('D', 'T');
-      this.m_current += 2;
-      return true;
+      this.MetaphAddExactApprox$java_lang_String$java_lang_String('D', 'T')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5329,10 +5408,10 @@ export class Metaphone3 {
    */
   Encode_LL_As_Vowel_Special_Cases(): boolean {
     if (
-      this.StringAt(this.m_current - 5, 8, 'TORTILLA', '') ||
-      this.StringAt(this.m_current - 8, 11, 'RATATOUILLE', '') ||
-      (this.StringAt(0, 5, 'GUILL', 'VEILL', 'GAILL', '') &&
-        !(
+      this.StringAt(this.m_current - 5, 8, 'TORTILLA', '')
+      || this.StringAt(this.m_current - 8, 11, 'RATATOUILLE', '')
+      || (this.StringAt(0, 5, 'GUILL', 'VEILL', 'GAILL', '')
+        && !(
           this.StringAt(
             this.m_current - 3,
             7,
@@ -5340,18 +5419,18 @@ export class Metaphone3 {
             'GUILLOR',
             'GUILLEN',
             '',
-          ) ||
-          (this.StringAt(0, 5, 'GUILL', '') && this.m_length === 5)
-        )) ||
-      this.StringAt(0, 7, 'BROUILL', 'GREMILL', 'ROBILL', '') ||
-      (this.StringAt(this.m_current - 2, 5, 'EILLE', '') &&
-        this.m_current + 2 === this.m_last &&
-        !this.StringAt(this.m_current - 5, 8, 'REVEILLE', ''))
+          )
+          || (this.StringAt(0, 5, 'GUILL', '') && this.m_length === 5)
+        ))
+        || this.StringAt(0, 7, 'BROUILL', 'GREMILL', 'ROBILL', '')
+        || (this.StringAt(this.m_current - 2, 5, 'EILLE', '')
+          && this.m_current + 2 === this.m_last
+          && !this.StringAt(this.m_current - 5, 8, 'REVEILLE', ''))
     ) {
-      this.m_current += 2;
-      return true;
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5362,31 +5441,31 @@ export class Metaphone3 {
    */
   Encode_LL_As_Vowel(): boolean {
     if (
-      (this.m_current + 3 === this.m_length &&
-        this.StringAt(this.m_current - 1, 4, 'ILLO', 'ILLA', 'ALLE', '')) ||
-      ((this.StringAt(this.m_last - 1, 2, 'AS', 'OS', '') ||
-        this.StringAt(this.m_last, 2, 'AS', 'OS', '') ||
-        this.StringAt(this.m_last, 1, 'A', 'O', '')) &&
-        this.StringAt(this.m_current - 1, 2, 'AL', 'IL', '') &&
-        !this.StringAt(this.m_current - 1, 4, 'ALLA', '')) ||
-      this.StringAt(0, 5, 'VILLE', 'VILLA', '') ||
-      this.StringAt(
-        0,
-        8,
-        'GALLARDO',
-        'VALLADAR',
-        'MAGALLAN',
-        'CAVALLAR',
-        'BALLASTE',
-        '',
-      ) ||
-      this.StringAt(0, 3, 'LLA', '')
+      (this.m_current + 3 === this.m_length
+        && this.StringAt(this.m_current - 1, 4, 'ILLO', 'ILLA', 'ALLE', ''))
+      || ((this.StringAt(this.m_last - 1, 2, 'AS', 'OS', '')
+        || this.StringAt(this.m_last, 2, 'AS', 'OS', '')
+        || this.StringAt(this.m_last, 1, 'A', 'O', ''))
+      && this.StringAt(this.m_current - 1, 2, 'AL', 'IL', '')
+      && !this.StringAt(this.m_current - 1, 4, 'ALLA', ''))
+    || this.StringAt(0, 5, 'VILLE', 'VILLA', '')
+    || this.StringAt(
+      0,
+      8,
+      'GALLARDO',
+      'VALLADAR',
+      'MAGALLAN',
+      'CAVALLAR',
+      'BALLASTE',
+      '',
+    )
+    || this.StringAt(0, 3, 'LLA', '')
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('L', '');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('L', '')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5397,20 +5476,22 @@ export class Metaphone3 {
    */
   Encode_LL_As_Vowel_Cases(): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
       ) == 'L'.charCodeAt(0)
     ) {
       if (this.Encode_LL_As_Vowel_Special_Cases()) {
-        return true;
-      } else if (this.Encode_LL_As_Vowel()) {
-        return true;
+        return true
       }
-      this.m_current += 2;
-    } else {
-      this.m_current++;
+      else if (this.Encode_LL_As_Vowel()) {
+        return true
+      }
+      this.m_current += 2
     }
-    return false;
+    else {
+      this.m_current++
+    }
+    return false
   }
 
   /**
@@ -5422,28 +5503,28 @@ export class Metaphone3 {
    */
   Encode_Vowel_LE_Transposition(save_current: number): boolean {
     if (
-      this.m_encodeVowels &&
-      save_current > 1 &&
-      !this.IsVowel$int(save_current - 1) &&
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      this.m_encodeVowels
+      && save_current > 1
+      && !this.IsVowel$int(save_current - 1)
+      && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(save_current + 1),
-      ) == 'E'.charCodeAt(0) &&
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      ) == 'E'.charCodeAt(0)
+      && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(save_current - 1),
-      ) != 'L'.charCodeAt(0) &&
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      ) != 'L'.charCodeAt(0)
+      && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(save_current - 1),
-      ) != 'R'.charCodeAt(0) &&
-      !this.IsVowel$int(save_current + 2) &&
-      !this.StringAt(0, 7, 'ECCLESI', 'COMPLEC', 'COMPLEJ', 'ROBLEDO', '') &&
-      !this.StringAt(0, 5, 'MCCLE', 'MCLEL', '') &&
-      !this.StringAt(0, 6, 'EMBLEM', 'KADLEC', '') &&
-      !(
-        save_current + 2 === this.m_last &&
-        this.StringAt(save_current, 3, 'LET', '')
-      ) &&
-      !this.StringAt(save_current, 7, 'LETTING', '') &&
-      !this.StringAt(
+      ) != 'R'.charCodeAt(0)
+      && !this.IsVowel$int(save_current + 2)
+      && !this.StringAt(0, 7, 'ECCLESI', 'COMPLEC', 'COMPLEJ', 'ROBLEDO', '')
+      && !this.StringAt(0, 5, 'MCCLE', 'MCLEL', '')
+      && !this.StringAt(0, 6, 'EMBLEM', 'KADLEC', '')
+      && !(
+        save_current + 2 === this.m_last
+        && this.StringAt(save_current, 3, 'LET', '')
+      )
+      && !this.StringAt(save_current, 7, 'LETTING', '')
+      && !this.StringAt(
         save_current,
         6,
         'LETELY',
@@ -5453,9 +5534,9 @@ export class Metaphone3 {
         'LETING',
         'LETORY',
         '',
-      ) &&
-      !this.StringAt(save_current, 5, 'LETUS', 'LETIV', '') &&
-      !this.StringAt(
+      )
+      && !this.StringAt(save_current, 5, 'LETUS', 'LETIV', '')
+      && !this.StringAt(
         save_current,
         4,
         'LESS',
@@ -5467,11 +5548,11 @@ export class Metaphone3 {
         'LETS',
         'LETT',
         '',
-      ) &&
-      !this.StringAt(save_current, 3, 'LEG', 'LER', 'LEX', '') &&
-      !(
-        this.StringAt(save_current, 6, 'LEMENT', '') &&
-        !(
+      )
+      && !this.StringAt(save_current, 3, 'LEG', 'LER', 'LEX', '')
+      && !(
+        this.StringAt(save_current, 6, 'LEMENT', '')
+        && !(
           this.StringAt(
             this.m_current - 5,
             6,
@@ -5483,36 +5564,36 @@ export class Metaphone3 {
             '',
           ) || this.StringAt(this.m_current - 4, 5, 'TABLE', '')
         )
-      ) &&
-      !(
-        save_current + 2 === this.m_last &&
-        this.StringAt(save_current - 2, 5, 'OCLES', 'ACLES', 'AKLES', '')
-      ) &&
-      !this.StringAt(save_current - 3, 5, 'LISLE', 'AISLE', '') &&
-      !this.StringAt(0, 4, 'ISLE', '') &&
-      !this.StringAt(0, 6, 'ROBLES', '') &&
-      !this.StringAt(save_current - 4, 7, 'PROBLEM', 'RESPLEN', '') &&
-      !this.StringAt(save_current - 3, 6, 'REPLEN', '') &&
-      !this.StringAt(save_current - 2, 4, 'SPLE', '') &&
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      )
+      && !(
+        save_current + 2 === this.m_last
+        && this.StringAt(save_current - 2, 5, 'OCLES', 'ACLES', 'AKLES', '')
+      )
+      && !this.StringAt(save_current - 3, 5, 'LISLE', 'AISLE', '')
+      && !this.StringAt(0, 4, 'ISLE', '')
+      && !this.StringAt(0, 6, 'ROBLES', '')
+      && !this.StringAt(save_current - 4, 7, 'PROBLEM', 'RESPLEN', '')
+      && !this.StringAt(save_current - 3, 6, 'REPLEN', '')
+      && !this.StringAt(save_current - 2, 4, 'SPLE', '')
+      && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(save_current - 1),
-      ) != 'H'.charCodeAt(0) &&
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      ) != 'H'.charCodeAt(0)
+      && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(save_current - 1),
       ) != 'W'.charCodeAt(0)
     ) {
-      this.MetaphAdd$java_lang_String('AL');
-      this.flag_AL_inversion = true;
+      this.MetaphAdd$java_lang_String('AL')
+      this.flag_AL_inversion = true
       if (
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(save_current + 2),
         ) == 'L'.charCodeAt(0)
       ) {
-        this.m_current = save_current + 3;
+        this.m_current = save_current + 3
       }
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5525,24 +5606,24 @@ export class Metaphone3 {
    */
   Encode_Vowel_Preserve_Vowel_After_L(save_current: number): boolean {
     if (
-      this.m_encodeVowels &&
-      !this.IsVowel$int(save_current - 1) &&
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      this.m_encodeVowels
+      && !this.IsVowel$int(save_current - 1)
+      && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(save_current + 1),
-      ) == 'E'.charCodeAt(0) &&
-      save_current > 1 &&
-      save_current + 1 !== this.m_last &&
-      !(
-        this.StringAt(save_current + 1, 2, 'ES', 'ED', '') &&
-        save_current + 2 === this.m_last
-      ) &&
-      !this.StringAt(save_current - 1, 5, 'RLEST', '')
+      ) == 'E'.charCodeAt(0)
+      && save_current > 1
+      && save_current + 1 !== this.m_last
+      && !(
+        this.StringAt(save_current + 1, 2, 'ES', 'ED', '')
+        && save_current + 2 === this.m_last
+      )
+      && !this.StringAt(save_current - 1, 5, 'RLEST', '')
     ) {
-      this.MetaphAdd$java_lang_String('LA');
-      this.m_current = this.SkipVowels(this.m_current);
-      return true;
+      this.MetaphAdd$java_lang_String('LA')
+      this.m_current = this.SkipVowels(this.m_current)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5552,12 +5633,14 @@ export class Metaphone3 {
    */
   Encode_LE_Cases(save_current: number) {
     if (this.Encode_Vowel_LE_Transposition(save_current)) {
-      return;
-    } else {
+
+    }
+    else {
       if (this.Encode_Vowel_Preserve_Vowel_After_L(save_current)) {
-        return;
-      } else {
-        this.MetaphAdd$java_lang_String('L');
+
+      }
+      else {
+        this.MetaphAdd$java_lang_String('L')
       }
     }
   }
@@ -5568,15 +5651,15 @@ export class Metaphone3 {
    */
   Encode_M() {
     if (
-      this.Encode_Silent_M_At_Beginning() ||
-      this.Encode_MR_And_MRS() ||
-      this.Encode_MAC() ||
-      this.Encode_MPT()
+      this.Encode_Silent_M_At_Beginning()
+      || this.Encode_MR_And_MRS()
+      || this.Encode_MAC()
+      || this.Encode_MPT()
     ) {
-      return;
+      return
     }
-    this.Encode_MB();
-    this.MetaphAdd$java_lang_String('M');
+    this.Encode_MB()
+    this.MetaphAdd$java_lang_String('M')
   }
 
   /**
@@ -5587,10 +5670,10 @@ export class Metaphone3 {
    */
   Encode_Silent_M_At_Beginning(): boolean {
     if (this.m_current === 0 && this.StringAt(this.m_current, 2, 'MN', '')) {
-      this.m_current += 1;
-      return true;
+      this.m_current += 1
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5603,26 +5686,29 @@ export class Metaphone3 {
     if (this.m_current === 0 && this.StringAt(this.m_current, 2, 'MR', '')) {
       if (this.m_length === 2 && this.StringAt(this.m_current, 2, 'MR', '')) {
         if (this.m_encodeVowels) {
-          this.MetaphAdd$java_lang_String('MASTAR');
-        } else {
-          this.MetaphAdd$java_lang_String('MSTR');
+          this.MetaphAdd$java_lang_String('MASTAR')
         }
-        this.m_current += 2;
-        return true;
-      } else if (
-        this.m_length === 3 &&
-        this.StringAt(this.m_current, 3, 'MRS', '')
+        else {
+          this.MetaphAdd$java_lang_String('MSTR')
+        }
+        this.m_current += 2
+        return true
+      }
+      else if (
+        this.m_length === 3
+        && this.StringAt(this.m_current, 3, 'MRS', '')
       ) {
         if (this.m_encodeVowels) {
-          this.MetaphAdd$java_lang_String('MASAS');
-        } else {
-          this.MetaphAdd$java_lang_String('MSS');
+          this.MetaphAdd$java_lang_String('MASAS')
         }
-        this.m_current += 3;
-        return true;
+        else {
+          this.MetaphAdd$java_lang_String('MSS')
+        }
+        this.m_current += 3
+        return true
       }
     }
-    return false;
+    return false
   }
 
   /**
@@ -5633,32 +5719,35 @@ export class Metaphone3 {
    */
   Encode_MAC(): boolean {
     if (
-      this.m_current === 0 &&
-      (this.StringAt(0, 7, 'MACIVER', 'MACEWEN', '') ||
-        this.StringAt(0, 8, 'MACELROY', 'MACILROY', '') ||
-        this.StringAt(0, 9, 'MACINTOSH', '') ||
-        this.StringAt(0, 2, 'MC', ''))
+      this.m_current === 0
+      && (this.StringAt(0, 7, 'MACIVER', 'MACEWEN', '')
+        || this.StringAt(0, 8, 'MACELROY', 'MACILROY', '')
+        || this.StringAt(0, 9, 'MACINTOSH', '')
+        || this.StringAt(0, 2, 'MC', ''))
     ) {
       if (this.m_encodeVowels) {
-        this.MetaphAdd$java_lang_String('MAK');
-      } else {
-        this.MetaphAdd$java_lang_String('MK');
+        this.MetaphAdd$java_lang_String('MAK')
+      }
+      else {
+        this.MetaphAdd$java_lang_String('MK')
       }
       if (this.StringAt(0, 2, 'MC', '')) {
         if (
-          this.StringAt(this.m_current + 2, 1, 'K', 'G', 'Q', '') &&
-          !this.StringAt(this.m_current + 2, 4, 'GEOR', '')
+          this.StringAt(this.m_current + 2, 1, 'K', 'G', 'Q', '')
+          && !this.StringAt(this.m_current + 2, 4, 'GEOR', '')
         ) {
-          this.m_current += 3;
-        } else {
-          this.m_current += 2;
+          this.m_current += 3
         }
-      } else {
-        this.m_current += 3;
+        else {
+          this.m_current += 2
+        }
       }
-      return true;
+      else {
+        this.m_current += 3
+      }
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5669,14 +5758,14 @@ export class Metaphone3 {
    */
   Encode_MPT(): boolean {
     if (
-      this.StringAt(this.m_current - 2, 8, 'COMPTROL', '') ||
-      this.StringAt(this.m_current - 4, 7, 'ACCOMPT', '')
+      this.StringAt(this.m_current - 2, 8, 'COMPTROL', '')
+      || this.StringAt(this.m_current - 4, 7, 'ACCOMPT', '')
     ) {
-      this.MetaphAdd$java_lang_String('N');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('N')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5687,10 +5776,10 @@ export class Metaphone3 {
    */
   Test_Silent_MB_1(): boolean {
     if (
-      (this.m_current === 3 &&
-        this.StringAt(this.m_current - 3, 5, 'THUMB', '')) ||
-      (this.m_current === 2 &&
-        this.StringAt(
+      (this.m_current === 3
+        && this.StringAt(this.m_current - 3, 5, 'THUMB', ''))
+      || (this.m_current === 2
+        && this.StringAt(
           this.m_current - 2,
           4,
           'DUMB',
@@ -5702,9 +5791,9 @@ export class Metaphone3 {
           '',
         ))
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5715,11 +5804,11 @@ export class Metaphone3 {
    */
   Test_Pronounced_MB(): boolean {
     if (
-      this.StringAt(this.m_current - 2, 6, 'NUMBER', '') ||
-      (this.StringAt(this.m_current + 2, 1, 'A', '') &&
-        !this.StringAt(this.m_current - 2, 7, 'DUMBASS', '')) ||
-      this.StringAt(this.m_current + 2, 1, 'O', '') ||
-      this.StringAt(
+      this.StringAt(this.m_current - 2, 6, 'NUMBER', '')
+      || (this.StringAt(this.m_current + 2, 1, 'A', '')
+        && !this.StringAt(this.m_current - 2, 7, 'DUMBASS', ''))
+      || this.StringAt(this.m_current + 2, 1, 'O', '')
+      || this.StringAt(
         this.m_current - 2,
         6,
         'LAMBEN',
@@ -5730,9 +5819,9 @@ export class Metaphone3 {
         '',
       )
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5743,35 +5832,35 @@ export class Metaphone3 {
    */
   Test_Silent_MB_2(): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
-      ) == 'B'.charCodeAt(0) &&
-      this.m_current > 1 &&
-      (this.m_current + 1 === this.m_last ||
-        this.StringAt(this.m_current + 2, 3, 'ING', 'ABL', '') ||
-        this.StringAt(this.m_current + 2, 4, 'LIKE', '') ||
-        (((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      ) == 'B'.charCodeAt(0)
+      && this.m_current > 1
+      && (this.m_current + 1 === this.m_last
+        || this.StringAt(this.m_current + 2, 3, 'ING', 'ABL', '')
+        || this.StringAt(this.m_current + 2, 4, 'LIKE', '')
+        || ((c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current + 2),
-        ) == 'S'.charCodeAt(0) &&
-          this.m_current + 2 === this.m_last) ||
-        this.StringAt(this.m_current - 5, 7, 'BUNCOMB', '') ||
-        (this.StringAt(this.m_current + 2, 2, 'ED', 'ER', '') &&
-          this.m_current + 3 === this.m_last &&
-          (this.StringAt(0, 5, 'CLIMB', 'PLUMB', '') ||
-            !this.StringAt(
-              this.m_current - 1,
-              5,
-              'IMBER',
-              'AMBER',
-              'EMBER',
-              'UMBER',
-              '',
-            )) &&
-          !this.StringAt(this.m_current - 2, 6, 'CUMBER', 'SOMBER', '')))
+        ) == 'S'.charCodeAt(0)
+        && this.m_current + 2 === this.m_last)
+      || this.StringAt(this.m_current - 5, 7, 'BUNCOMB', '')
+      || (this.StringAt(this.m_current + 2, 2, 'ED', 'ER', '')
+        && this.m_current + 3 === this.m_last
+        && (this.StringAt(0, 5, 'CLIMB', 'PLUMB', '')
+          || !this.StringAt(
+            this.m_current - 1,
+            5,
+            'IMBER',
+            'AMBER',
+            'EMBER',
+            'UMBER',
+            '',
+          ))
+          && !this.StringAt(this.m_current - 2, 6, 'CUMBER', 'SOMBER', '')))
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5782,12 +5871,12 @@ export class Metaphone3 {
    */
   Test_Pronounced_MB_2(): boolean {
     if (
-      this.StringAt(this.m_current - 1, 5, 'OMBAS', 'OMBAD', 'UMBRA', '') ||
-      this.StringAt(this.m_current - 3, 4, 'FLAM', '')
+      this.StringAt(this.m_current - 1, 5, 'OMBAS', 'OMBAD', 'UMBRA', '')
+      || this.StringAt(this.m_current - 3, 4, 'FLAM', '')
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5798,24 +5887,24 @@ export class Metaphone3 {
    */
   Test_MN(): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
-      ) == 'N'.charCodeAt(0) &&
-      (this.m_current + 1 === this.m_last ||
-        (this.StringAt(this.m_current + 2, 3, 'ING', 'EST', '') &&
-          this.m_current + 4 === this.m_last) ||
-        (((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      ) == 'N'.charCodeAt(0)
+      && (this.m_current + 1 === this.m_last
+        || (this.StringAt(this.m_current + 2, 3, 'ING', 'EST', '')
+          && this.m_current + 4 === this.m_last)
+        || ((c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current + 2),
-        ) == 'S'.charCodeAt(0) &&
-          this.m_current + 2 === this.m_last) ||
-        (this.StringAt(this.m_current + 2, 2, 'LY', 'ER', 'ED', '') &&
-          this.m_current + 3 === this.m_last) ||
-        this.StringAt(this.m_current - 2, 9, 'DAMNEDEST', '') ||
-        this.StringAt(this.m_current - 5, 9, 'GODDAMNIT', ''))
+        ) == 'S'.charCodeAt(0)
+        && this.m_current + 2 === this.m_last)
+      || (this.StringAt(this.m_current + 2, 2, 'LY', 'ER', 'ED', '')
+        && this.m_current + 3 === this.m_last)
+      || this.StringAt(this.m_current - 2, 9, 'DAMNEDEST', '')
+      || this.StringAt(this.m_current - 5, 9, 'GODDAMNIT', ''))
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5825,27 +5914,33 @@ export class Metaphone3 {
   Encode_MB() {
     if (this.Test_Silent_MB_1()) {
       if (this.Test_Pronounced_MB()) {
-        this.m_current++;
-      } else {
-        this.m_current += 2;
+        this.m_current++
       }
-    } else if (this.Test_Silent_MB_2()) {
+      else {
+        this.m_current += 2
+      }
+    }
+    else if (this.Test_Silent_MB_2()) {
       if (this.Test_Pronounced_MB_2()) {
-        this.m_current++;
-      } else {
-        this.m_current += 2;
+        this.m_current++
       }
-    } else if (this.Test_MN()) {
-      this.m_current += 2;
-    } else {
+      else {
+        this.m_current += 2
+      }
+    }
+    else if (this.Test_MN()) {
+      this.m_current += 2
+    }
+    else {
       if (
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current + 1),
         ) == 'M'.charCodeAt(0)
       ) {
-        this.m_current += 2;
-      } else {
-        this.m_current++;
+        this.m_current += 2
+      }
+      else {
+        this.m_current++
       }
     }
   }
@@ -5856,22 +5951,23 @@ export class Metaphone3 {
    */
   Encode_N() {
     if (this.Encode_NCE()) {
-      return;
+      return
     }
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
       ) == 'N'.charCodeAt(0)
     ) {
-      this.m_current += 2;
-    } else {
-      this.m_current++;
+      this.m_current += 2
+    }
+    else {
+      this.m_current++
     }
     if (
-      !this.StringAt(this.m_current - 3, 8, 'MONSIEUR', '') &&
-      !this.StringAt(this.m_current - 3, 6, 'NENESS', '')
+      !this.StringAt(this.m_current - 3, 8, 'MONSIEUR', '')
+      && !this.StringAt(this.m_current - 3, 6, 'NENESS', '')
     ) {
-      this.MetaphAdd$java_lang_String('N');
+      this.MetaphAdd$java_lang_String('N')
     }
   }
 
@@ -5884,19 +5980,19 @@ export class Metaphone3 {
    */
   Encode_NCE(): boolean {
     if (
-      this.StringAt(this.m_current + 1, 1, 'C', 'S', '') &&
-      this.StringAt(this.m_current + 2, 1, 'E', 'Y', 'I', '') &&
-      (this.m_current + 2 === this.m_last ||
-        (this.m_current + 3 === this.m_last &&
-          ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      this.StringAt(this.m_current + 1, 1, 'C', 'S', '')
+      && this.StringAt(this.m_current + 2, 1, 'E', 'Y', 'I', '')
+      && (this.m_current + 2 === this.m_last
+        || (this.m_current + 3 === this.m_last
+          && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
             this.CharAt(this.m_current + 3),
           ) == 'S'.charCodeAt(0)))
     ) {
-      this.MetaphAdd$java_lang_String('NTS');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('NTS')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5905,20 +6001,20 @@ export class Metaphone3 {
    */
   Encode_P() {
     if (
-      this.Encode_Silent_P_At_Beginning() ||
-      this.Encode_PT() ||
-      this.Encode_PH() ||
-      this.Encode_PPH() ||
-      this.Encode_RPS() ||
-      this.Encode_COUP() ||
-      this.Encode_PNEUM() ||
-      this.Encode_PSYCH() ||
-      this.Encode_PSALM()
+      this.Encode_Silent_P_At_Beginning()
+      || this.Encode_PT()
+      || this.Encode_PH()
+      || this.Encode_PPH()
+      || this.Encode_RPS()
+      || this.Encode_COUP()
+      || this.Encode_PNEUM()
+      || this.Encode_PSYCH()
+      || this.Encode_PSALM()
     ) {
-      return;
+      return
     }
-    this.Encode_PB();
-    this.MetaphAdd$java_lang_String('P');
+    this.Encode_PB()
+    this.MetaphAdd$java_lang_String('P')
   }
 
   /**
@@ -5929,13 +6025,13 @@ export class Metaphone3 {
    */
   Encode_Silent_P_At_Beginning(): boolean {
     if (
-      this.m_current === 0 &&
-      this.StringAt(this.m_current, 2, 'PN', 'PF', 'PS', 'PT', '')
+      this.m_current === 0
+      && this.StringAt(this.m_current, 2, 'PN', 'PF', 'PS', 'PT', '')
     ) {
-      this.m_current += 1;
-      return true;
+      this.m_current += 1
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -5946,22 +6042,22 @@ export class Metaphone3 {
    */
   Encode_PT(): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
       ) == 'T'.charCodeAt(0)
     ) {
       if (
-        (this.m_current === 0 &&
-          this.StringAt(this.m_current, 5, 'PTERO', '')) ||
-        this.StringAt(this.m_current - 5, 7, 'RECEIPT', '') ||
-        this.StringAt(this.m_current - 4, 8, 'ASYMPTOT', '')
+        (this.m_current === 0
+          && this.StringAt(this.m_current, 5, 'PTERO', ''))
+        || this.StringAt(this.m_current - 5, 7, 'RECEIPT', '')
+        || this.StringAt(this.m_current - 4, 8, 'ASYMPTOT', '')
       ) {
-        this.MetaphAdd$java_lang_String('T');
-        this.m_current += 2;
-        return true;
+        this.MetaphAdd$java_lang_String('T')
+        this.m_current += 2
+        return true
       }
     }
-    return false;
+    return false
   }
 
   /**
@@ -5975,21 +6071,22 @@ export class Metaphone3 {
    */
   Encode_PH(): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
       ) == 'H'.charCodeAt(0)
     ) {
       if (
-        this.StringAt(this.m_current, 9, 'PHTHALEIN', '') ||
-        (this.m_current === 0 &&
-          this.StringAt(this.m_current, 4, 'PHTH', '')) ||
-        this.StringAt(this.m_current - 3, 10, 'APOPHTHEGM', '')
+        this.StringAt(this.m_current, 9, 'PHTHALEIN', '')
+        || (this.m_current === 0
+          && this.StringAt(this.m_current, 4, 'PHTH', ''))
+        || this.StringAt(this.m_current - 3, 10, 'APOPHTHEGM', '')
       ) {
-        this.MetaphAdd$java_lang_String('0');
-        this.m_current += 4;
-      } else if (
-        this.m_current > 0 &&
-        (this.StringAt(
+        this.MetaphAdd$java_lang_String('0')
+        this.m_current += 4
+      }
+      else if (
+        this.m_current > 0
+        && (this.StringAt(
           this.m_current + 2,
           3,
           'EAD',
@@ -6005,23 +6102,24 @@ export class Metaphone3 {
           'EAV',
           'ART',
           '',
-        ) ||
-          this.StringAt(this.m_current + 2, 4, 'OUSE', '') ||
-          (this.StringAt(this.m_current + 2, 2, 'AM', '') &&
-            !this.StringAt(this.m_current - 1, 5, 'LPHAM', '')) ||
-          this.StringAt(this.m_current + 2, 5, 'AMMER', 'AZARD', 'UGGER', '') ||
-          this.StringAt(this.m_current + 2, 6, 'OLSTER', '')) &&
-        !this.StringAt(this.m_current - 3, 5, 'LYMPH', 'NYMPH', '')
+        )
+        || this.StringAt(this.m_current + 2, 4, 'OUSE', '')
+        || (this.StringAt(this.m_current + 2, 2, 'AM', '')
+          && !this.StringAt(this.m_current - 1, 5, 'LPHAM', ''))
+        || this.StringAt(this.m_current + 2, 5, 'AMMER', 'AZARD', 'UGGER', '')
+        || this.StringAt(this.m_current + 2, 6, 'OLSTER', ''))
+      && !this.StringAt(this.m_current - 3, 5, 'LYMPH', 'NYMPH', '')
       ) {
-        this.MetaphAdd$java_lang_String('P');
-        this.AdvanceCounter(3, 2);
-      } else {
-        this.MetaphAdd$java_lang_String('F');
-        this.m_current += 2;
+        this.MetaphAdd$java_lang_String('P')
+        this.AdvanceCounter(3, 2)
       }
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('F')
+        this.m_current += 2
+      }
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6033,19 +6131,19 @@ export class Metaphone3 {
    */
   Encode_PPH(): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
-      ) == 'P'.charCodeAt(0) &&
-      this.m_current + 2 < this.m_length &&
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      ) == 'P'.charCodeAt(0)
+      && this.m_current + 2 < this.m_length
+      && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 2),
       ) == 'H'.charCodeAt(0)
     ) {
-      this.MetaphAdd$java_lang_String('F');
-      this.m_current += 3;
-      return true;
+      this.MetaphAdd$java_lang_String('F')
+      this.m_current += 3
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6057,13 +6155,13 @@ export class Metaphone3 {
    */
   Encode_RPS(): boolean {
     if (
-      this.StringAt(this.m_current - 3, 5, 'CORPS', '') &&
-      !this.StringAt(this.m_current - 3, 6, 'CORPSE', '')
+      this.StringAt(this.m_current - 3, 5, 'CORPS', '')
+      && !this.StringAt(this.m_current - 3, 6, 'CORPSE', '')
     ) {
-      this.m_current += 2;
-      return true;
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6075,14 +6173,14 @@ export class Metaphone3 {
    */
   Encode_COUP(): boolean {
     if (
-      this.m_current === this.m_last &&
-      this.StringAt(this.m_current - 3, 4, 'COUP', '') &&
-      !this.StringAt(this.m_current - 5, 6, 'RECOUP', '')
+      this.m_current === this.m_last
+      && this.StringAt(this.m_current - 3, 4, 'COUP', '')
+      && !this.StringAt(this.m_current - 5, 6, 'RECOUP', '')
     ) {
-      this.m_current++;
-      return true;
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6094,11 +6192,11 @@ export class Metaphone3 {
    */
   Encode_PNEUM(): boolean {
     if (this.StringAt(this.m_current + 1, 4, 'NEUM', '')) {
-      this.MetaphAdd$java_lang_String('N');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('N')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6112,14 +6210,15 @@ export class Metaphone3 {
   Encode_PSYCH(): boolean {
     if (this.StringAt(this.m_current + 1, 4, 'SYCH', '')) {
       if (this.m_encodeVowels) {
-        this.MetaphAdd$java_lang_String('SAK');
-      } else {
-        this.MetaphAdd$java_lang_String('SK');
+        this.MetaphAdd$java_lang_String('SAK')
       }
-      this.m_current += 5;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('SK')
+      }
+      this.m_current += 5
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6132,14 +6231,15 @@ export class Metaphone3 {
   Encode_PSALM(): boolean {
     if (this.StringAt(this.m_current + 1, 4, 'SALM', '')) {
       if (this.m_encodeVowels) {
-        this.MetaphAdd$java_lang_String('SAM');
-      } else {
-        this.MetaphAdd$java_lang_String('SM');
+        this.MetaphAdd$java_lang_String('SAM')
       }
-      this.m_current += 5;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('SM')
+      }
+      this.m_current += 5
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6147,9 +6247,10 @@ export class Metaphone3 {
    */
   Encode_PB() {
     if (this.StringAt(this.m_current + 1, 1, 'P', 'B', '')) {
-      this.m_current += 2;
-    } else {
-      this.m_current++;
+      this.m_current += 2
+    }
+    else {
+      this.m_current++
     }
   }
 
@@ -6159,20 +6260,21 @@ export class Metaphone3 {
    */
   Encode_Q() {
     if (this.StringAt(this.m_current, 3, 'QIN', '')) {
-      this.MetaphAdd$java_lang_String('X');
-      this.m_current++;
-      return;
+      this.MetaphAdd$java_lang_String('X')
+      this.m_current++
+      return
     }
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
       ) == 'Q'.charCodeAt(0)
     ) {
-      this.m_current += 2;
-    } else {
-      this.m_current++;
+      this.m_current += 2
     }
-    this.MetaphAdd$java_lang_String('K');
+    else {
+      this.m_current++
+    }
+    this.MetaphAdd$java_lang_String('K')
   }
 
   /**
@@ -6181,22 +6283,23 @@ export class Metaphone3 {
    */
   Encode_R() {
     if (this.Encode_RZ()) {
-      return;
+      return
     }
     if (!this.Test_Silent_R()) {
       if (!this.Encode_Vowel_RE_Transposition()) {
-        this.MetaphAdd$java_lang_String('R');
+        this.MetaphAdd$java_lang_String('R')
       }
     }
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
-      ) == 'R'.charCodeAt(0) ||
-      this.StringAt(this.m_current - 6, 8, 'POITIERS', '')
+      ) == 'R'.charCodeAt(0)
+      || this.StringAt(this.m_current - 6, 8, 'POITIERS', '')
     ) {
-      this.m_current += 2;
-    } else {
-      this.m_current++;
+      this.m_current += 2
+    }
+    else {
+      this.m_current++
     }
   }
 
@@ -6220,35 +6323,37 @@ export class Metaphone3 {
         'PERZ',
         'WARZ',
         '',
-      ) ||
-      this.StringAt(this.m_current, 5, 'RZANO', 'RZOLA', '') ||
-      this.StringAt(this.m_current - 1, 4, 'ARZA', 'ARZN', '')
+      )
+      || this.StringAt(this.m_current, 5, 'RZANO', 'RZOLA', '')
+      || this.StringAt(this.m_current - 1, 4, 'ARZA', 'ARZN', '')
     ) {
-      return false;
+      return false
     }
     if (this.StringAt(this.m_current - 4, 11, 'YASTRZEMSKI', '')) {
-      this.MetaphAdd$java_lang_String$java_lang_String('R', 'X');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('R', 'X')
+      this.m_current += 2
+      return true
     }
     if (this.StringAt(this.m_current - 1, 10, 'BRZEZINSKI', '')) {
-      this.MetaphAdd$java_lang_String$java_lang_String('RS', 'RJ');
-      this.m_current += 4;
-      return true;
-    } else if (
-      this.StringAt(this.m_current - 1, 3, 'TRZ', 'PRZ', 'KRZ', '') ||
-      (this.StringAt(this.m_current, 2, 'RZ', '') &&
-        (this.IsVowel$int(this.m_current - 1) || this.m_current === 0))
-    ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('RS', 'X');
-      this.m_current += 2;
-      return true;
-    } else if (this.StringAt(this.m_current - 1, 3, 'BRZ', 'DRZ', 'GRZ', '')) {
-      this.MetaphAdd$java_lang_String$java_lang_String('RS', 'J');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('RS', 'RJ')
+      this.m_current += 4
+      return true
     }
-    return false;
+    else if (
+      this.StringAt(this.m_current - 1, 3, 'TRZ', 'PRZ', 'KRZ', '')
+      || (this.StringAt(this.m_current, 2, 'RZ', '')
+        && (this.IsVowel$int(this.m_current - 1) || this.m_current === 0))
+    ) {
+      this.MetaphAdd$java_lang_String$java_lang_String('RS', 'X')
+      this.m_current += 2
+      return true
+    }
+    else if (this.StringAt(this.m_current - 1, 3, 'BRZ', 'DRZ', 'GRZ', '')) {
+      this.MetaphAdd$java_lang_String$java_lang_String('RS', 'J')
+      this.m_current += 2
+      return true
+    }
+    return false
   }
 
   /**
@@ -6259,10 +6364,10 @@ export class Metaphone3 {
    */
   Test_Silent_R(): boolean {
     if (
-      (this.m_current === this.m_last &&
-        this.StringAt(this.m_current - 2, 3, 'IER', '') &&
-        (this.StringAt(this.m_current - 5, 3, 'MET', 'VIV', 'LUC', '') ||
-          this.StringAt(
+      (this.m_current === this.m_last
+        && this.StringAt(this.m_current - 2, 3, 'IER', '')
+        && (this.StringAt(this.m_current - 5, 3, 'MET', 'VIV', 'LUC', '')
+          || this.StringAt(
             this.m_current - 6,
             4,
             'CART',
@@ -6292,8 +6397,8 @@ export class Metaphone3 {
             'HOLL',
             'CHEN',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             this.m_current - 7,
             5,
             'CROUP',
@@ -6305,8 +6410,8 @@ export class Metaphone3 {
             'DEROS',
             'CHART',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             this.m_current - 8,
             6,
             'CHEVAL',
@@ -6317,17 +6422,17 @@ export class Metaphone3 {
             'LETELL',
             'COLOMB',
             '',
-          ) ||
-          this.StringAt(this.m_current - 9, 7, 'CHARCUT', '') ||
-          this.StringAt(this.m_current - 10, 8, 'CHARPENT', ''))) ||
-      this.StringAt(this.m_current - 2, 7, 'SURBURB', 'WORSTED', '') ||
-      this.StringAt(this.m_current - 2, 9, 'WORCESTER', '') ||
-      this.StringAt(this.m_current - 7, 8, 'MONSIEUR', '') ||
-      this.StringAt(this.m_current - 6, 8, 'POITIERS', '')
+          )
+          || this.StringAt(this.m_current - 9, 7, 'CHARCUT', '')
+          || this.StringAt(this.m_current - 10, 8, 'CHARPENT', '')))
+        || this.StringAt(this.m_current - 2, 7, 'SURBURB', 'WORSTED', '')
+        || this.StringAt(this.m_current - 2, 9, 'WORCESTER', '')
+        || this.StringAt(this.m_current - 7, 8, 'MONSIEUR', '')
+        || this.StringAt(this.m_current - 6, 8, 'POITIERS', '')
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6339,14 +6444,14 @@ export class Metaphone3 {
    */
   Encode_Vowel_RE_Transposition(): boolean {
     if (
-      this.m_encodeVowels &&
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      this.m_encodeVowels
+      && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
-      ) == 'E'.charCodeAt(0) &&
-      this.m_length > 3 &&
-      !this.StringAt(0, 5, 'OUTRE', 'LIBRE', 'ANDRE', '') &&
-      !(this.StringAt(0, 4, 'FRED', 'TRES', '') && this.m_length === 4) &&
-      !this.StringAt(
+      ) == 'E'.charCodeAt(0)
+      && this.m_length > 3
+      && !this.StringAt(0, 5, 'OUTRE', 'LIBRE', 'ANDRE', '')
+      && !(this.StringAt(0, 4, 'FRED', 'TRES', '') && this.m_length === 4)
+      && !this.StringAt(
         this.m_current - 2,
         5,
         'LDRED',
@@ -6357,16 +6462,16 @@ export class Metaphone3 {
         'TRES',
         'IFRED',
         '',
-      ) &&
-      !this.IsVowel$int(this.m_current - 1) &&
-      (this.m_current + 1 === this.m_last ||
-        (this.m_current + 2 === this.m_last &&
-          this.StringAt(this.m_current + 2, 1, 'D', 'S', '')))
+      )
+      && !this.IsVowel$int(this.m_current - 1)
+      && (this.m_current + 1 === this.m_last
+        || (this.m_current + 2 === this.m_last
+          && this.StringAt(this.m_current + 2, 1, 'D', 'S', '')))
     ) {
-      this.MetaphAdd$java_lang_String('AR');
-      return true;
+      this.MetaphAdd$java_lang_String('AR')
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6375,40 +6480,41 @@ export class Metaphone3 {
    */
   Encode_S() {
     if (
-      this.Encode_SKJ() ||
-      this.Encode_Special_SW() ||
-      this.Encode_SJ() ||
-      this.Encode_Silent_French_S_Final() ||
-      this.Encode_Silent_French_S_Internal() ||
-      this.Encode_ISL() ||
-      this.Encode_STL() ||
-      this.Encode_Christmas() ||
-      this.Encode_STHM() ||
-      this.Encode_ISTEN() ||
-      this.Encode_Sugar() ||
-      this.Encode_SH() ||
-      this.Encode_SCH() ||
-      this.Encode_SUR() ||
-      this.Encode_SU() ||
-      this.Encode_SSIO() ||
-      this.Encode_SS() ||
-      this.Encode_SIA() ||
-      this.Encode_SIO() ||
-      this.Encode_Anglicisations() ||
-      this.Encode_SC() ||
-      this.Encode_SEA_SUI_SIER() ||
-      this.Encode_SEA()
+      this.Encode_SKJ()
+      || this.Encode_Special_SW()
+      || this.Encode_SJ()
+      || this.Encode_Silent_French_S_Final()
+      || this.Encode_Silent_French_S_Internal()
+      || this.Encode_ISL()
+      || this.Encode_STL()
+      || this.Encode_Christmas()
+      || this.Encode_STHM()
+      || this.Encode_ISTEN()
+      || this.Encode_Sugar()
+      || this.Encode_SH()
+      || this.Encode_SCH()
+      || this.Encode_SUR()
+      || this.Encode_SU()
+      || this.Encode_SSIO()
+      || this.Encode_SS()
+      || this.Encode_SIA()
+      || this.Encode_SIO()
+      || this.Encode_Anglicisations()
+      || this.Encode_SC()
+      || this.Encode_SEA_SUI_SIER()
+      || this.Encode_SEA()
     ) {
-      return;
+      return
     }
-    this.MetaphAdd$java_lang_String('S');
+    this.MetaphAdd$java_lang_String('S')
     if (
-      this.StringAt(this.m_current + 1, 1, 'S', 'Z', '') &&
-      !this.StringAt(this.m_current + 1, 2, 'SH', '')
+      this.StringAt(this.m_current + 1, 1, 'S', 'Z', '')
+      && !this.StringAt(this.m_current + 1, 2, 'SH', '')
     ) {
-      this.m_current += 2;
-    } else {
-      this.m_current++;
+      this.m_current += 2
+    }
+    else {
+      this.m_current++
     }
   }
 
@@ -6423,17 +6529,17 @@ export class Metaphone3 {
   Encode_Special_SW(): boolean {
     if (this.m_current === 0) {
       if (this.Names_Beginning_With_SW_That_Get_Alt_SV()) {
-        this.MetaphAdd$java_lang_String$java_lang_String('S', 'SV');
-        this.m_current += 2;
-        return true;
+        this.MetaphAdd$java_lang_String$java_lang_String('S', 'SV')
+        this.m_current += 2
+        return true
       }
       if (this.Names_Beginning_With_SW_That_Get_Alt_XV()) {
-        this.MetaphAdd$java_lang_String$java_lang_String('S', 'XV');
-        this.m_current += 2;
-        return true;
+        this.MetaphAdd$java_lang_String$java_lang_String('S', 'XV')
+        this.m_current += 2
+        return true
       }
     }
-    return false;
+    return false
   }
 
   /**
@@ -6445,14 +6551,14 @@ export class Metaphone3 {
    */
   Encode_SKJ(): boolean {
     if (
-      this.StringAt(this.m_current, 4, 'SKJO', 'SKJU', '') &&
-      this.IsVowel$int(this.m_current + 3)
+      this.StringAt(this.m_current, 4, 'SKJO', 'SKJU', '')
+      && this.IsVowel$int(this.m_current + 3)
     ) {
-      this.MetaphAdd$java_lang_String('X');
-      this.m_current += 3;
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.m_current += 3
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6463,11 +6569,11 @@ export class Metaphone3 {
    */
   Encode_SJ(): boolean {
     if (this.StringAt(0, 2, 'SJ', '')) {
-      this.MetaphAdd$java_lang_String('X');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6479,16 +6585,16 @@ export class Metaphone3 {
    */
   Encode_Silent_French_S_Final(): boolean {
     if (this.StringAt(0, 5, 'LOUIS', '') && this.m_current === this.m_last) {
-      this.MetaphAdd$java_lang_String$java_lang_String('S', '');
-      this.m_current++;
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('S', '')
+      this.m_current++
+      return true
     }
     if (
-      (this.m_current === this.m_last &&
-        (this.StringAt(0, 4, 'YVES', '') ||
-          (this.StringAt(0, 4, 'HORS', '') && this.m_current === 3) ||
-          this.StringAt(this.m_current - 4, 5, 'CAMUS', 'YPRES', '') ||
-          this.StringAt(
+      (this.m_current === this.m_last
+        && (this.StringAt(0, 4, 'YVES', '')
+          || (this.StringAt(0, 4, 'HORS', '') && this.m_current === 3)
+          || this.StringAt(this.m_current - 4, 5, 'CAMUS', 'YPRES', '')
+          || this.StringAt(
             this.m_current - 5,
             6,
             'MESNES',
@@ -6497,8 +6603,8 @@ export class Metaphone3 {
             'INGRES',
             'CANNES',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             this.m_current - 6,
             7,
             'CHABLIS',
@@ -6509,8 +6615,8 @@ export class Metaphone3 {
             'GEORGES',
             'DESPRES',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             0,
             8,
             'ARKANSAS',
@@ -6518,8 +6624,8 @@ export class Metaphone3 {
             'CRUDITES',
             'BRUYERES',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             0,
             9,
             'DESCARTES',
@@ -6528,17 +6634,17 @@ export class Metaphone3 {
             'DESROCHES',
             'DESCHENES',
             '',
-          ) ||
-          this.StringAt(0, 10, 'RENDEZVOUS', '') ||
-          this.StringAt(0, 11, 'CONTRETEMPS', 'DESLAURIERS', ''))) ||
-      (this.m_current === this.m_last &&
-        this.StringAt(this.m_current - 2, 2, 'AI', 'OI', 'UI', '') &&
-        !this.StringAt(0, 4, 'LOIS', 'LUIS', ''))
+          )
+          || this.StringAt(0, 10, 'RENDEZVOUS', '')
+          || this.StringAt(0, 11, 'CONTRETEMPS', 'DESLAURIERS', '')))
+        || (this.m_current === this.m_last
+          && this.StringAt(this.m_current - 2, 2, 'AI', 'OI', 'UI', '')
+          && !this.StringAt(0, 4, 'LOIS', 'LUIS', ''))
     ) {
-      this.m_current++;
-      return true;
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6549,8 +6655,8 @@ export class Metaphone3 {
    */
   Encode_Silent_French_S_Internal(): boolean {
     if (
-      this.StringAt(this.m_current - 2, 9, 'DESCARTES', '') ||
-      this.StringAt(
+      this.StringAt(this.m_current - 2, 9, 'DESCARTES', '')
+      || this.StringAt(
         this.m_current - 2,
         7,
         'DESCHAM',
@@ -6563,19 +6669,19 @@ export class Metaphone3 {
         'DESHOTE',
         'DESLAUR',
         '',
-      ) ||
-      this.StringAt(this.m_current - 2, 6, 'MESNES', '') ||
-      this.StringAt(this.m_current - 5, 8, 'DUQUESNE', 'DUCHESNE', '') ||
-      this.StringAt(this.m_current - 7, 10, 'BEAUCHESNE', '') ||
-      this.StringAt(this.m_current - 3, 7, 'FRESNEL', '') ||
-      this.StringAt(this.m_current - 3, 9, 'GROSVENOR', '') ||
-      this.StringAt(this.m_current - 4, 10, 'LOUISVILLE', '') ||
-      this.StringAt(this.m_current - 7, 10, 'ILLINOISAN', '')
+      )
+      || this.StringAt(this.m_current - 2, 6, 'MESNES', '')
+      || this.StringAt(this.m_current - 5, 8, 'DUQUESNE', 'DUCHESNE', '')
+      || this.StringAt(this.m_current - 7, 10, 'BEAUCHESNE', '')
+      || this.StringAt(this.m_current - 3, 7, 'FRESNEL', '')
+      || this.StringAt(this.m_current - 3, 9, 'GROSVENOR', '')
+      || this.StringAt(this.m_current - 4, 10, 'LOUISVILLE', '')
+      || this.StringAt(this.m_current - 7, 10, 'ILLINOISAN', '')
     ) {
-      this.m_current++;
-      return true;
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6586,8 +6692,8 @@ export class Metaphone3 {
    */
   Encode_ISL(): boolean {
     if (
-      (this.StringAt(this.m_current - 2, 4, 'LISL', 'LYSL', 'AISL', '') &&
-        !this.StringAt(
+      (this.StringAt(this.m_current - 2, 4, 'LISL', 'LYSL', 'AISL', '')
+        && !this.StringAt(
           this.m_current - 3,
           7,
           'PAISLEY',
@@ -6596,16 +6702,16 @@ export class Metaphone3 {
           'ALISLAH',
           'ALISLAA',
           '',
-        )) ||
-      (this.m_current === 1 &&
-        (this.StringAt(this.m_current - 1, 4, 'ISLE', '') ||
-          this.StringAt(this.m_current - 1, 5, 'ISLAN', '')) &&
-        !this.StringAt(this.m_current - 1, 5, 'ISLEY', 'ISLER', ''))
+        ))
+        || (this.m_current === 1
+          && (this.StringAt(this.m_current - 1, 4, 'ISLE', '')
+            || this.StringAt(this.m_current - 1, 5, 'ISLAN', ''))
+          && !this.StringAt(this.m_current - 1, 5, 'ISLEY', 'ISLER', ''))
     ) {
-      this.m_current++;
-      return true;
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6617,48 +6723,50 @@ export class Metaphone3 {
    */
   Encode_STL(): boolean {
     if (
-      (this.StringAt(this.m_current, 4, 'STLE', 'STLI', '') &&
-        !this.StringAt(this.m_current + 2, 4, 'LESS', 'LIKE', 'LINE', '')) ||
-      this.StringAt(
+      (this.StringAt(this.m_current, 4, 'STLE', 'STLI', '')
+        && !this.StringAt(this.m_current + 2, 4, 'LESS', 'LIKE', 'LINE', ''))
+      || this.StringAt(
         this.m_current - 3,
         7,
         'THISTLY',
         'BRISTLY',
         'GRISTLY',
         '',
-      ) ||
-      this.StringAt(this.m_current - 1, 5, 'USCLE', '')
+      )
+      || this.StringAt(this.m_current - 1, 5, 'USCLE', '')
     ) {
       if (
-        this.StringAt(0, 7, 'KRISTEN', 'KRYSTLE', 'CRYSTLE', 'KRISTLE', '') ||
-        this.StringAt(0, 11, 'CHRISTENSEN', 'CHRISTENSON', '') ||
-        this.StringAt(this.m_current - 3, 9, 'FIRSTLING', '') ||
-        this.StringAt(this.m_current - 2, 8, 'NESTLING', 'WESTLING', '')
+        this.StringAt(0, 7, 'KRISTEN', 'KRYSTLE', 'CRYSTLE', 'KRISTLE', '')
+        || this.StringAt(0, 11, 'CHRISTENSEN', 'CHRISTENSON', '')
+        || this.StringAt(this.m_current - 3, 9, 'FIRSTLING', '')
+        || this.StringAt(this.m_current - 2, 8, 'NESTLING', 'WESTLING', '')
       ) {
-        this.MetaphAdd$java_lang_String('ST');
-        this.m_current += 2;
-      } else {
-        if (
-          this.m_encodeVowels &&
-          ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
-            this.CharAt(this.m_current + 3),
-          ) == 'E'.charCodeAt(0) &&
-          ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
-            this.CharAt(this.m_current + 4),
-          ) != 'R'.charCodeAt(0) &&
-          !this.StringAt(this.m_current + 3, 4, 'ETTE', 'ETTA', '') &&
-          !this.StringAt(this.m_current + 3, 2, 'EY', '')
-        ) {
-          this.MetaphAdd$java_lang_String('SAL');
-          this.flag_AL_inversion = true;
-        } else {
-          this.MetaphAdd$java_lang_String('SL');
-        }
-        this.m_current += 3;
+        this.MetaphAdd$java_lang_String('ST')
+        this.m_current += 2
       }
-      return true;
+      else {
+        if (
+          this.m_encodeVowels
+          && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+            this.CharAt(this.m_current + 3),
+          ) == 'E'.charCodeAt(0)
+          && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+            this.CharAt(this.m_current + 4),
+          ) != 'R'.charCodeAt(0)
+          && !this.StringAt(this.m_current + 3, 4, 'ETTE', 'ETTA', '')
+          && !this.StringAt(this.m_current + 3, 2, 'EY', '')
+        ) {
+          this.MetaphAdd$java_lang_String('SAL')
+          this.flag_AL_inversion = true
+        }
+        else {
+          this.MetaphAdd$java_lang_String('SL')
+        }
+        this.m_current += 3
+      }
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6669,11 +6777,11 @@ export class Metaphone3 {
    */
   Encode_Christmas(): boolean {
     if (this.StringAt(this.m_current - 4, 8, 'CHRISTMA', '')) {
-      this.MetaphAdd$java_lang_String('SM');
-      this.m_current += 3;
-      return true;
+      this.MetaphAdd$java_lang_String('SM')
+      this.m_current += 3
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6685,11 +6793,11 @@ export class Metaphone3 {
    */
   Encode_STHM(): boolean {
     if (this.StringAt(this.m_current, 4, 'STHM', '')) {
-      this.MetaphAdd$java_lang_String('SM');
-      this.m_current += 4;
-      return true;
+      this.MetaphAdd$java_lang_String('SM')
+      this.m_current += 4
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6702,15 +6810,16 @@ export class Metaphone3 {
   Encode_ISTEN(): boolean {
     if (this.StringAt(0, 8, 'CHRISTEN', '')) {
       if (
-        this.RootOrInflections(this.m_inWord, 'CHRISTEN') ||
-        this.StringAt(0, 11, 'CHRISTENDOM', '')
+        this.RootOrInflections(this.m_inWord, 'CHRISTEN')
+        || this.StringAt(0, 11, 'CHRISTENDOM', '')
       ) {
-        this.MetaphAdd$java_lang_String$java_lang_String('S', 'ST');
-      } else {
-        this.MetaphAdd$java_lang_String('ST');
+        this.MetaphAdd$java_lang_String$java_lang_String('S', 'ST')
       }
-      this.m_current += 2;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('ST')
+      }
+      this.m_current += 2
+      return true
     }
     if (
       this.StringAt(
@@ -6722,14 +6831,14 @@ export class Metaphone3 {
         'FASTEN',
         'MUSTNT',
         '',
-      ) ||
-      this.StringAt(this.m_current - 3, 7, 'MOISTEN', '')
+      )
+      || this.StringAt(this.m_current - 3, 7, 'MOISTEN', '')
     ) {
-      this.MetaphAdd$java_lang_String('S');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('S')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6740,11 +6849,11 @@ export class Metaphone3 {
    */
   Encode_Sugar(): boolean {
     if (this.StringAt(this.m_current, 5, 'SUGAR', '')) {
-      this.MetaphAdd$java_lang_String('X');
-      this.m_current++;
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6758,54 +6867,54 @@ export class Metaphone3 {
   Encode_SH(): boolean {
     if (this.StringAt(this.m_current, 2, 'SH', '')) {
       if (this.StringAt(this.m_current - 2, 8, 'CASHMERE', '')) {
-        this.MetaphAdd$java_lang_String('J');
-        this.m_current += 2;
-        return true;
+        this.MetaphAdd$java_lang_String('J')
+        this.m_current += 2
+        return true
       }
       if (
-        this.m_current > 0 &&
-        ((this.StringAt(this.m_current + 1, 3, 'HAP', '') &&
-          this.m_current + 3 === this.m_last) ||
-          this.StringAt(
-            this.m_current + 1,
-            4,
-            'HEIM',
-            'HOEK',
-            'HOLM',
-            'HOLZ',
-            'HOOD',
-            'HEAD',
-            'HEID',
-            'HAAR',
-            'HORS',
-            'HOLE',
-            'HUND',
-            'HELM',
-            'HAWK',
-            'HILL',
-            '',
-          ) ||
-          this.StringAt(
-            this.m_current + 1,
-            5,
-            'HEART',
-            'HATCH',
-            'HOUSE',
-            'HOUND',
-            'HONOR',
-            '',
-          ) ||
-          (this.StringAt(this.m_current + 2, 3, 'EAR', '') &&
-            this.m_current + 4 === this.m_last) ||
-          (this.StringAt(this.m_current + 2, 3, 'ORN', '') &&
-            !this.StringAt(this.m_current - 2, 7, 'UNSHORN', '')) ||
-          (this.StringAt(this.m_current + 1, 4, 'HOUR', '') &&
-            !(
-              this.StringAt(0, 7, 'BASHOUR', '') ||
-              this.StringAt(0, 8, 'MANSHOUR', '') ||
-              this.StringAt(0, 6, 'ASHOUR', '')
-            )) ||
-          this.StringAt(
+        this.m_current > 0
+        && ((this.StringAt(this.m_current + 1, 3, 'HAP', '')
+          && this.m_current + 3 === this.m_last)
+        || this.StringAt(
+          this.m_current + 1,
+          4,
+          'HEIM',
+          'HOEK',
+          'HOLM',
+          'HOLZ',
+          'HOOD',
+          'HEAD',
+          'HEID',
+          'HAAR',
+          'HORS',
+          'HOLE',
+          'HUND',
+          'HELM',
+          'HAWK',
+          'HILL',
+          '',
+        )
+        || this.StringAt(
+          this.m_current + 1,
+          5,
+          'HEART',
+          'HATCH',
+          'HOUSE',
+          'HOUND',
+          'HONOR',
+          '',
+        )
+        || (this.StringAt(this.m_current + 2, 3, 'EAR', '')
+          && this.m_current + 4 === this.m_last)
+        || (this.StringAt(this.m_current + 2, 3, 'ORN', '')
+          && !this.StringAt(this.m_current - 2, 7, 'UNSHORN', ''))
+        || (this.StringAt(this.m_current + 1, 4, 'HOUR', '')
+          && !(
+            this.StringAt(0, 7, 'BASHOUR', '')
+            || this.StringAt(0, 8, 'MANSHOUR', '')
+            || this.StringAt(0, 6, 'ASHOUR', '')
+          ))
+          || this.StringAt(
             this.m_current + 2,
             5,
             'ARMON',
@@ -6817,8 +6926,8 @@ export class Metaphone3 {
             'ANDLE',
             'ONOUR',
             '',
-          ) ||
-          this.StringAt(
+          )
+          || this.StringAt(
             this.m_current + 2,
             6,
             'ABILLE',
@@ -6828,14 +6937,15 @@ export class Metaphone3 {
           ))
       ) {
         if (!this.StringAt(this.m_current - 1, 1, 'S', ''))
-          this.MetaphAdd$java_lang_String('S');
-      } else {
-        this.MetaphAdd$java_lang_String('X');
+          this.MetaphAdd$java_lang_String('S')
       }
-      this.m_current += 2;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('X')
+      }
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6850,14 +6960,14 @@ export class Metaphone3 {
   Encode_SCH(): boolean {
     if (this.StringAt(this.m_current + 1, 2, 'CH', '')) {
       if (
-        this.m_current > 0 &&
-        (this.StringAt(this.m_current + 3, 3, 'IEF', 'EAT', '') ||
-          this.StringAt(this.m_current + 3, 4, 'ANCE', 'ARGE', '') ||
-          this.StringAt(0, 6, 'ESCHEW', ''))
+        this.m_current > 0
+        && (this.StringAt(this.m_current + 3, 3, 'IEF', 'EAT', '')
+          || this.StringAt(this.m_current + 3, 4, 'ANCE', 'ARGE', '')
+          || this.StringAt(0, 6, 'ESCHEW', ''))
       ) {
-        this.MetaphAdd$java_lang_String('S');
-        this.m_current++;
-        return true;
+        this.MetaphAdd$java_lang_String('S')
+        this.m_current++
+        return true
       }
       if (
         (this.StringAt(
@@ -6874,17 +6984,17 @@ export class Metaphone3 {
           'IS',
           'OL',
           '',
-        ) &&
-          !this.StringAt(
-            this.m_current,
-            6,
-            'SCHOLT',
-            'SCHISL',
-            'SCHERR',
-            '',
-          )) ||
-        this.StringAt(this.m_current + 3, 3, 'ISZ', '') ||
-        (this.StringAt(
+        )
+        && !this.StringAt(
+          this.m_current,
+          6,
+          'SCHOLT',
+          'SCHISL',
+          'SCHERR',
+          '',
+        ))
+        || this.StringAt(this.m_current + 3, 3, 'ISZ', '')
+        || (this.StringAt(
           this.m_current - 1,
           6,
           'ESCHAT',
@@ -6893,32 +7003,34 @@ export class Metaphone3 {
           'ISCHAE',
           'ISCHIA',
           '',
-        ) &&
-          !this.StringAt(this.m_current - 2, 8, 'FASCHING', '')) ||
-        (this.StringAt(this.m_current - 1, 5, 'ESCHI', '') &&
-          this.m_current + 3 === this.m_last) ||
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
-          this.CharAt(this.m_current + 3),
-        ) == 'Y'.charCodeAt(0)
+        )
+        && !this.StringAt(this.m_current - 2, 8, 'FASCHING', ''))
+      || (this.StringAt(this.m_current - 1, 5, 'ESCHI', '')
+        && this.m_current + 3 === this.m_last)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        this.CharAt(this.m_current + 3),
+      ) == 'Y'.charCodeAt(0)
       ) {
         if (
-          this.StringAt(this.m_current + 3, 2, 'ER', 'EN', 'IS', '') &&
-          (this.m_current + 4 === this.m_last ||
-            this.StringAt(this.m_current + 3, 3, 'ENK', 'ENB', 'IST', ''))
+          this.StringAt(this.m_current + 3, 2, 'ER', 'EN', 'IS', '')
+          && (this.m_current + 4 === this.m_last
+            || this.StringAt(this.m_current + 3, 3, 'ENK', 'ENB', 'IST', ''))
         ) {
-          this.MetaphAdd$java_lang_String$java_lang_String('X', 'SK');
-        } else {
-          this.MetaphAdd$java_lang_String('SK');
+          this.MetaphAdd$java_lang_String$java_lang_String('X', 'SK')
         }
-        this.m_current += 3;
-        return true;
-      } else {
-        this.MetaphAdd$java_lang_String('X');
-        this.m_current += 3;
-        return true;
+        else {
+          this.MetaphAdd$java_lang_String('SK')
+        }
+        this.m_current += 3
+        return true
+      }
+      else {
+        this.MetaphAdd$java_lang_String('X')
+        this.m_current += 3
+        return true
       }
     }
-    return false;
+    return false
   }
 
   /**
@@ -6931,18 +7043,19 @@ export class Metaphone3 {
   Encode_SUR(): boolean {
     if (this.StringAt(this.m_current + 1, 3, 'URE', 'URA', 'URY', '')) {
       if (
-        this.m_current === 0 ||
-        this.StringAt(this.m_current - 1, 1, 'N', 'K', '') ||
-        this.StringAt(this.m_current - 2, 2, 'NO', '')
+        this.m_current === 0
+        || this.StringAt(this.m_current - 1, 1, 'N', 'K', '')
+        || this.StringAt(this.m_current - 2, 2, 'NO', '')
       ) {
-        this.MetaphAdd$java_lang_String('X');
-      } else {
-        this.MetaphAdd$java_lang_String('J');
+        this.MetaphAdd$java_lang_String('X')
       }
-      this.AdvanceCounter(2, 1);
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('J')
+      }
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6955,20 +7068,22 @@ export class Metaphone3 {
    */
   Encode_SU(): boolean {
     if (
-      this.StringAt(this.m_current + 1, 2, 'UO', 'UA', '') &&
-      this.m_current !== 0
+      this.StringAt(this.m_current + 1, 2, 'UO', 'UA', '')
+      && this.m_current !== 0
     ) {
       if (this.StringAt(this.m_current - 1, 4, 'RSUA', '')) {
-        this.MetaphAdd$java_lang_String('S');
-      } else if (this.IsVowel$int(this.m_current - 1)) {
-        this.MetaphAdd$java_lang_String$java_lang_String('J', 'S');
-      } else {
-        this.MetaphAdd$java_lang_String$java_lang_String('X', 'S');
+        this.MetaphAdd$java_lang_String('S')
       }
-      this.AdvanceCounter(3, 1);
-      return true;
+      else if (this.IsVowel$int(this.m_current - 1)) {
+        this.MetaphAdd$java_lang_String$java_lang_String('J', 'S')
+      }
+      else {
+        this.MetaphAdd$java_lang_String$java_lang_String('X', 'S')
+      }
+      this.AdvanceCounter(3, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -6981,16 +7096,17 @@ export class Metaphone3 {
   Encode_SSIO(): boolean {
     if (this.StringAt(this.m_current + 1, 4, 'SION', '')) {
       if (this.StringAt(this.m_current - 2, 2, 'CI', '')) {
-        this.MetaphAdd$java_lang_String('J');
-      } else {
+        this.MetaphAdd$java_lang_String('J')
+      }
+      else {
         if (this.IsVowel$int(this.m_current - 1)) {
-          this.MetaphAdd$java_lang_String('X');
+          this.MetaphAdd$java_lang_String('X')
         }
       }
-      this.AdvanceCounter(4, 2);
-      return true;
+      this.AdvanceCounter(4, 2)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7009,8 +7125,8 @@ export class Metaphone3 {
         'ISSUR',
         'ISSUE',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         this.m_current - 1,
         6,
         'ESSIAN',
@@ -7022,11 +7138,11 @@ export class Metaphone3 {
         '',
       )
     ) {
-      this.MetaphAdd$java_lang_String('X');
-      this.AdvanceCounter(3, 2);
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.AdvanceCounter(3, 2)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7038,51 +7154,52 @@ export class Metaphone3 {
    */
   Encode_SIA(): boolean {
     if (
-      this.StringAt(this.m_current - 2, 5, 'CHSIA', '') ||
-      this.StringAt(this.m_current - 1, 5, 'RSIAL', '')
+      this.StringAt(this.m_current - 2, 5, 'CHSIA', '')
+      || this.StringAt(this.m_current - 1, 5, 'RSIAL', '')
     ) {
-      this.MetaphAdd$java_lang_String('X');
-      this.AdvanceCounter(3, 1);
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.AdvanceCounter(3, 1)
+      return true
     }
     if (
-      (this.StringAt(0, 6, 'ALESIA', 'ALYSIA', 'ALISIA', 'STASIA', '') &&
-        this.m_current === 3 &&
-        !this.StringAt(0, 9, 'ANASTASIA', '')) ||
-      this.StringAt(this.m_current - 5, 9, 'DIONYSIAN', '') ||
-      this.StringAt(this.m_current - 5, 8, 'THERESIA', '')
+      (this.StringAt(0, 6, 'ALESIA', 'ALYSIA', 'ALISIA', 'STASIA', '')
+        && this.m_current === 3
+        && !this.StringAt(0, 9, 'ANASTASIA', ''))
+      || this.StringAt(this.m_current - 5, 9, 'DIONYSIAN', '')
+      || this.StringAt(this.m_current - 5, 8, 'THERESIA', '')
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('X', 'S');
-      this.AdvanceCounter(3, 1);
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('X', 'S')
+      this.AdvanceCounter(3, 1)
+      return true
     }
     if (
-      (this.StringAt(this.m_current, 3, 'SIA', '') &&
-        this.m_current + 2 === this.m_last) ||
-      (this.StringAt(this.m_current, 4, 'SIAN', '') &&
-        this.m_current + 3 === this.m_last) ||
-      this.StringAt(this.m_current - 5, 9, 'AMBROSIAL', '')
+      (this.StringAt(this.m_current, 3, 'SIA', '')
+        && this.m_current + 2 === this.m_last)
+      || (this.StringAt(this.m_current, 4, 'SIAN', '')
+        && this.m_current + 3 === this.m_last)
+      || this.StringAt(this.m_current - 5, 9, 'AMBROSIAL', '')
     ) {
       if (
-        (this.IsVowel$int(this.m_current - 1) ||
-          this.StringAt(this.m_current - 1, 1, 'R', '')) &&
-        !(
-          this.StringAt(0, 5, 'JAMES', 'NICOS', 'PEGAS', 'PEPYS', '') ||
-          this.StringAt(0, 6, 'HOBBES', 'HOLMES', 'JAQUES', 'KEYNES', '') ||
-          this.StringAt(0, 7, 'MALTHUS', 'HOMOOUS', '') ||
-          this.StringAt(0, 8, 'MAGLEMOS', 'HOMOIOUS', '') ||
-          this.StringAt(0, 9, 'LEVALLOIS', 'TARDENOIS', '') ||
-          this.StringAt(this.m_current - 4, 5, 'ALGES', '')
+        (this.IsVowel$int(this.m_current - 1)
+          || this.StringAt(this.m_current - 1, 1, 'R', ''))
+        && !(
+          this.StringAt(0, 5, 'JAMES', 'NICOS', 'PEGAS', 'PEPYS', '')
+          || this.StringAt(0, 6, 'HOBBES', 'HOLMES', 'JAQUES', 'KEYNES', '')
+          || this.StringAt(0, 7, 'MALTHUS', 'HOMOOUS', '')
+          || this.StringAt(0, 8, 'MAGLEMOS', 'HOMOIOUS', '')
+          || this.StringAt(0, 9, 'LEVALLOIS', 'TARDENOIS', '')
+          || this.StringAt(this.m_current - 4, 5, 'ALGES', '')
         )
       ) {
-        this.MetaphAdd$java_lang_String('J');
-      } else {
-        this.MetaphAdd$java_lang_String('S');
+        this.MetaphAdd$java_lang_String('J')
       }
-      this.AdvanceCounter(2, 1);
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('S')
+      }
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7094,23 +7211,24 @@ export class Metaphone3 {
    */
   Encode_SIO(): boolean {
     if (this.StringAt(0, 7, 'SIOBHAN', '')) {
-      this.MetaphAdd$java_lang_String('X');
-      this.AdvanceCounter(3, 1);
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.AdvanceCounter(3, 1)
+      return true
     }
     if (this.StringAt(this.m_current + 1, 3, 'ION', '')) {
       if (
-        this.IsVowel$int(this.m_current - 1) ||
-        this.StringAt(this.m_current - 2, 2, 'ER', 'UR', '')
+        this.IsVowel$int(this.m_current - 1)
+        || this.StringAt(this.m_current - 2, 2, 'ER', 'UR', '')
       ) {
-        this.MetaphAdd$java_lang_String('J');
-      } else {
-        this.MetaphAdd$java_lang_String('X');
+        this.MetaphAdd$java_lang_String('J')
       }
-      this.AdvanceCounter(3, 1);
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('X')
+      }
+      this.AdvanceCounter(3, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7123,19 +7241,20 @@ export class Metaphone3 {
    */
   Encode_Anglicisations(): boolean {
     if (
-      (this.m_current === 0 &&
-        this.StringAt(this.m_current + 1, 1, 'M', 'N', 'L', '')) ||
-      this.StringAt(this.m_current + 1, 1, 'Z', '')
+      (this.m_current === 0
+        && this.StringAt(this.m_current + 1, 1, 'M', 'N', 'L', ''))
+      || this.StringAt(this.m_current + 1, 1, 'Z', '')
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('S', 'X');
+      this.MetaphAdd$java_lang_String$java_lang_String('S', 'X')
       if (this.StringAt(this.m_current + 1, 1, 'Z', '')) {
-        this.m_current += 2;
-      } else {
-        this.m_current++;
+        this.m_current += 2
       }
-      return true;
+      else {
+        this.m_current++
+      }
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7148,43 +7267,45 @@ export class Metaphone3 {
   Encode_SC(): boolean {
     if (this.StringAt(this.m_current, 2, 'SC', '')) {
       if (this.StringAt(this.m_current - 2, 8, 'VISCOUNT', '')) {
-        this.m_current += 1;
-        return true;
+        this.m_current += 1
+        return true
       }
       if (this.StringAt(this.m_current + 2, 1, 'I', 'E', 'Y', '')) {
         if (
-          this.StringAt(this.m_current + 2, 4, 'IOUS', '') ||
-          this.StringAt(this.m_current + 2, 3, 'IUT', '') ||
-          this.StringAt(this.m_current - 4, 9, 'OMNISCIEN', '') ||
-          this.StringAt(
+          this.StringAt(this.m_current + 2, 4, 'IOUS', '')
+          || this.StringAt(this.m_current + 2, 3, 'IUT', '')
+          || this.StringAt(this.m_current - 4, 9, 'OMNISCIEN', '')
+          || this.StringAt(
             this.m_current - 3,
             8,
             'CONSCIEN',
             'CRESCEND',
             'CONSCION',
             '',
-          ) ||
-          this.StringAt(this.m_current - 2, 6, 'FASCIS', '')
+          )
+          || this.StringAt(this.m_current - 2, 6, 'FASCIS', '')
         ) {
-          this.MetaphAdd$java_lang_String('X');
-        } else if (
-          this.StringAt(this.m_current, 7, 'SCEPTIC', 'SCEPSIS', '') ||
-          this.StringAt(this.m_current, 5, 'SCIVV', 'SCIRO', '') ||
-          this.StringAt(this.m_current, 6, 'SCIPIO', '') ||
-          this.StringAt(this.m_current - 2, 10, 'PISCITELLI', '')
-        ) {
-          this.MetaphAdd$java_lang_String('SK');
-        } else {
-          this.MetaphAdd$java_lang_String('S');
+          this.MetaphAdd$java_lang_String('X')
         }
-        this.m_current += 2;
-        return true;
+        else if (
+          this.StringAt(this.m_current, 7, 'SCEPTIC', 'SCEPSIS', '')
+          || this.StringAt(this.m_current, 5, 'SCIVV', 'SCIRO', '')
+          || this.StringAt(this.m_current, 6, 'SCIPIO', '')
+          || this.StringAt(this.m_current - 2, 10, 'PISCITELLI', '')
+        ) {
+          this.MetaphAdd$java_lang_String('SK')
+        }
+        else {
+          this.MetaphAdd$java_lang_String('S')
+        }
+        this.m_current += 2
+        return true
       }
-      this.MetaphAdd$java_lang_String('SK');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('SK')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7196,21 +7317,21 @@ export class Metaphone3 {
    */
   Encode_SEA_SUI_SIER(): boolean {
     if (
-      (this.StringAt(this.m_current - 3, 6, 'NAUSEA', '') &&
-        this.m_current + 2 === this.m_last) ||
-      this.StringAt(this.m_current - 2, 5, 'CASUI', '') ||
-      (this.StringAt(this.m_current - 1, 5, 'OSIER', 'ASIER', '') &&
-        !(
-          this.StringAt(0, 6, 'EASIER', '') ||
-          this.StringAt(0, 5, 'OSIER', '') ||
-          this.StringAt(this.m_current - 2, 6, 'ROSIER', 'MOSIER', '')
+      (this.StringAt(this.m_current - 3, 6, 'NAUSEA', '')
+        && this.m_current + 2 === this.m_last)
+      || this.StringAt(this.m_current - 2, 5, 'CASUI', '')
+      || (this.StringAt(this.m_current - 1, 5, 'OSIER', 'ASIER', '')
+        && !(
+          this.StringAt(0, 6, 'EASIER', '')
+          || this.StringAt(0, 5, 'OSIER', '')
+          || this.StringAt(this.m_current - 2, 6, 'ROSIER', 'MOSIER', '')
         ))
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('J', 'X');
-      this.AdvanceCounter(3, 1);
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('J', 'X')
+      this.AdvanceCounter(3, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7221,15 +7342,15 @@ export class Metaphone3 {
    */
   Encode_SEA(): boolean {
     if (
-      (this.StringAt(0, 4, 'SEAN', '') && this.m_current + 3 === this.m_last) ||
-      (this.StringAt(this.m_current - 3, 6, 'NAUSEO', '') &&
-        !this.StringAt(this.m_current - 3, 7, 'NAUSEAT', ''))
+      (this.StringAt(0, 4, 'SEAN', '') && this.m_current + 3 === this.m_last)
+      || (this.StringAt(this.m_current - 3, 6, 'NAUSEO', '')
+        && !this.StringAt(this.m_current - 3, 7, 'NAUSEAT', ''))
     ) {
-      this.MetaphAdd$java_lang_String('X');
-      this.AdvanceCounter(3, 1);
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.AdvanceCounter(3, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7238,28 +7359,29 @@ export class Metaphone3 {
    */
   Encode_T() {
     if (
-      this.Encode_T_Initial() ||
-      this.Encode_TCH() ||
-      this.Encode_Silent_French_T() ||
-      this.Encode_TUN_TUL_TUA_TUO() ||
-      this.Encode_TUE_TEU_TEOU_TUL_TIE() ||
-      this.Encode_TUR_TIU_Suffixes() ||
-      this.Encode_TI() ||
-      this.Encode_TIENT() ||
-      this.Encode_TSCH() ||
-      this.Encode_TZSCH() ||
-      this.Encode_TH_Pronounced_Separately() ||
-      this.Encode_TTH() ||
-      this.Encode_TH()
+      this.Encode_T_Initial()
+      || this.Encode_TCH()
+      || this.Encode_Silent_French_T()
+      || this.Encode_TUN_TUL_TUA_TUO()
+      || this.Encode_TUE_TEU_TEOU_TUL_TIE()
+      || this.Encode_TUR_TIU_Suffixes()
+      || this.Encode_TI()
+      || this.Encode_TIENT()
+      || this.Encode_TSCH()
+      || this.Encode_TZSCH()
+      || this.Encode_TH_Pronounced_Separately()
+      || this.Encode_TTH()
+      || this.Encode_TH()
     ) {
-      return;
+      return
     }
     if (this.StringAt(this.m_current + 1, 1, 'T', 'D', '')) {
-      this.m_current += 2;
-    } else {
-      this.m_current++;
+      this.m_current += 2
     }
-    this.MetaphAdd$java_lang_String('T');
+    else {
+      this.m_current++
+    }
+    this.MetaphAdd$java_lang_String('T')
   }
 
   /**
@@ -7271,47 +7393,47 @@ export class Metaphone3 {
   Encode_T_Initial(): boolean {
     if (this.m_current === 0) {
       if (this.StringAt(this.m_current + 1, 3, 'SAR', 'ZAR', '')) {
-        this.m_current++;
-        return true;
+        this.m_current++
+        return true
       }
       if (
-        (this.m_length === 3 &&
-          this.StringAt(this.m_current + 1, 2, 'SO', 'SA', 'SU', '')) ||
-        (this.m_length === 4 &&
-          this.StringAt(this.m_current + 1, 3, 'SAO', 'SAI', '')) ||
-        (this.m_length === 5 &&
-          this.StringAt(this.m_current + 1, 4, 'SING', 'SANG', ''))
+        (this.m_length === 3
+          && this.StringAt(this.m_current + 1, 2, 'SO', 'SA', 'SU', ''))
+        || (this.m_length === 4
+          && this.StringAt(this.m_current + 1, 3, 'SAO', 'SAI', ''))
+        || (this.m_length === 5
+          && this.StringAt(this.m_current + 1, 4, 'SING', 'SANG', ''))
       ) {
-        this.MetaphAdd$java_lang_String('X');
-        this.AdvanceCounter(3, 2);
-        return true;
+        this.MetaphAdd$java_lang_String('X')
+        this.AdvanceCounter(3, 2)
+        return true
       }
       if (
-        this.StringAt(this.m_current + 1, 1, 'S', '') &&
-        this.IsVowel$int(this.m_current + 2)
+        this.StringAt(this.m_current + 1, 1, 'S', '')
+        && this.IsVowel$int(this.m_current + 2)
       ) {
-        this.MetaphAdd$java_lang_String$java_lang_String('TS', 'S');
-        this.AdvanceCounter(3, 2);
-        return true;
+        this.MetaphAdd$java_lang_String$java_lang_String('TS', 'S')
+        this.AdvanceCounter(3, 2)
+        return true
       }
       if (this.StringAt(this.m_current + 1, 1, 'J', '')) {
-        this.MetaphAdd$java_lang_String('X');
-        this.AdvanceCounter(3, 2);
-        return true;
+        this.MetaphAdd$java_lang_String('X')
+        this.AdvanceCounter(3, 2)
+        return true
       }
       if (
-        (this.StringAt(this.m_current + 1, 2, 'HU', '') &&
-          this.m_length === 3) ||
-        this.StringAt(this.m_current + 1, 3, 'HAI', 'HUY', 'HAO', '') ||
-        this.StringAt(this.m_current + 1, 4, 'HYME', 'HYMY', 'HANH', '') ||
-        this.StringAt(this.m_current + 1, 5, 'HERES', '')
+        (this.StringAt(this.m_current + 1, 2, 'HU', '')
+          && this.m_length === 3)
+        || this.StringAt(this.m_current + 1, 3, 'HAI', 'HUY', 'HAO', '')
+        || this.StringAt(this.m_current + 1, 4, 'HYME', 'HYMY', 'HANH', '')
+        || this.StringAt(this.m_current + 1, 5, 'HERES', '')
       ) {
-        this.MetaphAdd$java_lang_String('T');
-        this.AdvanceCounter(3, 2);
-        return true;
+        this.MetaphAdd$java_lang_String('T')
+        this.AdvanceCounter(3, 2)
+        return true
       }
     }
-    return false;
+    return false
   }
 
   /**
@@ -7322,11 +7444,11 @@ export class Metaphone3 {
    */
   Encode_TCH(): boolean {
     if (this.StringAt(this.m_current + 1, 2, 'CH', '')) {
-      this.MetaphAdd$java_lang_String('X');
-      this.m_current += 3;
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.m_current += 3
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7338,12 +7460,12 @@ export class Metaphone3 {
    */
   Encode_Silent_French_T(): boolean {
     if (
-      (this.m_current === this.m_last &&
-        this.StringAt(this.m_current - 4, 5, 'MONET', 'GENET', 'CHAUT', '')) ||
-      this.StringAt(this.m_current - 2, 9, 'POTPOURRI', '') ||
-      this.StringAt(this.m_current - 3, 9, 'BOATSWAIN', '') ||
-      this.StringAt(this.m_current - 3, 8, 'MORTGAGE', '') ||
-      ((this.StringAt(
+      (this.m_current === this.m_last
+        && this.StringAt(this.m_current - 4, 5, 'MONET', 'GENET', 'CHAUT', ''))
+      || this.StringAt(this.m_current - 2, 9, 'POTPOURRI', '')
+      || this.StringAt(this.m_current - 3, 9, 'BOATSWAIN', '')
+      || this.StringAt(this.m_current - 3, 8, 'MORTGAGE', '')
+      || ((this.StringAt(
         this.m_current - 4,
         5,
         'BERET',
@@ -7354,66 +7476,66 @@ export class Metaphone3 {
         'PINOT',
         'TAROT',
         '',
-      ) ||
-        this.StringAt(
-          this.m_current - 5,
-          6,
-          'BALLET',
-          'BUFFET',
-          'CACHET',
-          'CHALET',
-          'ESPRIT',
-          'RAGOUT',
-          'GOULET',
-          'CHABOT',
-          'BENOIT',
-          '',
-        ) ||
-        this.StringAt(
-          this.m_current - 6,
-          7,
-          'GOURMET',
-          'BOUQUET',
-          'CROCHET',
-          'CROQUET',
-          'PARFAIT',
-          'PINCHOT',
-          'CABARET',
-          'PARQUET',
-          'RAPPORT',
-          'TOUCHET',
-          'COURBET',
-          'DIDEROT',
-          '',
-        ) ||
-        this.StringAt(
-          this.m_current - 7,
-          8,
-          'ENTREPOT',
-          'CABERNET',
-          'DUBONNET',
-          'MASSENET',
-          'MUSCADET',
-          'RICOCHET',
-          'ESCARGOT',
-          '',
-        ) ||
-        this.StringAt(
-          this.m_current - 8,
-          9,
-          'SOBRIQUET',
-          'CABRIOLET',
-          'CASSOULET',
-          'OUBRIQUET',
-          'CAMEMBERT',
-          '',
-        )) &&
-        !this.StringAt(this.m_current + 1, 2, 'AN', 'RY', 'IC', 'OM', 'IN', ''))
+      )
+      || this.StringAt(
+        this.m_current - 5,
+        6,
+        'BALLET',
+        'BUFFET',
+        'CACHET',
+        'CHALET',
+        'ESPRIT',
+        'RAGOUT',
+        'GOULET',
+        'CHABOT',
+        'BENOIT',
+        '',
+      )
+      || this.StringAt(
+        this.m_current - 6,
+        7,
+        'GOURMET',
+        'BOUQUET',
+        'CROCHET',
+        'CROQUET',
+        'PARFAIT',
+        'PINCHOT',
+        'CABARET',
+        'PARQUET',
+        'RAPPORT',
+        'TOUCHET',
+        'COURBET',
+        'DIDEROT',
+        '',
+      )
+      || this.StringAt(
+        this.m_current - 7,
+        8,
+        'ENTREPOT',
+        'CABERNET',
+        'DUBONNET',
+        'MASSENET',
+        'MUSCADET',
+        'RICOCHET',
+        'ESCARGOT',
+        '',
+      )
+      || this.StringAt(
+        this.m_current - 8,
+        9,
+        'SOBRIQUET',
+        'CABRIOLET',
+        'CASSOULET',
+        'OUBRIQUET',
+        'CAMEMBERT',
+        '',
+      ))
+      && !this.StringAt(this.m_current + 1, 2, 'AN', 'RY', 'IC', 'OM', 'IN', ''))
     ) {
-      this.m_current++;
-      return true;
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7425,18 +7547,18 @@ export class Metaphone3 {
    */
   Encode_TUN_TUL_TUA_TUO(): boolean {
     if (
-      this.StringAt(this.m_current - 3, 6, 'FORTUN', '') ||
-      (this.StringAt(this.m_current, 3, 'TUL', '') &&
-        this.IsVowel$int(this.m_current - 1) &&
-        this.IsVowel$int(this.m_current + 3)) ||
-      this.StringAt(this.m_current - 2, 5, 'BITUA', 'BITUE', '') ||
-      (this.m_current > 1 && this.StringAt(this.m_current, 3, 'TUA', 'TUO', ''))
+      this.StringAt(this.m_current - 3, 6, 'FORTUN', '')
+      || (this.StringAt(this.m_current, 3, 'TUL', '')
+        && this.IsVowel$int(this.m_current - 1)
+        && this.IsVowel$int(this.m_current + 3))
+      || this.StringAt(this.m_current - 2, 5, 'BITUA', 'BITUE', '')
+      || (this.m_current > 1 && this.StringAt(this.m_current, 3, 'TUA', 'TUO', ''))
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('X', 'T');
-      this.m_current++;
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('X', 'T')
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7448,11 +7570,11 @@ export class Metaphone3 {
    */
   Encode_TUE_TEU_TEOU_TUL_TIE(): boolean {
     if (
-      this.StringAt(this.m_current + 1, 4, 'UENT', '') ||
-      this.StringAt(this.m_current - 4, 9, 'RIGHTEOUS', '') ||
-      this.StringAt(this.m_current - 3, 7, 'STATUTE', '') ||
-      this.StringAt(this.m_current - 3, 7, 'AMATEUR', '') ||
-      this.StringAt(
+      this.StringAt(this.m_current + 1, 4, 'UENT', '')
+      || this.StringAt(this.m_current - 4, 9, 'RIGHTEOUS', '')
+      || this.StringAt(this.m_current - 3, 7, 'STATUTE', '')
+      || this.StringAt(this.m_current - 3, 7, 'AMATEUR', '')
+      || this.StringAt(
         this.m_current - 1,
         5,
         'NTULE',
@@ -7461,19 +7583,19 @@ export class Metaphone3 {
         'STULA',
         'STEUR',
         '',
-      ) ||
-      (this.m_current + 2 === this.m_last &&
-        this.StringAt(this.m_current, 3, 'TUE', '')) ||
-      this.StringAt(this.m_current, 5, 'TUENC', '') ||
-      this.StringAt(this.m_current - 3, 8, 'STATUTOR', '') ||
-      (this.m_current + 5 === this.m_last &&
-        this.StringAt(this.m_current, 6, 'TIENCE', ''))
+      )
+      || (this.m_current + 2 === this.m_last
+        && this.StringAt(this.m_current, 3, 'TUE', ''))
+      || this.StringAt(this.m_current, 5, 'TUENC', '')
+      || this.StringAt(this.m_current - 3, 8, 'STATUTOR', '')
+      || (this.m_current + 5 === this.m_last
+        && this.StringAt(this.m_current, 6, 'TIENCE', ''))
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('X', 'T');
-      this.AdvanceCounter(2, 1);
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('X', 'T')
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7485,8 +7607,8 @@ export class Metaphone3 {
    */
   Encode_TUR_TIU_Suffixes(): boolean {
     if (
-      this.m_current > 0 &&
-      this.StringAt(
+      this.m_current > 0
+      && this.StringAt(
         this.m_current + 1,
         3,
         'URE',
@@ -7499,19 +7621,20 @@ export class Metaphone3 {
       )
     ) {
       if (
-        (this.StringAt(this.m_current + 1, 3, 'URA', 'URO', '') &&
-          this.m_current + 3 === this.m_last &&
-          !this.StringAt(this.m_current - 3, 7, 'VENTURA', '')) ||
-        this.StringAt(this.m_current + 1, 4, 'URIA', '')
+        (this.StringAt(this.m_current + 1, 3, 'URA', 'URO', '')
+          && this.m_current + 3 === this.m_last
+          && !this.StringAt(this.m_current - 3, 7, 'VENTURA', ''))
+        || this.StringAt(this.m_current + 1, 4, 'URIA', '')
       ) {
-        this.MetaphAdd$java_lang_String('T');
-      } else {
-        this.MetaphAdd$java_lang_String$java_lang_String('X', 'T');
+        this.MetaphAdd$java_lang_String('T')
       }
-      this.AdvanceCounter(2, 1);
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String$java_lang_String('X', 'T')
+      }
+      this.AdvanceCounter(2, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7524,59 +7647,63 @@ export class Metaphone3 {
    */
   Encode_TI(): boolean {
     if (
-      (this.StringAt(this.m_current + 1, 2, 'IO', '') &&
-        !this.StringAt(this.m_current - 1, 5, 'ETIOL', '')) ||
-      this.StringAt(this.m_current + 1, 3, 'IAL', '') ||
-      this.StringAt(this.m_current - 1, 5, 'RTIUM', 'ATIUM', '') ||
-      (this.StringAt(this.m_current + 1, 3, 'IAN', '') &&
-        this.m_current > 0 &&
-        !(
-          this.StringAt(this.m_current - 4, 8, 'FAUSTIAN', '') ||
-          this.StringAt(this.m_current - 5, 9, 'PROUSTIAN', '') ||
-          this.StringAt(this.m_current - 2, 7, 'TATIANA', '') ||
-          this.StringAt(this.m_current - 3, 7, 'KANTIAN', 'GENTIAN', '') ||
-          this.StringAt(this.m_current - 8, 12, 'ROOSEVELTIAN', '')
-        )) ||
-      (this.m_current + 2 === this.m_last &&
-        this.StringAt(this.m_current, 3, 'TIA', '') &&
-        !(
-          this.StringAt(this.m_current - 3, 6, 'HESTIA', 'MASTIA', '') ||
-          this.StringAt(this.m_current - 2, 5, 'OSTIA', '') ||
-          this.StringAt(0, 3, 'TIA', '') ||
-          this.StringAt(this.m_current - 5, 8, 'IZVESTIA', '')
-        )) ||
-      this.StringAt(
-        this.m_current + 1,
-        4,
-        'IATE',
-        'IATI',
-        'IABL',
-        'IATO',
-        'IARY',
-        '',
-      ) ||
-      this.StringAt(this.m_current - 5, 9, 'CHRISTIAN', '')
+      (this.StringAt(this.m_current + 1, 2, 'IO', '')
+        && !this.StringAt(this.m_current - 1, 5, 'ETIOL', ''))
+      || this.StringAt(this.m_current + 1, 3, 'IAL', '')
+      || this.StringAt(this.m_current - 1, 5, 'RTIUM', 'ATIUM', '')
+      || (this.StringAt(this.m_current + 1, 3, 'IAN', '')
+        && this.m_current > 0
+        && !(
+          this.StringAt(this.m_current - 4, 8, 'FAUSTIAN', '')
+          || this.StringAt(this.m_current - 5, 9, 'PROUSTIAN', '')
+          || this.StringAt(this.m_current - 2, 7, 'TATIANA', '')
+          || this.StringAt(this.m_current - 3, 7, 'KANTIAN', 'GENTIAN', '')
+          || this.StringAt(this.m_current - 8, 12, 'ROOSEVELTIAN', '')
+        ))
+        || (this.m_current + 2 === this.m_last
+          && this.StringAt(this.m_current, 3, 'TIA', '')
+          && !(
+            this.StringAt(this.m_current - 3, 6, 'HESTIA', 'MASTIA', '')
+            || this.StringAt(this.m_current - 2, 5, 'OSTIA', '')
+            || this.StringAt(0, 3, 'TIA', '')
+            || this.StringAt(this.m_current - 5, 8, 'IZVESTIA', '')
+          ))
+          || this.StringAt(
+            this.m_current + 1,
+            4,
+            'IATE',
+            'IATI',
+            'IABL',
+            'IATO',
+            'IARY',
+            '',
+          )
+          || this.StringAt(this.m_current - 5, 9, 'CHRISTIAN', '')
     ) {
       if (
-        (this.m_current === 2 && this.StringAt(0, 4, 'ANTI', '')) ||
-        this.StringAt(0, 5, 'PATIO', 'PITIA', 'DUTIA', '')
+        (this.m_current === 2 && this.StringAt(0, 4, 'ANTI', ''))
+        || this.StringAt(0, 5, 'PATIO', 'PITIA', 'DUTIA', '')
       ) {
-        this.MetaphAdd$java_lang_String('T');
-      } else if (this.StringAt(this.m_current - 4, 8, 'EQUATION', '')) {
-        this.MetaphAdd$java_lang_String('J');
-      } else {
+        this.MetaphAdd$java_lang_String('T')
+      }
+      else if (this.StringAt(this.m_current - 4, 8, 'EQUATION', '')) {
+        this.MetaphAdd$java_lang_String('J')
+      }
+      else {
         if (this.StringAt(this.m_current, 4, 'TION', '')) {
-          this.MetaphAdd$java_lang_String('X');
-        } else if (this.StringAt(0, 5, 'KATIA', 'LATIA', '')) {
-          this.MetaphAdd$java_lang_String$java_lang_String('T', 'X');
-        } else {
-          this.MetaphAdd$java_lang_String$java_lang_String('X', 'T');
+          this.MetaphAdd$java_lang_String('X')
+        }
+        else if (this.StringAt(0, 5, 'KATIA', 'LATIA', '')) {
+          this.MetaphAdd$java_lang_String$java_lang_String('T', 'X')
+        }
+        else {
+          this.MetaphAdd$java_lang_String$java_lang_String('X', 'T')
         }
       }
-      this.AdvanceCounter(3, 1);
-      return true;
+      this.AdvanceCounter(3, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7587,11 +7714,11 @@ export class Metaphone3 {
    */
   Encode_TIENT(): boolean {
     if (this.StringAt(this.m_current + 1, 4, 'IENT', '')) {
-      this.MetaphAdd$java_lang_String$java_lang_String('X', 'T');
-      this.AdvanceCounter(3, 1);
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('X', 'T')
+      this.AdvanceCounter(3, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7602,14 +7729,14 @@ export class Metaphone3 {
    */
   Encode_TSCH(): boolean {
     if (
-      this.StringAt(this.m_current, 4, 'TSCH', '') &&
-      !this.StringAt(this.m_current - 3, 4, 'WELT', 'KLAT', 'FEST', '')
+      this.StringAt(this.m_current, 4, 'TSCH', '')
+      && !this.StringAt(this.m_current - 3, 4, 'WELT', 'KLAT', 'FEST', '')
     ) {
-      this.MetaphAdd$java_lang_String('X');
-      this.m_current += 4;
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.m_current += 4
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7622,11 +7749,11 @@ export class Metaphone3 {
    */
   Encode_TZSCH(): boolean {
     if (this.StringAt(this.m_current, 5, 'TZSCH', '')) {
-      this.MetaphAdd$java_lang_String('X');
-      this.m_current += 5;
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.m_current += 5
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7640,8 +7767,8 @@ export class Metaphone3 {
    */
   Encode_TH_Pronounced_Separately(): boolean {
     if (
-      (this.m_current > 0 &&
-        this.StringAt(
+      (this.m_current > 0
+        && this.StringAt(
           this.m_current + 1,
           4,
           'HOOD',
@@ -7661,9 +7788,9 @@ export class Metaphone3 {
           'HOFF',
           'HARD',
           '',
-        ) &&
-        !this.StringAt(this.m_current - 3, 5, 'SOUTH', 'NORTH', '')) ||
-      this.StringAt(
+        )
+        && !this.StringAt(this.m_current - 3, 5, 'SOUTH', 'NORTH', ''))
+      || this.StringAt(
         this.m_current + 1,
         5,
         'HOUSE',
@@ -7672,36 +7799,37 @@ export class Metaphone3 {
         'HYPNO',
         'HEQUE',
         '',
-      ) ||
-      (this.StringAt(this.m_current + 1, 4, 'HALL', '') &&
-        this.m_current + 4 === this.m_last &&
-        !this.StringAt(this.m_current - 3, 5, 'SOUTH', 'NORTH', '')) ||
-      (this.StringAt(this.m_current + 1, 3, 'HAM', '') &&
-        this.m_current + 3 === this.m_last &&
-        !(
-          this.StringAt(0, 6, 'GOTHAM', 'WITHAM', 'LATHAM', '') ||
-          this.StringAt(0, 7, 'BENTHAM', 'WALTHAM', 'WORTHAM', '') ||
-          this.StringAt(0, 8, 'GRANTHAM', '')
-        )) ||
-      (this.StringAt(this.m_current + 1, 5, 'HATCH', '') &&
-        !(
-          this.m_current === 0 ||
-          this.StringAt(this.m_current - 2, 8, 'UNTHATCH', '')
-        )) ||
-      this.StringAt(this.m_current - 3, 7, 'WARTHOG', '') ||
-      this.StringAt(this.m_current - 2, 6, 'ESTHER', '') ||
-      this.StringAt(this.m_current - 3, 6, 'GOETHE', '') ||
-      this.StringAt(this.m_current - 2, 8, 'NATHALIE', '')
+      )
+      || (this.StringAt(this.m_current + 1, 4, 'HALL', '')
+        && this.m_current + 4 === this.m_last
+        && !this.StringAt(this.m_current - 3, 5, 'SOUTH', 'NORTH', ''))
+      || (this.StringAt(this.m_current + 1, 3, 'HAM', '')
+        && this.m_current + 3 === this.m_last
+        && !(
+          this.StringAt(0, 6, 'GOTHAM', 'WITHAM', 'LATHAM', '')
+          || this.StringAt(0, 7, 'BENTHAM', 'WALTHAM', 'WORTHAM', '')
+          || this.StringAt(0, 8, 'GRANTHAM', '')
+        ))
+        || (this.StringAt(this.m_current + 1, 5, 'HATCH', '')
+          && !(
+            this.m_current === 0
+            || this.StringAt(this.m_current - 2, 8, 'UNTHATCH', '')
+          ))
+          || this.StringAt(this.m_current - 3, 7, 'WARTHOG', '')
+          || this.StringAt(this.m_current - 2, 6, 'ESTHER', '')
+          || this.StringAt(this.m_current - 3, 6, 'GOETHE', '')
+          || this.StringAt(this.m_current - 2, 8, 'NATHALIE', '')
     ) {
       if (this.StringAt(this.m_current - 3, 7, 'POSTHUM', '')) {
-        this.MetaphAdd$java_lang_String('X');
-      } else {
-        this.MetaphAdd$java_lang_String('T');
+        this.MetaphAdd$java_lang_String('X')
       }
-      this.m_current += 2;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('T')
+      }
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7713,14 +7841,15 @@ export class Metaphone3 {
   Encode_TTH(): boolean {
     if (this.StringAt(this.m_current, 3, 'TTH', '')) {
       if (this.StringAt(this.m_current - 2, 5, 'MATTH', '')) {
-        this.MetaphAdd$java_lang_String('0');
-      } else {
-        this.MetaphAdd$java_lang_String('T0');
+        this.MetaphAdd$java_lang_String('0')
       }
-      this.m_current += 3;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('T0')
+      }
+      this.m_current += 3
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7733,8 +7862,8 @@ export class Metaphone3 {
   Encode_TH(): boolean {
     if (this.StringAt(this.m_current, 2, 'TH', '')) {
       if (this.StringAt(this.m_current - 3, 7, 'CLOTHES', '')) {
-        this.m_current += 3;
-        return true;
+        this.m_current += 3
+        return true
       }
       if (
         this.StringAt(
@@ -7751,24 +7880,26 @@ export class Metaphone3 {
           'ILDA',
           'ILDE',
           '',
-        ) ||
-        (this.StringAt(0, 4, 'THOM', '') && this.m_length === 4) ||
-        (this.StringAt(0, 5, 'THOMS', '') && this.m_length === 5) ||
-        this.StringAt(0, 4, 'VAN ', 'VON ', '') ||
-        this.StringAt(0, 3, 'SCH', '')
+        )
+        || (this.StringAt(0, 4, 'THOM', '') && this.m_length === 4)
+        || (this.StringAt(0, 5, 'THOMS', '') && this.m_length === 5)
+        || this.StringAt(0, 4, 'VAN ', 'VON ', '')
+        || this.StringAt(0, 3, 'SCH', '')
       ) {
-        this.MetaphAdd$java_lang_String('T');
-      } else {
+        this.MetaphAdd$java_lang_String('T')
+      }
+      else {
         if (this.StringAt(0, 2, 'SM', '')) {
-          this.MetaphAdd$java_lang_String$java_lang_String('0', 'T');
-        } else {
-          this.MetaphAdd$java_lang_String('0');
+          this.MetaphAdd$java_lang_String$java_lang_String('0', 'T')
+        }
+        else {
+          this.MetaphAdd$java_lang_String('0')
         }
       }
-      this.m_current += 2;
-      return true;
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7777,15 +7908,16 @@ export class Metaphone3 {
    */
   Encode_V() {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
       ) == 'V'.charCodeAt(0)
     ) {
-      this.m_current += 2;
-    } else {
-      this.m_current++;
+      this.m_current += 2
     }
-    this.MetaphAddExactApprox$java_lang_String$java_lang_String('V', 'F');
+    else {
+      this.m_current++
+    }
+    this.MetaphAddExactApprox$java_lang_String$java_lang_String('V', 'F')
   }
 
   /**
@@ -7794,23 +7926,23 @@ export class Metaphone3 {
    */
   Encode_W() {
     if (
-      this.Encode_Silent_W_At_Beginning() ||
-      this.Encode_WITZ_WICZ() ||
-      this.Encode_WR() ||
-      this.Encode_Initial_W_Vowel() ||
-      this.Encode_WH() ||
-      this.Encode_Eastern_European_W()
+      this.Encode_Silent_W_At_Beginning()
+      || this.Encode_WITZ_WICZ()
+      || this.Encode_WR()
+      || this.Encode_Initial_W_Vowel()
+      || this.Encode_WH()
+      || this.Encode_Eastern_European_W()
     ) {
-      return;
+      return
     }
     if (
-      this.m_encodeVowels &&
-      this.StringAt(this.m_current, 2, 'WE', '') &&
-      this.m_current + 1 === this.m_last
+      this.m_encodeVowels
+      && this.StringAt(this.m_current, 2, 'WE', '')
+      && this.m_current + 1 === this.m_last
     ) {
-      this.MetaphAdd$java_lang_String('A');
+      this.MetaphAdd$java_lang_String('A')
     }
-    this.m_current++;
+    this.m_current++
   }
 
   /**
@@ -7821,10 +7953,10 @@ export class Metaphone3 {
    */
   Encode_Silent_W_At_Beginning(): boolean {
     if (this.m_current === 0 && this.StringAt(this.m_current, 2, 'WR', '')) {
-      this.m_current += 1;
-      return true;
+      this.m_current += 1
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7839,29 +7971,31 @@ export class Metaphone3 {
    */
   Encode_WITZ_WICZ(): boolean {
     if (
-      this.m_current + 3 === this.m_last &&
-      this.StringAt(this.m_current, 4, 'WICZ', 'WITZ', '')
+      this.m_current + 3 === this.m_last
+      && this.StringAt(this.m_current, 4, 'WICZ', 'WITZ', '')
     ) {
       if (this.m_encodeVowels) {
         if (
-          /* length */ this.m_primary.str.length > 0 &&
-          ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+          /* length */ this.m_primary.str.length > 0
+          && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
             /* charAt */ this.m_primary.str.charAt(
               /* length */ this.m_primary.str.length - 1,
             ),
           ) == 'A'.charCodeAt(0)
         ) {
-          this.MetaphAdd$java_lang_String$java_lang_String('TS', 'FAX');
-        } else {
-          this.MetaphAdd$java_lang_String$java_lang_String('ATS', 'FAX');
+          this.MetaphAdd$java_lang_String$java_lang_String('TS', 'FAX')
         }
-      } else {
-        this.MetaphAdd$java_lang_String$java_lang_String('TS', 'FX');
+        else {
+          this.MetaphAdd$java_lang_String$java_lang_String('ATS', 'FAX')
+        }
       }
-      this.m_current += 4;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String$java_lang_String('TS', 'FX')
+      }
+      this.m_current += 4
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7872,11 +8006,11 @@ export class Metaphone3 {
    */
   Encode_WR(): boolean {
     if (this.StringAt(this.m_current, 2, 'WR', '')) {
-      this.MetaphAdd$java_lang_String('R');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('R')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7896,23 +8030,25 @@ export class Metaphone3 {
             'VA',
             'A',
             'FA',
-          );
-        } else {
+          )
+        }
+        else {
           this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
             'A',
             'V',
             'A',
             'F',
-          );
+          )
         }
-      } else {
-        this.MetaphAdd$java_lang_String('A');
       }
-      this.m_current++;
-      this.m_current = this.SkipVowels(this.m_current);
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('A')
+      }
+      this.m_current++
+      this.m_current = this.SkipVowels(this.m_current)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7925,12 +8061,12 @@ export class Metaphone3 {
   Encode_WH(): boolean {
     if (this.StringAt(this.m_current, 2, 'WH', '')) {
       if (
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.CharAt(this.m_current + 2),
-        ) == 'O'.charCodeAt(0) &&
-        !(
-          this.StringAt(this.m_current + 2, 4, 'OOSH', '') ||
-          this.StringAt(
+        ) == 'O'.charCodeAt(0)
+        && !(
+          this.StringAt(this.m_current + 2, 4, 'OOSH', '')
+          || this.StringAt(
             this.m_current + 2,
             3,
             'OOP',
@@ -7938,14 +8074,15 @@ export class Metaphone3 {
             'ORL',
             'ORT',
             '',
-          ) ||
-          this.StringAt(this.m_current + 2, 2, 'OA', 'OP', '')
+          )
+          || this.StringAt(this.m_current + 2, 2, 'OA', 'OP', '')
         )
       ) {
-        this.MetaphAdd$java_lang_String('H');
-        this.AdvanceCounter(3, 2);
-        return true;
-      } else {
+        this.MetaphAdd$java_lang_String('H')
+        this.AdvanceCounter(3, 2)
+        return true
+      }
+      else {
         if (
           this.StringAt(
             this.m_current + 2,
@@ -7960,24 +8097,25 @@ export class Metaphone3 {
             'OLE',
             'OOD',
             '',
-          ) ||
-          this.StringAt(this.m_current + 2, 4, 'EART', 'OUSE', 'OUND', '') ||
-          this.StringAt(this.m_current + 2, 5, 'AMMER', '')
+          )
+          || this.StringAt(this.m_current + 2, 4, 'EART', 'OUSE', 'OUND', '')
+          || this.StringAt(this.m_current + 2, 5, 'AMMER', '')
         ) {
-          this.MetaphAdd$java_lang_String('H');
-          this.m_current += 2;
-          return true;
-        } else if (this.m_current === 0) {
-          this.MetaphAdd$java_lang_String('A');
-          this.m_current += 2;
-          this.m_current = this.SkipVowels(this.m_current);
-          return true;
+          this.MetaphAdd$java_lang_String('H')
+          this.m_current += 2
+          return true
+        }
+        else if (this.m_current === 0) {
+          this.MetaphAdd$java_lang_String('A')
+          this.m_current += 2
+          this.m_current = this.SkipVowels(this.m_current)
+          return true
         }
       }
-      this.m_current += 2;
-      return true;
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -7990,9 +8128,9 @@ export class Metaphone3 {
    */
   Encode_Eastern_European_W(): boolean {
     if (
-      (this.m_current === this.m_last &&
-        this.IsVowel$int(this.m_current - 1)) ||
-      this.StringAt(
+      (this.m_current === this.m_last
+        && this.IsVowel$int(this.m_current - 1))
+      || this.StringAt(
         this.m_current - 1,
         5,
         'EWSKI',
@@ -8000,23 +8138,23 @@ export class Metaphone3 {
         'OWSKI',
         'OWSKY',
         '',
-      ) ||
-      (this.StringAt(this.m_current, 5, 'WICKI', 'WACKI', '') &&
-        this.m_current + 4 === this.m_last) ||
-      (this.StringAt(this.m_current, 4, 'WIAK', '') &&
-        this.m_current + 3 === this.m_last) ||
-      this.StringAt(0, 3, 'SCH', '')
+      )
+      || (this.StringAt(this.m_current, 5, 'WICKI', 'WACKI', '')
+        && this.m_current + 4 === this.m_last)
+      || (this.StringAt(this.m_current, 4, 'WIAK', '')
+        && this.m_current + 3 === this.m_last)
+      || this.StringAt(0, 3, 'SCH', '')
     ) {
       this.MetaphAddExactApprox$java_lang_String$java_lang_String$java_lang_String$java_lang_String(
         '',
         'V',
         '',
         'F',
-      );
-      this.m_current++;
-      return true;
+      )
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8025,22 +8163,23 @@ export class Metaphone3 {
    */
   Encode_X() {
     if (
-      this.Encode_Initial_X() ||
-      this.Encode_Greek_X() ||
-      this.Encode_X_Special_Cases() ||
-      this.Encode_X_To_H() ||
-      this.Encode_X_Vowel() ||
-      this.Encode_French_X_Final()
+      this.Encode_Initial_X()
+      || this.Encode_Greek_X()
+      || this.Encode_X_Special_Cases()
+      || this.Encode_X_To_H()
+      || this.Encode_X_Vowel()
+      || this.Encode_French_X_Final()
     ) {
-      return;
+      return
     }
     if (
-      this.StringAt(this.m_current + 1, 1, 'X', 'Z', 'S', '') ||
-      this.StringAt(this.m_current + 1, 2, 'CI', 'CE', '')
+      this.StringAt(this.m_current + 1, 1, 'X', 'Z', 'S', '')
+      || this.StringAt(this.m_current + 1, 2, 'CI', 'CE', '')
     ) {
-      this.m_current += 2;
-    } else {
-      this.m_current++;
+      this.m_current += 2
+    }
+    else {
+      this.m_current++
     }
   }
 
@@ -8052,19 +8191,19 @@ export class Metaphone3 {
    */
   Encode_Initial_X(): boolean {
     if (
-      this.StringAt(0, 3, 'XIA', 'XIO', 'XIE', '') ||
-      this.StringAt(0, 2, 'XU', '')
+      this.StringAt(0, 3, 'XIA', 'XIO', 'XIE', '')
+      || this.StringAt(0, 2, 'XU', '')
     ) {
-      this.MetaphAdd$java_lang_String('X');
-      this.m_current++;
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.m_current++
+      return true
     }
     if (this.m_current === 0) {
-      this.MetaphAdd$java_lang_String('S');
-      this.m_current++;
-      return true;
+      this.MetaphAdd$java_lang_String('S')
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8075,14 +8214,14 @@ export class Metaphone3 {
    */
   Encode_Greek_X(): boolean {
     if (
-      this.StringAt(this.m_current + 1, 3, 'YLO', 'YLE', 'ENO', '') ||
-      this.StringAt(this.m_current + 1, 4, 'ANTH', '')
+      this.StringAt(this.m_current + 1, 3, 'YLO', 'YLE', 'ENO', '')
+      || this.StringAt(this.m_current + 1, 4, 'ANTH', '')
     ) {
-      this.MetaphAdd$java_lang_String('S');
-      this.m_current++;
-      return true;
+      this.MetaphAdd$java_lang_String('S')
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8093,19 +8232,19 @@ export class Metaphone3 {
    */
   Encode_X_Special_Cases(): boolean {
     if (this.StringAt(this.m_current - 2, 5, 'LUXUR', '')) {
-      this.MetaphAddExactApprox$java_lang_String$java_lang_String('GJ', 'KJ');
-      this.m_current++;
-      return true;
+      this.MetaphAddExactApprox$java_lang_String$java_lang_String('GJ', 'KJ')
+      this.m_current++
+      return true
     }
     if (
-      this.StringAt(0, 7, 'TEXEIRA', '') ||
-      this.StringAt(0, 8, 'TEIXEIRA', '')
+      this.StringAt(0, 7, 'TEXEIRA', '')
+      || this.StringAt(0, 8, 'TEIXEIRA', '')
     ) {
-      this.MetaphAdd$java_lang_String('X');
-      this.m_current++;
-      return true;
+      this.MetaphAdd$java_lang_String('X')
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8117,14 +8256,14 @@ export class Metaphone3 {
    */
   Encode_X_To_H(): boolean {
     if (
-      this.StringAt(this.m_current - 2, 6, 'OAXACA', '') ||
-      this.StringAt(this.m_current - 3, 7, 'QUIXOTE', '')
+      this.StringAt(this.m_current - 2, 6, 'OAXACA', '')
+      || this.StringAt(this.m_current - 3, 7, 'QUIXOTE', '')
     ) {
-      this.MetaphAdd$java_lang_String('H');
-      this.m_current++;
-      return true;
+      this.MetaphAdd$java_lang_String('H')
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8137,11 +8276,11 @@ export class Metaphone3 {
    */
   Encode_X_Vowel(): boolean {
     if (this.StringAt(this.m_current + 1, 3, 'UAL', 'ION', 'IOU', '')) {
-      this.MetaphAdd$java_lang_String$java_lang_String('KX', 'KS');
-      this.AdvanceCounter(3, 1);
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('KX', 'KS')
+      this.AdvanceCounter(3, 1)
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8154,9 +8293,9 @@ export class Metaphone3 {
   Encode_French_X_Final(): boolean {
     if (
       !(
-        this.m_current === this.m_last &&
-        (this.StringAt(this.m_current - 3, 3, 'IAU', 'EAU', 'IEU', '') ||
-          this.StringAt(
+        this.m_current === this.m_last
+        && (this.StringAt(this.m_current - 3, 3, 'IAU', 'EAU', 'IEU', '')
+          || this.StringAt(
             this.m_current - 2,
             2,
             'AI',
@@ -8168,9 +8307,9 @@ export class Metaphone3 {
           ))
       )
     ) {
-      this.MetaphAdd$java_lang_String('KS');
+      this.MetaphAdd$java_lang_String('KS')
     }
-    return false;
+    return false
   }
 
   /**
@@ -8179,26 +8318,28 @@ export class Metaphone3 {
    */
   Encode_Z() {
     if (
-      this.Encode_ZZ() ||
-      this.Encode_ZU_ZIER_ZS() ||
-      this.Encode_French_EZ() ||
-      this.Encode_German_Z()
+      this.Encode_ZZ()
+      || this.Encode_ZU_ZIER_ZS()
+      || this.Encode_French_EZ()
+      || this.Encode_German_Z()
     ) {
-      return;
+      return
     }
     if (this.Encode_ZH()) {
-      return;
-    } else {
-      this.MetaphAdd$java_lang_String('S');
+      return
+    }
+    else {
+      this.MetaphAdd$java_lang_String('S')
     }
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
       ) == 'Z'.charCodeAt(0)
     ) {
-      this.m_current += 2;
-    } else {
-      this.m_current++;
+      this.m_current += 2
+    }
+    else {
+      this.m_current++
     }
   }
 
@@ -8211,25 +8352,25 @@ export class Metaphone3 {
    */
   Encode_ZZ(): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
-      ) == 'Z'.charCodeAt(0) &&
-      ((this.StringAt(this.m_current + 2, 1, 'I', 'O', 'A', '') &&
-        this.m_current + 2 === this.m_last) ||
-        this.StringAt(
-          this.m_current - 2,
-          9,
-          'MOZZARELL',
-          'PIZZICATO',
-          'PUZZONLAN',
-          '',
-        ))
+      ) == 'Z'.charCodeAt(0)
+      && ((this.StringAt(this.m_current + 2, 1, 'I', 'O', 'A', '')
+        && this.m_current + 2 === this.m_last)
+      || this.StringAt(
+        this.m_current - 2,
+        9,
+        'MOZZARELL',
+        'PIZZICATO',
+        'PUZZONLAN',
+        '',
+      ))
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('TS', 'S');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String$java_lang_String('TS', 'S')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8240,21 +8381,22 @@ export class Metaphone3 {
    */
   Encode_ZU_ZIER_ZS(): boolean {
     if (
-      (this.m_current === 1 &&
-        this.StringAt(this.m_current - 1, 4, 'AZUR', '')) ||
-      (this.StringAt(this.m_current, 4, 'ZIER', '') &&
-        !this.StringAt(this.m_current - 2, 6, 'VIZIER', '')) ||
-      this.StringAt(this.m_current, 3, 'ZSA', '')
+      (this.m_current === 1
+        && this.StringAt(this.m_current - 1, 4, 'AZUR', ''))
+      || (this.StringAt(this.m_current, 4, 'ZIER', '')
+        && !this.StringAt(this.m_current - 2, 6, 'VIZIER', ''))
+      || this.StringAt(this.m_current, 3, 'ZSA', '')
     ) {
-      this.MetaphAdd$java_lang_String$java_lang_String('J', 'S');
+      this.MetaphAdd$java_lang_String$java_lang_String('J', 'S')
       if (this.StringAt(this.m_current, 3, 'ZSA', '')) {
-        this.m_current += 2;
-      } else {
-        this.m_current++;
+        this.m_current += 2
       }
-      return true;
+      else {
+        this.m_current++
+      }
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8266,14 +8408,14 @@ export class Metaphone3 {
    */
   Encode_French_EZ(): boolean {
     if (
-      (this.m_current === 3 &&
-        this.StringAt(this.m_current - 3, 4, 'CHEZ', '')) ||
-      this.StringAt(this.m_current - 5, 6, 'RENDEZ', '')
+      (this.m_current === 3
+        && this.StringAt(this.m_current - 3, 4, 'CHEZ', ''))
+      || this.StringAt(this.m_current - 5, 6, 'RENDEZ', '')
     ) {
-      this.m_current++;
-      return true;
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8285,11 +8427,11 @@ export class Metaphone3 {
    */
   Encode_German_Z(): boolean {
     if (
-      (this.m_current === 2 &&
-        this.m_current + 1 === this.m_last &&
-        this.StringAt(this.m_current - 2, 4, 'NAZI', '')) ||
-      this.StringAt(this.m_current - 2, 6, 'NAZIFY', 'MOZART', '') ||
-      this.StringAt(
+      (this.m_current === 2
+        && this.m_current + 1 === this.m_last
+        && this.StringAt(this.m_current - 2, 4, 'NAZI', ''))
+      || this.StringAt(this.m_current - 2, 6, 'NAZIFY', 'MOZART', '')
+      || this.StringAt(
         this.m_current - 3,
         4,
         'HOLZ',
@@ -8297,31 +8439,32 @@ export class Metaphone3 {
         'MERZ',
         'FITZ',
         '',
-      ) ||
-      (this.StringAt(this.m_current - 3, 4, 'GANZ', '') &&
-        !this.IsVowel$int(this.m_current + 1)) ||
-      this.StringAt(this.m_current - 4, 5, 'STOLZ', 'PRINZ', '') ||
-      this.StringAt(this.m_current - 4, 7, 'VENEZIA', '') ||
-      this.StringAt(this.m_current - 3, 6, 'HERZOG', '') ||
-      /* contains */ (this.m_inWord.indexOf('SCH') != -1 &&
-        !this.StringAt(this.m_last - 2, 3, 'IZE', 'OZE', 'ZEL', '')) ||
-      (this.m_current > 0 && this.StringAt(this.m_current, 4, 'ZEIT', '')) ||
-      this.StringAt(this.m_current - 3, 4, 'WEIZ', '')
+      )
+      || (this.StringAt(this.m_current - 3, 4, 'GANZ', '')
+        && !this.IsVowel$int(this.m_current + 1))
+      || this.StringAt(this.m_current - 4, 5, 'STOLZ', 'PRINZ', '')
+      || this.StringAt(this.m_current - 4, 7, 'VENEZIA', '')
+      || this.StringAt(this.m_current - 3, 6, 'HERZOG', '')
+      /* contains */ || (this.m_inWord.includes('SCH')
+        && !this.StringAt(this.m_last - 2, 3, 'IZE', 'OZE', 'ZEL', ''))
+      || (this.m_current > 0 && this.StringAt(this.m_current, 4, 'ZEIT', ''))
+      || this.StringAt(this.m_current - 3, 4, 'WEIZ', '')
     ) {
       if (
-        this.m_current > 0 &&
-        ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+        this.m_current > 0
+        && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
           this.m_inWord.charAt(this.m_current - 1),
         ) == 'T'.charCodeAt(0)
       ) {
-        this.MetaphAdd$java_lang_String('S');
-      } else {
-        this.MetaphAdd$java_lang_String('TS');
+        this.MetaphAdd$java_lang_String('S')
       }
-      this.m_current++;
-      return true;
+      else {
+        this.MetaphAdd$java_lang_String('TS')
+      }
+      this.m_current++
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8332,15 +8475,15 @@ export class Metaphone3 {
    */
   Encode_ZH(): boolean {
     if (
-      ((c) => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
+      (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
         this.CharAt(this.m_current + 1),
       ) == 'H'.charCodeAt(0)
     ) {
-      this.MetaphAdd$java_lang_String('J');
-      this.m_current += 2;
-      return true;
+      this.MetaphAdd$java_lang_String('J')
+      this.m_current += 2
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8362,13 +8505,13 @@ export class Metaphone3 {
         'SWENSEN',
         'SWOBODA',
         '',
-      ) ||
-      this.StringAt(0, 9, 'SWIDERSKI', 'SWARTHOUT', '') ||
-      this.StringAt(0, 10, 'SWEARENGIN', '')
+      )
+      || this.StringAt(0, 9, 'SWIDERSKI', 'SWARTHOUT', '')
+      || this.StringAt(0, 10, 'SWEARENGIN', '')
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8381,9 +8524,9 @@ export class Metaphone3 {
    */
   Names_Beginning_With_SW_That_Get_Alt_XV(): boolean {
     if (
-      this.StringAt(0, 5, 'SWART', '') ||
-      this.StringAt(0, 6, 'SWARTZ', 'SWARTS', 'SWIGER', '') ||
-      this.StringAt(
+      this.StringAt(0, 5, 'SWART', '')
+      || this.StringAt(0, 6, 'SWARTZ', 'SWARTS', 'SWIGER', '')
+      || this.StringAt(
         0,
         7,
         'SWITZER',
@@ -8392,14 +8535,14 @@ export class Metaphone3 {
         'SWIGART',
         'SWIHART',
         '',
-      ) ||
-      this.StringAt(0, 8, 'SWEITZER', 'SWATZELL', 'SWINDLER', '') ||
-      this.StringAt(0, 9, 'SWINEHART', '') ||
-      this.StringAt(0, 10, 'SWEARINGEN', '')
+      )
+      || this.StringAt(0, 8, 'SWEITZER', 'SWATZELL', 'SWINDLER', '')
+      || this.StringAt(0, 9, 'SWINEHART', '')
+      || this.StringAt(0, 10, 'SWEARINGEN', '')
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8412,8 +8555,8 @@ export class Metaphone3 {
    */
   Germanic_Or_Slavic_Name_Beginning_With_W(): boolean {
     if (
-      this.StringAt(0, 3, 'WEE', 'WIX', 'WAX', '') ||
-      this.StringAt(
+      this.StringAt(0, 3, 'WEE', 'WIX', 'WAX', '')
+      || this.StringAt(
         0,
         4,
         'WOLF',
@@ -8446,8 +8589,8 @@ export class Metaphone3 {
         'WELK',
         'WISE',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         0,
         5,
         'WIRTH',
@@ -8504,8 +8647,8 @@ export class Metaphone3 {
         'WILMA',
         'WEBER',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         0,
         6,
         'WETZEL',
@@ -8586,8 +8729,8 @@ export class Metaphone3 {
         'WAGNER',
         'WISSER',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         0,
         7,
         'WISEMAN',
@@ -8683,8 +8826,8 @@ export class Metaphone3 {
         'WISHART',
         'WILLIAM',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         0,
         8,
         'WESTPHAL',
@@ -8719,8 +8862,8 @@ export class Metaphone3 {
         'WASINGER',
         'WINBORNE',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         0,
         9,
         'WHISENANT',
@@ -8743,8 +8886,8 @@ export class Metaphone3 {
         'WINKLEMAN',
         'WILHEMINA',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         0,
         10,
         'WISNIEWSKI',
@@ -8766,14 +8909,14 @@ export class Metaphone3 {
         'WANNAMAKER',
         'WEISSINGER',
         '',
-      ) ||
-      this.StringAt(0, 11, 'WALDSCHMIDT', 'WEINGARTNER', 'WINEBRENNER', '') ||
-      this.StringAt(0, 12, 'WOLFENBARGER', '') ||
-      this.StringAt(0, 13, 'WOJCIECHOWSKI', '')
+      )
+      || this.StringAt(0, 11, 'WALDSCHMIDT', 'WEINGARTNER', 'WINEBRENNER', '')
+      || this.StringAt(0, 12, 'WOLFENBARGER', '')
+      || this.StringAt(0, 13, 'WOJCIECHOWSKI', '')
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -8791,8 +8934,8 @@ export class Metaphone3 {
    */
   Names_Beginning_With_J_That_Get_Alt_Y(): boolean {
     if (
-      this.StringAt(0, 3, 'JAN', 'JON', 'JAN', 'JIN', 'JEN', '') ||
-      this.StringAt(
+      this.StringAt(0, 3, 'JAN', 'JON', 'JAN', 'JIN', 'JEN', '')
+      || this.StringAt(
         0,
         4,
         'JUHL',
@@ -8829,8 +8972,8 @@ export class Metaphone3 {
         'JUDE',
         'JONE',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         0,
         5,
         'JOANN',
@@ -8888,8 +9031,8 @@ export class Metaphone3 {
         'JEANE',
         'JONNA',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         0,
         6,
         'JORDAN',
@@ -8987,8 +9130,8 @@ export class Metaphone3 {
         'JERGEN',
         'JAKOB',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         0,
         7,
         'JOHNSON',
@@ -9049,8 +9192,8 @@ export class Metaphone3 {
         'JANTZEN',
         'JOHNNIE',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         0,
         8,
         'JOSEFINA',
@@ -9088,8 +9231,8 @@ export class Metaphone3 {
         'JARNIGAN',
         'JANOUSEK',
         '',
-      ) ||
-      this.StringAt(
+      )
+      || this.StringAt(
         0,
         9,
         'JOHNATHAN',
@@ -9110,21 +9253,21 @@ export class Metaphone3 {
         'JIMMERSON',
         'JOHANSSON',
         '',
-      ) ||
-      this.StringAt(0, 10, 'JAKUBOWSKI', '')
+      )
+      || this.StringAt(0, 10, 'JAKUBOWSKI', '')
     ) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 }
 
-const m3 = new Metaphone3();
+const m3 = new Metaphone3()
 
-export type Metaphone3Config = {
-  encodeExact?: boolean;
-  encodeVowels?: boolean;
-};
+export interface Metaphone3Config {
+  encodeExact?: boolean
+  encodeVowels?: boolean
+}
 
 /**
  * Takes in a word and returns the primary and alternate metaphone3 encodings
@@ -9137,13 +9280,13 @@ export function metaphone3(
   word: string,
   config?: Metaphone3Config,
 ): [primary: string, alternate?: string] {
-  const { encodeVowels = false, encodeExact = false } = config ?? {};
+  const { encodeVowels = false, encodeExact = false } = config ?? {}
 
-  m3.SetEncodeExact(encodeExact);
-  m3.SetEncodeVowels(encodeVowels);
-  m3.SetWord(word);
-  m3.Encode();
+  m3.SetEncodeExact(encodeExact)
+  m3.SetEncodeVowels(encodeVowels)
+  m3.SetWord(word)
+  m3.Encode()
 
-  const alternate = m3.GetAlternateMetaph();
-  return [m3.GetMetaph(), alternate.length === 0 ? undefined : alternate];
+  const alternate = m3.GetAlternateMetaph()
+  return [m3.GetMetaph(), alternate.length === 0 ? undefined : alternate]
 }
