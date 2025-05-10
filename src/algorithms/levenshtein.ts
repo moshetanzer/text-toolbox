@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 // https://github.com/ka-weihe/fastest-levenshtein
 import type { SimilarityAlgorithm, SimilarityOptions, SimilarityResult } from '../types'
 import { distanceToSimilarity, preprocessStrings } from '../utils'
@@ -14,10 +12,10 @@ function myers_32(a: string, b: string): number {
   let sc = n
   let i = n
   while (i--) {
-    peq[a.charCodeAt(i)] |= 1 << i
+    peq[a.charCodeAt(i)]! |= 1 << i
   }
   for (i = 0; i < m; i++) {
-    let eq = peq[b.charCodeAt(i)]
+    let eq = peq[b.charCodeAt(i)] as number
     const xv = eq | mv
     eq |= ((eq & pv) + pv) ^ pv
     mv |= ~(eq | pv)
@@ -42,8 +40,8 @@ function myers_32(a: string, b: string): number {
 function myers_x(b: string, a: string): number {
   const n = a.length
   const m = b.length
-  const mhc = []
-  const phc = []
+  const mhc: number[] = []
+  const phc: number[] = []
   const hsize = Math.ceil(n / 32)
   const vsize = Math.ceil(m / 32)
   for (let i = 0; i < hsize; i++) {
@@ -57,21 +55,21 @@ function myers_x(b: string, a: string): number {
     const start = j * 32
     const vlen = Math.min(32, m) + start
     for (let k = start; k < vlen; k++) {
-      peq[b.charCodeAt(k)] |= 1 << k
+      peq[b.charCodeAt(k)]! |= 1 << k
     }
     for (let i = 0; i < n; i++) {
-      const eq = peq[a.charCodeAt(i)]
-      const pb = (phc[(i / 32) | 0] >>> i) & 1
-      const mb = (mhc[(i / 32) | 0] >>> i) & 1
+      const eq = peq[a.charCodeAt(i)] as number
+      const pb = (phc[(i / 32) | 0]! >>> i) & 1
+      const mb = (mhc[(i / 32) | 0]! >>> i) & 1
       const xv = eq | mv
       const xh = ((((eq | mb) & pv) + pv) ^ pv) | eq | mb
       let ph = mv | ~(xh | pv)
       let mh = pv & xh
       if ((ph >>> 31) ^ pb) {
-        phc[(i / 32) | 0] ^= 1 << i
+        phc[(i / 32) | 0]! ^= 1 << i
       }
       if ((mh >>> 31) ^ mb) {
-        mhc[(i / 32) | 0] ^= 1 << i
+        mhc[(i / 32) | 0]! ^= 1 << i
       }
       ph = (ph << 1) | pb
       mh = (mh << 1) | mb
@@ -87,13 +85,13 @@ function myers_x(b: string, a: string): number {
   const start = j * 32
   const vlen = Math.min(32, m - start) + start
   for (let k = start; k < vlen; k++) {
-    peq[b.charCodeAt(k)] |= 1 << k
+    peq[b.charCodeAt(k)]! |= 1 << k
   }
   let score = m
   for (let i = 0; i < n; i++) {
-    const eq = peq[a.charCodeAt(i)]
-    const pb = (phc[(i / 32) | 0] >>> i) & 1
-    const mb = (mhc[(i / 32) | 0] >>> i) & 1
+    const eq = peq[a.charCodeAt(i)] as number
+    const pb = (phc[(i / 32) | 0]! >>> i) & 1
+    const mb = (mhc[(i / 32) | 0]! >>> i) & 1
     const xv = eq | mv
     const xh = ((((eq | mb) & pv) + pv) ^ pv) | eq | mb
     let ph = mv | ~(xh | pv)
@@ -101,10 +99,10 @@ function myers_x(b: string, a: string): number {
     score += (ph >>> (m - 1)) & 1
     score -= (mh >>> (m - 1)) & 1
     if ((ph >>> 31) ^ pb) {
-      phc[(i / 32) | 0] ^= 1 << i
+      phc[(i / 32) | 0]! ^= 1 << i
     }
     if ((mh >>> 31) ^ mb) {
-      mhc[(i / 32) | 0] ^= 1 << i
+      mhc[(i / 32) | 0]! ^= 1 << i
     }
     ph = (ph << 1) | pb
     mh = (mh << 1) | mb
