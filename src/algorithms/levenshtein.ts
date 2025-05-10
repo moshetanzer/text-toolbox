@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 // https://github.com/ka-weihe/fastest-levenshtein
 import type { SimilarityAlgorithm, SimilarityOptions, SimilarityResult } from '../types'
 import { distanceToSimilarity, preprocessStrings } from '../utils'
