@@ -36,6 +36,9 @@ function normalizePunctuationSpacing(text: string, options?: NormalizePunctuatio
   }
   return result
 }
+function saneWhitespaceNormalization(text: string): string {
+  return normalizeWhitespace(removeExtraSpaces(normalizePunctuationSpacing((text))))
+}
 
 export {
   ensureSpaceAfterPunctuation,
@@ -46,4 +49,5 @@ export {
   removeLeadingWhitespace,
   removeTrailingWhitespace,
   removeWhitespaceBeforePunctuation,
+  saneWhitespaceNormalization,
 }
