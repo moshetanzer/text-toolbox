@@ -1,28 +1,49 @@
-function removeDoubleSpaces(text: string): string {
-  return text.replace(/\s{2,}/g, ' ').trim()
+const WHITE_SPACE_REGEX = /\p{White_Space}+/gu
+interface NormalizePunctuationOptions {
+  removeExtraSpacesAfterPunctuation?: boolean
 }
-function removeAllSpaces(text: string): string {
-  return text.replace(/\s+/g, '')
+
+function removeAllWhitespace(text: string): string {
+  return text.replace(WHITE_SPACE_REGEX, '')
 }
-function removeLeadingSpaces(text: string): string {
+function removeLeadingWhitespace(text: string): string {
   return text.split('\n').map(line => line.replace(/^\s+/, '')).join('\n')
 }
-function removeTrailingSpaces(text: string): string {
+function removeTrailingWhitespace(text: string): string {
   return text.split('\n').map(line => line.replace(/\s+$/, '')).join('\n')
 }
-function removeWhitespaceAroundPunctuation(text: string): string {
-  return text
-    .replace(/\s+([.,!?:;])/g, '$1') // remove space before punctuation
-    .replace(/([.,!?:;])(?=\S)/g, '$1 ') // ensure one space after punctuation
-    .replace(/([!?.])(?:\s*\1)+/g, '$1$1$1') // collapse repeated punctuation (max 3 for !?.)
-    .replace(/\s{2,}/g, ' ') // collapse multiple spaces
-    .trim()
+function normalizeWhitespace(text: string): string {
+  return text.replace(WHITE_SPACE_REGEX, ' ').trim()
+}
+function removeExtraSpaces(text: string): string {
+  return text.replace(/\s{2,}/g, ' ').trim()
+}
+function removeWhitespaceBeforePunctuation(text: string): string {
+  return text.replace(/\s+(\p{P})/gu, '$1')
+}
+function ensureSpaceAfterPunctuation(text: string): string {
+  return text.replace(/(\p{P})(?=\S)/gu, '$1 ')
+}
+function removeExtraSpacesAfterPunctuation(text: string): string {
+  return text.replace(/(\p{P})\s{2,}/gu, '$1 ')
+}
+function normalizePunctuationSpacing(text: string, options?: NormalizePunctuationOptions): string {
+  const removeExtra = options?.removeExtraSpacesAfterPunctuation !== false
+  let result = ensureSpaceAfterPunctuation(text)
+  result = removeWhitespaceBeforePunctuation(result)
+  if (removeExtra) {
+    result = removeExtraSpacesAfterPunctuation(result)
+  }
+  return result
 }
 
 export {
-  removeAllSpaces,
-  removeDoubleSpaces,
-  removeLeadingSpaces,
-  removeTrailingSpaces,
-  removeWhitespaceAroundPunctuation,
+  ensureSpaceAfterPunctuation,
+  normalizePunctuationSpacing,
+  normalizeWhitespace,
+  removeAllWhitespace,
+  removeExtraSpaces,
+  removeLeadingWhitespace,
+  removeTrailingWhitespace,
+  removeWhitespaceBeforePunctuation,
 }

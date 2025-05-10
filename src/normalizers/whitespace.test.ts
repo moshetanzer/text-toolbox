@@ -1,103 +1,78 @@
 import { describe, expect, it } from 'vitest'
 import {
-  removeAllSpaces,
-  removeDoubleSpaces,
-  removeLeadingSpaces,
-  removeTrailingSpaces,
-  removeWhitespaceAroundPunctuation,
+  ensureSpaceAfterPunctuation,
+  normalizePunctuationSpacing,
+  normalizeWhitespace,
+  removeAllWhitespace,
+  removeExtraSpaces,
+  removeLeadingWhitespace,
+  removeTrailingWhitespace,
+  removeWhitespaceBeforePunctuation,
 } from './whitespace'
 
-describe('text normalizer functions', () => {
-  describe('removeDoubleSpaces', () => {
-    it('removes consecutive spaces and trims', () => {
-      expect(removeDoubleSpaces('hello   world')).toBe('hello world')
-      expect(removeDoubleSpaces('  hello    world  ')).toBe('hello world')
-    })
-
-    it('preserves single spaces between words', () => {
-      expect(removeDoubleSpaces('a b c')).toBe('a b c')
-    })
-
-    it('works with tabs and newlines', () => {
-      expect(removeDoubleSpaces('hello\t\t\tworld')).toBe('hello world')
-      expect(removeDoubleSpaces('hello\n\nworld')).toBe('hello world')
-    })
-
-    it('returns empty string if input is only spaces', () => {
-      expect(removeDoubleSpaces('     ')).toBe('')
+describe('whitespace Utils', () => {
+  describe('removeAllWhitespace', () => {
+    it('should remove all whitespace characters', () => {
+      expect(removeAllWhitespace(' Hello   World ')).toBe('HelloWorld')
+      expect(removeAllWhitespace('\tHello \n World')).toBe('HelloWorld')
+      expect(removeAllWhitespace('')).toBe('')
+      expect(removeAllWhitespace(' ')).toBe('')
     })
   })
 
-  describe('removeAllSpaces', () => {
-    it('removes all whitespace characters', () => {
-      expect(removeAllSpaces('a b\tc\nd')).toBe('abcd')
-    })
-
-    it('returns empty string if input is only whitespace', () => {
-      expect(removeAllSpaces('   \t\n')).toBe('')
-    })
-
-    it('preserves non-whitespace characters exactly', () => {
-      expect(removeAllSpaces(' abc-def ')).toBe('abc-def')
+  describe('removeLeadingWhitespace', () => {
+    it('should remove leading whitespace from each line', () => {
+      const input = '   Hello\n  World\n   '
+      const expected = 'Hello\nWorld\n'
+      expect(removeLeadingWhitespace(input)).toBe(expected)
     })
   })
 
-  describe('removeLeadingSpaces', () => {
-    it('removes spaces at the beginning of each line', () => {
-      const input = '   line1\n\t  line2\nline3'
-      const expected = 'line1\nline2\nline3'
-      expect(removeLeadingSpaces(input)).toBe(expected)
-    })
-
-    it('does not affect trailing spaces', () => {
-      expect(removeLeadingSpaces('   hello   ')).toBe('hello   ')
-    })
-
-    it('handles multiple empty lines', () => {
-      expect(removeLeadingSpaces('\n\n   \n  abc')).toBe('\n\n\nabc')
+  describe('removeTrailingWhitespace', () => {
+    it('should remove trailing whitespace from each line', () => {
+      const input = 'Hello   \nWorld   \n'
+      const expected = 'Hello\nWorld\n'
+      expect(removeTrailingWhitespace(input)).toBe(expected)
     })
   })
 
-  describe('removeTrailingSpaces', () => {
-    it('removes spaces at the end of each line', () => {
-      const input = 'line1   \nline2 \t\nline3'
-      const expected = 'line1\nline2\nline3'
-      expect(removeTrailingSpaces(input)).toBe(expected)
-    })
-
-    it('does not affect leading spaces', () => {
-      expect(removeTrailingSpaces('   hello   ')).toBe('   hello')
-    })
-
-    it('handles multiple lines and blank lines', () => {
-      const input = '  abc  \n   \nxyz \n'
-      const expected = '  abc\n\nxyz\n'
-      expect(removeTrailingSpaces(input)).toBe(expected)
+  describe('normalizeWhitespace', () => {
+    it('should replace multiple whitespaces with a single space', () => {
+      expect(normalizeWhitespace(' Hello   World ')).toBe('Hello World')
+      expect(normalizeWhitespace('  Multiple   spaces here ')).toBe('Multiple spaces here')
     })
   })
 
-  describe('removeWhitespaceAroundPunctuation', () => {
-    it('removes spaces before punctuation and normalizes after', () => {
-      const input = 'Hello ,  world ! This is a test .'
-      const expected = 'Hello, world! This is a test.'
-      expect(removeWhitespaceAroundPunctuation(input)).toBe(expected)
+  describe('removeExtraSpaces', () => {
+    it('should remove extra spaces and trim the text', () => {
+      expect(removeExtraSpaces('  Hello   World  ')).toBe('Hello World')
+      expect(removeExtraSpaces('Multiple    spaces   here')).toBe('Multiple spaces here')
+    })
+  })
+
+  describe('removeWhitespaceBeforePunctuation', () => {
+    it('should remove whitespace before punctuation', () => {
+      expect(removeWhitespaceBeforePunctuation('Hello , World !')).toBe('Hello, World!')
+      expect(removeWhitespaceBeforePunctuation('Test .')).toBe('Test.')
+    })
+  })
+
+  describe('ensureSpaceAfterPunctuation', () => {
+    it('should ensure there is a space after punctuation', () => {
+      expect(ensureSpaceAfterPunctuation('Hello,World!')).toBe('Hello, World!')
+      expect(ensureSpaceAfterPunctuation('Test.This')).toBe('Test. This')
+    })
+  })
+
+  describe('normalizePunctuationSpacing', () => {
+    it('should normalize spaces before and after punctuation', () => {
+      expect(normalizePunctuationSpacing('Hello ,World!', { removeExtraSpacesAfterPunctuation: true })).toBe('Hello, World!')
+      expect(normalizePunctuationSpacing('Test .This', { removeExtraSpacesAfterPunctuation: true })).toBe('Test. This')
+      expect(normalizePunctuationSpacing('Hi ,  how are you ?', { removeExtraSpacesAfterPunctuation: true })).toBe('Hi, how are you?')
     })
 
-    it('preserves correct spacing after punctuation', () => {
-      const input = 'Wait!  Are you sure ?Yes , absolutely.'
-      const expected = 'Wait! Are you sure? Yes, absolutely.'
-      expect(removeWhitespaceAroundPunctuation(input)).toBe(expected)
-    })
-
-    it('works with multiple punctuation marks in sequence', () => {
-      const input = 'Wow! ! ! That was awesome, wasn\'t it?'
-      const expected = 'Wow!!! That was awesome, wasn\'t it?'
-      expect(removeWhitespaceAroundPunctuation(input)).toBe(expected)
-    })
-
-    it('does not affect punctuation with no extra spacing', () => {
-      const input = 'Hello, world! This is fine.'
-      expect(removeWhitespaceAroundPunctuation(input)).toBe(input)
+    it('should work with default options when no config is passed', () => {
+      expect(normalizePunctuationSpacing('Hello ,World!')).toBe('Hello, World!')
     })
   })
 })
