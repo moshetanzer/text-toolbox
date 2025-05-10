@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /**
  * Default size of key storage allocation
  */
@@ -684,36 +686,36 @@ export class Metaphone3 {
       == '\u00CC'.charCodeAt(0)
       || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
       == '\u00CD'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u00CE'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u00CF'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u00D2'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u00D3'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u00D4'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u00D5'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u00D6'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u008C'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u00D8'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u00D9'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u00DA'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u00DB'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u00DC'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u00DD'.charCodeAt(0)
-        || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
-        == '\u009F'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00CE'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00CF'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00D2'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00D3'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00D4'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00D5'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00D6'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u008C'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00D8'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00D9'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00DA'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00DB'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00DC'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u00DD'.charCodeAt(0)
+      || (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(inChar)
+      == '\u009F'.charCodeAt(0)
     ) {
       return true
     }
@@ -2149,36 +2151,36 @@ export class Metaphone3 {
             )
             && !this.StringAt(this.m_current - 5, 7, 'ALDRICH', '')
             && !this.StringAt(this.m_current - 6, 8, 'GOODRICH', '')
-              && !this.StringAt(this.m_current - 7, 9, 'GINGERICH', ''))
-            || (this.m_current + 1 === this.m_last
-              && this.StringAt(
-            this.m_current - 4,
-            6,
-            'ULRICH',
-            'LFRICH',
-            'LLRICH',
-            'EMRICH',
-            'ZURICH',
-            'EYRICH',
-            '',
-          ))
-          || ((this.StringAt(this.m_current - 1, 1, 'A', 'O', 'U', 'E', '')
-            || this.m_current === 0)
-        && this.StringAt(
-          this.m_current + 2,
-          1,
-          'L',
-          'R',
-          'N',
-          'M',
-          'B',
-          'H',
-          'F',
-          'V',
-          'W',
-          ' ',
-          '',
-        ))
+            && !this.StringAt(this.m_current - 7, 9, 'GINGERICH', ''))
+          || (this.m_current + 1 === this.m_last
+            && this.StringAt(
+              this.m_current - 4,
+              6,
+              'ULRICH',
+              'LFRICH',
+              'LLRICH',
+              'EMRICH',
+              'ZURICH',
+              'EYRICH',
+              '',
+            ))
+            || ((this.StringAt(this.m_current - 1, 1, 'A', 'O', 'U', 'E', '')
+              || this.m_current === 0)
+            && this.StringAt(
+              this.m_current + 2,
+              1,
+              'L',
+              'R',
+              'N',
+              'M',
+              'B',
+              'H',
+              'F',
+              'V',
+              'W',
+              ' ',
+              '',
+            ))
     ) {
       if (
         this.StringAt(this.m_current + 2, 1, 'R', 'L', '')
@@ -2372,9 +2374,9 @@ export class Metaphone3 {
       && !(
         (this.StringAt(0, 5, 'CHORE', 'CHOLO', 'CHOLA', '')
           && this.m_length === 5)
-          || this.StringAt(this.m_current, 5, 'CHORT', 'CHOSE', '')
-          || this.StringAt(this.m_current - 3, 7, 'CROCHET', '')
-            || this.StringAt(0, 7, 'CHEMISE', 'CHARISE', 'CHARISS', 'CHAROLE', '')
+        || this.StringAt(this.m_current, 5, 'CHORT', 'CHOSE', '')
+        || this.StringAt(this.m_current - 3, 7, 'CROCHET', '')
+        || this.StringAt(0, 7, 'CHEMISE', 'CHARISE', 'CHARISS', 'CHAROLE', '')
       )
     ) {
       if (this.StringAt(this.m_current + 2, 1, 'R', 'L', '')) {
@@ -2521,14 +2523,14 @@ export class Metaphone3 {
       'ACHERNAR',
       '',
     )
-      || this.StringAt(
-        this.m_current - 1,
-        9,
-        'ACHALASIA',
-        'ACHILLEAN',
-        'ACHIMENES',
-        '',
-      )
+    || this.StringAt(
+      this.m_current - 1,
+      9,
+      'ACHALASIA',
+      'ACHILLEAN',
+      'ACHIMENES',
+      '',
+    )
     || this.StringAt(this.m_current - 1, 10, 'ACHIMELECH', 'ACHITOPHEL', '')
     || (this.m_current - 2 === 0
       && (this.StringAt(this.m_current - 2, 6, 'INCHOA', '')
@@ -2786,8 +2788,8 @@ export class Metaphone3 {
           || this.StringAt(this.m_current - 7, 11, 'ENCARNACION', '')
           || this.StringAt(this.m_current - 4, 8, 'POLICIES', '')
           || this.StringAt(this.m_current - 2, 8, 'HACIENDA', '')
-            || this.StringAt(this.m_current - 6, 9, 'ANDALUCIA', '')
-            || this.StringAt(this.m_current - 2, 5, 'SOCIO', 'SOCIE', '')
+          || this.StringAt(this.m_current - 6, 9, 'ANDALUCIA', '')
+          || this.StringAt(this.m_current - 2, 5, 'SOCIO', 'SOCIE', '')
         )
       ) {
         this.MetaphAdd$java_lang_String$java_lang_String('X', 'S')
@@ -3444,33 +3446,33 @@ export class Metaphone3 {
           || this.StringAt(this.m_current - 2, 4, 'HIGH', 'TIGH', '')
           || this.m_current + 1 === this.m_last
           || (this.StringAt(
-              this.m_current + 2,
-              2,
-              'IE',
-              'EY',
-              'ES',
-              'ER',
-              'ED',
-              'TY',
-              '',
-            )
-            && this.m_current + 3 === this.m_last
-            && !this.StringAt(this.m_current - 5, 9, 'GALLAGHER', ''))
-          || (this.StringAt(this.m_current + 2, 1, 'Y', '')
-            && this.m_current + 2 === this.m_last)
-          || (this.StringAt(this.m_current + 2, 3, 'ING', 'OUT', '')
-            && this.m_current + 4 === this.m_last)
-          || (this.StringAt(this.m_current + 2, 4, 'ERTY', '')
-            && this.m_current + 5 === this.m_last)
-          || !this.IsVowel$int(this.m_current + 2)
-            || this.StringAt(this.m_current - 3, 5, 'GAUGH', 'GEOGH', 'MAUGH', '')
-            || this.StringAt(this.m_current - 4, 8, 'BROUGHAM', ''))
-          && !(
-            this.StringAt(0, 6, 'BALOGH', 'SABAGH', '')
-            || this.StringAt(this.m_current - 2, 7, 'BAGHDAD', '')
-              || this.StringAt(this.m_current - 3, 5, 'WHIGH', '')
-              || this.StringAt(this.m_current - 5, 7, 'SABBAGH', 'AKHLAGH', '')
+            this.m_current + 2,
+            2,
+            'IE',
+            'EY',
+            'ES',
+            'ER',
+            'ED',
+            'TY',
+            '',
           )
+          && this.m_current + 3 === this.m_last
+          && !this.StringAt(this.m_current - 5, 9, 'GALLAGHER', ''))
+        || (this.StringAt(this.m_current + 2, 1, 'Y', '')
+          && this.m_current + 2 === this.m_last)
+        || (this.StringAt(this.m_current + 2, 3, 'ING', 'OUT', '')
+          && this.m_current + 4 === this.m_last)
+        || (this.StringAt(this.m_current + 2, 4, 'ERTY', '')
+          && this.m_current + 5 === this.m_last)
+        || !this.IsVowel$int(this.m_current + 2)
+        || this.StringAt(this.m_current - 3, 5, 'GAUGH', 'GEOGH', 'MAUGH', '')
+        || this.StringAt(this.m_current - 4, 8, 'BROUGHAM', ''))
+      && !(
+        this.StringAt(0, 6, 'BALOGH', 'SABAGH', '')
+        || this.StringAt(this.m_current - 2, 7, 'BAGHDAD', '')
+        || this.StringAt(this.m_current - 3, 5, 'WHIGH', '')
+        || this.StringAt(this.m_current - 5, 7, 'SABBAGH', 'AKHLAGH', '')
+      )
     ) {
       this.m_current += 2
       return true
@@ -4801,13 +4803,13 @@ export class Metaphone3 {
     || this.StringAt(0, 4, 'SAN ', '')
     || (this.m_current + 1 === this.m_last
       && (c => (c.charCodeAt == null ? c : c.charCodeAt(0)))(
-          this.CharAt(this.m_current + 1),
-        ) == 'O'.charCodeAt(0)
-        && !(
-          this.StringAt(0, 4, 'TOJO', '')
-          || this.StringAt(0, 5, 'BANJO', '')
-          || this.StringAt(0, 6, 'MARYJO', '')
-        ))
+        this.CharAt(this.m_current + 1),
+      ) == 'O'.charCodeAt(0)
+      && !(
+        this.StringAt(0, 4, 'TOJO', '')
+        || this.StringAt(0, 5, 'BANJO', '')
+        || this.StringAt(0, 6, 'MARYJO', '')
+      ))
     ) {
       if (
         !(

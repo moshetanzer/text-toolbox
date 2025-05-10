@@ -1,4 +1,4 @@
-import { describe, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { metaphone3 } from './metaphone-three'
 
 describe('metaphone3', () => {
@@ -87,7 +87,7 @@ describe('metaphone3', () => {
 
     // Each configuration should produce different results
     const allResults = [noOptions, vowelsOnly, exactOnly, bothOptions]
-    // @ts-expect-error
+    // @ts-expect-error since test
     const uniqueResults = new Set(allResults.map(JSON.stringify))
     expect(uniqueResults.size).toBe(4) // All results should be different
   })
