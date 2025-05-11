@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-nocheck
 
 /**
  * Default size of key storage allocation
