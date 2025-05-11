@@ -22,10 +22,10 @@ function damerauLevenshtein(a: string, b: string, limit?: number): number {
 
   for (let i = 0; i < limit; i++) {
     matrix[i] = [i]
-    matrix[i].length = limit
+    matrix[i]!.length = limit
   }
   for (let i = 0; i < limit; i++) {
-    matrix[0][i] = i
+    matrix[0]![i] = i
   }
 
   if (Math.abs(lenA - lenB) > (limit || 100)) {
@@ -46,35 +46,35 @@ function damerauLevenshtein(a: string, b: string, limit?: number): number {
     // Step 4
     for (j = 1; j <= lenB; ++j) {
       // Check the jagged ld total so far
-      if (i === j && matrix[i][j] > 4)
+      if (i === j && matrix[i]![j]! > 4)
         return lenA
 
       that_j = b[j - 1]
       cost = (this_i === that_j) ? 0 : 1 // Step 5
       // Calculate the minimum (much faster than Math.min(...)).
-      min = matrix[i - 1][j] + 1 // Deletion.
+      min = matrix[i - 1]![j]! + 1 // Deletion.
 
-      t = matrix[i][j - 1] + 1 // Insertion.
+      t = matrix[i]![j - 1]! + 1 // Insertion.
       if (t < min)
         min = t
 
-      t = matrix[i - 1][j - 1] + cost // Substitution.
+      t = matrix[i - 1]![j - 1]! + cost // Substitution.
       if (t < min)
         min = t
 
       // Update matrix.
       // Check for transposition
       if (i > 1 && j > 1 && this_i === b[j - 2] && a[i - 2] === that_j) {
-        t = matrix[i - 2][j - 2] + cost
+        t = matrix[i - 2]![j - 2]! + cost
         if (t < min)
           min = t // Transposition.
       }
 
-      matrix[i][j] = min
+      matrix[i]![j]! = min
     }
   }
 
-  return matrix[lenA][lenB]
+  return matrix[lenA]![lenB]!
 }
 
 export { damerauLevenshtein }
