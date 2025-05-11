@@ -81,3 +81,7 @@ export function similarityToDistance(
   // Convert similarity (0-1) to distance
   return maxDistance * (1 - similarity)
 }
+
+export function isValidString(text: any): text is string {
+  return typeof text === 'string' && text.trim().length > 0
+}
