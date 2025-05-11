@@ -1,5 +1,7 @@
 # Text Toolbox
 
+[![codecov](https://codecov.io/gh/moshetanzer/text-toolbox/graph/badge.svg?token=UBY45FC2VS)](https://codecov.io/gh/moshetanzer/text-toolbox)
+
 A TypeScript library providing a consistent API for string similarity algorithms, including both similarity scores and distance calculations. Also includes performent utilities for cleaning and normalizing strings.
 
 ## Features
