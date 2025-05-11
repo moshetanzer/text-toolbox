@@ -28,6 +28,7 @@ function sentanceCase(text: string): string {
   text = text.toLowerCase()
   return text && text.length > 0 && text[0] ? text[0].toUpperCase() + text.slice(1) : ''
 }
+// TODO: remove this to case function since for kebab and snake case we need to use the same function
 function toCase(text: string, separator: string, capitalize: boolean = false): string {
   return text
     .split(' ')
