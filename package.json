@@ -47,7 +47,6 @@
     "eslint": "latest",
     "installed-check": "latest",
     "knip": "latest",
-    "lint-staged": "latest",
     "simple-git-hooks": "latest",
     "typescript": "latest",
     "unbuild": "latest",
