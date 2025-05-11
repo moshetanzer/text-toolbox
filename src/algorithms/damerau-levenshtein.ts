@@ -1,13 +1,22 @@
-interface DamerauLevenshteinResult {
-  steps: number
-  relative: number
-  similarity: number
-}
+import { isValidString } from '../utils'
 
-function damerauLevenshtein(a: string, b: string, limit?: number): DamerauLevenshteinResult {
+/**
+ * Calculates the Damerau-Levenshtein distance between two strings.
+ * This measures the minimum number of operations (insertions, deletions, substitutions, or transpositions)
+ * required to change one string into the other.
+ *
+ * @param a - First string to compare
+ * @param b - Second string to compare
+ * @param limit - Optional upper limit for distance calculation (defaults to max length of a or b + 1)
+ * @returns The Damerau-Levenshtein distance as a number
+ */
+function damerauLevenshtein(a: string, b: string, limit?: number): number {
+  if (!isValidString(a) && !isValidString(b)) {
+    return 0
+  }
   const lenA = a.length
   const lenB = b.length
-  const matrix = []
+  const matrix: number[][] = []
 
   limit = (limit || ((lenB > lenA ? lenB : lenA))) + 1
 
@@ -20,13 +29,13 @@ function damerauLevenshtein(a: string, b: string, limit?: number): DamerauLevens
   }
 
   if (Math.abs(lenA - lenB) > (limit || 100)) {
-    return prepare(limit || 100)
+    return limit || 100
   }
   if (lenA === 0) {
-    return prepare(lenB)
+    return lenB
   }
   if (lenB === 0) {
-    return prepare(lenA)
+    return lenA
   }
 
   // Calculate matrix.
@@ -38,38 +47,34 @@ function damerauLevenshtein(a: string, b: string, limit?: number): DamerauLevens
     for (j = 1; j <= lenB; ++j) {
       // Check the jagged ld total so far
       if (i === j && matrix[i][j] > 4)
-        return prepare(lenA)
+        return lenA
 
       that_j = b[j - 1]
       cost = (this_i === that_j) ? 0 : 1 // Step 5
       // Calculate the minimum (much faster than Math.min(...)).
       min = matrix[i - 1][j] + 1 // Deletion.
-      // eslint-disable-next-line no-cond-assign
-      if ((t = matrix[i][j - 1] + 1) < min)
-        min = t // Insertion.
-      // eslint-disable-next-line no-cond-assign
-      if ((t = matrix[i - 1][j - 1] + cost) < min)
-        min = t // Substitution.
+
+      t = matrix[i][j - 1] + 1 // Insertion.
+      if (t < min)
+        min = t
+
+      t = matrix[i - 1][j - 1] + cost // Substitution.
+      if (t < min)
+        min = t
 
       // Update matrix.
-      // eslint-disable-next-line no-cond-assign
-      matrix[i][j] = (i > 1 && j > 1 && this_i === b[j - 2] && a[i - 2] === that_j && (t = matrix[i - 2][j - 2] + cost) < min) ? t : min // Transposition.
+      // Check for transposition
+      if (i > 1 && j > 1 && this_i === b[j - 2] && a[i - 2] === that_j) {
+        t = matrix[i - 2][j - 2] + cost
+        if (t < min)
+          min = t // Transposition.
+      }
+
+      matrix[i][j] = min
     }
   }
 
-  return prepare(matrix[lenA][lenB])
-
-  function prepare(steps: number) {
-    const length = Math.max(lenA, lenB)
-    const relative = length === 0
-      ? 0
-      : (steps / length)
-    const similarity = 1 - relative
-    return {
-      steps,
-      relative,
-      similarity,
-    }
-  }
+  return matrix[lenA][lenB]
 }
+
 export { damerauLevenshtein }

@@ -1,9 +1,22 @@
 // based on https://github.com/ka-weihe/fast-dice-coefficient
 
-import type { SimilarityAlgorithm, SimilarityOptions, SimilarityResult } from '../types'
-import { preprocessStrings } from '../utils'
+import { isValidString } from '../utils'
 
-function diceCoefficientInternal(a: string, b: string): number {
+/**
+ * Calculates the Dice Coefficient between two strings.
+ * This measures the similarity between two strings based on the number of bigrams (two-character combinations) they share.
+ * The value ranges from 0 (no similarity) to 1 (identical strings).
+ *
+ * @param a - First string to compare
+ * @param b - Second string to compare
+ * @returns The Dice Coefficient as a number between 0 and 1
+ */
+function diceCoefficient(a: string, b: string): number {
+  if (!isValidString(a) || !isValidString(b)) {
+    return 0
+  }
+  a = a.toLowerCase()
+  b = b.toLowerCase()
   let i, j, k, match, ref, ref1, sub
   if (a.length < 2 || b.length < 2) {
     return 0
@@ -27,28 +40,5 @@ function diceCoefficientInternal(a: string, b: string): number {
     }
   }
   return 2.0 * match / (a.length + b.length - 2)
-};
-
-export class DiceCoefficient implements SimilarityAlgorithm {
-  private defaultOptions: SimilarityOptions = {
-    caseSensitive: false,
-  }
-
-  public compare(str1: string, str2: string, options?: SimilarityOptions): SimilarityResult {
-    const mergedOptions: SimilarityOptions = { ...this.defaultOptions, ...options }
-    const [processedStr1, processedStr2] = preprocessStrings(str1, str2, mergedOptions)
-    const similarity = diceCoefficientInternal(processedStr1, processedStr2)
-    const distance = 1 - similarity
-    return { distance, similarity }
-  }
-
-  public similarity(str1: string, str2: string, options?: SimilarityOptions): number {
-    return this.compare(str1, str2, options).similarity
-  }
-
-  public distance(str1: string, str2: string, options?: SimilarityOptions): number {
-    return this.compare(str1, str2, options).distance
-  }
 }
-
-export const diceCoefficient = new DiceCoefficient()
+export { diceCoefficient }

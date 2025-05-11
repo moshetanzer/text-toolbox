@@ -1,6 +1,6 @@
 // https://github.com/ka-weihe/fastest-levenshtein
-import type { SimilarityAlgorithm, SimilarityOptions, SimilarityResult } from '../types'
-import { distanceToSimilarity, preprocessStrings } from '../utils'
+
+import { isValidString } from '../utils'
 
 const peq = new Uint32Array(0x10000)
 function myers_32(a: string, b: string): number {
@@ -114,8 +114,19 @@ function myers_x(b: string, a: string): number {
   }
   return score
 }
-
-function levenshteinInternal(a: string, b: string): number {
+/**
+ * Calculates the Levenshtein distance between two strings.
+ * This measures the minimum number of single-character edits (insertions, deletions, or substitutions)
+ * required to change one string into the other.
+ *
+ * @param a - First string to compare
+ * @param b - Second string to compare
+ * @returns The Levenshtein distance as a number
+ */
+function levenshtein(a: string, b: string): number {
+  if (!isValidString(a) && !isValidString(b)) {
+    return 0
+  }
   if (a.length < b.length) {
     const tmp = b
     b = a
@@ -130,27 +141,4 @@ function levenshteinInternal(a: string, b: string): number {
   return myers_x(a, b)
 };
 
-export class Levenshtein implements SimilarityAlgorithm {
-  private defaultOptions: SimilarityOptions = {
-    caseSensitive: true,
-  }
-
-  public compare(str1: string, str2: string, options?: SimilarityOptions): SimilarityResult {
-    const mergedOptions: SimilarityOptions = { ...this.defaultOptions, ...options }
-    const [processedStr1, processedStr2] = preprocessStrings(str1, str2, mergedOptions)
-    const distance = levenshteinInternal(processedStr1, processedStr2)
-    const maxDistance = Math.max(processedStr1.length, processedStr2.length)
-    const similarity = distanceToSimilarity(distance, maxDistance)
-    return { distance, similarity }
-  }
-
-  public similarity(str1: string, str2: string, options?: SimilarityOptions): number {
-    return this.compare(str1, str2, options).similarity
-  }
-
-  public distance(str1: string, str2: string, options?: SimilarityOptions): number {
-    return this.compare(str1, str2, options).distance
-  }
-}
-
-export const levenshtein = new Levenshtein()
+export { levenshtein }
