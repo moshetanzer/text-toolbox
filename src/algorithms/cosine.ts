@@ -20,9 +20,11 @@ function cosine(a: Vector, b: Vector): number {
     const x = a[i]
     const y = b[i]
 
-    xx += x * x
-    yy += y * y
-    xy += x * y
+    if (x !== undefined && y !== undefined) {
+      xx += x * x
+      yy += y * y
+      xy += x * y
+    }
   }
 
   // Handle zero vectors to avoid division by zero

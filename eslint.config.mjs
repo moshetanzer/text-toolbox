@@ -4,5 +4,6 @@ export default antfu({
   rules: {
     'no-control-regex': 'off',
     'regexp/no-dupe-disjunctions': 'off',
+    'eslint-comments/no-unlimited-disable': 'off',
   },
 })
