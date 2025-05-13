@@ -44,8 +44,7 @@ describe('fingerprintKeyer', () => {
     })
   })
 
-  // Test specific edge cases from the Java implementation
-  describe('compatibility with Java implementation', () => {
+  describe('general test', () => {
     it('should handle strings with multiple special characters', () => {
       const input = 'Thé Quïçk, Brôwn Fox! Jumps över the lâzy dög.'
       expect(fingerprintKey(input)).toBe('brown dog fox jumps lazy over quick the')

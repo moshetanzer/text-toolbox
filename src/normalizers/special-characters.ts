@@ -1,3 +1,5 @@
+import { DIACRITICS } from '../regex'
+
 function replaceSmartChars(text: string): string {
   const s = text
     .replace(/[‘’\u201A]/g, '\'') // smart single quotes and apostrophe
@@ -24,6 +26,49 @@ function stripEmoji(text: string): string {
 function removeIllegalChars(text: string): string {
   return text.normalize('NFKD')
     .replace(/[\x00-\x1F\x7F-\x9F\uFFFD\uFFFE\uFFFF]/g, '')
+}
+const NONDIACRITICS: Record<string, string> = {
+  // Replace non-diacritics with their equivalent characters
+  'ß': 'ss',
+  'æ': 'ae',
+  // https://en.wikipedia.org/wiki/%C3%98#:~:text=%C3%98%20(or%20minuscule%3A%20%C3%B8),as%20an%20%5Boe%5D%20diphthong.
+  'ø': 'oe',
+  'å': 'aa', // TODO: We'll never see this after decomposition
+  '©': 'c', // copyright character
+  '\u00F0': 'd', // Small letter Icelandic eth
+  '\u0111': 'd', // Small letter D with stroke
+  '\u0256': 'd', // Small letter African D
+  '\u00FE': 'th', // Lower case Icelandic thorn þ
+  'ƿ': 'w', // Lower case Wynn from Old English modernly transliterated to w
+  // Visually similar replacements from our private former asciify() method
+  // (only need lower case forms since we're already downcased)
+  '\u0127': 'h', // small H with stroke
+  '\u0131': 'i', // dotless I
+  '\u0138': 'k', // small letter Kra
+  '\u0142': 'l', // Bialystock
+  '\u014B': 'n', // Small letter Eng
+  '\u017F': 's', // long s
+  '\u0167': 't', // small letter T with stroke
+  // Additional characters following the same principle
+  'œ': 'oe',
+  'ẜ': 's', // more long S forms
+  'ẝ': 's',
+}
+
+export function removeDiacritics(text: string): string {
+  text = text.normalize('NFKD')
+  text = text.replace(DIACRITICS, '')
+  return text
+}
+
+export function removeNonDiacritics(orig: string): string {
+  let result = ''
+  for (let i = 0; i < orig.length; i++) {
+    const source = orig.substring(i, i + 1)
+    const replace = NONDIACRITICS[source]
+    result += replace === undefined ? source : replace
+  }
+  return result
 }
 
 export {

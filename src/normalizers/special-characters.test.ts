@@ -2,9 +2,11 @@ import { describe, expect, it } from 'vitest'
 
 // Function imports
 import {
+  removeDiacritics,
   removeHtmlTags,
   removeNewLineCharacters,
   removeNonASCII,
+  removeNonDiacritics,
   removePunctuation,
   replaceSmartChars,
   stripEmoji,
@@ -110,6 +112,34 @@ describe('text manipulation functions', () => {
       const input = 'Hello world'
       const expected = 'Hello world'
       expect(stripEmoji(input)).toBe(expected)
+    })
+  })
+
+  describe('removeDiacritics', () => {
+    it('should remove diacritical marks', () => {
+      expect(removeDiacritics('áéíóú')).toBe('aeiou')
+      expect(removeDiacritics('çñ')).toBe('cn')
+      expect(removeDiacritics('Crème Brûlée')).toBe('Creme Brulee')
+      expect(removeDiacritics('Mötley Crüe')).toBe('Motley Crue')
+      expect(removeDiacritics('Māori')).toBe('Maori')
+    })
+  })
+
+  describe('removeNonDiacritics', () => {
+    it('should replace non-diacritical characters with ASCII equivalents', () => {
+      expect(removeNonDiacritics('ß')).toBe('ss')
+      expect(removeNonDiacritics('æ')).toBe('ae')
+      expect(removeNonDiacritics('ø')).toBe('oe')
+      expect(removeNonDiacritics('å')).toBe('aa')
+      expect(removeNonDiacritics('©')).toBe('c')
+      expect(removeNonDiacritics('œ')).toBe('oe')
+      expect(removeNonDiacritics('\u00F0')).toBe('d') // Small letter Icelandic eth
+      expect(removeNonDiacritics('\u00FE')).toBe('th') // Lower case Icelandic thorn
+    })
+
+    it('should leave other characters unchanged', () => {
+      expect(removeNonDiacritics('abcABC123')).toBe('abcABC123')
+      expect(removeNonDiacritics('hello world')).toBe('hello world')
     })
   })
 })
