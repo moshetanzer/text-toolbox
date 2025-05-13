@@ -1,7 +1,7 @@
 {
   "name": "text-toolbox",
   "type": "module",
-  "version": "0.0.4",
+  "version": "1.0.12",
   "packageManager": "pnpm@10.11.0",
   "description": "",
   "author": "",
