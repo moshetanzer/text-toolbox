@@ -1,4 +1,4 @@
-//Based on VueUse useDateFormat function. thanks antfu!
+// Based on VueUse useDateFormat function. thanks antfu!
 
 export type DateLike = Date | number | string | undefined
 
@@ -24,7 +24,7 @@ function formatOrdinal(num: number) {
   return num + (suffixes[(v - 20) % 10] ?? suffixes[v] ?? suffixes[0] ?? '')
 }
 
- function formatDateInternal(date: Date, formatStr: string, options: UseDateFormatOptions = {}) {
+function formatDateInternal(date: Date, formatStr: string, options: UseDateFormatOptions = {}) {
   const years = date.getFullYear()
   const month = date.getMonth()
   const days = date.getDate()
@@ -78,7 +78,7 @@ function formatOrdinal(num: number) {
   return formatStr.replace(REGEX_FORMAT, (match, $1) => $1 ?? matches[match]?.() ?? match)
 }
 
- function normalizeDate(date: DateLike) {
+function normalizeDate(date: DateLike) {
   if (date === null)
     return new Date(Number.NaN) // null is invalid
   if (date === undefined)
@@ -98,8 +98,8 @@ function formatOrdinal(num: number) {
   return new Date(date)
 }
 
- function formatDate(date: DateLike, formatStr: string = 'HH:mm:ss', options: UseDateFormatOptions = {}): string {
-  //TODO: Handle invalid date by adding a check if nan write now it is oupting NaN-NaN-NaN
- return formatDateInternal(normalizeDate(date), formatStr, options)
+function formatDate(date: DateLike, formatStr: string = 'HH:mm:ss', options: UseDateFormatOptions = {}): string {
+  // TODO: Handle invalid date by adding a check if nan write now it is oupting NaN-NaN-NaN
+  return formatDateInternal(normalizeDate(date), formatStr, options)
 }
 export { formatDate }

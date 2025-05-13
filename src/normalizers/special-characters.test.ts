@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest'
 
-// Function imports
 import {
   removeDiacritics,
   removeHtmlTags,
