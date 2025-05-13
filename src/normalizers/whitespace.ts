@@ -1,6 +1,6 @@
+import { WHITESPACE } from '../regex'
 import { isValidString } from '../utils'
 
-const WHITE_SPACE_REGEX = /\p{White_Space}+/gu
 interface NormalizePunctuationOptions {
   removeExtraSpacesAfterPunctuation?: boolean
 }
@@ -10,7 +10,7 @@ function removeAllWhitespace(text: string): string {
   if (typeof text !== 'string') {
     return text
   }
-  return text.replace(WHITE_SPACE_REGEX, '')
+  return text.replace(WHITESPACE, '')
 }
 function removeLeadingWhitespace(text: string): string {
   if (!isValidString(text)) {
@@ -28,7 +28,7 @@ function normalizeWhitespace(text: string): string {
   if (!isValidString(text)) {
     return text
   }
-  return text.replace(WHITE_SPACE_REGEX, ' ').trim()
+  return text.replace(WHITESPACE, ' ').trim()
 }
 function removeExtraSpaces(text: string): string {
   if (!isValidString(text)) {
