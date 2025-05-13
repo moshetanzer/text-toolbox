@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { DIACRITICS, MODIFIER_LETTERS, MODIFIER_SYMBOLS, PUNCTUATION, WHITESPACE } from './regex'
+import { DIACRITICS, PUNCTUATION, WHITESPACE } from './regex'
 
 describe('regular Expression Tests', () => {
   it('wHITESPACE should match all types of whitespace characters', () => {
