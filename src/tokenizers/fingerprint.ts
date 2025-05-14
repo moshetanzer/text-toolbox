@@ -1,7 +1,7 @@
 import { removeDiacritics, removeNonDiacritics } from '../normalizers/special-characters'
 import { CONTROL_CHARACTERS, PUNCTUATION, WHITESPACE } from '../regex'
 
-export function fingerprintKey(text: string, ...o: any[]): string {
+function fingerprint(text: string, ...o: any[]): string {
   if (text === null || (o !== null && o.length > 0)) {
     throw new Error('Fingerprint keyer accepts a single string parameter')
   }
@@ -15,3 +15,5 @@ export function fingerprintKey(text: string, ...o: any[]): string {
     .filter((word, index, array) => index === 0 || word !== array[index - 1])
     .join(' ')
 }
+
+export { fingerprint }

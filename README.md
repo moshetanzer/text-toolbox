@@ -17,10 +17,11 @@ pnpm add text-toolbox
 * `levenshtein()`
 * `damerauLevenshtein()`
 * `diceCoefficient()`
+* `cosineDistance()`
 
 ### Similarity
 
-* `cosineStringSimilarity()`
+* `cosineSimilarity()`
 * `jaroWinkler()`
 
 ### Metaphonics
@@ -67,6 +68,10 @@ Remove or replace problematic characters and formatting:
 * `sentanceCase()` - Converts a string to sentence case, where only the first letter of the first word is capitalized.
 * `snakeCase()` - Converts a string to snake case, where each word is lowercase and separated by underscores.
 * `titleCase()` - Converts a string to title case, where  the first letter of each  word is capitalized.
+
+## String Tokenizers
+
+* `fingerprint()` - It normalizes text by removing special characters, creating sorted unique word lists.
 
 ## Algorithm Descriptions
 
