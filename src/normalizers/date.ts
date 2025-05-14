@@ -1,8 +1,8 @@
 // Based on VueUse useDateFormat function. thanks antfu!
 
-export type DateLike = Date | number | string | undefined
+type DateLike = Date | number | string | undefined
 
-export interface UseDateFormatOptions {
+interface UseDateFormatOptions {
   locales?: Intl.LocalesArgument
   customMeridiem?: (hours: number, minutes: number, isLowercase?: boolean, hasPeriod?: boolean) => string
 }

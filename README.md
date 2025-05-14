@@ -1,23 +1,8 @@
-# Text Toolbox
+# Text Toolbox [Heavy WIP]
 
 [![codecov](https://codecov.io/gh/moshetanzer/text-toolbox/graph/badge.svg?token=UBY45FC2VS)](https://codecov.io/gh/moshetanzer/text-toolbox)
 
 A TypeScript library providing a consistent API for string similarity algorithms, including both similarity scores and distance calculations. Also includes performent utilities for cleaning and normalizing strings.
-
-## Features
-
-* **Consistent API** across all algorithms
-* Support for both **similarity scores** (0–1) and **distance metrics**
-* **High-performance** implementations
-* TypeScript support with **full type definitions**
-* Multiple string comparison algorithms:
-
-  * Levenshtein distance
-  * Damerau-Levenshtein distance
-  * Cosine similarity
-  * Dice coefficient
-  * Jaro-Winkler
-* Built-in **string normalization utilities** for whitespace and special characters
 
 ## Installation
 
@@ -25,36 +10,23 @@ A TypeScript library providing a consistent API for string similarity algorithms
 pnpm add text-toolbox
 ```
 
-## Usage
+## Algorithims
 
-### Basic Example
+### Distance
 
-```ts
-import { levenshtein } from 'text-toolbox'
+* `levenshtein()`
+* `damerauLevenshtein()`
+* `diceCoefficient()`
 
-// Calculate similarity (0–1, higher means more similar)
-const similarity = levenshtein.similarity('hello', 'hallo')
-console.log(`Similarity: ${similarity}`) // Output: Similarity: 0.8
+### Similarity
 
-// Calculate distance (higher means more different)
-const distance = levenshtein.distance('hello', 'hallo')
-console.log(`Distance: ${distance}`) // Output: Distance: 1
+`cosineStringSimilarity()`
+`jaroWinkler()`
 
-// Get both metrics at once
-const result = levenshtein.compare('hello', 'hallo')
-console.log(`Distance: ${result.distance}, Similarity: ${result.similarity}`)
-```
+### Metaphonics
 
-### Using Options
-
-```ts
-import { levenshtein } from 'text-toolbox'
-
-const result = levenshtein.compare('Hello', 'hello', {
-  caseSensitive: true,
-  normalize: true
-})
-```
+* `metaphone3()`
+* `doubleMetaphone()`
 
 ## String Cleaning Utilities
 
@@ -64,23 +36,37 @@ A set of helper functions to normalize and sanitize strings before comparison.
 
 Clean up inconsistent or unwanted whitespace:
 
-* `removeAllSpaces` – Removes **all spaces** from the string.
-* `removeDoubleSpaces` – Replaces multiple consecutive spaces with a **single space**.
-* `removeLeadingSpaces` – Removes **spaces at the beginning** of the string.
-* `removeTrailingSpaces` – Removes **spaces at the end** of the string.
-* `removeWhitespaceAroundPunctuation` – Removes extra spaces **around punctuation** (e.g., ` , . : ; ! ?`).
+* `removeAllSpaces()` – Removes **all spaces** from the string.
+* `removeExtraSpaces()` – Replaces multiple consecutive spaces with a **single space**.
+* `removeLeadingSpaces()` – Removes **spaces at the beginning** of the string.
+* `removeTrailingSpaces()` – Removes **spaces at the end** of the string.
+* `normalizePunctuationSpacing()` – Removes extra spaces **around punctuation** (e.g., ` , . : ; ! ?`).
 
 ### Special Character Cleaners
 
 Remove or replace problematic characters and formatting:
 
-* `removeHtmlTags` – Strips **HTML tags** (e.g., `<p>`, `<div>`) from the string.
-* `removeIllegalChars` – Removes **non-printable or disallowed characters** (e.g., control codes).
-* `removeNewLineCharacters` – Removes **newline (`\n`) and carriage return (`\r`) characters**.
-* `removeNonASCII` – Removes all characters **outside the standard ASCII range**.
-* `removePunctuation` – Removes **common punctuation marks** from the string.
-* `replaceSmartChars` – Replaces **smart quotes, long dashes, and other typographic symbols** with plain equivalents.
-* `stripEmoji` – Removes all **emoji characters** and symbols.
+* `removeHtmlTags()` – Strips **HTML tags** (e.g., `<p>`, `<div>`) from the string.
+* `removeIllegalChars()` – Removes **non-printable or disallowed characters** (e.g., control codes).
+* `removeNewLineCharacters()` – Removes **newline (`\n`) and carriage return (`\r`) characters**.
+* `removeNonASCII()` – Removes all characters **outside the standard ASCII range**.
+* `removePunctuation()` – Removes **common punctuation marks** from the string.
+* `replaceSmartChars()` – Replaces **smart quotes, long dashes, and other typographic symbols** with plain equivalents.
+* `stripEmoji()` – Removes all **emoji characters** and symbols.
+* `removePunctuation()` – Removes all **punctuation** and symbols.
+
+### String Case Formatters
+
+* `camelCase()` - Converts a string to camel case, where the first word is lowercase and each subsequent word starts with an uppercase letter, with no spaces or punctuation.
+* `constantCase()` - Converts a string to constant case, where each word is capitalized and separated by underscores.
+* `dotCase()` - Converts a string to dot case, where each word is lowercase and separated by periods.
+* `camelCase()`
+* `kebabCase()` - Converts a string to kebab case, where each word is lowercase and separated by hyphens.
+* `pascalCase()` - Converts a string to Pascal case, where each word starts with an uppercase letter and there are no spaces or punctuation.
+* `pathCase()` - Converts a string to path case, where each word is lowercase and separated by slashes.
+* `sentanceCase()` - Converts a string to sentence case, where only the first letter of the first word is capitalized.
+* `snakeCase()` - Converts a string to snake case, where each word is lowercase and separated by underscores.
+* `titleCase()` - Converts a string to title case, where  the first letter of each  word is capitalized.
 
 ## Algorithm Descriptions
 

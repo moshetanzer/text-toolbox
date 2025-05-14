@@ -55,13 +55,13 @@ const NONDIACRITICS: Record<string, string> = {
   'ẝ': 's',
 }
 
-export function removeDiacritics(text: string): string {
+function removeDiacritics(text: string): string {
   text = text.normalize('NFKD')
   text = text.replace(DIACRITICS, '')
   return text
 }
-
-export function removeNonDiacritics(orig: string): string {
+// todo: renmae this function
+function removeNonDiacritics(orig: string): string {
   let result = ''
   for (let i = 0; i < orig.length; i++) {
     const source = orig.substring(i, i + 1)
@@ -72,10 +72,12 @@ export function removeNonDiacritics(orig: string): string {
 }
 
 export {
+  removeDiacritics,
   removeHtmlTags,
   removeIllegalChars,
   removeNewLineCharacters,
   removeNonASCII,
+  removeNonDiacritics,
   removePunctuation,
   replaceSmartChars,
   stripEmoji,
