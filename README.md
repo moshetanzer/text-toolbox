@@ -73,28 +73,6 @@ Remove or replace problematic characters and formatting:
 
 * `fingerprint()` - It normalizes text by removing special characters, creating sorted unique word lists.
 
-## Algorithm Descriptions
-
-### Levenshtein Distance
-
-The Levenshtein distance is the minimum number of single-character edits (insertions, deletions, or substitutions) required to transform one string into another. This implementation uses a highly-optimized bit-vector algorithm based on [fastest-levenshtein](https://github.com/ka-weihe/fastest-levenshtein) for maximum performance.
-
-### Damerau-Levenshtein Distance
-
-An extension of the Levenshtein algorithm that also considers transpositions (swapping of adjacent characters) as a single edit operation.
-
-### Cosine Similarity
-
-Measures the cosine of the angle between two n-gram vectors of the strings. Often used for full-text similarity.
-
-### Dice Coefficient
-
-Also known as the Sørensen–Dice coefficient. It is calculated as twice the number of shared bigrams divided by the total number of bigrams in both strings.
-
-### Jaro-Winkler
-
-A string similarity metric designed for short strings such as names. It favors strings that match from the beginning and penalizes transpositions.
-
 ## License
 
 MIT
