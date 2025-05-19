@@ -1,9 +1,5 @@
-type Vector = number[] | Float32Array | Float64Array
-
-interface StringVectorizationOptions {
-  tokenizeBy?: 'char' | 'word'
-  caseSensitive?: boolean
-}
+import type { StringVectorizationOptions, Vector } from '../types'
+import { stringToVector } from '../utils'
 
 function cosine(a: Vector, b: Vector): number {
   if (a.length !== b.length)
@@ -29,36 +25,6 @@ function cosine(a: Vector, b: Vector): number {
     return 0
 
   return xy / Math.sqrt(xx * yy)
-}
-
-function stringToVector(
-  str: string,
-  vocabulary: Set<string>,
-  options: StringVectorizationOptions = {},
-): number[] {
-  const { tokenizeBy = 'word', caseSensitive = false } = options
-
-  if (!str)
-    // eslint-disable-next-line unicorn/no-new-array
-    return new Array(vocabulary.size).fill(0)
-
-  const processedStr = caseSensitive ? str : str.toLowerCase()
-
-  const terms = tokenizeBy === 'word'
-    ? processedStr.split(/\s+/).filter(Boolean)
-    : processedStr.split('')
-
-  const termFrequency: Record<string, number> = {}
-  for (const term of terms) {
-    termFrequency[term] = (termFrequency[term] || 0) + 1
-  }
-
-  const vector: number[] = []
-  for (const term of vocabulary) {
-    vector.push(termFrequency[term] || 0)
-  }
-
-  return vector
 }
 
 function cosineSimilarity(
