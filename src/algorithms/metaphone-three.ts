@@ -9267,11 +9267,6 @@ export class Metaphone3 {
 
 const m3 = new Metaphone3()
 
-export interface Metaphone3Config {
-  encodeExact?: boolean
-  encodeVowels?: boolean
-}
-
 /**
  * Takes in a word and returns the primary and alternate metaphone3 encodings
  *
@@ -9279,7 +9274,7 @@ export interface Metaphone3Config {
  * @param config The configuration options
  * @returns The primary and alternate metaphone3 encodings in that order
  */
-export function metaphone3(
+function metaphoneThree(
   word: string,
   config?: Metaphone3Config,
 ): [primary: string, alternate?: string] {
@@ -9293,3 +9288,5 @@ export function metaphone3(
   const alternate = m3.GetAlternateMetaph()
   return [m3.GetMetaph(), alternate.length === 0 ? undefined : alternate]
 }
+
+export { metaphoneThree }
