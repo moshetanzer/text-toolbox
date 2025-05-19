@@ -1,6 +1,6 @@
 /* eslint-disable */
 // @ts-nocheck
-
+import type { Metaphone3Config } from "../types"
 /**
  * Default size of key storage allocation
  */
