@@ -1,4 +1,4 @@
-import { removeDiacritics, removeNonDiacritics } from '../normalizers/special-characters'
+import { removeDiacritics, replaceCompatibilityCharacters } from '../normalizers/special-characters'
 import { CONTROL_CHARACTERS, PUNCTUATION, WHITESPACE } from '../regex'
 
 function fingerprint(text: string, ...o: any[]): string {
@@ -6,8 +6,8 @@ function fingerprint(text: string, ...o: any[]): string {
     throw new Error('Fingerprint keyer accepts a single string parameter')
   }
   text = removeDiacritics(text)
-  text = removeNonDiacritics(text)
   text = text.replace(PUNCTUATION, '').replace(CONTROL_CHARACTERS, ' ')
+  text = replaceCompatibilityCharacters(text)
   return text.split(WHITESPACE)
     .map(word => word.trim().toLowerCase())
     .filter(word => word.length > 0)
