@@ -1,11 +1,5 @@
 // Based on VueUse useDateFormat function. thanks antfu!
-
-type DateLike = Date | number | string | undefined
-
-interface UseDateFormatOptions {
-  locales?: Intl.LocalesArgument
-  customMeridiem?: (hours: number, minutes: number, isLowercase?: boolean, hasPeriod?: boolean) => string
-}
+import type { DateLike, UseDateFormatOptions } from '../types'
 
 // eslint-disable-next-line regexp/no-misleading-capturing-group
 const REGEX_PARSE = /* #__PURE__ */ /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[T\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/i

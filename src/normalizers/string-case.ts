@@ -1,8 +1,6 @@
+import type { CapitalizeOptions } from '../types'
 import { isValidString } from '../utils'
 
-interface CapitalizeOptions {
-  separators?: string[]
-}
 function titleCase(text: string, options: CapitalizeOptions = {}): string {
   if (!isValidString(text)) {
     return text

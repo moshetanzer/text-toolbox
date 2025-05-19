@@ -1,9 +1,6 @@
+import type { NormalizePunctuationOptions } from '../types'
 import { WHITESPACE } from '../regex'
 import { isValidString } from '../utils'
-
-interface NormalizePunctuationOptions {
-  removeExtraSpacesAfterPunctuation?: boolean
-}
 
 function removeAllWhitespace(text: string): string {
   // dont use isValidString here since we want to remove all whitespace
