@@ -1,46 +1,47 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  removeControlCharacters,
   removeDiacritics,
   removeHtmlTags,
+  removeIllegalCharacters,
   removeNewLineCharacters,
   removeNonASCII,
-  removeNonDiacritics,
   removePunctuation,
-  replaceSmartChars,
+  replaceSmartTypography,
   stripEmoji,
 } from './special-characters'
 
 describe('text manipulation functions', () => {
-  describe('replaceSmartChars', () => {
+  describe('replaceSmartTypography', () => {
     it('should replace smart single quotes and apostrophes with normal single quotes', () => {
       const input = '‘Hello’ world!'
       const expected = '\'Hello\' world!'
-      expect(replaceSmartChars(input)).toBe(expected)
+      expect(replaceSmartTypography(input)).toBe(expected)
     })
 
     it('should replace smart double quotes with normal double quotes', () => {
       const input = '“Hello” world!'
       const expected = '"Hello" world!'
-      expect(replaceSmartChars(input)).toBe(expected)
+      expect(replaceSmartTypography(input)).toBe(expected)
     })
 
     it('should replace ellipsis with "..."', () => {
       const input = 'Hello… world!'
       const expected = 'Hello... world!'
-      expect(replaceSmartChars(input)).toBe(expected)
+      expect(replaceSmartTypography(input)).toBe(expected)
     })
 
     it('should replace em dashes with a hyphen', () => {
       const input = 'Hello — world!'
       const expected = 'Hello - world!'
-      expect(replaceSmartChars(input)).toBe(expected)
+      expect(replaceSmartTypography(input)).toBe(expected)
     })
 
     it('should trim spaces after replacements', () => {
       const input = '  ‘Hello’ world!  '
       const expected = '\'Hello\' world!'
-      expect(replaceSmartChars(input)).toBe(expected)
+      expect(replaceSmartTypography(input)).toBe(expected)
     })
   })
 
@@ -124,21 +125,55 @@ describe('text manipulation functions', () => {
     })
   })
 
-  describe('removeNonDiacritics', () => {
-    it('should replace non-diacritical characters with ASCII equivalents', () => {
-      expect(removeNonDiacritics('ß')).toBe('ss')
-      expect(removeNonDiacritics('æ')).toBe('ae')
-      expect(removeNonDiacritics('ø')).toBe('oe')
-      expect(removeNonDiacritics('å')).toBe('aa')
-      expect(removeNonDiacritics('©')).toBe('c')
-      expect(removeNonDiacritics('œ')).toBe('oe')
-      expect(removeNonDiacritics('\u00F0')).toBe('d') // Small letter Icelandic eth
-      expect(removeNonDiacritics('\u00FE')).toBe('th') // Lower case Icelandic thorn
+  describe('removeIllegalCharacters', () => {
+    it('should remove control characters and non-printable characters', () => {
+      const input = 'Hello\u0000 world\u007F!'
+      const expected = 'Hello world!'
+      expect(removeIllegalCharacters(input)).toBe(expected)
     })
 
-    it('should leave other characters unchanged', () => {
-      expect(removeNonDiacritics('abcABC123')).toBe('abcABC123')
-      expect(removeNonDiacritics('hello world')).toBe('hello world')
+    it('should remove special Unicode characters like U+FFFD (Replacement Character)', () => {
+      const input = 'Hello\uFFFD world!'
+      const expected = 'Hello world!'
+      expect(removeIllegalCharacters(input)).toBe(expected)
+    })
+
+    it('should remove characters from the range U+FFFE and U+FFFF', () => {
+      const input = 'Hello\uFFFE world\uFFFF!'
+      const expected = 'Hello world!'
+      expect(removeIllegalCharacters(input)).toBe(expected)
+    })
+
+    it('should not affect normal text', () => {
+      const input = 'Hello world!'
+      const expected = 'Hello world!'
+      expect(removeIllegalCharacters(input)).toBe(expected)
+    })
+  })
+
+  describe('removeControlCharacters', () => {
+    it('should remove ASCII control characters from the text', () => {
+      const input = 'Hello\u0001\u0002\u0003 world!'
+      const expected = 'Hello world!'
+      expect(removeControlCharacters(input)).toBe(expected)
+    })
+
+    it('should handle text with only control characters', () => {
+      const input = '\u0001\u0002\u0003'
+      const expected = ''
+      expect(removeControlCharacters(input)).toBe(expected)
+    })
+
+    it('should not alter normal text', () => {
+      const input = 'Hello world!'
+      const expected = 'Hello world!'
+      expect(removeControlCharacters(input)).toBe(expected)
+    })
+
+    it('should remove newline and tab characters as well', () => {
+      const input = 'Hello\nworld\t!'
+      const expected = 'Helloworld!'
+      expect(removeControlCharacters(input)).toBe(expected)
     })
   })
 })

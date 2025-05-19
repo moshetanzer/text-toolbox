@@ -1,4 +1,5 @@
-import { DIACRITICS, PUNCTUATION } from '../regex'
+import { COMPATIBILTITY_CHARACTERS } from '../constants'
+import { CONTROL_CHARACTERS, DIACRITICS, PUNCTUATION } from '../regex'
 
 function replaceSmartTypography(text: string): string {
   text = text
@@ -7,6 +8,10 @@ function replaceSmartTypography(text: string): string {
     .replace(/\u2026/g, '...')
     .replace(/[\u2013\u2014]/g, '-')
   return text.trim()
+}
+
+function removeControlCharacters(text: string): string {
+  return text.replace(CONTROL_CHARACTERS, '').trim()
 }
 
 function removeHtmlTags(text: string): string {
@@ -41,13 +46,21 @@ function removeDiacritics(text: string): string {
   return text.trim()
 }
 
+function replaceCompatibilityCharacters(text: string): string {
+  return [...text].map(char =>
+    COMPATIBILTITY_CHARACTERS[char] || char,
+  ).join('')
+}
+
 export {
+  removeControlCharacters,
   removeDiacritics,
   removeHtmlTags,
   removeIllegalCharacters,
   removeNewLineCharacters,
   removeNonASCII,
   removePunctuation,
+  replaceCompatibilityCharacters,
   replaceSmartTypography,
   stripEmoji,
 }

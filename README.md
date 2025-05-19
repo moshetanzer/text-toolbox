@@ -43,18 +43,20 @@ Clean up inconsistent or unwanted whitespace:
 * `removeTrailingSpaces()` – Removes **spaces at the end** of the string.
 * `normalizePunctuationSpacing()` – Removes extra spaces **around punctuation** (e.g., ` , . : ; ! ?`).
 
-### Special Character Cleaners
+### Special Character Cleaners (Docs Done - API Stable)
 
 Remove or replace problematic characters and formatting:
 
-* `removeHtmlTags()` – Strips **HTML tags** (e.g., `<p>`, `<div>`) from the string.
-* `removeIllegalChars()` – Removes **non-printable or disallowed characters** (e.g., control codes).
-* `removeNewLineCharacters()` – Removes **newline (`\n`) and carriage return (`\r`) characters**.
-* `removeNonASCII()` – Removes all characters **outside the standard ASCII range**.
-* `removePunctuation()` – Removes **common punctuation marks** from the string.
-* `replaceSmartChars()` – Replaces **smart quotes, long dashes, and other typographic symbols** with plain equivalents.
-* `stripEmoji()` – Removes all **emoji characters** and symbols.
-* `removePunctuation()` – Removes all **punctuation** and symbols.
+* `removeDiacritics()` - Removes diacritic marks (accents) from characters in a string.
+* `removeHtmlTags()` - Strips HTML tags from the input string.
+* `removeIllegalCharacters()` - Removes illegal or non-printable characters from the string.
+* `removeNewLineCharacters()` - Removes newline (`\n`) and carriage return (`\r`) characters from the string.
+* `removeNonASCII()` - Removes all non-ASCII characters from the string.
+* `replaceCompatibilityCharacters()` -* This function normalizes text by converting non-ASCII characters (like æ, ø, ß) to their closest ASCII representation (ae, oe, ss).
+* `removeControlCharacters()` - Strips control characters from the string.
+* `removePunctuation()` - Removes punctuation characters from the string.
+* `replaceSmartTypography()` - Converts smart typography characters (like curly quotes and em-dashes) to their standard ASCII equivalents.
+* `stripEmoji()` - Removes all emoji characters from the string.
 
 ### String Case Formatters
 
@@ -72,6 +74,12 @@ Remove or replace problematic characters and formatting:
 ## String Tokenizers
 
 * `fingerprint()` - It normalizes text by removing special characters, creating sorted unique word lists.
+
+## Presets
+
+* `normalizeName()` -
+* `normalizeEmail()` -
+* `formatDate()` -
 
 ## License
 
