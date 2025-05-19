@@ -55,7 +55,7 @@ const dutchSch = /E[DMNR]|UY|OO/
  *   Double metaphone codes for `value`.
  */
 
-export function doubleMetaphone(value: string): [string, string] {
+function doubleMetaphone(value: string): [string, string] {
   let primary = ''
   let secondary = ''
   let index = 0
@@ -1048,3 +1048,5 @@ export function doubleMetaphone(value: string): [string, string] {
 
   return [primary, secondary]
 }
+
+export { doubleMetaphone }
