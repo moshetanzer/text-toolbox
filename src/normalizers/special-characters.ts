@@ -88,7 +88,6 @@ function removeIllegalCharacters(text: string): string {
     .replace(/[\uFFFD\uFDD0-\uFDEF\uFFFE\uFFFF]/g, '')
   // Remove zero-width and invisible characters
     .replace(/[\u200B-\u200D\u00AD]/g, '')
-
     .trim()
   text = removeControlCharacters(text)
   return text
