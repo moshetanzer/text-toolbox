@@ -47,6 +47,8 @@ Clean up inconsistent or unwanted whitespace:
 
 Remove or replace problematic characters and formatting:
 
+* `removeCombiningMarks()` - Removes all types of combining marks from a string.
+* `removeModifiers()` - Removes modifier letters and symbols from a string
 * `removeDiacritics()` - Removes diacritic marks (accents) from characters in a string.
 * `removeHtmlTags()` - Strips HTML tags from the input string.
 * `removeIllegalCharacters()` - Removes illegal or non-printable characters from the string.

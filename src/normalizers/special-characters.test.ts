@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  removeCombiningMarks,
   removeControlCharacters,
   removeDiacritics,
   removeHtmlTags,
   removeIllegalCharacters,
+  removeModifiers,
   removeNewLineCharacters,
   removeNonASCII,
   removePunctuation,
@@ -174,6 +176,45 @@ describe('text manipulation functions', () => {
       const input = 'Hello\nworld\t!'
       const expected = 'Helloworld!'
       expect(removeControlCharacters(input)).toBe(expected)
+    })
+  })
+  describe('removeModifiers', () => {
+    it('should remove modifier letters and symbols', () => {
+      const input = 'aʰbʱc˩dˆe' // ʰ, ʱ, ˩ are Lm; ˆ is Sk
+      const expected = 'abcde'
+      expect(removeModifiers(input)).toBe(expected)
+    })
+
+    it('should handle text without modifiers', () => {
+      const input = 'Hello world!'
+      expect(removeModifiers(input)).toBe('Hello world!')
+    })
+
+    it('should trim surrounding whitespace after removal', () => {
+      const input = '  ʰHello˩  '
+      const expected = 'Hello'
+      expect(removeModifiers(input)).toBe(expected)
+    })
+  })
+
+  describe('removeNonSpacingCombiningMarks', () => {
+    it('should remove non-spacing combining marks like accents and enclosing symbols', () => {
+      const base = 'a'
+      const combining = '\u0301\u0300\u20DD\u20E3' // acute, grave, enclosing circle, keycap
+      const input = `${base}${combining}b`
+      const expected = 'ab'
+      expect(removeCombiningMarks(input)).toBe(expected)
+    })
+
+    it('should not remove visible letters or spacing characters', () => {
+      const input = 'Hello world!'
+      expect(removeCombiningMarks(input)).toBe('Hello world!')
+    })
+
+    it('should trim the result', () => {
+      const input = ' \u0301Hello\u0301 '
+      const expected = 'Hello'
+      expect(removeCombiningMarks(input)).toBe(expected)
     })
   })
 })
