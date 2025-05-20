@@ -61,16 +61,33 @@ function removeExtraSpacesAfterPunctuation(text: string): string {
   return text.replace(/(\p{P})\s{2,}/gu, '$1 ')
 }
 
-function normalizePunctuationSpacing(text: string, options?: NormalizePunctuationOptions): string {
-  if (!isValidString(text)) {
+function tightenPunctuation(text: string, chars: string[]): string {
+  const escaped = chars.map(c => `\\${c}`).join('')
+  const regex = new RegExp(`\\s*([${escaped}])\\s*`, 'g')
+  return text.replace(regex, '$1')
+}
+
+function normalizePunctuationSpacing(
+  text: string,
+  options?: NormalizePunctuationOptions,
+): string {
+  if (!isValidString(text))
     return text
-  }
+
   const removeExtra = options?.removeExtraSpacesAfterPunctuation !== false
+  const tightPuncts = options?.tightPunctuation ?? []
+
   let result = ensureSpaceAfterPunctuation(text)
   result = removeWhitespaceBeforePunctuation(result)
+
   if (removeExtra) {
     result = removeExtraSpacesAfterPunctuation(result)
   }
+
+  if (tightPuncts.length > 0) {
+    result = tightenPunctuation(result, tightPuncts)
+  }
+
   return result
 }
 
