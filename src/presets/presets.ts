@@ -1,5 +1,5 @@
+import { titleCase } from '../normalizers/case'
 import { removeCombiningMarks, removeControlCharacters, removeDiacritics, removeIllegalCharacters, replaceSmartTypography } from '../normalizers/special-characters'
-import { titleCase } from '../normalizers/string-case'
 import { normalizePunctuationSpacing, normalizeWhitespace, removeExtraSpaces } from '../normalizers/whitespace'
 import { isValidString } from '../utils'
 
