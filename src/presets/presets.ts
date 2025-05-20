@@ -10,10 +10,10 @@ function normalizeName(text: string): string {
   text = text.toLowerCase().trim()
   text = replaceSmartTypography(removeCombiningMarks(removeControlCharacters(removeDiacritics(removeIllegalCharacters((text))))))
   text = normalizeWhitespace(removeExtraSpaces(normalizePunctuationSpacing((text), {
-    tightPunctuation: ['-', "'"]
+    tightPunctuation: ['-', '\''],
   })))
   text = titleCase(text, {
-    separators: [' ', '-', "'"]
+    separators: [' ', '-', '\''],
   })
   return text
 }

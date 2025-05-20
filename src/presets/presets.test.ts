@@ -27,7 +27,7 @@ describe('normalizeName', () => {
   })
 
   it('preserves apostrophes in names', () => {
-    expect(normalizeName("o'neill")).toBe("O'Neill")
+    expect(normalizeName('o\'neill')).toBe('O\'Neill')
   })
 
   it('handles names with accents and diacritics', () => {
