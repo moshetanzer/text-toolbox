@@ -1,4 +1,4 @@
-import { COMPATIBILTITY_CHARACTERS } from '../constants'
+import { COMPATIBILTITY_CHARACTERS_MAP } from '../constants'
 import { COMBINING_MARKS, CONTROL_CHARACTERS, DIACRITICS, MODIFIER_LETTERS, MODIFIER_SYMBOLS, PUNCTUATION } from '../regex'
 
 /**
@@ -113,7 +113,7 @@ function removeDiacritics(text: string): string {
  */
 function replaceCompatibilityCharacters(text: string): string {
   return [...text].map(char =>
-    COMPATIBILTITY_CHARACTERS[char] || char,
+    COMPATIBILTITY_CHARACTERS_MAP[char] || char,
   ).join('').trim()
 }
 
