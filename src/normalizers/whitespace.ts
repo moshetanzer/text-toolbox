@@ -1,5 +1,5 @@
 import type { NormalizePunctuationOptions } from '../types'
-import { WHITESPACE } from '../regex'
+import { TABS, WHITESPACE } from '../regex'
 import { isValidString } from '../utils'
 
 function removeAllWhitespace(text: string): string {
@@ -9,48 +9,58 @@ function removeAllWhitespace(text: string): string {
   }
   return text.replace(WHITESPACE, '')
 }
+
 function removeLeadingWhitespace(text: string): string {
   if (!isValidString(text)) {
     return text
   }
   return text.split('\n').map(line => line.replace(/^\s+/, '')).join('\n')
 }
+
 function removeTrailingWhitespace(text: string): string {
   if (!isValidString(text)) {
     return text
   }
   return text.split('\n').map(line => line.replace(/\s+$/, '')).join('\n')
 }
+
 function normalizeWhitespace(text: string): string {
   if (!isValidString(text)) {
     return text
   }
-  return text.replace(WHITESPACE, ' ').trim()
+  text = text.replace(WHITESPACE, ' ')
+  text = text.replace(TABS, ' ')
+  return text.trim()
 }
+
 function removeExtraSpaces(text: string): string {
   if (!isValidString(text)) {
     return text
   }
   return text.replace(/\s{2,}/g, ' ').trim()
 }
+
 function removeWhitespaceBeforePunctuation(text: string): string {
   if (!isValidString(text)) {
     return text
   }
   return text.replace(/\s+(\p{P})/gu, '$1')
 }
+
 function ensureSpaceAfterPunctuation(text: string): string {
   if (!isValidString(text)) {
     return text
   }
   return text.replace(/(\p{P})(?=\S)/gu, '$1 ')
 }
+
 function removeExtraSpacesAfterPunctuation(text: string): string {
   if (!isValidString(text)) {
     return text
   }
   return text.replace(/(\p{P})\s{2,}/gu, '$1 ')
 }
+
 function normalizePunctuationSpacing(text: string, options?: NormalizePunctuationOptions): string {
   if (!isValidString(text)) {
     return text
@@ -63,12 +73,6 @@ function normalizePunctuationSpacing(text: string, options?: NormalizePunctuatio
   }
   return result
 }
-function saneWhitespaceNormalization(text: string): string {
-  if (!isValidString(text)) {
-    return text
-  }
-  return normalizeWhitespace(removeExtraSpaces(normalizePunctuationSpacing((text))))
-}
 
 export {
   ensureSpaceAfterPunctuation,
@@ -79,5 +83,4 @@ export {
   removeLeadingWhitespace,
   removeTrailingWhitespace,
   removeWhitespaceBeforePunctuation,
-  saneWhitespaceNormalization,
 }
