@@ -1,6 +1,8 @@
 # Text Toolbox [Heavy WIP]
 
-[![codecov](https://codecov.io/gh/moshetanzer/text-toolbox/graph/badge.svg?token=UBY45FC2VS)](https://codecov.io/gh/moshetanzer/text-toolbox)
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![Codecov][codecov-src]][codecov-href]
 
 A high-performance TypeScript library for string similarity and distance algorithms—complete with robust utilities for string cleaning, normalization, and format transformation.
 
@@ -99,3 +101,11 @@ This package is safe :)
 ## License
 
 MIT
+
+<!-- Badges -->
+[npm-version-src]: https://img.shields.io/npm/v/text-toolbox?style=flat
+[npm-version-href]: https://npmjs.com/package/text-toolbox
+[npm-downloads-src]: https://img.shields.io/npm/dm/text-toolbox?style=flat
+[npm-downloads-href]: https://npmjs.com/package/text-toolbox
+[codecov-src]: https://img.shields.io/codecov/c/gh/moshetanzer/text-toolbox/main?style=flat&colorA=18181B&colorB=F0DB4F
+[codecov-href]: https://codecov.io/gh/moshetanzer/text-toolbox
