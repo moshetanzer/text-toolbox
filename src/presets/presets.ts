@@ -12,5 +12,5 @@ function normalizeName(text: string): string {
 }
 
 export {
-  normalizeName
+  normalizeName,
 }

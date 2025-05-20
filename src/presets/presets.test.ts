@@ -14,4 +14,3 @@ describe('normalizeName', () => {
     expect(normalizeName('  MARY   SMITH  ')).toBe('Mary Smith')
   })
 })
-
