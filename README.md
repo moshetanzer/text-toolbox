@@ -2,12 +2,23 @@
 
 [![codecov](https://codecov.io/gh/moshetanzer/text-toolbox/graph/badge.svg?token=UBY45FC2VS)](https://codecov.io/gh/moshetanzer/text-toolbox)
 
-A TypeScript library delivering high-performance string similarity and distance algorithms, along with a comprehensive set of utilities for string cleaning, normalization, and format transformation.
+A high-performance TypeScript library for string similarity and distance algorithms—complete with robust utilities for string cleaning, normalization, and format transformation.
+
+* Fully tree-shakeable
+* Zero dependencies
 
 ## Installation
 
 ```bash
+# pnpm
 pnpm add text-toolbox
+
+# npm
+npm install text-toolbox
+
+# yarn
+yarn add text-toolbox
+
 ```
 
 ## Algorithims
@@ -43,7 +54,7 @@ Clean up inconsistent or unwanted whitespace:
 * `removeTrailingSpaces()` – Removes **spaces at the end** of the string.
 * `normalizePunctuationSpacing()` – Removes extra spaces **around punctuation** (e.g., ` , . : ; ! ?`).
 
-### Special Character Cleaners (Docs Done - API Stable)
+### Special Character Cleaners
 
 Remove or replace problematic characters and formatting:
 
@@ -54,7 +65,7 @@ Remove or replace problematic characters and formatting:
 * `removeIllegalCharacters()` - Removes illegal or non-printable characters from the string.
 * `removeNewLineCharacters()` - Removes newline (`\n`) and carriage return (`\r`) characters from the string.
 * `removeNonASCII()` - Removes all non-ASCII characters from the string.
-* `replaceCompatibilityCharacters()` -* This function normalizes text by converting non-ASCII characters (like æ, ø, ß) to their closest ASCII representation (ae, oe, ss).
+* `replaceCompatibilityCharacters()` - This function normalizes text by converting non-ASCII characters (like æ, ø, ß) to their closest ASCII representation (ae, oe, ss).
 * `removeControlCharacters()` - Strips control characters from the string.
 * `removePunctuation()` - Removes punctuation characters from the string.
 * `replaceSmartTypography()` - Converts smart typography characters (like curly quotes and em-dashes) to their standard ASCII equivalents.
@@ -80,8 +91,10 @@ Remove or replace problematic characters and formatting:
 ## Presets
 
 * `normalizeName()` -
-* `normalizeEmail()` -
-* `formatDate()` -
+
+## Security
+
+This package is safe :)
 
 ## License
 
