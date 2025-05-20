@@ -50,11 +50,14 @@ A set of helper functions to normalize and sanitize strings before comparison.
 
 Clean up inconsistent or unwanted whitespace:
 
-* `removeAllSpaces()` – Removes **all spaces** from the string.
-* `removeExtraSpaces()` – Replaces multiple consecutive spaces with a **single space**.
-* `removeLeadingSpaces()` – Removes **spaces at the beginning** of the string.
-* `removeTrailingSpaces()` – Removes **spaces at the end** of the string.
-* `normalizePunctuationSpacing()` – Removes extra spaces **around punctuation** (e.g., ` , . : ; ! ?`).
+* `ensureSpaceAfterPunctuation()` - Ensures there is **exactly one space** after punctuation marks like `. , : ; ! ?` (if followed by a word character).
+* `normalizePunctuationSpacing()` – Normalizes spaces around punctuation by removing spaces before, ensuring one space after, optionally removing extra spaces, and allowing custom tight spacing for specific characters (e.g., `-`, `'`).
+* `normalizeWhitespace()` - Trims leading/trailing whitespace and collapses **all internal whitespace** (spaces, tabs, newlines) to a **single space**.
+* `removeAllWhitespace()` - Removes **all whitespace characters** (spaces, tabs, newlines) from the string.
+* `removeExtraSpaces()` - Replaces multiple **consecutive spaces** with a **single space** (ignores tabs/newlines).
+* `removeLeadingWhitespace()` - Removes **whitespace at the beginning** of the string.
+* `removeTrailingWhitespace()` - Removes **whitespace at the end** of the string.
+* `removeWhitespaceBeforePunctuation()` - Removes **any whitespace directly before punctuation** like `. , : ; ! ?`.
 
 ### Special Character Cleaners
 
