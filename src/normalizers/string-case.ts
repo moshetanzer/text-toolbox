@@ -6,7 +6,6 @@ function titleCase(text: string, options: CapitalizeOptions = {}): string {
     return text
   }
   const separators = options.separators ?? [' ']
-
   const pattern = `([^${separators.map(s => `\\${s}`).join('')}]+|[${separators.map(s => `\\${s}`).join('')}])`
   const regex = new RegExp(pattern, 'g')
 
@@ -19,6 +18,7 @@ function titleCase(text: string, options: CapitalizeOptions = {}): string {
     })
     .join('')
 }
+
 function sentanceCase(text: string): string {
   if (!isValidString(text)) {
     return text
@@ -26,6 +26,7 @@ function sentanceCase(text: string): string {
   text = text.toLowerCase()
   return text && text.length > 0 && text[0] ? text[0].toUpperCase() + text.slice(1) : ''
 }
+
 // TODO: remove this to case function since for kebab and snake case we need to use the same function
 function toCase(text: string, separator: string, capitalize: boolean = false): string {
   return text
@@ -35,42 +36,49 @@ function toCase(text: string, separator: string, capitalize: boolean = false): s
     )
     .join(separator)
 }
+
 function camelCase(text: string): string {
   if (!isValidString(text)) {
     return text
   }
   return toCase(text, '', false)
 }
+
 function pascalCase(text: string): string {
   if (!isValidString(text)) {
     return text
   }
   return toCase(text, '', true)
 }
+
 function snakeCase(text: string): string {
   if (!isValidString(text)) {
     return text
   }
   return toCase(text, '_').toLowerCase()
 }
+
 function kebabCase(text: string): string {
   if (!isValidString(text)) {
     return text
   }
   return toCase(text, '-').toLowerCase()
 }
+
 function constantCase(text: string): string {
   if (!isValidString(text)) {
     return text
   }
   return text.toUpperCase().replace(/\s+/g, '_')
 }
+
 function dotCase(text: string): string {
   if (!isValidString(text)) {
     return text
   }
   return text.toLowerCase().replace(/\s+/g, '.')
 }
+
 function pathCase(text: string): string {
   if (!isValidString(text)) {
     return text
