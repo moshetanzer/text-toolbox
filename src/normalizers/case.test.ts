@@ -9,7 +9,7 @@ import {
   sentanceCase,
   snakeCase,
   titleCase,
-} from './string-case'
+} from './case'
 
 // Mock the isValidString utility
 vi.mock('../utils', () => ({
