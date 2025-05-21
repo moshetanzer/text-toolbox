@@ -188,28 +188,4 @@ const TITLE_PREFIXES = [
   'CTO',
 ]
 
-const ADDRESS_CORRECTION_MAP: Record<string, string> = {
-  'st': 'Street',
-  'st.': 'Street',
-  'rd': 'Road',
-  'rd.': 'Road',
-  'ave': 'Avenue',
-  'ave.': 'Avenue',
-  'blvd': 'Boulevard',
-  'blvd.': 'Boulevard',
-  'ln': 'Lane',
-  'ln.': 'Lane',
-  'dr': ' Drive',
-  'dr.': 'Drive',
-  'apt': 'Apartment',
-  'apt.': 'Apartment',
-  'n': 'North',
-  'n.': 'North',
-  's': 'South',
-  's.': 'South',
-  'e': 'East',
-  'e.': 'East',
-  'w': 'West',
-  'w.': 'West',
-}
-export { ADDRESS_CORRECTION_MAP, COMPATIBILTITY_CHARACTERS_MAP, TITLE_PREFIXES, TITLE_SUFFIXES }
+export { COMPATIBILTITY_CHARACTERS_MAP, TITLE_PREFIXES, TITLE_SUFFIXES }
