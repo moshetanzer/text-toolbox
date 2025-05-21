@@ -236,7 +236,7 @@ const DEFAULT_MAX_KEY_LENGTH = 8
  *
  * @class
  */
-export class Metaphone3 {
+ class Metaphone3 {
   /**
    * Length of word sent in to be encoded, as
    * measured at beginning of encoding.
