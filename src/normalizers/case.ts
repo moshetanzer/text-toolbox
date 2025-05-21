@@ -1,6 +1,14 @@
 import type { CapitalizeOptions } from '../types'
 import { isValidString } from '../utils'
 
+/**
+ * Converts a string to title case based on specified separators.
+ *
+ * @param {string} text - The input string to convert.
+ * @param {CapitalizeOptions} [options] - Optional configuration.
+ * @param {string[]} [options.separators] - Characters to treat as word separators.
+ * @returns {string} The title-cased version of the input string.
+ */
 function titleCase(text: string, options: CapitalizeOptions = {}): string {
   if (!isValidString(text)) {
     return text
@@ -19,6 +27,12 @@ function titleCase(text: string, options: CapitalizeOptions = {}): string {
     .join('')
 }
 
+/**
+ * Converts a string to sentence case (only the first character is capitalized).
+ *
+ * @param {string} text - The input string to convert.
+ * @returns {string} The sentence-cased version of the input string.
+ */
 function sentanceCase(text: string): string {
   if (!isValidString(text)) {
     return text
@@ -37,6 +51,12 @@ function toCase(text: string, separator: string, capitalize: boolean = false): s
     .join(separator)
 }
 
+/**
+ * Converts a string to camelCase.
+ *
+ * @param {string} text - The input string to convert.
+ * @returns {string} The camelCased version of the input string.
+ */
 function camelCase(text: string): string {
   if (!isValidString(text)) {
     return text
@@ -44,6 +64,12 @@ function camelCase(text: string): string {
   return toCase(text, '', false)
 }
 
+/**
+ * Converts a string to PascalCase.
+ *
+ * @param {string} text - The input string to convert.
+ * @returns {string} The PascalCased version of the input string.
+ */
 function pascalCase(text: string): string {
   if (!isValidString(text)) {
     return text
@@ -51,6 +77,12 @@ function pascalCase(text: string): string {
   return toCase(text, '', true)
 }
 
+/**
+ * Converts a string to snake_case.
+ *
+ * @param {string} text - The input string to convert.
+ * @returns {string} The snake_cased version of the input string.
+ */
 function snakeCase(text: string): string {
   if (!isValidString(text)) {
     return text
@@ -58,6 +90,12 @@ function snakeCase(text: string): string {
   return toCase(text, '_').toLowerCase()
 }
 
+/**
+ * Converts a string to kebab-case.
+ *
+ * @param {string} text - The input string to convert.
+ * @returns {string} The kebab-cased version of the input string.
+ */
 function kebabCase(text: string): string {
   if (!isValidString(text)) {
     return text
@@ -65,6 +103,12 @@ function kebabCase(text: string): string {
   return toCase(text, '-').toLowerCase()
 }
 
+/**
+ * Converts a string to CONSTANT_CASE.
+ *
+ * @param {string} text - The input string to convert.
+ * @returns {string} The CONSTANT_CASE version of the input string.
+ */
 function constantCase(text: string): string {
   if (!isValidString(text)) {
     return text
@@ -72,6 +116,12 @@ function constantCase(text: string): string {
   return text.toUpperCase().replace(/\s+/g, '_')
 }
 
+/**
+ * Converts a string to dot.case.
+ *
+ * @param {string} text - The input string to convert.
+ * @returns {string} The dot.cased version of the input string.
+ */
 function dotCase(text: string): string {
   if (!isValidString(text)) {
     return text
@@ -79,6 +129,12 @@ function dotCase(text: string): string {
   return text.toLowerCase().replace(/\s+/g, '.')
 }
 
+/**
+ * Converts a string to path/case.
+ *
+ * @param {string} text - The input string to convert.
+ * @returns {string} The path/cased version of the input string.
+ */
 function pathCase(text: string): string {
   if (!isValidString(text)) {
     return text
