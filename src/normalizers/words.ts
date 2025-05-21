@@ -1,5 +1,11 @@
 import { TITLE_PREFIXES, TITLE_SUFFIXES } from '../constants'
 
+/**
+ * Removes consecutive duplicate words from a string (case-insensitive).
+ *
+ * @param {string} text - The input string to process.
+ * @returns {string} The string with duplicate consecutive words removed.
+ */
 function removeDuplicateWords(text: string): string {
   if (!text) {
     return ''
@@ -17,6 +23,12 @@ function removeDuplicateWords(text: string): string {
   return result.join(' ')
 }
 
+/**
+ * Removes a known title prefix (e.g., "Dr.", "Mr.", "Ms.") from the beginning of a string.
+ *
+ * @param {string} text - The input string to process.
+ * @returns {string} The string with the title prefix removed, preserving leading spaces.
+ */
 function removeTitlePrefix(text: string): string {
   if (!text)
     return ''
@@ -28,6 +40,12 @@ function removeTitlePrefix(text: string): string {
   return text.replace(regex, '$1') // keep leading spaces, remove title
 }
 
+/**
+ * Removes a known title suffix (e.g., "Jr.", "Sr.", "PhD") from the end of a string.
+ *
+ * @param {string} text - The input string to process.
+ * @returns {string} The string with the title suffix removed.
+ */
 function removeTitleSuffix(text: string): string {
   if (!text)
     return ''
